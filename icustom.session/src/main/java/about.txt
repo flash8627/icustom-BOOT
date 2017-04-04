@@ -1,0 +1,4 @@
+
+Session的管理方式目前无非就是三种单机Session(基于单机内存，无法部署多台机器)、基于Cookie(安全性差)、基于全局的统一Session管理(Redis、MySQL)等多种方式 
+针对于像淘宝这种超大型网站来说Session如何管理的就无从得知了、但是可以通过yy的方式想象一下，这种大型架构都需要部署多台认证Server，但是一般来说集中式Session无法存储那么多的Session 
+那么就可以通过UID分片的形式来存储，不同UID分布在不同的Server上认证即可
