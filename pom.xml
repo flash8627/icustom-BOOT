@@ -29,15 +29,31 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!-- 注解和jersey rest webservices需要使用到此支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
+		</dependency>
+		
+		<!-- Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
 
 	<modules>
 		<module>icustom.core</module>
+		<module>icustom.cache</module>
+		<module>icustom.devtools</module>
 		<module>icustom.webservices</module>
 		<module>icustom.security</module>
 		<module>icustom.register</module>
@@ -47,14 +63,16 @@
 		<module>icustom.email</module>
 		<module>icustom.druid</module>
 		<module>icustom.resources</module>
-		<module>icustom.session</module>
 		<module>icustom.workflow</module>
 		<module>icustom.bbs</module>
 		<module>icustom.product</module>
 		<module>icustom.parstore</module>
+		<module>icustom.session</module>
+		<module>icustom.session.redis</module>
+		<module>icustom.metrics</module>
+		<module>icustom.metrics.redis</module>
 		<module>icustom.web</module>
 		<module>icustom.ear</module>
-		<module>icustom.metrics</module>
 	</modules>
 
 
