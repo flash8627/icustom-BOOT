@@ -3,29 +3,54 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Spring Security Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>icustom Spring Security Login</title>
+<link href="bootstrap3.3.5/css/bootstrap.css" rel="stylesheet"></link>
+<link href="css/app.css" rel="stylesheet"></link>
+<link rel="stylesheet" type="text/css"
+	href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+
 </head>
+
 <body>
-	<div th:if="${param.error}">Invalid username and password.</div>
-	<div th:if="${param.logout}">You have been logged out.</div>
-	<div th:if="${#httpServletRequest.remoteUser != null}">
-		<p th:text="${#httpServletRequest.remoteUser}">sample_user</p>
+	<div id="mainWrapper">
+		<div class="login-container">
+			<div class="login-card">
+				<div class="login-form">
+					<form th:action="@{/login}" method="post" class="form-horizontal">
+						<div class="alert alert-danger">
+							<p>Invalid username and password.</p>
+						</div>
+						<div class="alert alert-success">
+							<p>You have been logged out successfully.</p>
+						</div>
+						<div class="input-group input-sm">
+							<label class="input-group-addon" for="username"><i
+								class="fa fa-user"></i></label> <input type="text" class="form-control"
+								id="username" name="username" placeholder="Enter Username"
+								required>
+						</div>
+						<div class="input-group input-sm">
+							<label class="input-group-addon" for="password"><i
+								class="fa fa-lock"></i></label> <input type="password"
+								class="form-control" id="password" name="password"
+								placeholder="Enter Password" required>
+						</div>
+						<div class="input-group input-sm">
+							<div class="checkbox">
+								<label><input type="checkbox" id="rememberme"
+									name="remember-me"> Remember Me</label>
+							</div>
+						</div>
+						<div class="form-actions">
+							<input type="submit"
+								class="btn btn-block btn-primary btn-default" value="Log in">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-	<form th:action="@{/login}" method="post">
-		<div>
-			<label> User Name : <input type="text" name="username" />
-			</label>
-		</div>
-		<div>
-			<label> Password: <input type="password" name="password" />
-			</label>
-		</div>
-		<div>
-			<input type="submit" value="Sign In" />
-		</div>
-		<input type="checkbox" name="remember-me" value="true"
-			th:checked="checked" />
-		<p>Remember me</p>
-	</form>
+
 </body>
 </html>

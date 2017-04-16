@@ -1,11 +1,24 @@
 package com.gwtjs.springsecurity.service;
 
-import com.gwtjs.springsecurity.model.SysUserVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
+import com.gwtjs.springsecurity.dao.SysUserDao;
+import com.gwtjs.springsecurity.entity.SysUser;
 
-	SysUserVO findById(int id);
-	
-	SysUserVO findBySso(String sso);
-	
+@Service("userService")
+public class UserService {
+
+	@Autowired
+	private SysUserDao sysUserDao;
+
+	public SysUser findByName(String userName) {
+		return sysUserDao.findByName(userName);
+	}
+
+	public int update(SysUser user) {
+		return sysUserDao.update(user.getName(), user.getEmail(),
+				user.getPassword(), user.getId());
+	}
+
 }
