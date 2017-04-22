@@ -4,17 +4,17 @@ import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * MyBatis基础配置
@@ -23,17 +23,16 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
  *
  */
 @Configuration
-@EnableTransactionManagement //@MapperScan("com.gwtjs.**.dao")
+@MapperScan("com.gwtjs.**.dao")
 public class MyBatisConfig implements TransactionManagementConfigurer {
-
-	@Autowired
-	DataSource dataSource;
 
 	@Bean(name = "sqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactoryBean() {
-		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-		bean.setDataSource(dataSource);
-		bean.setTypeAliasesPackage("com.gwtjs.springsecurity.entity");
+		//PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		
+		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource());
+		sessionFactory.setTypeAliasesPackage("com.gwtjs.springsecurity.entity");
 
 		/*// 分页插件
 		PageHelper pageHelper = new PageHelper();
@@ -50,25 +49,25 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
 		// 添加XML目录
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		try {
-			bean.setMapperLocations(resolver
-					.getResources("classpath:com/gwtjs/springsecurity/jaxrs/dao/*Dao.xml"));
-			return bean.getObject();
+			sessionFactory.setMapperLocations(resolver
+					.getResources("classpath*:com/gwtjs/**/dao/*Dao.xml"));
+			return sessionFactory.getObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	@Bean
-	public SqlSessionTemplate sqlSessionTemplate(
-			SqlSessionFactory sqlSessionFactory) {
-		return new SqlSessionTemplate(sqlSessionFactory);
+	@ConfigurationProperties(prefix="spring.mybatis.datasource")
+	public DataSource dataSource(){
+		return new DruidDataSource();
 	}
 
 	@Bean(name = "transactionManager")
 	@Override
 	public PlatformTransactionManager annotationDrivenTransactionManager() {
-		return new DataSourceTransactionManager(dataSource);
+		return new DataSourceTransactionManager(dataSource());
 	}
 	
 	/*D:\Workspaces\ICustom\spring-security_spring-boot\spring-boot-icustom\src\main\java\com\gwtjs\icustom\demo\SpringBootICustomApplication.java*/

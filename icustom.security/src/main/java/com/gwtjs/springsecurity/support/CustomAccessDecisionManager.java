@@ -57,7 +57,7 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
 
 			// ga 为用户所被赋予的权限。 needRole 为访问相应的资源应该具有的权限。
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
-
+				
 				if (needRole.trim().equals(ga.getAuthority().trim())) {
 					return;
 				}

@@ -101,4 +101,11 @@ public class SysUser implements java.io.Serializable {
 		this.SysRoles = SysRoles;
 	}
 
+	@Override
+	public String toString() {
+		return "SysUser [id=" + id + ", name=" + name + ", email=" + email
+				+ ", password=" + password + ", dob=" + dob + ", SysRoles="
+				+ SysRoles + "]";
+	}
+
 }

@@ -1,9 +1,6 @@
 package com.gwtjs.springsecurity;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -12,21 +9,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.gwtjs.springsecurity.entity.SysResource;
-import com.gwtjs.springsecurity.service.SysResourceService;
 import com.gwtjs.springsecurity.support.Appctx;
 
-@SpringBootApplication
+@SpringBootApplication 	
 // @EnableAutoConfiguration(exclude = MyFilterSecurityInterceptor.class)
 public class MainApplication {
 
 	@Autowired
 	private RequestMappingHandlerConfig requestMappingHandlerConfig;
-
+	
 	private static final Logger log = LoggerFactory
 			.getLogger(MainApplication.class);
 
@@ -36,8 +28,10 @@ public class MainApplication {
 	}
 
 	public static void main(String[] args) {
+		
 		// SpringApplication.run(MainApplication.class, args);
 		SpringApplication app = new SpringApplication(MainApplication.class);
+		
 		Appctx.ctx = app.run(args);
 
 		/*

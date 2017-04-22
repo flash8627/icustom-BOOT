@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -45,7 +44,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 
 	@Autowired
 	private SysRoleDao sysRoleDao;
-
+	
 	private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
 
 	@PostConstruct
@@ -53,6 +52,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 	private void loadResourceDefine() {// 一定要加上@PostConstruct注解
 		// 在Web服务器启动时，提取系统中的所有权限。
 		List<SysRole> list = sysRoleDao.findAll();
+		
 		List<String> query = new ArrayList<String>();
 		if (list != null && list.size() > 0) {
 			for (SysRole sr : list) {
