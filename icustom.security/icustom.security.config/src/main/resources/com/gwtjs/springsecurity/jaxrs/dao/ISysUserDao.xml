@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwtjs.springsecurity.jaxrs.dao.ISysUserDao">
+
+	<select id="findAllUserList" resultType="com.gwtjs.springsecurity.entity.SysUser">
+		<include refid="Base_Column_List" /> 
+	</select>
+	
+	<select id="findUserPageCount" resultType="int">
+		SELECT count(1) FROM sys_user_t T1 WHERE 1=1 
+	</select>
+	
+	<select id="findUserPage" resultType="com.gwtjs.springsecurity.entity.SysUser">
+		<include refid="Base_Column_List" /> 
+		<include refid="select_cond" /> 
+		<!-- AND name = #{param1.name}
+		AND email = #{param1.email}
+		AND #{param2.curPage} = #{param2.curPage} 
+		AND #{param2.pageSize} = #{param2.pageSize} 
+		 AND #{param2.endIndex} = #{param2.endIndex} 
+		AND #{param2.startIndex} = #{param2.startIndex} 
+		 -->
+		<!-- AND #{param2.mysqlStartIndex} = #{param2.mysqlEndIndex}  -->
+		LIMIT #{param2.startIndex} , #{param2.endIndex} 
+	</select>
+	
+	<select id="findUser" resultType="com.gwtjs.springsecurity.entity.SysUser">
+		<include refid="Base_Column_List" /> 
+		 AND id=#{id,jdbcType=INTEGER} 
+	</select>
+	
+	<select id="findUserByname" resultType="com.gwtjs.springsecurity.entity.SysUser">
+		<include refid="Base_Column_List" /> 
+		 AND upper(account)=upper(#{account,jdbcType=VARCHAR})
+	</select>
+	
+	<sql id="select_cond">
+		<if test='_parameter.get("param1").account != null and _parameter.get("param1").account != "" and _parameter.get("param1").account != "null"'>
+			AND upper(T1.account) = upper(#{param1.account,jdbcType=VARCHAR}) 
+		</if>
+		<if test='_parameter.get("param1").username != null and _parameter.get("param1").username != "" and _parameter.get("param1").username != "null"'>
+			AND upper(T1.username) = upper(#{param1.username,jdbcType=VARCHAR}) 
+		</if>
+	</sql>
+		
+	<sql id="Base_Column_List">
+		SELECT id id, account account, username username, 
+		email email FROM sys_user_t T1 WHERE 1=1 
+	</sql>
+	
+	<select id="findUserIdCount" resultType="int">
+		SELECT max(T1.id)+1 FROM  sys_user_t T1
+	</select>
+	
+	<update id="update">
+		UPDATE sys_user_t
+		SET 
+		username=#{username,jdbcType=VARCHAR},
+		email=#{email,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updatePwd">
+		UPDATE sys_user_t
+		SET 
+		password=#{password,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=INTEGER}
+	</update>
+	
+	<insert id="insert">
+		INSERT into sys_user_t(id,account,username,email,password) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{account,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<insert id="batchInsert">
+		declare
+		<if test="list!=null and !list.isEmpty()">
+			begin
+			<foreach collection="list" item="item">
+				INSERT into sys_user_t(id,account,username,email,password)
+				 values(
+				 #{item.id,jdbcType=INTEGER},
+				 #{item.account,jdbcType=VARCHAR},
+				 #{item.username,jdbcType=VARCHAR},
+				 #{item.email,jdbcType=VARCHAR},
+				 #{item.password,jdbcType=VARCHAR});
+			</foreach>
+			end;
+		</if>
+	</insert>
+
+</mapper>

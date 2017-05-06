@@ -61,13 +61,13 @@ public class PageInterceptor implements Interceptor {
 		Object param = queryArgs[PARAMETER_INDEX];
 		// 检查是否需要拦截，如果需要，那么返回page对象
 		PageVO page = checkInvocation(sqlId, param);
+		log.info("sql id:",sqlId);
 		
 		// 如果没有分页参数就直接返回
 		if (null == page) {
 			return invocation.proceed();
 		}
 		if (null != param && Map.class.isAssignableFrom(param.getClass())) {
-			log.info("sql id:",sqlId);
 			queryCount(queryArgs, mappedStatement, sqlId, page, executor);
 		}
 		// 查询结果集处理
@@ -82,7 +82,7 @@ public class PageInterceptor implements Interceptor {
 			}
 		}
 
-		PagedResult<?> pagedResult = new PagedResult<>();
+		PagedResult<?> pagedResult = new PagedResult();
 		pagedResult.setPageVO(page);
 		pagedResult.setResult(entityList);
 
@@ -140,7 +140,7 @@ public class PageInterceptor implements Interceptor {
 		// 定义需要的变量
 		final Object parameter = queryArgs[PARAMETER_INDEX];
 		final RowBounds rowBounds = (RowBounds) queryArgs[ROW_BOUNDS_INDEX];
-		ResultHandler<?> resultHandler = (ResultHandler<?>) queryArgs[RESULT_HANDLER_INDEX];
+		ResultHandler resultHandler = (ResultHandler) queryArgs[RESULT_HANDLER_INDEX];
 		Configuration configuration = mappedStatement.getConfiguration();
 		BoundSql boundSql = mappedStatement.getBoundSql(parameter);
 
@@ -233,6 +233,7 @@ public class PageInterceptor implements Interceptor {
 	 */
 	private Statement prepareStatement(Executor executor,
 			StatementHandler handler) throws SQLException {
+		Integer transactionTimeout = 60;
 		Statement sm = null;
 		// 从Executor中获取事务的连接
 		Connection connection = ConnectionLogger.newInstance(executor
@@ -240,7 +241,7 @@ public class PageInterceptor implements Interceptor {
 
 		// 预处理连接对象
 		try {
-			sm = handler.prepare(connection,800);
+			sm = handler.prepare(connection,transactionTimeout);
 			handler.parameterize(sm);
 			return sm;
 		} catch (SQLException ex) {

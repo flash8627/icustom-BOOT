@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwtjs.springsecurity.jaxrs.dao.ISysRoleDao">
+	
+	<select id="findRoleIdCount" resultType="int">
+		SELECT max(T1.id)+1 FROM  sys_role_t T1
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_role_t (id, rolename,uid)
+			VALUES (#{id,jdbcType=NUMERIC} , #{rolename,jdbcType=VARCHAR},#{userId,jdbcType=NUMERIC}) 
+	</insert>
+	
+	<delete id="delete">
+		DELETE
+			FROM sys_role_t
+			WHERE id = #{id,jdbcType=NUMERIC} 
+	</delete>
+	
+	<update id="update">
+		UPDATE sys_role_t
+			SET 
+			  rolename = #{rolename,jdbcType=VARCHAR} 
+			WHERE id = #{id,jdbcType=NUMERIC}  
+	</update>
+	
+	<select id="findRolePageCount" resultType="int">
+		SELECT
+			  COUNT(1) 
+			FROM sys_role_t 
+	</select>
+	
+	<select id="findRolePage" resultType="com.gwtjs.springsecurity.entity.SysRole">
+		<include refid="select_base" />
+		LIMIT #{param2.startIndex} , #{param2.endIndex} 
+	</select>
+	
+	<sql id="select_base">
+		SELECT
+			  id id,
+			  rolename rolename,
+			  uid uid 
+			FROM sys_role_t
+	</sql>
+	
+</mapper>
