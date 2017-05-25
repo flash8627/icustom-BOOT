@@ -1,24 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>icustom.web</artifactId>
+	<packaging>war</packaging>
+
+	<name>icustom.web</name>
+	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
-	<artifactId>icustom.web</artifactId>
-	<packaging>war</packaging>
-	
-	<!--
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
 	<dependencies>
+		
 		<dependency>
-			<groupId>com.gwtjs.ICustom</groupId>
-			<artifactId>ICustom.international.api</artifactId>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.log</artifactId>
+			<version>${project.parent.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.resources</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-	-->
-	
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!-- cancel web directory  -->
+				<plugin> <groupId>org.apache.maven.plugins</groupId> 
+					<artifactId>maven-war-plugin</artifactId> <version>2.4</version> <configuration> 
+					<warSourceDirectory>src/main/webapp</warSourceDirectory> <warName>icustom.security</warName> 
+					<failOnMissingWebXml>false</failOnMissingWebXml> </configuration> </plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<useSystemClassLoader>false</useSystemClassLoader>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<finalName>icustom.web</finalName>
+	</build>
+
 </project>

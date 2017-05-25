@@ -1,0 +1,48 @@
+{
+"update_url":"http://clients2.google.com/service/update2/crx",
+  "name": "Advanced REST client",
+  "description": "The web developers helper program to create and test custom HTTP requests.",
+  "icons": {
+    "16": "img/arc_icon_16.png",
+    "128": "img/arc_icon_128.png"
+  },
+  "version": "3.1.1",
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "declarativeWebRequest",
+    "<all_urls>",
+    "history",
+    "background",
+    "storage",
+    "clipboardWrite"
+  ],
+  "background": {
+    "scripts": ["background.js","/oauth2/oauth2.js"]
+  },
+  "app": {
+    "launch": {
+      "local_path": "RestClient.html"
+    }
+  },
+  "content_security_policy": "script-src 'unsafe-eval' chrome-extension:// chrome-extension-resource:// * * 'self'; object-src chrome-extension:// chrome-extension-resource:// 'self'; frame-src chrome-extension:// chrome-extension-resource:// 'self'",
+  "content_scripts": [
+    {
+    	"matches": ["*"],
+    	"js": ["gdriveinit.js"]
+    },
+    {
+    	"matches": ["*"],
+	"js": ["oauth2/oauth2_inject.js"],
+	"run_at": "document_start"
+    }
+  ],
+  "intents": {
+	"http://webintents.org/view": [{
+		"title": "Advanced REST client",
+		"type": ["application/restclient+data"],
+		"href": "/intentview.html",
+		"disposition" : "inline"
+	}]
+  }
+}

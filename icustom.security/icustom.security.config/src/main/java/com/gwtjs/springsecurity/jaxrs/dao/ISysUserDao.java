@@ -43,7 +43,7 @@ public interface ISysUserDao {
 	 * 
 	 * @return
 	 */
-	PagedResult<SysUser> findUserPage(SysUser user,PageVO page);
+	PagedResult<SysUser> findUserPage(@Param("user") SysUser user,@Param("page") PageVO page);
 
 	/**
 	 * 批量插入用户数据

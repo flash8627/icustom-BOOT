@@ -55,6 +55,8 @@ public class ISysUserDaoTest extends MainApplicationTest {
 		page.setMysqlEndIndex(8);
 		PagedResult<SysUser> result = sysUserDao.findUserPage(user, page);
 		System.out.println("PagedResult:"+result);
+		System.out.println("PagedResult page:"+result.getPageVO());
+		System.out.println("PagedResult vo:"+result.getResult());
 		assertTrue(user!=null);
 	}
 	
@@ -97,7 +99,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 		sysUserDao.insert(user);
 	}
 	
-	@Test
+	@Test @Ignore
 	public void updatePwdTest()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
@@ -109,7 +111,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 		sysUserDao.updatePwd(user);
 	}
 	
-	@Test
+	@Test @Ignore
 	public void updateTest()
 	{
 		SysUser user = new SysUser();

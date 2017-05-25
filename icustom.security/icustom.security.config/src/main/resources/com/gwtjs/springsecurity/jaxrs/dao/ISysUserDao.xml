@@ -13,15 +13,15 @@
 	<select id="findUserPage" resultType="com.gwtjs.springsecurity.entity.SysUser">
 		<include refid="Base_Column_List" /> 
 		<include refid="select_cond" /> 
-		<!-- AND name = #{param1.name}
-		AND email = #{param1.email}
+		<!-- AND name = #{user.name}
+		AND email = #{user.email}
 		AND #{param2.curPage} = #{param2.curPage} 
 		AND #{param2.pageSize} = #{param2.pageSize} 
 		 AND #{param2.endIndex} = #{param2.endIndex} 
 		AND #{param2.startIndex} = #{param2.startIndex} 
 		 -->
 		<!-- AND #{param2.mysqlStartIndex} = #{param2.mysqlEndIndex}  -->
-		LIMIT #{param2.startIndex} , #{param2.endIndex} 
+		LIMIT #{page.startIndex} , #{page.endIndex} 
 	</select>
 	
 	<select id="findUser" resultType="com.gwtjs.springsecurity.entity.SysUser">
@@ -35,11 +35,11 @@
 	</select>
 	
 	<sql id="select_cond">
-		<if test='_parameter.get("param1").account != null and _parameter.get("param1").account != "" and _parameter.get("param1").account != "null"'>
-			AND upper(T1.account) = upper(#{param1.account,jdbcType=VARCHAR}) 
+		<if test='_parameter.get("user").account != null and _parameter.get("user").account != "" and _parameter.get("user").account != "null"'>
+			AND upper(T1.account) = upper(#{user.account,jdbcType=VARCHAR}) 
 		</if>
-		<if test='_parameter.get("param1").username != null and _parameter.get("param1").username != "" and _parameter.get("param1").username != "null"'>
-			AND upper(T1.username) = upper(#{param1.username,jdbcType=VARCHAR}) 
+		<if test='_parameter.get("user").username != null and _parameter.get("user").username != "" and _parameter.get("user").username != "null"'>
+			AND upper(T1.username) = upper(#{user.username,jdbcType=VARCHAR}) 
 		</if>
 	</sql>
 		

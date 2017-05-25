@@ -22,8 +22,6 @@ public class ISysResourceDaoTest  extends MainApplicationTest {
 	public void serviceAocTest() {
 		assertTrue(sysResourceDao != null);
 	}
-	
-
 
 	@Test @Ignore
 	public void insertTest() {
@@ -50,6 +48,9 @@ public class ISysResourceDaoTest  extends MainApplicationTest {
 		page.setPageSize(18);
 		PagedResult<SysResource> result = sysResourceDao.findResourcePage(sys,
 				page);
+		System.out.println("resource result:\n"+result);
+		System.out.println("resource page result:\n"+result.getPageVO());
+		System.out.println("resource VO   result:\n"+result.getResult());
 	}
 
 }

@@ -2,6 +2,7 @@ package com.gwtjs.springsecurity.jaxrs.dao;
 
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
@@ -23,6 +24,6 @@ public interface ISysRoleDao {
 	
 	public int update(SysRole role);
 	
-	public PagedResult<SysRole> findRolePage(SysRole role,PageVO page);
+	public PagedResult<SysRole> findRolePage(@Param("vo") SysRole role,@Param("page") PageVO page);
 	
 }

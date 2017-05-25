@@ -39,4 +39,9 @@ public class PagedResult<T> implements Serializable {
 		this.result = result;
 	}
 
+	@Override
+	public String toString() {
+		return "PagedResult [pageVO=" + pageVO + ", result=" + result + "]";
+	}
+
 }

@@ -67,9 +67,9 @@ public class ISysRoleDaoTest extends MainApplicationTest {
 		page.setPageSize(10);
 		
 		PagedResult<SysRole> result = sysRoleDao.findRolePage(role, page);
-		System.out.println(result);
-		System.out.println(result.getPageVO());
-		System.out.println(result.getResult());
+		System.out.println("role result:\n"+result);
+		System.out.println("role page result:\n"+result.getPageVO());
+		System.out.println("role VO   result:\n"+result.getResult());
 	}
 	
 }

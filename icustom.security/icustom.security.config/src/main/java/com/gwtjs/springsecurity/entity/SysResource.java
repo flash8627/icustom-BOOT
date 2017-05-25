@@ -12,11 +12,11 @@ import com.gwtjs.core.entity.BaseResource;
 @Entity
 @Table(name = "sys_resource_t")
 public class SysResource extends BaseResource {
-	
+
 	/***/
 	private static final long serialVersionUID = -8724114844194419901L;
 
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 10)
 	private Integer id;
@@ -93,6 +93,14 @@ public class SysResource extends BaseResource {
 
 	public void setMethodPath(String methodPath) {
 		this.methodPath = methodPath;
+	}
+
+	@Override
+	public String toString() {
+		return "SysResource [id=" + id + ", resourceString=" + resourceString
+				+ ", resourceId=" + resourceId + ", remark=" + remark
+				+ ", resourceName=" + resourceName + ", methodName="
+				+ methodName + ", methodPath=" + methodPath + "]";
 	}
 
 }

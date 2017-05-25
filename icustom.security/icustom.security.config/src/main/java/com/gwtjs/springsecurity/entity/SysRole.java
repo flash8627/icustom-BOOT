@@ -68,4 +68,10 @@ public class SysRole extends BaseResource {
 		this.sysUser = sysUser;
 	}
 
+	@Override
+	public String toString() {
+		return "SysRole [id=" + id + ", sysUser=" + sysUser + ", rolename="
+				+ rolename + ", userId=" + userId + "]";
+	}
+
 }

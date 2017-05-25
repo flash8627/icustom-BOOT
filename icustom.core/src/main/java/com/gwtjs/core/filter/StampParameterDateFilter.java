@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gwtjs.core.intercepts.PageInterceptor;
 import com.gwtjs.core.util.spring.StringUtils;
 
 /**
@@ -32,7 +31,7 @@ public class StampParameterDateFilter implements Filter {
 	private String stampStatus = "1";
 	
 	private static final com.gwtjs.core.log.ILogger log = com.gwtjs.core.log.LoggerFactory
-			.getLogger(PageInterceptor.class);
+			.getLogger(StampParameterDateFilter.class);
 	
 	private static final Logger logger = LoggerFactory
 			.getLogger(StampParameterDateFilter.class);
@@ -40,7 +39,7 @@ public class StampParameterDateFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		log.info("stamp Status",stampStatus);
-		logger.error(stampStatus);
+		//logger.error(stampStatus);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = MainApplication.class)
+@SpringBootTest(classes = SecurityMainApplication.class)
 @WebAppConfiguration
 public class MainApplicationTest {
 	

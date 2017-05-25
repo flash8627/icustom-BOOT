@@ -3,6 +3,7 @@ package com.gwtjs.springsecurity.jaxrs.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
@@ -22,6 +23,6 @@ public interface ISysResourceDao {
 	
 	List<SysResource> findAll();
 	
-	PagedResult<SysResource> findResourcePage(SysResource sys,PageVO page);
+	PagedResult<SysResource> findResourcePage(@Param("vo")SysResource sys,@Param("page")PageVO page);
 	
 }

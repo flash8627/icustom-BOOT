@@ -38,6 +38,10 @@
 			WHERE id = id
 	</update>
 	
+	<select id="findAll" resultType="com.gwtjs.springsecurity.entity.SysResource">
+		<include refid="select_base" />
+	</select>
+	
 	<select id="findResourcePageCount" resultType="int">
 		SELECT
 			  COUNT(1) 
@@ -49,19 +53,19 @@
 	<select id="findResourcePage" resultType="com.gwtjs.springsecurity.entity.SysResource">
 		<include refid="select_base" />
 			<include refid="select_cond" />
-			LIMIT #{param2.startIndex} , #{param2.endIndex} 
+			LIMIT #{page.startIndex} , #{page.endIndex} 
 	</select>
 	
 	<sql id="select_cond">
-		<if test='_parameter.get("param1").methodName != null and _parameter.get("param1").methodName != ""'>
-			AND UPPER(T1.method_name) LIKE UPPER('#{param1.methodName,jdbcType=VARCHAR}') 
+		<if test='_parameter.get("vo").methodName != null and _parameter.get("vo").methodName != ""'>
+			AND UPPER(T1.method_name) LIKE UPPER('#{vo.methodName,jdbcType=VARCHAR}') 
 		</if>
-		<if test='_parameter.get("param1").resourceName != null and _parameter.get("param1").resourceName != ""'>
-			AND UPPER(T1.resource_name) LIKE UPPER('#{param1.resourceName,jdbcType=VARCHAR}') 
+		<if test='_parameter.get("vo").resourceName != null and _parameter.get("vo").resourceName != ""'>
+			AND UPPER(T1.resource_name) LIKE UPPER('#{vo.resourceName,jdbcType=VARCHAR}') 
 		</if>
 		
-		<if test='_parameter.get("param1").resourceString != null and _parameter.get("param1").resourceString != ""'>
-			AND UPPER(T1.resource_string) LIKE UPPER('#{param1.resourceString,jdbcType=VARCHAR}') 
+		<if test='_parameter.get("vo").resourceString != null and _parameter.get("vo").resourceString != ""'>
+			AND UPPER(T1.resource_string) LIKE UPPER('#{vo.resourceString,jdbcType=VARCHAR}') 
 		</if>
 	</sql>
 	
