@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gwtjs.international.dao.InternationalDAO">
+	
+	<select id="i18n" resultType="com.gwtjs.international.entity.LanguageVO">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SYS_LANGUAGE_T T1
+		where VALID_FLAG=1 
+		AND T1.LAN_CODE = #{lanCode,jdbcType=VARCHAR} 
+		AND T1.LAN_TYPE = #{lanType,jdbcType=INTEGER}
+			AND ROWNUM = 1
+	</select>
+	
+	<select id="findItem" resultType="com.gwtjs.international.entity.LanguageVO">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SYS_LANGUAGE_T T1
+		where VALID_FLAG=1 AND T1.LAN_ID = #{lanId,jdbcType=NUMERIC}
+	</select>
+	
+	<select id="findByItem" resultType="com.gwtjs.international.entity.LanguageVO">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SYS_LANGUAGE_T T1
+		where VALID_FLAG=1 
+			AND T1.LAN_CODE = #{lanCode,jdbcType=VARCHAR} 
+			AND T1.LAN_VALUE = #{lanValue,jdbcType=VARCHAR}
+			AND T1.LAN_TYPE = #{lanType,jdbcType=INTEGER}
+			AND ROWNUM = 1
+	</select>
+	
+	<select id="findLanguagePage" resultType="com.gwtjs.international.entity.LanguageVO">
+		<include refid="page_st" />
+		SELECT
+		<include refid="Base_Column_List" />
+		,row_number() over(partition by LAN_CODE order by CREATED_DATE DESC) groupIndex 
+		FROM SYS_LANGUAGE_T T1
+		where VALID_FLAG=1
+		<include refid="select_cond" />
+		
+		<include refid="page_et" />
+	</select>
+
+	<select id="findLanguagePageCount" resultType="int">
+		SELECT
+		COUNT(1)
+		FROM SYS_LANGUAGE_T T1 
+		where VALID_FLAG=1
+		<include refid="select_cond" />
+	</select>
+	
+	<sql id="page_st">
+		SELECT * FROM (
+		SELECT TT.* , ROWNUM RN FROM (
+	</sql>
+	<sql id="page_et">
+		) TT
+		<![CDATA[
+		) WHERE RN<=#{1.endIndex} AND RN>=#{1.startIndex}
+		]]>
+	</sql>
+	
+	<sql id="Base_Column_List">
+		LAN_ID lanId, 
+		LAN_CODE lanCode, 
+		lan_value lanValue,
+		LAN_TYPE lanType,
+		(decode((LAN_TYPE),1,'Chinese','English')) lanTypeLab,
+		remarks remarks,
+		ATTRIBUTE1 attribute1, 
+		ATTRIBUTE2 attribute2, 
+		ATTRIBUTE3 attribute3,
+		ATTRIBUTE4 attribute4, 
+		ATTRIBUTE5 attribute5, 
+		ATTRIBUTE6 attribute6,
+		ATTRIBUTE7 attribute7, 
+		ATTRIBUTE8 attribute8, 
+		ATTRIBUTE9 attribute9,
+		ATTRIBUTE10 attribute10, 
+		(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID = to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
+		ORDER_CODE orderCode, 
+		CREATED_USER createdUser,
+		TO_CHAR(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS') createdDate,
+		(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID = to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn,
+		UPDATE_LAST_USER updateLastUser,
+		TO_CHAR(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS') updateLastDate
+	</sql>
+
+	<sql id="select_cond">
+
+		<if test='_parameter.get("0").lanId != null'>
+			AND T1.LAN_ID = #{0.lanId,jdbcType=NUMERIC}
+		</if>
+
+		<if test='_parameter.get("0").lanCode != null'>
+			AND T1.LAN_CODE = #{0.lanCode,jdbcType=VARCHAR}
+		</if>
+
+		<if test='_parameter.get("0").lanValue != null'>
+			AND T1.lan_value = #{0.lanValue,jdbcType=VARCHAR}
+		</if>
+
+		<if test='_parameter.get("0").lanType != null'>
+			AND T1.LAN_TYPE = #{0.lanType,jdbcType=INTEGER}
+		</if>
+		
+		<if test='_parameter.get("0").remarks != null'>
+			AND T1.remarks LIKE '%'||#{0.remarks,jdbcType=VARCHAR}||'%'
+		</if>
+
+	</sql>
+
+	<!-- batch action -->
+
+	<delete id="batchRemovePks">
+		DELETE FROM SYS_LANGUAGE_T WHERE LAN_ID in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item.lanId}
+		</foreach>
+	</delete>
+
+	<!-- batchUpdate -->
+	<update id="batchUpdate">
+		declare
+		<if test="list!=null and !list.isEmpty()">
+			begin
+			<foreach collection="list" item="item">
+				UPDATE
+				SYS_LANGUAGE_T
+				SET
+				LAN_CODE = #{item.lanCode,jdbcType=VARCHAR},
+				LAN_VALUE = #{item.lanValue,jdbcType=VARCHAR},
+				LAN_TYPE = #{item.lanType,jdbcType=INTEGER},
+				REMARKS = #{item.remarks,jdbcType=VARCHAR},
+				ORDER_CODE = #{item.orderCode,jdbcType=INTEGER},
+				UPDATE_LAST_USER = #{item.updateLastUser,jdbcType=NUMERIC},
+				UPDATE_LAST_DATE = SYSDATE
+				where LAN_ID = #{item.lanId,jdbcType=NUMERIC};
+			</foreach>
+			end;
+		</if>
+	</update>
+
+	<insert id="batchInsert">
+		declare
+		<if test="list!=null and !list.isEmpty()">
+			begin
+			<foreach collection="list" item="item">
+				INSERT INTO SYS_LANGUAGE_T
+				(
+				LAN_ID, 
+				LAN_CODE,
+				LAN_VALUE, 
+				LAN_TYPE,
+				REMARKS,
+				ATTRIBUTE1, 
+				ATTRIBUTE2, 
+				ATTRIBUTE3,
+				ATTRIBUTE4, 
+				ATTRIBUTE5, 
+				ATTRIBUTE6,
+				ATTRIBUTE7, 
+				ATTRIBUTE8,
+				ATTRIBUTE9,
+				ATTRIBUTE10,
+				ORDER_CODE,
+				CREATED_USER,
+				CREATED_DATE,
+				UPDATE_LAST_USER,
+				UPDATE_LAST_DATE,
+				VALID_FLAG
+				)
+				values (
+				SYS_LANGUAGE_S.NEXTVAL,
+				#{item.lanCode,jdbcType=VARCHAR},
+				#{item.lanValue,jdbcType=VARCHAR},
+				#{item.lanType,jdbcType=INTEGER},
+				#{item.remarks,jdbcType=VARCHAR},
+				#{item.attribute1,jdbcType=VARCHAR},
+				#{item.attribute2,jdbcType=VARCHAR},
+				#{item.attribute3,jdbcType=VARCHAR},
+				#{item.attribute4,jdbcType=VARCHAR},
+				#{item.attribute5,jdbcType=VARCHAR},
+				#{item.attribute6,jdbcType=VARCHAR},
+				#{item.attribute7,jdbcType=VARCHAR},
+				#{item.attribute8,jdbcType=VARCHAR},
+				#{item.attribute9,jdbcType=VARCHAR},
+				#{item.attribute10,jdbcType=VARCHAR},
+				#{item.orderCode,jdbcType=INTEGER},
+				#{item.createdUser,jdbcType=NUMERIC},
+				SYSDATE,
+				#{item.updateLastUser,jdbcType=NUMERIC},
+				SYSDATE,
+				1
+				);
+			</foreach>
+			end;
+		</if>
+	</insert>
+
+
+</mapper>

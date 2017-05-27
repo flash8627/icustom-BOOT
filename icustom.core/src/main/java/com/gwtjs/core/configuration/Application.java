@@ -72,7 +72,7 @@ public class Application implements IApplicationPrincipal {
 
 	private static Object lockObj = new Object();
 	{
-		// initJalor5();
+		// init icustom();
 	}
 
 	@Override

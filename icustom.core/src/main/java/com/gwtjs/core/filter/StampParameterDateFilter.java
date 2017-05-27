@@ -25,7 +25,7 @@ import com.gwtjs.core.util.spring.StringUtils;
  * @author aGuang
  *
  */
-@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/*",filterName="StampParameterDateFilter")
 public class StampParameterDateFilter implements Filter {
 	
 	private String stampStatus = "1";

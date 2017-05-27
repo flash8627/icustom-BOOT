@@ -12,7 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebFilter(urlPatterns = "/*",filterName="CharacterEncodeFilter",
+@WebFilter(urlPatterns = "/*",filterName="ICustomCharacterEncodeFilter",
 initParams={
         @WebInitParam(name="encoding",value="UTF-8"),
         @WebInitParam(name = "forceEncoding", value = "true")

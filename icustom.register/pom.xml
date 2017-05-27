@@ -9,16 +9,20 @@
 	</parent>
 	
 	<artifactId>icustom.register</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	
-	<!--
+	
 	<dependencies>
 		<dependency>
-			<groupId>com.gwtjs.ICustom</groupId>
-			<artifactId>ICustom.international.api</artifactId>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.international.api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.international.impl</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
-	-->
 	
 </project>

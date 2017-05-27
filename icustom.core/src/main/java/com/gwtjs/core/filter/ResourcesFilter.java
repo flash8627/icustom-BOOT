@@ -24,7 +24,7 @@ import com.gwtjs.core.util.InputStreamUtils;
 /**
  * Servlet Filter implementation class ResourceFilter
  */
-@WebFilter(urlPatterns = "*")
+@WebFilter(urlPatterns = "*",filterName="ICustomResourcesFilter")
 public class ResourcesFilter implements Filter {
 	
 	private static final Logger log = LoggerFactory.getLogger(ResourcesFilter.class);

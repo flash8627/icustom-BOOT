@@ -1,0 +1,392 @@
+
+<link rel="stylesheet" type="text/css" href="../resources/jquery/themes/icon.css">
+
+<script src="js/global.js"></script>
+<script src="js/RegisterView.js"></script>
+<script src="js/RegisterService.js"></script>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Register Manager</h1>
+	</div>
+	<div class="easyui-layout" style="width: 100%; height: 508px;">
+		<div data-options="region:'west',split:true" title="条目"
+			style="width: 30%; padding: 0;">
+			<div class="easyui-layout" data-options="fit:true">
+				<div data-options="region:'north'"
+					style="height: 34px; width: 100%; border: 0; padding: 3px;">
+					<input class="easyui-searchbox" style="height: 26px; width: 100%;"
+						data-options="prompt:'Please Input Value',searcher:doSearch"></input>
+				</div>
+				<div data-options="region:'center'" style="border: 0;">
+					<ul class="easyui-tree" id="regTree"></ul>
+					<!-- <ul class="easyui-tree"
+					data-options="url:'../services/register/registerService/findRecords/10/1',method:'get',animate:true"></ul> -->
+				</div>
+			</div>
+
+		</div>
+		<div style="padding:8px;"
+			data-options="region:'center',iconCls:'Module-mgr-ico'">
+			<div style="margin: 6px 0;">
+				<a href="javascript:void(0)" class="easyui-linkbutton btn-primary" data-options="" onclick="addItem()"><i class="fa fa-plus"></i> Add Item</a> 
+				<a href="javascript:void(0)" class="easyui-linkbutton btn-primary" data-options="" onclick="doSave()"><i class="fa fa-save fa-trash-o fa-lg"></i> Save</a> 
+				<div class="btn-group actionbtn">
+                    <a href="javascript:;" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> 导入导出</a>
+                    <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="false">
+                        <span class="fa fa-caret-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;"><i class="i"></i> 导出Excel</a></li>
+                        <li><a href="javascript:;"><i class="i"></i> 下载Excel模板</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:;"><i class="i"></i> 导入Excel</a></li>
+                    </ul>
+                </div>
+			</div>
+			
+			<div class="my-form-group-row" style="">
+				<span class="form-group my-form-group" style="width: 38%;">
+				节点信息
+				</span>
+				<span class="form-group my-form-group" style="width: 38%;">
+				</span>
+			</div>
+			<form class="form-horizontal" role="form" style="margin:6px;">
+				    <div class="form-group">
+				        <label for="regCode" class="col-sm-2 control-label">名称:</label>
+				        <div class="col-sm-10">
+				        	<input type="hidden" class="form-control" id="regId" name="regId">
+				            <input type="text" class="form-control" id="regCode" name="regCode" placeholder="请输入名称">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="regName" class="col-sm-2 control-label">显示名称:</label>
+				        <div class="col-sm-10">
+				            <input type="text" class="form-control" id="regName" name="regName" placeholder="请输显示名称">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="regValue" class="col-sm-2 control-label">值:</label>
+				        <div class="col-sm-10">
+				            <input type="text" class="form-control" id="regValue" name="regValue" placeholder="请输入值">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="parentPath" class="col-sm-2 control-label">父路径:</label>
+				        <div class="col-sm-10">
+				            <input type="text" class="form-control" id="parentPath" name="parentPath" placeholder="请输入名称">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="parentName" class="col-sm-2 control-label">父节点名称:</label>
+				        <div class="col-sm-10">
+				        	<input type="hidden" class="form-control" id="parentId" name="parentId">
+				            <input type="text" class="form-control" id="parentName" name="parentName"
+				            	placeholder="请选择父节点" style="width:68%;float:left;">
+				            <!-- 信息警告消息的上下文按钮 -->
+				            <label style="float:left;padding:3px;">
+				            	<button type="button" id="parent_select_btn" class="btn btn-info">...</button>
+							</label>
+				        </div>
+				        
+				    </div>
+				    <div class="form-group">
+				        <div class="col-sm-offset-2 col-sm-10">
+				        	<label for="regStatus" class="col-sm-2 control-label">有效状态</label>
+				            <div class="checkbox">
+				                <label>
+				                    <input type="checkbox" checked="checked" value="1" name="regStatus">
+				                </label>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="form-group" style="width:96%;margin:0 auto;">
+				        <label for="regDesc">说明</label>
+				        <textarea class="form-control" name="regDesc" id="regDesc"></textarea>
+				    </div> 
+				</form> 
+
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="register_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary"
+					id="register_modal_submit">
+					<i class="fa fa-save"></i> Save
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="parent_select_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            	<!-- <ul class="easyui-tree"
+					data-options="url:'../services/register/registerService/findRecords/10/1',method:'get',checkbox:true,animate:true">
+				</ul> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="parent_select_modal_submit"><i class="fa fa-save"></i> Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var BASE = '../services/register/registerService/';
+	
+var initRegTree = function(itemId) {
+	var baseUrl = BASE + 'findRegisterList';
+	var url = baseUrl;
+	if (itemId != undefined) {
+		url = url + '/' + regId;
+	}else{
+		url = url + '/0';
+	}
+	$('#regTree').tree({
+		url : url,
+		method : 'get',
+		fit : true,
+		lines:true,
+		//checkbox:true,
+		onBeforeLoad:function(){
+		　　    //获取根节点
+		　　    var rooNode = $("#regTree").tree('getRoot');
+		　　    //调用expand方法
+		　　    $("#regTree").tree('expand',rooNode); 
+		},
+		formatter:function(node){
+			if(node.leaf){
+				// 叶子节点否?
+				node.iconCls = 'icon-reload';
+				node.state = 'closed';
+				$("#regTree").tree("expandAll",node.target);
+			}
+			var s = node.text;
+			if (node.children){
+				s += ' <span style="color:CCCCCC">(' + node.children.length + ')</span>';
+			}
+			//s += '<span style="color:#FFFFFF;">&nbsp;<i class="fa fa-plus"></i></span>';
+			s += '<span class="removeNode" style="color:#FFFFFF;" onclick="doRemove()">&nbsp;<i class="fa fa-remove"></i></span>';
+			return s;
+		},onClick: function(node){
+			node.regName = node.text;
+			node.regStatus = 1;
+			node.regId = node.id;
+			//node.parentId = pnode.id;
+			var pnode = $('#regTree').tree('getParent',node.target);
+			if(pnode!=null)
+			node.parentName = pnode.text;
+			resetForm();
+			setFormValues(node);
+		},onLoadSuccess:function(node){
+	         $(".tree-title").mouseover(function(event){
+					/* console.info('mouseover',event);
+					console.info('mouseover',event.target);
+					console.info('mouseover',event.delegateTarget); */
+	         }); 
+	    },
+		/*
+		onBeforeLoad: function(node, param){
+		}, */
+		onBeforeExpand : function(node) {
+			if (node) {
+				$('#regTree').tree('options').url = baseUrl+"/"+node.id;
+			}
+		}
+	});
+}
+	
+	//过滤
+	function doSearch(value) {
+		alert('You input: ' + value);
+	}
+	
+	// 点击 Create 按钮，弹出创建产品对话框
+    $('#parent_select_btn').on('click', function() {
+        var title = '上一级节点选择';
+        var $modal = $('#parent_select_modal');
+        $modal.find('.modal-title').text(title);
+        $('#parent_select_modal').modal('show');
+    });
+	
+	//添加条目，如果parentId为空则是一级
+	function addItem() {
+		resetForm();
+		var node = $('#regTree').tree('getSelected');
+		var parentPath = '';
+		console.warn('add node parent',node);
+		if(node!=null){
+			node.parentId=node.id;
+			node.parentName=node.text;
+			if(node.parentPath!=null&&node.parentPath!=""){
+				node.parentPath=node.parentPath;
+				if(node.regCode!=null&&node.regCode!=''){
+					node.parentPath=node.parentPath+'.'+node.regCode
+				}
+			}else{
+				node.parentPath=node.regCode;
+			}
+		}else{
+			node = {};
+			node.parentId=0;
+			node.parentName='';
+			node.parentPath=parentPath;
+		}
+		
+		node.regId=0;
+		node.regName='';
+		node.regCode='';
+		node.regValue='';
+		node.regDesc='';
+		node.regId=0;
+		setFormValues(node);
+	}
+	
+	//.tree-title .fa-remove
+	// 点击 Delete 按钮，删除产品
+	doRemove = function() {
+		var node = $("#regTree").tree("getSelected");
+		if(node){
+			var params = [{
+				regId:node.id
+			}];
+			
+			if (confirm('Do you want to delete this language?')) {
+				RegisterService.batchRemoveRegister(params,function(){
+					$('#regTree').tree('remove', node.target);
+				});
+				
+			}
+		}
+		return false;
+	}
+	
+	//保存，含新增和修改
+	function doSave() {
+		var values = getFormValues();
+		console.info(values);
+		var selected = $('#regTree').tree('getSelected');
+		if(values.regId!=0){
+			RegisterService.batchUpdateRegister([values],function(){
+				//更新
+				if (selected){
+					$('#regTree').tree('update', {
+						target: selected.target,
+						parentId: values.parentId,
+						parentName:values.parentName,
+						parentPath: values.parentPath,
+						regCode:values.regCode,
+						regDesc: values.regDesc,
+						regId:values.regId,
+						regName:values.regName,
+						regStatus:values.regValue,
+						regName:values.regName,
+						text: values.regName//,
+						//不用更新id:values.regId
+					});
+				}
+			});
+			//提交[values]
+		}else{
+			var result = RegisterService.batchInsertRegister([values]);
+			for(var i=0;i<result.obj.length;i++){
+				result.obj[i].id = result.obj[i].regId;
+				result.obj[i].text = result.obj[i].regName;
+			}
+			if(selected==null){
+				selected = {};
+			}
+			$('#regTree').tree('append', {
+				parent: selected.target,
+				data: result.obj
+			});
+		}
+		resetForm();
+	}
+	
+	//重置表单
+	function resetForm() {
+		var values = {
+			regId:0,
+			regName:'',
+			regCode:'',
+			regValue:'',
+			parentId:0,
+			parentName:'',
+			parentPath:'',
+			regDesc:''
+		};
+		setFormValues(values);
+	}
+    filter = function(){
+    	/*$('#tt').tree({
+			filter: function(q, node){
+				return node.text.toLowerCase().indexOf(q.toLowerCase()) >= 0;
+			}
+		})*/
+    	$('#regTree').tree({
+            //url: '../services/register/registerService/findRegisterList',
+            loadFilter: function(data){
+                if (data.d){
+                    return data.d;
+                } else {
+                    return data;
+                }
+            }
+        });
+    }
+    
+    /*设置表单值*/
+    function getFormValues(){
+    	var values={};
+    	values.regId=$('input[name="regId"]').val();
+    	values.regName=$('input[name="regName"]').val();
+    	values.regCode=$('input[name="regCode"]').val();
+    	values.regValue=$('input[name="regValue"]').val();
+    	values.parentId=$('input[name="parentId"]').val();
+    	values.parentName=$('input[name="parentName"]').val();
+    	values.parentPath=$('input[name="parentPath"]').val();
+    	values.regDesc=$('#regDesc').val();
+    	values.regStatus=$('input[name=regStatus]').attr('checked')==1?1:0;
+    	return values;
+    }
+    
+    /*设置表单值*/
+    function setFormValues(values){
+    	$('input[name="regId"]').val(values.regId);
+    	$('input[name="regName"]').val(values.regName);
+    	$('input[name="regCode"]').val(values.regCode);
+    	$('input[name="regValue"]').val(values.regValue);
+    	$('input[name="parentId"]').val(values.parentId);
+    	$('input[name="parentName"]').val(values.parentName);
+    	$('input[name="parentPath"]').val(values.parentPath);
+    	$('#regDesc').val(values.regDesc);
+    	$('input[name=regStatus]').attr('checked',true);
+    }
+    
+    $(function() {
+		initRegTree();
+		console.info('添加一级节点有问题!');
+	})
+</script>
+
+<style>
+	.tree-title .fa-remove:hover{color:#F00;}
+	.my-form-group-row{/*border-top:6px #F90 solid;*/border-bottom: 2px #74c557 solid;background:#F0F2F8}
+</style>

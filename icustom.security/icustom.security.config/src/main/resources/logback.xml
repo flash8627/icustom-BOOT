@@ -3,7 +3,7 @@
     <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
         <!-- 项目的appid -->
     <property name="APP_ID" value="com.gwtjs.icustom"/>
-    <property name="LOG_PATH" value="log"></property>
+    <property name="LOG_PATH" value="target/log"></property>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} %-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
@@ -14,7 +14,7 @@
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
         </filter>
-        <file>${LOG_PATH}/${APP_ID}/access.log</file>
+        <file>${LOG_PATH}/${APP_ID}/icustom.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/${APP_ID}/access.log.%d{yyyy-MM-dd}.zip
             </fileNamePattern>
@@ -32,9 +32,9 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <file>${LOG_PATH}/${APP_ID}/access_debug.log</file>
+        <file>${LOG_PATH}/${APP_ID}/icustom_debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APP_ID}/access_debug.log.%d{yyyy-MM-dd}.zip
+            <fileNamePattern>${LOG_PATH}/${APP_ID}/icustom_debug.log.%d{yyyy-MM-dd}.zip
             </fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -49,9 +49,9 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <file>${LOG_PATH}/${APP_ID}/access_info.log</file>
+        <file>${LOG_PATH}/${APP_ID}/icustom_info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APP_ID}/access_info.log.%d{yyyy-MM-dd}.zip
+            <fileNamePattern>${LOG_PATH}/${APP_ID}/icustom_info.log.%d{yyyy-MM-dd}.zip
             </fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -67,9 +67,9 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <file>${LOG_PATH}/${APP_ID}/access_warn.log</file>
+        <file>${LOG_PATH}/${APP_ID}/icustom_warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APP_ID}/access_warn.log.%d{yyyy-MM-dd}.zip
+            <fileNamePattern>${LOG_PATH}/${APP_ID}/icustom_warn.log.%d{yyyy-MM-dd}.zip
             </fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -84,9 +84,9 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <file>${LOG_PATH}/${APP_ID}/access_error.log</file>
+        <file>${LOG_PATH}/${APP_ID}/icustom_error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${APP_ID}/access_error.log.%d{yyyy-MM-dd}.zip
+            <fileNamePattern>${LOG_PATH}/${APP_ID}/icustom_error.log.%d{yyyy-MM-dd}.zip
             </fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
