@@ -20,7 +20,7 @@ import com.gwtjs.lookup.services.ILookupItemService;
  *
  */
 @Named("lookupItemService")
-public class LookupItemServiceImpl implements ILookupItemService {
+public class LookupItemService implements ILookupItemService {
 
 	@Inject
 	private ILookupItemDAO lookupItemDao;
@@ -32,7 +32,6 @@ public class LookupItemServiceImpl implements ILookupItemService {
 	public PagedResult<LookupItemVO> findRecords(LookupItemVO record, PageVO page) {
 		PagedResult<LookupItemVO> paged = new PagedResult<LookupItemVO>();
 		PageVO pageVO = new PageVO();
-		pageVO.setTotalRows(lookupItemDao.selectListCount(record,page));
 		if(pageVO.getTotalRows()>0){
 			paged.setPageVO(pageVO);
 			paged.setResult(lookupItemDao.selectList(record, page));

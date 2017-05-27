@@ -20,11 +20,8 @@ public interface ILookupItemDAO extends BaseSqlMapper<LookupItemVO> {
 	List<LookupItemVO> findLookupItems(@Param("classId")Integer classId);
 	
 	//
-	List<LookupItemVO> selectList(LookupItemVO record,PageVO page);
+	List<LookupItemVO> selectList(@Param("vo")LookupItemVO record,@Param("page")PageVO page);
 
-	//
-	int selectListCount(LookupItemVO record,PageVO page);
-	
 	//
 	int batchRemovePks(List<LookupItemVO> records);
 

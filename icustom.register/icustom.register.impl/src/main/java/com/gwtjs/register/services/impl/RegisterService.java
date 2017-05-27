@@ -20,7 +20,7 @@ import com.gwtjs.register.services.IRegisterService;
  *
  */
 @Named("registerService")
-public class RegisterServiceImpl implements IRegisterService {
+public class RegisterService implements IRegisterService {
 
 	@Inject
 	private IRegisterDAO registerDAO;
@@ -32,7 +32,7 @@ public class RegisterServiceImpl implements IRegisterService {
 	public PagedResult<RegisterVO> findRecords(RegisterVO record, PageVO page) {
 		PagedResult<RegisterVO> paged = new PagedResult<RegisterVO>();
 		PageVO pageVO = new PageVO();
-		pageVO.setTotalRows(registerDAO.selectListCount(record, page));
+		//pageVO.setTotalRows(registerDAO.selectListCount(record, page));
 		if (pageVO.getTotalRows() > 0) {
 			paged.setPageVO(pageVO);
 			paged.setResult(registerDAO.selectList(record, page));

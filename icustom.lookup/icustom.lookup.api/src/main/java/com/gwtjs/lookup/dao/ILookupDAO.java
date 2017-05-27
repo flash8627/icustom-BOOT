@@ -18,7 +18,7 @@ public interface ILookupDAO extends BaseSqlMapper<LookupVO> {
 	LookupVO findItem(@Param("classId")Integer classId);
 
 	//
-	PagedResult<LookupVO> findLookupPage(LookupVO record,PageVO page);
+	PagedResult<LookupVO> findLookupPage(@Param("vo")LookupVO record,@Param("page")PageVO page);
 
 	//
 	int batchRemovePks(List<LookupVO> records);

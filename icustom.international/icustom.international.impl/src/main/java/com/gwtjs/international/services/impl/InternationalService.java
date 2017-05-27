@@ -20,7 +20,7 @@ import com.gwtjs.international.services.IInternationalService;
  *
  */
 @Named("internationalService")
-public class InternationalServiceImpl implements IInternationalService {
+public class InternationalService implements IInternationalService {
 
 	@Inject
 	private InternationalDAO internationalDao;

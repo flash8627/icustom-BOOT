@@ -25,14 +25,11 @@ public interface IRegisterDAO extends BaseSqlMapper<RegisterVO> {
 	List<RegisterVO> findRegisterList(RegisterVO record);
 	
 	//
-	List<RegisterVO> selectList(RegisterVO record,PageVO page);
+	List<RegisterVO> selectList(@Param("vo")RegisterVO record,@Param("page")PageVO page);
 	
 	//
 	List<RegisterVO> findItems(RegisterVO record);
 
-	//
-	int selectListCount(RegisterVO record,PageVO page);
-	
 	//
 	int batchRemovePks(List<RegisterVO> records);
 

@@ -20,7 +20,7 @@ import com.gwtjs.lookup.services.ILookupClassifyService;
  *
  */
 @Named("lookupClassifyService")
-public class LookupClassifyServiceImpl implements ILookupClassifyService {
+public class LookupClassifyService implements ILookupClassifyService {
 
 	@Inject
 	private ILookupDAO lookupDao;
