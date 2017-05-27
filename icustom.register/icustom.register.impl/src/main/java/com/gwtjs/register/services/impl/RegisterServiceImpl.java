@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.register.dao.IRegisterDAO;
 import com.gwtjs.register.entity.RegisterVO;
@@ -29,9 +29,9 @@ public class RegisterServiceImpl implements IRegisterService {
 	 * 分页的lookup 条目
 	 */
 	@Override
-	public PagedResult<RegisterVO> findRecords(RegisterVO record, PagerVO page) {
+	public PagedResult<RegisterVO> findRecords(RegisterVO record, PageVO page) {
 		PagedResult<RegisterVO> paged = new PagedResult<RegisterVO>();
-		PagerVO pageVO = new PagerVO();
+		PageVO pageVO = new PageVO();
 		pageVO.setTotalRows(registerDAO.selectListCount(record, page));
 		if (pageVO.getTotalRows() > 0) {
 			paged.setPageVO(pageVO);

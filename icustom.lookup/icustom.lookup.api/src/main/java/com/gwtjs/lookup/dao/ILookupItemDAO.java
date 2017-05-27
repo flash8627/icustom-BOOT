@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gwtjs.core.entity.PagerVO;
-import com.gwtjs.core.mapper.BaseSqlMapper;
+import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.icustom.mapper.BaseSqlMapper;
 import com.gwtjs.lookup.entity.LookupItemVO;
 
 public interface ILookupItemDAO extends BaseSqlMapper<LookupItemVO> {
@@ -20,10 +20,10 @@ public interface ILookupItemDAO extends BaseSqlMapper<LookupItemVO> {
 	List<LookupItemVO> findLookupItems(@Param("classId")Integer classId);
 	
 	//
-	List<LookupItemVO> selectList(LookupItemVO record,PagerVO page);
+	List<LookupItemVO> selectList(LookupItemVO record,PageVO page);
 
 	//
-	int selectListCount(LookupItemVO record,PagerVO page);
+	int selectListCount(LookupItemVO record,PageVO page);
 	
 	//
 	int batchRemovePks(List<LookupItemVO> records);

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gwtjs.core.entity.PagerVO;
-import com.gwtjs.core.mapper.BaseSqlMapper;
+import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.icustom.mapper.BaseSqlMapper;
 import com.gwtjs.register.entity.RegisterVO;
 
 /**
@@ -25,13 +25,13 @@ public interface IRegisterDAO extends BaseSqlMapper<RegisterVO> {
 	List<RegisterVO> findRegisterList(RegisterVO record);
 	
 	//
-	List<RegisterVO> selectList(RegisterVO record,PagerVO page);
+	List<RegisterVO> selectList(RegisterVO record,PageVO page);
 	
 	//
 	List<RegisterVO> findItems(RegisterVO record);
 
 	//
-	int selectListCount(RegisterVO record,PagerVO page);
+	int selectListCount(RegisterVO record,PageVO page);
 	
 	//
 	int batchRemovePks(List<RegisterVO> records);

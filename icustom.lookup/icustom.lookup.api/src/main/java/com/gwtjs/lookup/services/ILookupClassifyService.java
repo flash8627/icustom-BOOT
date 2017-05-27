@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.lookup.entity.LookupVO;
 
@@ -30,13 +30,13 @@ public interface ILookupClassifyService {
 	
 	@GET
 	@Path("findListRecords/{pageSize}/{curPage}")
-	public PagedResult<LookupVO> findListRecords(@QueryParam("")LookupVO record, @PathParam("")PagerVO page);
+	public PagedResult<LookupVO> findListRecords(@QueryParam("")LookupVO record, @PathParam("")PageVO page);
 	
 	@GET @Path("findItem/{classId}")
 	ResultWrapper findItem(@PathParam("classId")Integer classId);
 	
 	@GET @Path("findLookupList/{pageSize}/{curPage}")
-	PagedResult<LookupVO> findLookupList(@QueryParam("")LookupVO record,@PathParam("")PagerVO page);
+	PagedResult<LookupVO> findLookupList(@QueryParam("")LookupVO record,@PathParam("")PageVO page);
 
 	@PUT @Path("batchRemovePks")
 	ResultWrapper batchRemovePks(List<LookupVO> records);

@@ -1,27 +1,42 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
+	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-  <artifactId>icustom.international.impl</artifactId>
-  <packaging>jar</packaging>
+	<artifactId>icustom.international.impl</artifactId>
+	<packaging>jar</packaging>
 
-  <name>icustom.international.impl</name>
-  <url>http://maven.apache.org</url>
+	<name>icustom.international.impl</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.gwtjs.icustom</groupId>
-		<artifactId>icustom.international.api</artifactId>
-     <version>${project.parent.version}</version>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.international.api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.core</artifactId>
+			<version>${project.parent.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<version>${project.parent.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+	</dependencies>
 </project>

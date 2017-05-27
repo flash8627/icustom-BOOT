@@ -43,6 +43,12 @@ public class ResultWrapper {
 		this.data = data;
 		this.errorCode = errorCode;
 	};
+	
+
+
+	public static ResultWrapper successResult(Object data) {
+		return new ResultWrapper(ResultWrapper.STATUS_SUCCESS, "", data, null);
+	}
 
 	public static ResultWrapper constructSuccessResult(Object data) {
 		return new ResultWrapper(ResultWrapper.STATUS_SUCCESS, "", data, null);

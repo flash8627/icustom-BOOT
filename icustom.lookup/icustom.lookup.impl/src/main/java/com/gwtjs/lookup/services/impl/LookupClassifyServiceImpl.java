@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.lookup.dao.ILookupDAO;
 import com.gwtjs.lookup.entity.LookupVO;
@@ -29,7 +29,7 @@ public class LookupClassifyServiceImpl implements ILookupClassifyService {
 	 * 分页的lookup 条目
 	 */
 	@Override
-	public PagedResult<LookupVO> findListRecords(LookupVO record, PagerVO page) {
+	public PagedResult<LookupVO> findListRecords(LookupVO record, PageVO page) {
 		return lookupDao.findLookupPage(record, page);
 	}
 	
@@ -40,7 +40,7 @@ public class LookupClassifyServiceImpl implements ILookupClassifyService {
 	}
 
 	@Override
-	public PagedResult<LookupVO> findLookupList(LookupVO record, PagerVO page) {
+	public PagedResult<LookupVO> findLookupList(LookupVO record, PageVO page) {
 		return findListRecords(record, page);
 	}
 

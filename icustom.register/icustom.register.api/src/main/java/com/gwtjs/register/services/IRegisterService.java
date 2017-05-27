@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.register.entity.RegisterVO;
 
@@ -30,7 +30,7 @@ public interface IRegisterService {
 	
 	@GET
 	@Path("/findRecords/{pageSize}/{curPage}")
-	public PagedResult<RegisterVO> findRecords(@QueryParam("") RegisterVO record, @PathParam("")PagerVO page);
+	public PagedResult<RegisterVO> findRecords(@QueryParam("") RegisterVO record, @PathParam("")PageVO page);
 	
 	@GET
 	@Path("/findItem/{regId}")

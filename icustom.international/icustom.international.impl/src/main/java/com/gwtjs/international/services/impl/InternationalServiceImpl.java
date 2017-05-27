@@ -6,8 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.international.dao.InternationalDAO;
 import com.gwtjs.international.entity.LanguageVO;
@@ -30,7 +30,7 @@ public class InternationalServiceImpl implements IInternationalService {
 	 */
 	@Override
 	public PagedResult<LanguageVO> findListRecords(LanguageVO record,
-			PagerVO page) {
+			PageVO page) {
 		return internationalDao.findLanguagePage(record, page);
 	}
 
@@ -47,7 +47,7 @@ public class InternationalServiceImpl implements IInternationalService {
 	}
 
 	@Override
-	public PagedResult<LanguageVO> findLanguageList(LanguageVO record, PagerVO page) {
+	public PagedResult<LanguageVO> findLanguageList(LanguageVO record, PageVO page) {
 		return internationalDao.findLanguagePage(record, page);
 	}
 

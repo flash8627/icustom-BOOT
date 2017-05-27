@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.lookup.dao.ILookupItemDAO;
 import com.gwtjs.lookup.entity.LookupItemVO;
@@ -29,9 +29,9 @@ public class LookupItemServiceImpl implements ILookupItemService {
 	 * 分页的lookup 条目
 	 */
 	@Override
-	public PagedResult<LookupItemVO> findRecords(LookupItemVO record, PagerVO page) {
+	public PagedResult<LookupItemVO> findRecords(LookupItemVO record, PageVO page) {
 		PagedResult<LookupItemVO> paged = new PagedResult<LookupItemVO>();
-		PagerVO pageVO = new PagerVO();
+		PageVO pageVO = new PageVO();
 		pageVO.setTotalRows(lookupItemDao.selectListCount(record,page));
 		if(pageVO.getTotalRows()>0){
 			paged.setPageVO(pageVO);

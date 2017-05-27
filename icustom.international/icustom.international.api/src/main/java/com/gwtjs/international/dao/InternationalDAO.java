@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
-import com.gwtjs.core.mapper.BaseSqlMapper;
+import com.gwtjs.icustom.mapper.BaseSqlMapper;
 import com.gwtjs.international.entity.LanguageVO;
 
 public interface InternationalDAO extends BaseSqlMapper<LanguageVO> {
@@ -21,7 +21,7 @@ public interface InternationalDAO extends BaseSqlMapper<LanguageVO> {
 	LanguageVO i18n(LanguageVO record);
 
 	//
-	PagedResult<LanguageVO> findLanguagePage(LanguageVO record,PagerVO page);
+	PagedResult<LanguageVO> findLanguagePage(@Param("vo")LanguageVO record,@Param("page")PageVO page);
 	
 	//
 	int batchRemovePks(List<LanguageVO> records);

@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PagerVO;
+import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.ResultWrapper;
 import com.gwtjs.lookup.entity.LookupItemVO;
 
@@ -31,7 +31,7 @@ public interface ILookupItemService {
 	ResultWrapper findItem(@PathParam("itemId")Integer itemId);
 	
 	@GET @Path("findRecords/{pageSize}/{curPage}")
-	PagedResult<LookupItemVO> findRecords(@QueryParam("")LookupItemVO record,@PathParam("")PagerVO page);
+	PagedResult<LookupItemVO> findRecords(@QueryParam("")LookupItemVO record,@PathParam("")PageVO page);
 	
 	@GET @Path("findLookupItems/{classId}")
 	ResultWrapper findLookupItems(@PathParam("classId")Integer classId);

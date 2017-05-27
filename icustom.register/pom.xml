@@ -11,18 +11,9 @@
 	<artifactId>icustom.register</artifactId>
 	<packaging>pom</packaging>
 	
-	
-	<dependencies>
-		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.international.api</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.international.impl</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-	</dependencies>
+	<modules>
+		<module>icustom.register.api</module>
+		<module>icustom.register.impl</module>
+	</modules>
 	
 </project>
