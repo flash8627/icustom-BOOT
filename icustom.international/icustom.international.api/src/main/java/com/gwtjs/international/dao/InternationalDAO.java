@@ -6,10 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.icustom.mapper.BaseSqlMapper;
 import com.gwtjs.international.entity.LanguageVO;
 
-public interface InternationalDAO extends BaseSqlMapper<LanguageVO> {
+public interface InternationalDAO{
 	
 	//
 	LanguageVO findByItem(LanguageVO lan);

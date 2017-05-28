@@ -17,7 +17,7 @@ import com.gwtjs.core.api.test.ApiTestUiMainApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ApiTestUiMainApplication.class)
 @WebAppConfiguration
-public class MainApplicationTest {
+public class SecurityUIApplicationTest {
 	
 	MockMvc mvc;
 

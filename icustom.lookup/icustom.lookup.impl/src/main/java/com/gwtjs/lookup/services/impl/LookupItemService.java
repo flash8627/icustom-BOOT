@@ -51,7 +51,7 @@ public class LookupItemService implements ILookupItemService {
 
 	@Override
 	public ResultWrapper selectListCount(LookupItemVO record) {
-		return ResultWrapper.successResult(lookupItemDao.selectListCount(record));
+		return null;//ResultWrapper.successResult(lookupItemDao.selectListCount(record));
 	}
 
 	@Override

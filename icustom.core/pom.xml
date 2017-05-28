@@ -24,7 +24,8 @@
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<optional>true</optional>
+			<scope>provided</scope>
+			<!-- <optional>true</optional> -->
 		</dependency>
 
 		<dependency>

@@ -6,10 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.icustom.mapper.BaseSqlMapper;
 import com.gwtjs.lookup.entity.LookupVO;
 
-public interface ILookupDAO extends BaseSqlMapper<LookupVO> {
+public interface ILookupDAO{
 	
 	//
 	LookupVO findByItem(LookupVO record);

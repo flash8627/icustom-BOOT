@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.mapper.BaseSqlMapper;
 import com.gwtjs.register.entity.RegisterVO;
 
 /**
@@ -13,7 +12,7 @@ import com.gwtjs.register.entity.RegisterVO;
  * @author aGuang
  *
  */
-public interface IRegisterDAO extends BaseSqlMapper<RegisterVO> {
+public interface IRegisterDAO{
 	
 	//
 	RegisterVO getByPathRegister(RegisterVO reg);
