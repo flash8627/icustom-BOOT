@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
-import com.gwtjs.core.log.ILogger;
-import com.gwtjs.core.log.LoggerFactory;
+import com.gwtjs.core.log.ICustomLogger;
+import com.gwtjs.core.log.ICustomLoggerFactory;
 
 @SpringBootApplication
 /*SpringBoot之Mapper接口文件所在的包名,mybaits dao.xml的扫描路径*/
@@ -16,7 +16,7 @@ import com.gwtjs.core.log.LoggerFactory;
 @ServletComponentScan(value={"com.gwtjs"})
 public class ICustomCoreApplication {
 	
-	private static final ILogger log = LoggerFactory.getLogger(ICustomCoreApplication.class);
+	private static final ICustomLogger log = ICustomLoggerFactory.getLogger(ICustomCoreApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ICustomCoreApplication.class, args);

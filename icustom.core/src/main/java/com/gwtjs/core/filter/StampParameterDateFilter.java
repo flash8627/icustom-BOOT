@@ -30,7 +30,7 @@ public class StampParameterDateFilter implements Filter {
 	
 	private String stampStatus = "1";
 	
-	private static final com.gwtjs.core.log.ILogger log = com.gwtjs.core.log.LoggerFactory
+	private static final com.gwtjs.core.log.ICustomLogger log = com.gwtjs.core.log.ICustomLoggerFactory
 			.getLogger(StampParameterDateFilter.class);
 	
 	private static final Logger logger = LoggerFactory

@@ -2,6 +2,7 @@ package com.gwtjs.core.filter;
 
 import static com.gwtjs.core.util.InputStreamUtils.buildOutStream;
 import static com.gwtjs.core.util.RequestUtil.getUserAgent;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,10 +16,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-
+import com.gwtjs.core.log.ICustomLogger;
+import com.gwtjs.core.log.ICustomLoggerFactory;
 import com.gwtjs.core.util.InputStreamUtils;
 
 /**
@@ -27,7 +27,8 @@ import com.gwtjs.core.util.InputStreamUtils;
 @WebFilter(urlPatterns = "*",filterName="ICustomResourcesFilter")
 public class ResourcesFilter implements Filter {
 	
-	private static final Logger log = LoggerFactory.getLogger(ResourcesFilter.class);
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(ResourcesFilter.class);
 	
 	/**
 	 * 获取url地址，将*转化成web/*,并处理图片路径\空串等逻辑 如果web目录没有直接取，直接到不到就返回404;

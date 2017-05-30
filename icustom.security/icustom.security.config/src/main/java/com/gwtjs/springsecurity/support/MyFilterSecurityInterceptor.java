@@ -11,12 +11,16 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Component;
+
+import com.gwtjs.springsecurity.SecurityWebSecurityConfig;
 
 /**
  * 该过滤器的主要作用就是通过spring著名的IoC生成securityMetadataSource。
@@ -27,7 +31,8 @@ import org.springframework.stereotype.Component;
  * @author aGuang 2010/3/29
  *
  */
-@Component
+@Component //@Configuration
+//@ConditionalOnClass(MyFilterSecurityInterceptor.class)
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements
 		Filter {
 	

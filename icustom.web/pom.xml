@@ -31,6 +31,12 @@
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.security.config</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.resources</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
@@ -52,7 +58,7 @@
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.parent.version}</version>
-			<optional>true</optional>
+			<!-- <optional>true</optional> -->
 		</dependency>
 		
 		<dependency>

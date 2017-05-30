@@ -1,14 +1,16 @@
 package com.gwtjs.icustom;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.gwtjs.core.log.ICustomLogger;
+import com.gwtjs.core.log.ICustomLoggerFactory;
 
 @SpringBootApplication
 public class ICustomWebApplication {
 	
-	private static final Logger log = LoggerFactory
+	private static final ICustomLogger log = ICustomLoggerFactory
 			.getLogger(ICustomWebApplication.class);
 	
 	public static void main(String[] args) {

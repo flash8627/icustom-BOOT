@@ -3,6 +3,8 @@ package com.gwtjs.springsecurity;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,8 +26,9 @@ import com.gwtjs.springsecurity.support.MyFilterSecurityInterceptor;
 
 @Configuration
 @EnableWebSecurity
+@ConditionalOnClass(SecurityWebSecurityConfig.class)
 // @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private MyFilterSecurityInterceptor mySecurityFilter;
@@ -81,7 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 
 	 * @return
 	 */
-	@Bean  
+	@Bean @ConditionalOnMissingBean(PersistentTokenRepository.class)
     public PersistentTokenRepository persistentTokenRepository() {  
         JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();  
         tokenRepositoryImpl.setDataSource(dataSource);  
@@ -115,12 +118,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.eraseCredentials(false);
 	}
 
-	@Bean
+	@Bean @ConditionalOnMissingBean(BCryptPasswordEncoder.class)
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(4);
 	}
 
-	@Bean
+	@Bean @ConditionalOnMissingBean(LoginSuccessHandler.class)
 	public LoginSuccessHandler loginSuccessHandler() {
 		return new LoginSuccessHandler();
 	}

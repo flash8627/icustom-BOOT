@@ -24,8 +24,8 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-import com.gwtjs.core.log.ILogger;
-import com.gwtjs.core.log.LoggerFactory;
+import com.gwtjs.core.log.ICustomLogger;
+import com.gwtjs.core.log.ICustomLoggerFactory;
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
 
@@ -37,7 +37,7 @@ public class PageInterceptor implements Interceptor {
 	/** 查询count的sql后缀 */
 	private static final String COUNT_SQL_FIX = "Count";
 
-	private static final ILogger log = LoggerFactory
+	private static final ICustomLogger log = ICustomLoggerFactory
 			.getLogger(PageInterceptor.class);
 
 	/** 数据连接 */
