@@ -1,6 +1,7 @@
-package com.start;
+package com.icustom.metrics;
 
-import com.start.handler.MyHandler;
+import com.icustom.metrics.handler.MyHandler;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -11,7 +12,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * ClassName: WebSocketConfig
  * Description:
  *
- * @author kang.wang03
+ * @author aGuang
  *         Date 2016/11/24
  */
 @Configuration

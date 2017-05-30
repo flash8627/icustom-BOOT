@@ -28,13 +28,6 @@
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.log</artifactId>
-			<version>${project.parent.version}</version>
-			<optional>true</optional>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.parent.version}</version>
 			<optional>true</optional>
@@ -69,32 +62,38 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
+			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
+			<optional>true</optional>
 			<version>2.3.1</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
+			<optional>true</optional>
 		</dependency>
 		
 		<dependency>

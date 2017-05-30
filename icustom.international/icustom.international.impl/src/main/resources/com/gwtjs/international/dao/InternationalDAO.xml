@@ -57,7 +57,7 @@
 	<sql id="page_et">
 		) TT
 		<![CDATA[
-		) WHERE RN<=#{1.endIndex} AND RN>=#{1.startIndex}
+		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
 		]]>
 	</sql>
 	
@@ -89,24 +89,24 @@
 
 	<sql id="select_cond">
 
-		<if test='_parameter.get("0").lanId != null'>
-			AND T1.LAN_ID = #{0.lanId,jdbcType=NUMERIC}
+		<if test='_parameter.get("vo").lanId != null'>
+			AND T1.LAN_ID = #{vo.lanId,jdbcType=NUMERIC}
 		</if>
 
-		<if test='_parameter.get("0").lanCode != null'>
-			AND T1.LAN_CODE = #{0.lanCode,jdbcType=VARCHAR}
+		<if test='_parameter.get("vo").lanCode != null'>
+			AND T1.LAN_CODE = #{vo.lanCode,jdbcType=VARCHAR}
 		</if>
 
-		<if test='_parameter.get("0").lanValue != null'>
-			AND T1.lan_value = #{0.lanValue,jdbcType=VARCHAR}
+		<if test='_parameter.get("vo").lanValue != null'>
+			AND T1.lan_value = #{vo.lanValue,jdbcType=VARCHAR}
 		</if>
 
-		<if test='_parameter.get("0").lanType != null'>
-			AND T1.LAN_TYPE = #{0.lanType,jdbcType=INTEGER}
+		<if test='_parameter.get("vo").lanType != null'>
+			AND T1.LAN_TYPE = #{vo.lanType,jdbcType=INTEGER}
 		</if>
 		
-		<if test='_parameter.get("0").remarks != null'>
-			AND T1.remarks LIKE '%'||#{0.remarks,jdbcType=VARCHAR}||'%'
+		<if test='_parameter.get("vo").remarks != null'>
+			AND T1.remarks LIKE '%'||#{vo.remarks,jdbcType=VARCHAR}||'%'
 		</if>
 
 	</sql>

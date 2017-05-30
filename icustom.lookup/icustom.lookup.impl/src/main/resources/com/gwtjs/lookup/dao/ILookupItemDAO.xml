@@ -62,27 +62,27 @@
 	
 	<sql id="select_cond">
 
-		<if test='_parameter.get("0").classId != null'>
+		<if test='_parameter.get("vo").classId != null'>
 			AND T1.ITEM_ID = #{itemId,jdbcType=INTEGER}
 		</if>
 
-		<if test='_parameter.get("0").itemName != null'>
+		<if test='_parameter.get("vo").itemName != null'>
 			AND T1.ITEM_CODE = #{itemCode,jdbcType=INTEGER}
 		</if>
 
-		<if test='_parameter.get("0").itemName != null'>
+		<if test='_parameter.get("vo").itemName != null'>
 			AND T1.ITEM_NAME = #{itemName,jdbcType=VARCHAR}
 		</if>
 
-		<if test='_parameter.get("0").itemLan != null'>
+		<if test='_parameter.get("vo").itemLan != null'>
 			AND T1.ITEM_LAN = #{itemLan,jdbcType=INTEGER}
 		</if>
 
-		<if test='_parameter.get("0").itemStatus != null'>
+		<if test='_parameter.get("vo").itemStatus != null'>
 			AND T1.ITEM_STATUS = #{itemStatus,jdbcType=INTEGER}
 		</if>
 
-		<if test='_parameter.get("0").classId != null'>
+		<if test='_parameter.get("vo").classId != null'>
 			AND T1.CLASS_ID = #{classId,jdbcType=INTEGER}
 		</if>
 

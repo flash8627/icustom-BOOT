@@ -1,4 +1,4 @@
-package com.start.handler;
+package com.icustom.metrics.handler;
 
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -8,7 +8,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  * ClassName: MyHandler
  * Description:
  *
- * @author kang.wang03
+ * @author aGuang
  *         Date 2016/11/24
  */
 public class MyHandler extends TextWebSocketHandler {

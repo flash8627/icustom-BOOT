@@ -1,4 +1,4 @@
-package com.start;
+package com.gwtjs.icustom.email;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,14 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * ClassName: AppApplication
  * Description:
  *
- * @author kang.wang03
+ * @author aGuang
  *         Date 2016/11/8
  */
 @SpringBootApplication
-public class AppApplication {
+public class MailAppApplication {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(AppApplication.class, args);
+        SpringApplication.run(MailAppApplication.class, args);
     }
 
 }

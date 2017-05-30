@@ -40,7 +40,7 @@
 	<sql id="page_et">
 		) TT
 		<![CDATA[
-		) WHERE RN<=#{1.endIndex} AND RN>=#{1.startIndex}
+		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
 		]]>
 	</sql>
 
@@ -53,7 +53,7 @@
 		where T1.VALID_FLAG=1
 		<include refid="select_cond" />
 		ORDER BY CLASS_ID DESC
-		<!-- <if test="#{1.order != null}"> order by #{1.order} asc </if> -->
+		<!-- <if test="#{page.order != null}"> order by #{page.order} asc </if> -->
 		<include refid="page_et" />
 	</select>
 
@@ -67,15 +67,15 @@
 
 	<sql id="select_cond">
 
-		<if test='_parameter.get("0").classId != null'>
-			AND T1.CLASS_ID = #{0.classId,jdbcType=NUMERIC}
+		<if test='_parameter.get("vo").classId != null'>
+			AND T1.CLASS_ID = #{vo.classId,jdbcType=NUMERIC}
 		</if>
-		<if test='_parameter.get("0").className != null'>
-			AND T1.CLASS_NAME = #{0.className,jdbcType=VARCHAR}
+		<if test='_parameter.get("vo").className != null'>
+			AND T1.CLASS_NAME = #{vo.className,jdbcType=VARCHAR}
 		</if>
-		<if test='_parameter.get("0").classCode != null'>
+		<if test='_parameter.get("vo").classCode != null'>
 			AND T1.CLASS_CODE LIKE
-			('%'||#{0.classCode,jdbcType=VARCHAR}||'%')
+			('%'||#{vo.classCode,jdbcType=VARCHAR}||'%')
 		</if>
 
 	</sql>
