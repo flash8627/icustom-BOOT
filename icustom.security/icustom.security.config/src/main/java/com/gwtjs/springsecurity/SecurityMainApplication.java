@@ -5,14 +5,16 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.gwtjs.core.log.ICustomLogger;
 import com.gwtjs.core.log.ICustomLoggerFactory;
 import com.gwtjs.springsecurity.support.Appctx;
+import com.gwtjs.springsecurity.support.MyFilterSecurityInterceptor;
 
 @SpringBootApplication 	
-// @EnableAutoConfiguration(exclude = MyFilterSecurityInterceptor.class)
+//@EnableAutoConfiguration(exclude = MyFilterSecurityInterceptor.class)
 public class SecurityMainApplication {
 
 	private static final ICustomLogger log = ICustomLoggerFactory

@@ -17,6 +17,7 @@ import com.gwtjs.core.filter.ResourcesFilter;
  * Created by y00372937 on 2016/11/17.
  */
 @Configuration
+@ConditionalOnClass(WebApplicationConfig.class)
 @ComponentScan({"com.gwtjs.core.filter","com.gwtjs.core.servlet","com.gwtjs.core.autoconfiguration"})
 public class WebApplicationConfig {
 	
@@ -24,14 +25,13 @@ public class WebApplicationConfig {
      * 注册资源拦截器
      * @return
      */
-    @Bean
+    @Bean @ConditionalOnMissingBean(FilterRegistrationBean.class)
     public FilterRegistrationBean registerDispatchServlet() {
     	FilterRegistrationBean registration = new FilterRegistrationBean(new ResourcesFilter());
     	registration.setName("ICustomResourcesFilter");
         registration.addUrlPatterns("/*");
-        registration.addServletNames("resourcesFilter");
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
-        registration.setOrder(10);
+        //registration.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
+        //registration.setOrder(1000);
         return registration;
     }
 
@@ -39,7 +39,7 @@ public class WebApplicationConfig {
      * UTF-8编码过滤器。
      * @return
      */
-    @Bean
+    @Bean @ConditionalOnMissingBean(FilterRegistrationBean.class)
     public FilterRegistrationBean characterEncodingFilter(){
         FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CharacterEncodingFilter());
         registrationBean.setName("ICustomCharacterEncodingFilter");
@@ -66,7 +66,7 @@ public class WebApplicationConfig {
      * 注册RequestContextFilter。
      * @return
      */
-    @Bean
+    @Bean @ConditionalOnMissingBean(FilterRegistrationBean.class)
     public FilterRegistrationBean changeRequestContextFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean(new RequestContextFilter());
         registration.setName("ICustomRequestContextFilter");//避免与spring-boot默认的requestContextFilter冲突。

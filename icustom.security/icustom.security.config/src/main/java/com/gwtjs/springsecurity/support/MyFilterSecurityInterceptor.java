@@ -32,7 +32,7 @@ import com.gwtjs.springsecurity.SecurityWebSecurityConfig;
  *
  */
 @Component //@Configuration
-//@ConditionalOnClass(MyFilterSecurityInterceptor.class)
+@ConditionalOnClass(MyFilterSecurityInterceptor.class)
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements
 		Filter {
 	

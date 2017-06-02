@@ -60,7 +60,7 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(mySecurityFilter, FilterSecurityInterceptor.class)
 				// 在正确的位置添加我们自定义的过滤器
 				.authorizeRequests()
-				.antMatchers("/home","/api/**","/login","/*.css")
+				.antMatchers("/home","/api/**","/services/api/**","/login","/login*","/*.css","*.css")
 				.permitAll()
 				.anyRequest()
 				.authenticated()
