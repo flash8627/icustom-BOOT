@@ -1,5 +1,8 @@
 package com.gwtjs.springsecurity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,6 +32,7 @@ import com.gwtjs.springsecurity.support.MyFilterSecurityInterceptor;
 @EnableWebSecurity
 @ConditionalOnClass(SecurityWebSecurityConfig.class)
 // @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -55,29 +60,19 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
 		/* 哈哈哈，暂时停用 */
-		.addFilterBefore(mySecurityFilter, FilterSecurityInterceptor.class)
+		http.addFilterBefore(mySecurityFilter, FilterSecurityInterceptor.class)
 				// 在正确的位置添加我们自定义的过滤器
-				.authorizeRequests()
-				.antMatchers("/home","/api/**","/services/api/**","/login","/login*","/*.css","*.css")
-				.permitAll()
-				.anyRequest()
-				.authenticated()
-				// .antMatchers("/hello").hasAuthority("ADMIN")
-				.and().formLogin()
-				.loginPage("/login")
-				.permitAll()
-				.successHandler(loginSuccessHandler())
-				.and().logout().logoutSuccessUrl("/home").permitAll()
+				.authorizeRequests().antMatchers("/login").permitAll()
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/",true)
+				.and().logout().logoutSuccessUrl("/")
 				.invalidateHttpSession(true)
-				//.and().rememberMe().tokenValiditySeconds(1209600)
-				 .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(86400)  
-				 .and().exceptionHandling().accessDeniedPage("/Access_Denied")
+				.and().rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(86400)  
+				.and().exceptionHandling().accessDeniedPage("/accessDenied")
 				.and().csrf().disable()
-				/*.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+				/*
+				 * .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
 				.csrf().csrfTokenRepository(csrfTokenRepository())*/;
-		/* 哈哈哈，暂时停用 */
 	}
 	
 	/**
@@ -101,12 +96,22 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
 	}
-
+	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		super.configure(web);
+		List<String> list=new ArrayList<String>();
+        list.add("/js/**");
+        list.add("/scripts/**");
+        list.add("/css/**");
+        list.add("/image/**");
+        list.add("/images/**");
+        list.add("/resources/**");
+        list.add("/font/**");
+        list.add("/fonts/**");
+        list.add("/**/favicon.ico");
+		web.ignoring().antMatchers(list.toArray(new String[list.size()]));
 	}
-
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)
 			throws Exception {
@@ -115,7 +120,7 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(customUserDetailsService).passwordEncoder(
 				passwordEncoder());
 		// 不删除凭据，以便记住用户
-		auth.eraseCredentials(false);
+		//auth.eraseCredentials(false);
 	}
 
 	@Bean @ConditionalOnMissingBean(BCryptPasswordEncoder.class)
