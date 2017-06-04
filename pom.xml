@@ -69,7 +69,6 @@
 		<module>icustom.ear</module>
 
 		<module>icustom.resources</module>
-		<module>icustom.workflow</module>
 		<module>icustom.bbs</module>
 		<module>icustom.session</module>
 		<module>icustom.session.redis</module>

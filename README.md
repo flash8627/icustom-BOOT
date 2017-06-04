@@ -10,6 +10,13 @@ Metrics»ù±¾ÉÏÊÇ³ÉÊì¹«Ë¾ÀïÃæ±ØĞë×öµÄÒ»¼şÊÂÇé£¬¼òµ¥µãÀ´Ëµ¾ÍÊÇ¶ÔÓ¦ÓÃµÄ¼à¿Ø£¬Ö®Ç°ÔÚÒ
 ¶øspring Boot Actuator Ìá¹©ÁËmetrics service£¬ÈÃ¼à¿Ø±äµÃÍ³Ò»»¯ÁË£¬·½±ã¹ÜÀí
 
 
+icustom.activiti
+workflow
+
+icustom.api.test.ui
+webservices api test ui
+
+
 
 
 
