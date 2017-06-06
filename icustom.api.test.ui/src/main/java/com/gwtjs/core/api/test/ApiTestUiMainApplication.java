@@ -4,15 +4,16 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.gwtjs.core.log.ICustomLogger;
+import com.gwtjs.core.log.ICustomLoggerFactory;
 
 @SpringBootApplication 	
 public class ApiTestUiMainApplication {
 
-	private static final Logger log = LoggerFactory
+	private static final ICustomLogger log = ICustomLoggerFactory
 			.getLogger(ApiTestUiMainApplication.class);
 
 	@PostConstruct

@@ -19,6 +19,19 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.log</artifactId>
+			<version>${project.parent.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom-spring-boot-starter</artifactId>
+			<version>${project.parent.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -33,6 +46,11 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>

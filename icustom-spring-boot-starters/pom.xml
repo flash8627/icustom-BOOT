@@ -21,6 +21,7 @@
 		<module>icustom-spring-boot-starter</module>
 		<module>icustom-spring-boot-starter-cxf</module>
 		<module>icustom-spring-boot-starter-mybatis</module>
+		<module>icustom-spring-boot-starter-jedis</module>
 	</modules>
 
 

@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-package sample.data.redis;
-
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.springframework.boot.test.rule.OutputCapture;
-import org.springframework.data.redis.RedisConnectionFailureException;
+package com.gwtjs.icustom.data.redis;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.springframework.boot.test.rule.OutputCapture;
+
 /**
- * Tests for {@link SampleRedisApplication}.
+ * Tests for {@link ICustomRedisApplication}.
  *
  * @author Dave Syer
  */
-public class SampleRedisApplicationTests {
+public class ICustomRedisApplicationTests {
 
 	@Rule
 	public OutputCapture outputCapture = new OutputCapture();
@@ -37,7 +35,7 @@ public class SampleRedisApplicationTests {
 	@Test
 	public void testDefaultSettings() throws Exception {
 		try {
-			SampleRedisApplication.main(new String[0]);
+			ICustomRedisApplication.main(new String[0]);
 		}
 		catch (Exception ex) {
 			if (!redisServerRunning(ex)) {
@@ -50,9 +48,9 @@ public class SampleRedisApplicationTests {
 
 	private boolean redisServerRunning(Throwable ex) {
 		System.out.println(ex.getMessage());
-		if (ex instanceof RedisConnectionFailureException) {
+		/*if (ex instanceof RedisConnectionFailureException) {
 			return false;
-		}
+		}*/
 		return (ex.getCause() == null || redisServerRunning(ex.getCause()));
 	}
 

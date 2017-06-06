@@ -1,0 +1,7 @@
+spring: 
+  application: 
+    name: icustom
+server:
+  port: 8080
+  error: 
+    path: /custom/error

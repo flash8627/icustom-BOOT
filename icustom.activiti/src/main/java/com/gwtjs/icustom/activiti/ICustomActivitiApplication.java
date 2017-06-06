@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.gwtjs.core.log.ICustomLogger;
+import com.gwtjs.core.log.ICustomLoggerFactory;
 import com.gwtjs.icustom.activiti.dao.CompRepository;
 import com.gwtjs.icustom.activiti.dao.PersonRepository;
 import com.gwtjs.icustom.activiti.model.Comp;
@@ -20,7 +22,10 @@ import com.gwtjs.icustom.activiti.service.ActivitiService;
 @EnableJpaRepositories("com.gwtjs.icustom.activiti.dao")
 @EntityScan("com.gwtjs.icustom.activiti.model")
 public class ICustomActivitiApplication {
-
+	
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(ICustomActivitiApplication.class);
+	
 	@Autowired
 	private PersonRepository personRepository;
 
@@ -57,5 +62,6 @@ public class ICustomActivitiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ICustomActivitiApplication.class, args);
+		log.info("Running with Spring successfull------");
 	}
 }
