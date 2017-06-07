@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.data.jedis.autoconfigure;
+package com.gwtjs.icustom.jedis.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
