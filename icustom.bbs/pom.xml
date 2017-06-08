@@ -11,14 +11,13 @@
 	<artifactId>icustom.bbs</artifactId>
 	<packaging>jar</packaging>
 	
-	<!--
 	<dependencies>
 		<dependency>
-			<groupId>com.gwtjs.ICustom</groupId>
-			<artifactId>ICustom.international.api</artifactId>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.log</artifactId>
 			<version>${project.parent.version}</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
-	-->
 	
 </project>
