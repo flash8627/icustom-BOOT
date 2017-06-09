@@ -20,10 +20,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleSessionRedisApplication {
+public class ICustomSessionRedisApplication {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleSessionRedisApplication.class);
+		SpringApplication.run(ICustomSessionRedisApplication.class);
 	}
 
 }

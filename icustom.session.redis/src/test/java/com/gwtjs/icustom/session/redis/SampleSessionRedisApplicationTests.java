@@ -29,12 +29,12 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.gwtjs.icustom.session.redis.SampleSessionRedisApplication;
+import com.gwtjs.icustom.session.redis.ICustomSessionRedisApplication;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link SampleSessionRedisApplication}.
+ * Tests for {@link ICustomSessionRedisApplication}.
  *
  * @author Andy Wilkinson
  */
@@ -47,7 +47,7 @@ public class SampleSessionRedisApplicationTests {
 
 		try {
 			ConfigurableApplicationContext context = new SpringApplicationBuilder()
-					.sources(SampleSessionRedisApplication.class)
+					.sources(ICustomSessionRedisApplication.class)
 					.properties("server.port:0")
 					.initializers(new ServerPortInfoApplicationContextInitializer())
 					.run();
