@@ -52,6 +52,7 @@ public class ICustomJedisApplication {
 	public String get(String key) throws Exception {
 		return redisClient.get(key);
 	}
+	
 }
 
 

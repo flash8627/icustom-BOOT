@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package sample.data.mongo;
+package com.gwtjs.icustom.data.mongo;
 
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.rule.OutputCapture;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.gwtjs.icustom.data.mongo.SampleMongoApplication;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

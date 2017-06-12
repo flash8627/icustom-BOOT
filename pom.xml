@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.3.RELEASE</version>
+		<version>1.5.4.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -52,37 +52,43 @@
 	</dependencies>
 
 	<modules>
-		<module>icustom.cloud</module>
-		<module>icustom.attachments</module>
+		<!--common core-->
 		<module>icustom.log</module>
 		<module>icustom.util</module>
 		<module>icustom.core</module>
-		<module>icustom.cache</module>
-		<module>icustom.api.test.ui</module>
-		<module>icustom.sso</module>
-
-		<!--does not exist-->
-		<module>icustom.devtools</module>
-		<module>icustom.excel</module>
-		<module>icustom.email</module>
-		<module>icustom.druid</module>
-		<module>icustom.ear</module>
-
 		<module>icustom.resources</module>
-		<module>icustom.bbs</module>
-		<module>icustom.redis</module>
-		<module>icustom.session</module>
-		<module>icustom.session.redis</module>
+		<module>icustom.api.test.ui</module>
+		<!--starters-->
+		<module>icustom-spring-boot-starters</module>
+		<!--cloud core-->
+		<module>icustom.devtools</module>
 		<module>icustom.metrics</module>
+		<module>icustom.cloud</module>
+		<!--ICustom Data-->
+		<module>icustom.redis</module>
+		<module>icustom.mongodb</module>
+		<module>icustom.session</module>
+
+		<!--?-->
+		<module>icustom.cache</module>
+		<module>icustom.druid</module>
+		<module>icustom.session.redis</module>
 		<module>icustom.metrics.redis</module>
-		<module>icustom.web</module>
 		<!-- group -->
 		<module>icustom.security</module>
-		<module>icustom-spring-boot-starters</module>
-		<module>icustom.sample</module>
 		<module>icustom.register</module>
 		<module>icustom.lookup</module>
 		<module>icustom.international</module>
+		<module>icustom.sample</module>
+		<!--1-->
+		<module>icustom.attachments</module>
+		<module>icustom.sso</module>
+		<module>icustom.excel</module>
+		<module>icustom.email</module>
+		<module>icustom.bbs</module>
+		
+		<module>icustom.ear</module>
+		<module>icustom.web</module>
 	</modules>
 
 

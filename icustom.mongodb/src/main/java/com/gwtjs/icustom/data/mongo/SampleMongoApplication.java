@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.data.mongo;
+package com.gwtjs.icustom.data.mongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

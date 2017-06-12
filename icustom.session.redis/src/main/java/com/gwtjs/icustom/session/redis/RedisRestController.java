@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 the original author or authors.
+ * Copyright 2012-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,26 @@
  * limitations under the License.
  */
 
-package sample.data.mongo;
+package com.gwtjs.icustom.session.redis;
 
-import org.springframework.data.annotation.Id;
+import java.util.UUID;
 
-public class Customer {
+import javax.servlet.http.HttpSession;
 
-	@Id
-	private String id;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-	private String firstName;
-	private String lastName;
+@RestController
+public class RedisRestController {
 
-	public Customer() {
-	}
-
-	public Customer(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Customer[id=%s, firstName='%s', lastName='%s']", id,
-				firstName, lastName);
+	@GetMapping("/")
+	String uid(HttpSession session) {
+		UUID uid = (UUID) session.getAttribute("uid");
+		if (uid == null) {
+			uid = UUID.randomUUID();
+		}
+		session.setAttribute("uid", uid);
+		return uid.toString();
 	}
 
 }

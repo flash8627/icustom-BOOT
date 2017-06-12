@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.data.mongo;
+package com.gwtjs.icustom.data.mongo;
 
 import java.util.List;
 

@@ -21,14 +21,14 @@
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.log</artifactId>
-			<version>${project.parent.version}</version>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
-			<version>${project.parent.version}</version>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>

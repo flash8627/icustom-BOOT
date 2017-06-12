@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
-			<version>${project.parent.version}</version>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		
