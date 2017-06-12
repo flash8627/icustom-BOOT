@@ -23,12 +23,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.rule.OutputCapture;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gwtjs.icustom.data.mongo.SampleMongoApplication;
+import com.gwtjs.icustom.data.mongo.ICustomMongoApplication;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link SampleMongoApplication}.
+ * Tests for {@link ICustomMongoApplication}.
  *
  * @author Dave Syer
  * @author Andy Wilkinson

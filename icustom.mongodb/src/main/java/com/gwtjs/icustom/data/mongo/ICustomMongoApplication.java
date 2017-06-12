@@ -22,7 +22,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleMongoApplication implements CommandLineRunner {
+public class ICustomMongoApplication implements CommandLineRunner {
 
 	@Autowired
 	private CustomerRepository repository;
@@ -56,7 +56,7 @@ public class SampleMongoApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleMongoApplication.class, args);
+		SpringApplication.run(ICustomMongoApplication.class, args);
 	}
 
 }
