@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 	<artifactId>icustom.jedis-test</artifactId>
 	<name>icustom redis</name>

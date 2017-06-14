@@ -4,8 +4,9 @@
 
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
-		<artifactId>icustom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>icustom.lookup</artifactId>
+		<version>0.1.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
 	<artifactId>icustom.lookup.impl</artifactId>
