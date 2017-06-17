@@ -38,6 +38,7 @@ public class ICustomJedisApplication {
 	 */
 	@RequestMapping("/set")
 	public String set(String key, String value) throws Exception {
+		log.info(key+":"+value);
 		redisClient.set(key, value);
 		return "success";
 	}
@@ -50,6 +51,7 @@ public class ICustomJedisApplication {
 	 */
 	@RequestMapping("/get")
 	public String get(String key) throws Exception {
+		log.info(key);
 		return redisClient.get(key);
 	}
 	

@@ -17,7 +17,7 @@ public class SysResource extends BaseResource {
 	private static final long serialVersionUID = -8724114844194419901L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 10)
 	private Integer id;
 

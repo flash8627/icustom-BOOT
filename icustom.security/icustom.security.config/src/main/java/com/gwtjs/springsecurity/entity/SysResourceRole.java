@@ -21,7 +21,7 @@ public class SysResourceRole extends BaseResource {
 	private static final long serialVersionUID = 4203811499633005155L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 10)
 	private int id;
 

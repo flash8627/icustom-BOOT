@@ -24,14 +24,14 @@ public class SysUser extends BaseResource {
 	 */
 	private static final long serialVersionUID = 2807693589347371291L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "account", length = 120)
+	@Column(name = "user_account", length = 120)
 	private String account; // 用户帐号
 
-	@Column(name = "username", length = 120)
+	@Column(name = "user_name", length = 120)
 	private String username; // 用户姓名
 
 	@Column(name = "email", length = 50)

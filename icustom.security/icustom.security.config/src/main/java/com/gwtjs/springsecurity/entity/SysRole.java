@@ -23,15 +23,15 @@ public class SysRole extends BaseResource {
 	private static final long serialVersionUID = -3048274432307622364L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "role_id", length = 10)
 	private int id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "uid", nullable = false)
+	@JoinColumn(name = "u_id", nullable = false)
 	private SysUser sysUser;// 角色对应的用户实体
 
-	@Column(name = "rolename", length = 100)
+	@Column(name = "role_name", length = 100)
 	private String rolename;// 角色名称
 
 	private Integer userId;
