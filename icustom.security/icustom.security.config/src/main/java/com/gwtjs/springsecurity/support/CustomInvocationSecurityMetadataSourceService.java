@@ -73,12 +73,11 @@ public class CustomInvocationSecurityMetadataSourceService implements
 			List<String> urls = new ArrayList<String>();
 			logger.debug("\nsysResourceDao:" + sysResourceDao);
 			SysRole role = sysRoleDao.findByRoleName(auth);
-			List<SysResourceRole> rrs = sysResourceRoleDao
-					.findByRoleResource(role.getId() + "");
-			logger.info(getRoleIds(rrs).toString());
+			List<SysResourceRole> resourceRoles = sysResourceRoleDao.findByRoleResource(role.getId() + "");
+			logger.info(getRoleIds(resourceRoles).toString());
 			List<SysResource> resources = new ArrayList<>();
-			if(rrs.size()>0)
-			resources = sysResourceDao.findByRoleName(getRoleIds(rrs));
+			if(resourceRoles.size()>0)
+				resources = sysResourceDao.findByRoleName(getRoleIds(resourceRoles));
 			if (resources != null && resources.size() > 0) {
 				for (SysResource resource : resources) {
 					// Object value = map.get("resource_string");

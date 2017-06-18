@@ -1,0 +1,80 @@
+-- Create table
+create table SYS_REGISTER_T
+(
+  reg_id           NUMBER(30) not null,
+  reg_name         VARCHAR2(60) not null,
+  reg_code         VARCHAR2(60),
+  reg_desc         VARCHAR2(200),
+  reg_value        VARCHAR2(200),
+  reg_status       INTEGER default 1,
+  parent_path      VARCHAR2(200),
+  parent_id        NUMBER(30),
+  order_code       INTEGER default 1,
+  created_user     NUMBER,
+  created_date     DATE default SYSDATE,
+  update_last_user NUMBER,
+  update_last_date DATE default SYSDATE,
+  valid_flag       NUMBER(1) default 1
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table SYS_REGISTER_T
+  is '数据字典';
+-- Add comments to the columns 
+comment on column SYS_REGISTER_T.reg_name
+  is '名称或label';
+comment on column SYS_REGISTER_T.reg_code
+  is '编码';
+comment on column SYS_REGISTER_T.reg_desc
+  is ' 说明';
+comment on column SYS_REGISTER_T.parent_id
+  is '上一级，这个也是树型结构';
+comment on column SYS_REGISTER_T.created_user
+  is '创建用户';
+comment on column SYS_REGISTER_T.created_date
+  is '创建日期';
+comment on column SYS_REGISTER_T.update_last_user
+  is '最后更新用户';
+comment on column SYS_REGISTER_T.update_last_date
+  is '最后更新日期';
+comment on column SYS_REGISTER_T.valid_flag
+  is '启用停用，删除状态';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_REGISTER_T
+  add primary key (REG_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table SYS_REGISTER_T
+  add constraint SYS_REGISTER_T_PPATH_UNIQUE unique (PARENT_PATH)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
