@@ -22,16 +22,16 @@ public class SysResourceRole extends BaseResource {
 
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", length = 10)
+	@Column(name = "resource_role_id", length = 10)
 	private int id;
 
-	@Column(name = "roleId", length = 50)
+	@Column(name = "role_id", length = 50)
 	private String roleId; // 角色ID
 
-	@Column(name = "resourceId", length = 50)
+	@Column(name = "resource_id", length = 50)
 	private String resourceId;// 资源ID
 
-	@Column(name = "updateTime")
+	@Column(name = "update_time")
 	private Date updateTime;// 更新时间
 
 	public int getId() {

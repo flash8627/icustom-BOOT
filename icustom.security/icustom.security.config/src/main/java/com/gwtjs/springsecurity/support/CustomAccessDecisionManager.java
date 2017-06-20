@@ -3,6 +3,8 @@ package com.gwtjs.springsecurity.support;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -41,7 +43,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CustomAccessDecisionManager implements AccessDecisionManager {
-
+	
+	protected static Logger logger = LoggerFactory.getLogger(CustomAccessDecisionManager.class);
+	
 	public void decide(Authentication authentication, Object object,
 			Collection<ConfigAttribute> configAttributes)
 			throws AccessDeniedException, InsufficientAuthenticationException {
@@ -54,7 +58,7 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
 		while (ite.hasNext()) {
 			ConfigAttribute ca = ite.next();
 			String needRole = ((SecurityConfig) ca).getAttribute();
-
+			
 			// ga 为用户所被赋予的权限。 needRole 为访问相应的资源应该具有的权限。
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
 				
