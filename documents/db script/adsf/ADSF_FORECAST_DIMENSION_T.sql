@@ -1,3 +1,14 @@
+
+declare
+v_num number;
+begin
+select count(*) into v_num from user_tables where table_name='DSF_FORECAST_DIMENSION_T';
+if v_num > 0 then
+execute immediate 'drop table DSF_FORECAST_DIMENSION_T';
+end if;
+end;
+/
+
 -- Create table
 create table DSF_FORECAST_DIMENSION_T
 (

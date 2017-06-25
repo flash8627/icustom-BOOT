@@ -1,3 +1,14 @@
+
+declare
+v_num number;
+begin
+select count(*) into v_num from user_tables where table_name='PERSISTENT_LOGINS';
+if v_num > 0 then
+execute immediate 'drop table PERSISTENT_LOGINS';
+end if;
+end;
+/
+
 -- Create table
 create table PERSISTENT_LOGINS
 (

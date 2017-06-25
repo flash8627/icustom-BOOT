@@ -1,3 +1,10 @@
 #autoconfigure
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.gwtjs.springsecurity.configuration.SecurityAutoConfiguration
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.gwtjs.springsecurity.SecurityWebSecurityConfig
+
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.gwtjs.springsecurity.support.MyFilterSecurityInterceptor

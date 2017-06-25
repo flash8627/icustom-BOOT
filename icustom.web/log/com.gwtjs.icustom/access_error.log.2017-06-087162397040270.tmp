@@ -1,0 +1,15 @@
+2017-06-08 23:31:49 15494 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field mySecurityMetadataSource in com.gwtjs.springsecurity.support.MyFilterSecurityInterceptor required a bean of type 'com.gwtjs.springsecurity.support.CustomInvocationSecurityMetadataSourceService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.gwtjs.springsecurity.support.CustomInvocationSecurityMetadataSourceService' in your configuration.
+

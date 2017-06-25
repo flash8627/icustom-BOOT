@@ -1,3 +1,13 @@
+declare
+v_num number;
+begin
+select count(*) into v_num from user_tables where table_name='SYS_LOOKUP_ITEM_T';
+if v_num > 0 then
+execute immediate 'drop table SYS_LOOKUP_ITEM_T';
+end if;
+end;
+/
+
 -- Create table
 create table SYS_LOOKUP_ITEM_T
 (

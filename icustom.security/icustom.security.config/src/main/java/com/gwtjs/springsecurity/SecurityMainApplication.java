@@ -14,7 +14,7 @@ import com.gwtjs.springsecurity.support.Appctx;
 import com.gwtjs.springsecurity.support.MyFilterSecurityInterceptor;
 
 @SpringBootApplication 	
-//@EnableAutoConfiguration(exclude = MyFilterSecurityInterceptor.class)
+@EnableAutoConfiguration(exclude = MyFilterSecurityInterceptor.class)
 public class SecurityMainApplication {
 
 	private static final ICustomLogger log = ICustomLoggerFactory
@@ -26,11 +26,12 @@ public class SecurityMainApplication {
 	}
 
 	public static void main(String[] args) {
-		
-		// SpringApplication.run(MainApplication.class, args);
 		SpringApplication app = new SpringApplication(SecurityMainApplication.class);
-		
 		Appctx.ctx = app.run(args);
+		/*
+		System.out.println(Appctx.getObject("customInvocationSecurityMetadataSourceService"));
+		SpringApplication.run(SecurityMainApplication.class, args);
+		 */
 
 		/*
 		 * UserService suserService = (UserService)

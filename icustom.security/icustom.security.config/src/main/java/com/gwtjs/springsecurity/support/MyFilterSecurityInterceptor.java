@@ -12,7 +12,11 @@ import javax.servlet.ServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
@@ -31,13 +35,14 @@ import com.gwtjs.springsecurity.SecurityWebSecurityConfig;
  * @author aGuang 2010/3/29
  *
  */
-@Component //@Configuration
+@Component
+@Configuration
 @ConditionalOnClass(MyFilterSecurityInterceptor.class)
-public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements
-		Filter {
-	
+public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor
+		implements Filter {
+
 	@Autowired
-	private CustomInvocationSecurityMetadataSourceService mySecurityMetadataSource;
+	private CustomInvocationSecurityMetadataSourceService customInvocationSecurityMetadataSourceService;
 
 	@Autowired
 	private CustomAccessDecisionManager myAccessDecisionManager;
@@ -77,7 +82,7 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 	@Override
 	public SecurityMetadataSource obtainSecurityMetadataSource() {
 		logger.debug("obtainSecurityMetadataSource");
-		return this.mySecurityMetadataSource;
+		return this.customInvocationSecurityMetadataSourceService;
 	}
 
 	public void destroy() {
@@ -87,4 +92,21 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 	public void init(FilterConfig filterconfig) throws ServletException {
 		logger.debug("filter===========================init");
 	}
+
+	@Bean @ConditionalOnMissingBean(CustomInvocationSecurityMetadataSourceService.class)
+	public CustomInvocationSecurityMetadataSourceService getCustomInvocationSecurityMetadataSourceService() {
+		return customInvocationSecurityMetadataSourceService;
+	}
+	
+	@Bean
+	public CustomAccessDecisionManager getMyAccessDecisionManager() {
+		return myAccessDecisionManager;
+	}
+
+	@Override @Bean @ConditionalOnMissingBean(AccessDecisionManager.class)
+	public AccessDecisionManager getAccessDecisionManager() {
+		// TODO Auto-generated method stub AccessDecisionManager
+		return this.myAccessDecisionManager;
+	}
+	
 }

@@ -14,7 +14,8 @@ import com.gwtjs.core.filter.ResourcesFilter;
 
 /**
  * web应用程序的配置，注册servlet，listener，filter等类。
- * Created by y00372937 on 2016/11/17.
+ * @author aGuang 2017/06/23 
+ * 
  */
 @Configuration
 @ConditionalOnClass(WebApplicationConfig.class)

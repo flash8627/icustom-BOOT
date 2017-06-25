@@ -44,7 +44,7 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired  
     DataSource dataSource; 
 
-	@Override
+	@Override @ConditionalOnMissingBean(AuthenticationManager.class)
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
@@ -90,7 +90,7 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 对CSRF进行自定义:
 	 * 在服务端要求CSRF令牌应该以Angular想要的格式回传(一个叫做 "X-XRSF-TOKEN" 的消息头，而不是默认的"X-CSRF-TOKEN")
 	 * @return
-	 */
+	 */ @ConditionalOnMissingBean(CsrfTokenRepository.class)
 	private CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
