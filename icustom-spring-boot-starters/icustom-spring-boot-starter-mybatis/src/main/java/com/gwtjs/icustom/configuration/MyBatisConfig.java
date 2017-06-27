@@ -27,8 +27,8 @@ import com.gwtjs.icustom.intercepts.PageInterceptor;
  *
  */
 @Configuration
-@MapperScan("com.gwtjs.**.dao")
-@ConditionalOnClass(MyBatisConfig.class)// 当PersonService这个类在类路径中时，且当前容器中没有这个Bean的情况下，开始自动配置 
+@MapperScan({"com.gwtjs.icustom","com.gwtjs.**.dao"})
+@ConditionalOnClass(MyBatisConfig.class)// 当Service这个类在类路径中时，且当前容器中没有这个Bean的情况下，开始自动配置 
 public class MyBatisConfig implements TransactionManagementConfigurer {
 	
 	/*public MyBatisConfig() {
@@ -73,6 +73,4 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
 		return new DataSourceTransactionManager(dataSource());
 	}
 	
-	/*D:\Workspaces\ICustom\spring-security_spring-boot\spring-boot-icustom\src\main\java\com\gwtjs\icustom\demo\SpringBootICustomApplication.java*/
-
 }

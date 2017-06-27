@@ -15,6 +15,7 @@ public class ICustomWebApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ICustomWebApplication.class, args);
-		log.info("Running with Spring successfull------");
+		log.info("Running with icustom web successfull------");
 	}
+	
 }

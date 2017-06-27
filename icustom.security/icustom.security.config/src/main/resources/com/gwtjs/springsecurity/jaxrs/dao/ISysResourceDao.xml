@@ -38,7 +38,7 @@
 			WHERE id = id
 	</update>
 	
-	<select id="findAll" resultType="com.gwtjs.springsecurity.entity.SysResource">
+	<select id="findAll" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
 		<include refid="select_base" />
 	</select>
 	
@@ -50,7 +50,7 @@
 			<include refid="select_cond" />
 	</select>
 	
-	<select id="findResourcePage" resultType="com.gwtjs.springsecurity.entity.SysResource">
+	<select id="findResourcePage" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
 		<include refid="select_base" />
 			<include refid="select_cond" />
 			LIMIT #{page.startIndex} , #{page.endIndex} 

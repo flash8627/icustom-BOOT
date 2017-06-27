@@ -251,7 +251,7 @@
 		</if>
 	</sql>
 
-	<select id="queryRegionCurrentForecast" resultType="com.gwtjs.springsecurity.entity.ForecastVO">
+	<select id="queryRegionCurrentForecast" resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
 		Select *
 		From (Select rownum rn, t.* From (
 		<include refid="sqlSelectForecast" />
@@ -272,7 +272,7 @@
 		)
 	</select>
 
-	<select id="queryRegionForecast" resultType="com.gwtjs.springsecurity.entity.ForecastVO">
+	<select id="queryRegionForecast" resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
 		Select *
 		From (Select rownum rn, t.* From (
 		<include refid="sqlSelectForecast" />

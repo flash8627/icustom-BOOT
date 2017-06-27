@@ -29,7 +29,7 @@
 			<include refid="select_cond" />
 	</select>
 	
-	<select id="findResourcePage" resultType="com.gwtjs.springsecurity.entity.SysResource">
+	<select id="findResourcePage" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
 		<include refid="page_st" />
 		<include refid="select_base" />
 		<include refid="select_cond" />
