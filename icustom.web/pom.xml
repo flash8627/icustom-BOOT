@@ -45,7 +45,7 @@
 
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.security.config</artifactId>
+			<artifactId>icustom.security.core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		

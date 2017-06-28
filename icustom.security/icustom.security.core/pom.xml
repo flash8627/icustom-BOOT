@@ -15,7 +15,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-	<artifactId>icustom.security.config</artifactId>
+	<artifactId>icustom.security.core</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
