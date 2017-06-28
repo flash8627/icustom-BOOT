@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
-		<version>0.1.6-SNAPSHOT</version>
+		<version>0.2.6.28-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 	<artifactId>icustom.metrics.redis</artifactId>

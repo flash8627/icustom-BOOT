@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
-		<version>0.1.6-SNAPSHOT</version>
+		<version>0.2.6.28-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
@@ -23,13 +23,26 @@
 	</properties>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.metrics</artifactId>
+			<artifactId>icustom.resources</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.api.test.ui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.core</artifactId>
+			<version>${project.version}</version>
+			<!-- <optional>true</optional> -->
+		</dependency>
+
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.security.config</artifactId>
@@ -38,42 +51,29 @@
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.resources</artifactId>
+			<artifactId>icustom.metrics</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.api.test.ui</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
-			<artifactId>icustom.core</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.version}</version>
 			<!-- <optional>true</optional> -->
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
@@ -85,7 +85,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -107,11 +107,17 @@
 
 		<pluginManagement>
 			<plugins>
-				<!-- cancel web directory  -->
-				<plugin> <groupId>org.apache.maven.plugins</groupId> 
-					<artifactId>maven-war-plugin</artifactId> <version>2.4</version> <configuration> 
-					<warSourceDirectory>src/main/webapp</warSourceDirectory> <warName>icustom.security</warName> 
-					<failOnMissingWebXml>false</failOnMissingWebXml> </configuration> </plugin>
+				<!-- cancel web directory -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<warSourceDirectory>src/main/webapp</warSourceDirectory>
+						<warName>icustom.web</warName>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
