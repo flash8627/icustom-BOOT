@@ -18,7 +18,13 @@ create table SYS_RESOURCE_T
   remark          VARCHAR2(200 CHAR),
   resource_id     VARCHAR2(50 CHAR),
   resource_name   VARCHAR2(400 CHAR),
-  resource_string VARCHAR2(1000 CHAR)
+  resource_string VARCHAR2(1000 CHAR),
+  order_code       INTEGER default 1,
+  created_user     NUMBER,
+  created_date     DATE default SYSDATE,
+  update_last_user NUMBER,
+  update_last_date DATE default SYSDATE,
+  valid_flag       INTEGER default 1
 )
 tablespace USERS
   pctfree 10

@@ -16,7 +16,13 @@ create table SYS_USER_T
   user_account VARCHAR2(120 CHAR),
   email        VARCHAR2(50 CHAR),
   password     VARCHAR2(120 CHAR),
-  user_name    VARCHAR2(120 CHAR)
+  user_name    VARCHAR2(120 CHAR),
+  order_code       INTEGER default 1,
+  created_user     NUMBER,
+  created_date     DATE default SYSDATE,
+  update_last_user NUMBER,
+  update_last_date DATE default SYSDATE,
+  valid_flag       INTEGER default 1
 )
 tablespace USERS
   pctfree 10

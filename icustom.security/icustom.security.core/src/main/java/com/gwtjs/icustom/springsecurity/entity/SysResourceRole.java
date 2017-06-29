@@ -5,7 +5,7 @@ import java.util.Date;
 import com.gwtjs.core.entity.BaseResource;
 
 public class SysResourceRole extends BaseResource {
-	
+
 	/**
 	 * 
 	 */
@@ -14,8 +14,9 @@ public class SysResourceRole extends BaseResource {
 	private int id;
 
 	private String roleId; // 角色ID
-
+	private String roleName; // 角色ID
 	private String resourceId;// 资源ID
+	private String resourceName;// 资源ID
 
 	private Date updateTime;// 更新时间
 
@@ -49,6 +50,22 @@ public class SysResourceRole extends BaseResource {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
 	}
 
 }

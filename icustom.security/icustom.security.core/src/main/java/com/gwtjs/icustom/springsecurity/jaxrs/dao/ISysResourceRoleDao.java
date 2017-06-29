@@ -27,5 +27,6 @@ public interface ISysResourceRoleDao {
 	PagedResult<SysResourceRole> findByRoleResource(@Param("roles")List<SysRole> list,@Param("page")PageVO page);
 	
 	List<SysResourceRole> findByRoleResource(@Param("roleId")int roleId);
-	
+
+	List<SysResourceRole> findByRole(@Param("list")List<Integer> roleIds);
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gwtjs.springsecurity.jaxrs.dao.ISysResourceDao">
+<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao">
 	
 	<insert id="insert">
-	INSERT INTO bootsample.sys_resource
+	INSERT INTO sys_resource
             (id,
              method_name,
              method_path,
@@ -27,7 +27,7 @@
 	</delete>
 	
 	<update id="update">
-		UPDATE bootsample.sys_resource
+		UPDATE sys_resource
 			SET 
 			  method_name = method_name,
 			  method_path = method_path,
@@ -38,6 +38,27 @@
 			WHERE id = id
 	</update>
 	
+	<select id="findByRole" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
+		SELECT t.id              id,
+		       t.method_name     methodName,
+		       t.method_path     methodPath,
+		       t.remark          remark,
+		       t.resource_id     resourceId,
+		       t.resource_name   resourceName,
+		       t.resource_string resourceString
+		  FROM sys_resource_t t
+		  JOIN sys_resource_role_t rrt
+		  ON (rrt.resource_id=t.resource_id and rrt.valid_flag = 1 )
+		 WHERE t.valid_flag = 1
+				AND (1=2 
+				<foreach collection="list" item="item">
+					OR (
+						t.role_id = #{item}
+					)
+				</foreach>
+			)
+	</select>
+	
 	<select id="findAll" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
 		<include refid="select_base" />
 	</select>
@@ -45,8 +66,8 @@
 	<select id="findResourcePageCount" resultType="int">
 		SELECT
 			  COUNT(1) 
-			FROM sys_resource  
-			WHERE 1 = 1 
+			FROM sys_resource  tt  
+			WHERE  tt.valid_flag = 1 
 			<include refid="select_cond" />
 	</select>
 	
@@ -58,14 +79,14 @@
 	
 	<sql id="select_cond">
 		<if test='_parameter.get("vo").methodName != null and _parameter.get("vo").methodName != ""'>
-			AND UPPER(T1.method_name) LIKE UPPER('#{vo.methodName,jdbcType=VARCHAR}') 
+			AND UPPER(tt.method_name) LIKE UPPER('#{vo.methodName,jdbcType=VARCHAR}') 
 		</if>
 		<if test='_parameter.get("vo").resourceName != null and _parameter.get("vo").resourceName != ""'>
-			AND UPPER(T1.resource_name) LIKE UPPER('#{vo.resourceName,jdbcType=VARCHAR}') 
+			AND UPPER(tt.resource_name) LIKE UPPER('#{vo.resourceName,jdbcType=VARCHAR}') 
 		</if>
 		
 		<if test='_parameter.get("vo").resourceString != null and _parameter.get("vo").resourceString != ""'>
-			AND UPPER(T1.resource_string) LIKE UPPER('#{vo.resourceString,jdbcType=VARCHAR}') 
+			AND UPPER(tt.resource_string) LIKE UPPER('#{vo.resourceString,jdbcType=VARCHAR}') 
 		</if>
 	</sql>
 	
@@ -78,8 +99,8 @@
              resource_id resourceId,
              resource_name resourceName,
              resource_string resourceString
-			FROM sys_resource T1 
-			WHERE 1 = 1 
+			FROM sys_resource tt 
+			WHERE tt.valid_flag = 1 
 	</sql>
 	
 </mapper>

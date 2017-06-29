@@ -81,7 +81,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 			logger.info(getRoleIds(resourceRoles).toString());
 			List<SysResource> resources = new ArrayList<>();
 			if(resourceRoles.size()>0)
-				resources = sysResourceDao.findByRoleName(getRoleIds(resourceRoles));
+				resources = sysResourceDao.findByRole(getRoleIds(resourceRoles));
 			if (resources != null && resources.size() > 0) {
 				for (SysResource resource : resources) {
 					// Object value = map.get("resource_string");

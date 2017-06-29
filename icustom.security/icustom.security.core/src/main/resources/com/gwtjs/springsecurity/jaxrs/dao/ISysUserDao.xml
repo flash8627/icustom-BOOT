@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gwtjs.springsecurity.jaxrs.dao.ISysUserDao">
+<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao">
 
 	<select id="findAllUserList" resultType="com.gwtjs.icustom.springsecurity.entity.SysUser">
 		<include refid="Base_Column_List" /> 
 	</select>
 	
 	<select id="findUserPageCount" resultType="int">
-		SELECT count(1) FROM sys_user_t T1 WHERE 1=1 
+		SELECT count(1) FROM sys_user_t su WHERE 1=1 
 	</select>
 	
 	<select id="findUserPage" resultType="com.gwtjs.icustom.springsecurity.entity.SysUser">
@@ -36,20 +36,20 @@
 	
 	<sql id="select_cond">
 		<if test='_parameter.get("user").account != null and _parameter.get("user").account != "" and _parameter.get("user").account != "null"'>
-			AND upper(T1.account) = upper(#{user.account,jdbcType=VARCHAR}) 
+			AND upper(su.account) = upper(#{user.account,jdbcType=VARCHAR}) 
 		</if>
 		<if test='_parameter.get("user").username != null and _parameter.get("user").username != "" and _parameter.get("user").username != "null"'>
-			AND upper(T1.username) = upper(#{user.username,jdbcType=VARCHAR}) 
+			AND upper(su.username) = upper(#{user.username,jdbcType=VARCHAR}) 
 		</if>
 	</sql>
 		
 	<sql id="Base_Column_List">
 		SELECT id id, account account, username username, 
-		email email FROM sys_user_t T1 WHERE 1=1 
+		email email FROM sys_user_t su WHERE 1=1 
 	</sql>
 	
 	<select id="findUserIdCount" resultType="int">
-		SELECT max(T1.id)+1 FROM  sys_user_t T1
+		SELECT max(su.id)+1 FROM  sys_user_t su
 	</select>
 	
 	<update id="update">

@@ -12,10 +12,16 @@ end;
 -- Create table
 create table SYS_ROLE_T
 (
-  role_id   NUMBER(10) not null,
-  role_name VARCHAR2(100 CHAR),
-  user_id   NUMBER(10),
-  u_id      NUMBER(10) not null
+  role_id		NUMBER(10) not null,
+  role_name		VARCHAR2(100 CHAR),
+  user_id		NUMBER(10),
+  u_id			NUMBER(10) not null,
+  order_code		INTEGER default 1,
+  created_user		NUMBER,
+  created_date		DATE default SYSDATE,
+  update_last_user	NUMBER,
+  update_last_date	DATE default SYSDATE,
+  valid_flag		INTEGER default 1
 )
 tablespace USERS
   pctfree 10

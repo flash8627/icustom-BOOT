@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gwtjs.springsecurity.jaxrs.dao.ISysResourceRoleDao">
+<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceRoleDao">
+	
 	
 	<sql id="page_st">
 		SELECT * FROM (
@@ -9,7 +10,7 @@
 	<sql id="page_et">
 		) TT
 		<![CDATA[
-		) WHERE RN<=#{1.endIndex} AND RN>=#{1.startIndex}
+		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
 		]]>
 	</sql>
 	
@@ -19,13 +20,15 @@
              role_id roleId,
              resource_id resourceId,
              update_time updateTime
-			FROM sys_resource_role_t T1 
+			FROM sys_resource_role_t srrt 
+			WHERE srrt.valid_flag = 1 
 	</sql>
 	
 	<select id="findResourcePageCount" resultType="int">
 		SELECT
 			  COUNT(1) 
 			FROM sys_resource_role_t  
+			WHERE srrt.valid_flag = 1 
 			<include refid="select_cond" />
 	</select>
 	
@@ -37,16 +40,15 @@
 	</select>
 	
 	<sql id="select_cond">
-		WHERE 1 = 1 
 		<if test='_parameter.get("vo").methodName != null and _parameter.get("vo").methodName != ""'>
-			AND UPPER(T1.method_name) LIKE UPPER('#{vo.methodName,jdbcType=VARCHAR}') 
+			AND UPPER(srrt.method_name) LIKE UPPER('#{vo.methodName,jdbcType=VARCHAR}') 
 		</if>
 		<if test='_parameter.get("vo").resourceName != null and _parameter.get("vo").resourceName != ""'>
-			AND UPPER(T1.resource_name) LIKE UPPER('#{vo.resourceName,jdbcType=VARCHAR}') 
+			AND UPPER(srrt.resource_name) LIKE UPPER('#{vo.resourceName,jdbcType=VARCHAR}') 
 		</if>
 		
 		<if test='_parameter.get("vo").resourceString != null and _parameter.get("vo").resourceString != ""'>
-			AND UPPER(T1.resource_string) LIKE UPPER('#{vo.resourceString,jdbcType=VARCHAR}') 
+			AND UPPER(srrt.resource_string) LIKE UPPER('#{vo.resourceString,jdbcType=VARCHAR}') 
 		</if>
 	</sql>
 	
