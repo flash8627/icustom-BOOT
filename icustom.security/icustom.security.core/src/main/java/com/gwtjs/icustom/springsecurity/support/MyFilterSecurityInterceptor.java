@@ -50,25 +50,21 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		//在执行doFilter之前，进行权限的检查，而具体的实现已经交给 accessDecisionManager
 		FilterInvocation fi = new FilterInvocation(request, response, chain);
-		invoke(fi);
-
-	}
-
-	public Class<? extends Object> getSecureObjectClass() {
-		return FilterInvocation.class;
-	}
-
-	public void invoke(FilterInvocation fi) throws IOException,
-			ServletException {
 		logger.debug("filter..........................");
 		InterceptorStatusToken token = super.beforeInvocation(fi);
+		
 		try {
 			fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
 		} finally {
 			super.afterInvocation(token, null);
 		}
 
+	}
+
+	public Class<? extends Object> getSecureObjectClass() {
+		return FilterInvocation.class;
 	}
 
 	@Override

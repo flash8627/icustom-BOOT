@@ -30,6 +30,7 @@ import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleResourceDao;
 /**
  * 最核心的地方，就是提供某个资源对应的权限定义，即getAttributes方法返回的结果。 
  * 此类在初始化时，应该取到所有资源及其对应角色的定义。
+ * 初始化资源的访问权限的定义
  */
 @Service
 public class CustomInvocationSecurityMetadataSourceService implements
@@ -79,8 +80,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 					urls.add(resource.getResourceUrl());
 				}
 			}
-			for (String res : urls) {
-				String url = res;
+			for (String url : urls) {
 
 				/*
 				 * 判断资源文件和权限的对应关系，如果已经存在相关的资源url，则要通过该url为key提取出权限集合，将权限增加到权限集合中。

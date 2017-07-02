@@ -18,7 +18,10 @@ import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao;
 
 /**
- * 用户登陆在这里
+ * 认证管理器，实现用户认证的入口
+ * <p>
+ * 	以从数据库中读入用户的密码，角色信息，是否锁定，账号是否过期等
+ * </p>
  */
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
