@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.icustom.springsecurity.entity.SysRole;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao;
 import com.gwtjs.icustom.springsecurity.jaxrs.service.IRoleRestService;
 
@@ -17,25 +17,25 @@ public class RoleRestService implements IRoleRestService {
 	private ISysRoleDao sysRoleDao;
 
 	@Override
-	public int insert(SysRole role) {
+	public int insert(SysRoleVO role) {
 		// TODO Auto-generated method stub
-		return sysRoleDao.insert(role);
+		return 0;//sysRoleDao.insert(role);
 	}
 
 	@Override
-	public int delete(SysRole role) {
+	public int delete(SysRoleVO role) {
 		// TODO Auto-generated method stub
-		return sysRoleDao.delete(role);
+		return 0;//sysRoleDao.delete(role);
 	}
 
 	@Override
-	public int update(SysRole role) {
+	public int update(SysRoleVO role) {
 		// TODO Auto-generated method stub
-		return sysRoleDao.update(role);
+		return 0;//sysRoleDao.update(role);
 	}
 
 	@Override
-	public PagedResult<SysRole> findRolePage(SysRole role,PageVO page) {
+	public PagedResult<SysRoleVO> findRolePage(SysRoleVO role,PageVO page) {
 		System.out.println("role:\n"+role);
 		System.out.println("page:\n"+page);
 		// TODO Auto-generated method stub

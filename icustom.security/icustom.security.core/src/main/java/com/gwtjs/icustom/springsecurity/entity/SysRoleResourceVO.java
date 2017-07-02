@@ -1,10 +1,8 @@
 package com.gwtjs.icustom.springsecurity.entity;
 
-import java.util.Date;
-
 import com.gwtjs.core.entity.BaseResource;
 
-public class SysResourceRole extends BaseResource {
+public class SysRoleResourceVO extends BaseResource {
 
 	/**
 	 * 
@@ -13,12 +11,10 @@ public class SysResourceRole extends BaseResource {
 
 	private int id;
 
-	private String roleId; // 角色ID
+	private long roleId; // 角色ID
 	private String roleName; // 角色ID
-	private String resourceId;// 资源ID
+	private long resourceId;// 资源ID
 	private String resourceName;// 资源ID
-
-	private Date updateTime;// 更新时间
 
 	public int getId() {
 		return id;
@@ -28,28 +24,12 @@ public class SysResourceRole extends BaseResource {
 		this.id = id;
 	}
 
-	public String getRoleId() {
+	public long getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(long roleId) {
 		this.roleId = roleId;
-	}
-
-	public String getResourceId() {
-		return resourceId;
-	}
-
-	public void setResourceId(String resourceId) {
-		this.resourceId = resourceId;
-	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
 	}
 
 	public String getRoleName() {
@@ -58,6 +38,14 @@ public class SysResourceRole extends BaseResource {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public long getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(long resourceId) {
+		this.resourceId = resourceId;
 	}
 
 	public String getResourceName() {

@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.gwtjs.icustom.springsecurity.region.dao.IRegionForecastHeaderDao">
+
+	<update id="submitRegionForecast">
+		UPDATE dsf_forecast_region_header_t t
+		SET
+		t.forecast_status = 'SUBMIT',
+		t.last_update_date = sysdate,
+		t.last_updated_by = #{vo.currentUserId, jdbcType=DOUBLE},
+		t.last_updated_name = #{vo.currentUserCN, jdbcType=VARCHAR}
+		WHERE
+		1=1 and ( 1=2
+		<foreach collection='list' item="item">
+			OR t.forecast_header_id=#{item}
+		</foreach>
+		)
+	</update>
+
+	<sql id="sqlSelectForecast">
+		Select gh.forecast_header_id forecastHeaderId,
+		gh.pdt_type pdtType,
+		gh.pdt_id pdtId,
+		gh.supply_entity_id supplyEntityId,
+		gh.bucket_dimension bucketDimension,
+		gh.forecast_dimension_code forecastDimensionCode,
+		gh.forecast_status forecastStatus,
+		gh.delete_flag deleteFlag,
+		gh.created_by createdBy,
+		gh.created_name creationUserCN,
+		gh.creation_date creationDate,
+		gh.last_updated_by lastUpdatedBy,
+		gh.last_updated_name lastUpdateUserCN,
+		gh.last_update_date lastUpdateDate,
+
+		pd.pdt_large_code pdtLargeCode,
+		pd.pdt_large_name_cn pdtLargeNameCn,
+		pd.pdt_large_name_en pdtLargeNameEn,
+		pd.pdt_large_uom pdtLargeUom,
+
+		fd.forecast_dimension_desc_cn forecastDimensionDescCn,
+		fd.forecast_dimension_desc_en forecastDimensionDescEn,
+		fd.forecast_dimension_category forecastDimensionCategory,
+		fd.edit_flag editFlag,
+		fd.rate_flag rateFlag,
+
+		de.demand_entity_id demandentityid,
+		de.bg_code bgcode,
+		de.demand_entity_type demandentitytype,
+		de.demand_entity_code demandentitycode,
+
+		ao.area_org_name_cn areaOrgName,
+
+		po.lv0_org_code lv0OrgCode,
+		po.lv0_type_name lv0TypeName,
+		po.lv0_org_name_cn lv0OrgNameCn,
+		po.lv0_org_name_en lv0OrgNameEn,
+
+		po.lv1_org_code lv1OrgCode,
+		po.lv1_type_name lv1TypeName,
+		po.lv1_org_name_cn lv1OrgNameCn,
+		po.lv1_org_name_en lv1OrgNameEn,
+
+		po.lv2_org_code lv2OrgCode,
+		po.lv2_type_name lv2TypeName,
+		po.lv2_org_name_cn lv2OrgNameCn,
+		po.lv2_org_name_en lv2OrgNameEn,
+
+		po.lv3_org_code lv3OrgCode,
+		po.lv3_type_name lv3TypeName,
+		po.lv3_org_name_cn lv3OrgNameCn,
+		po.lv3_org_name_en lv3OrgNameEn,
+
+		po.lv4_org_code lv4OrgCode,
+		po.lv4_type_name lv4TypeName,
+		po.lv4_org_name_cn lv4OrgNameCn,
+		po.lv4_org_name_en lv4OrgNameEn
+
+		FROM dsf_forecast_region_header_t gh
+
+		JOIN dsf_demand_entity_t de
+		ON (gh.demand_entity_id = de.demand_entity_id AND de.enable_flag = 'Y')
+
+		JOIN dsf_area_org_t ao
+		ON (ao.area_org_code = de.demand_entity_code AND
+		upper(ao.area_org_type) = upper('REGION') AND de.demand_entity_id = gh.demand_entity_id)
+
+		JOIN dsf_pdt_large_t pd
+		ON (pd.pdt_large_id = gh.pdt_id AND pd.enable_flag = 'Y')
+
+		JOIN dsf_pdt_org_t po
+		ON (po.pdt_org_id = pd.pdt_org_id AND po.enable_flag = 'Y')
+
+		JOIN dsf_forecast_dimension_t fd
+		On (fd.forecast_dimension_code = gh.forecast_dimension_code
+		AND fd.bg_code=#{vo.bgCode,jdbcType=VARCHAR}
+		AND UPPER(fd.demand_entity_type) =
+		UPPER(#{vo.demandEntityType,jdbcType=VARCHAR} )
+		AND fd.bucket_dimension=#{vo.bucketDimension,jdbcType=VARCHAR}
+		and gh.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		and fd.bg_code = de.bg_code
+		and de.demand_entity_type = fd.demand_entity_type
+		and fd.bucket_dimension = gh.bucket_dimension
+		)
+	</sql>
+
+	<sql id="sqlWhereForecast">
+		WHERE 1=1
+		<!-- <![CDATA[ <addProgram prepend ="and" dimensions2Fields="SalesCategoryLV1:lv1_org_code"></addProgram>]]> 
+			<![CDATA[ <addProgram prepend ="and" dimensions2Fields="Region:de.demand_entity_code"></addProgram>]]> -->
+
+		<if test='vo.bucketDimension != null and vo.bucketDimension !="" '>
+			AND gh.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.bgCode != null and vo.bgCode !="" '>
+			AND de.bg_code = #{vo.bgCode, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.pdtType != null and vo.pdtType !="" '>
+			AND gh.pdt_type = #{vo.pdtType, jdbcType=VARCHAR}
+		</if>
+
+		<if test='vo.pdtId != null and vo.pdtId !="" '>
+			AND gh.pdt_id = #{vo.pdtId,jdbcType=INTEGER}
+		</if>
+		<if test='vo.demandEntityId != null and vo.demandEntityId !="" '>
+			AND de.demand_entity_id = #{vo.demandEntityId, jdbcType=VARCHAR}
+		</if>
+
+		<if test='vo.demandEntityCode != null and vo.demandEntityCode !="" '>
+			AND de.demand_entity_code = #{vo.demandEntityCode, jdbcType=VARCHAR}
+		</if>
+
+		<if test='vo.areaType != null and vo.areaType =="CHINA" '>
+			AND de.demand_entity_code = '027425'
+		</if>
+
+		<if test='vo.areaType != null and vo.areaType =="OVERSEA" '>
+			AND de.demand_entity_code != '027425'
+		</if>
+
+		<if test='vo.demandEntityType != null and vo.demandEntityType !="" '>
+			AND UPPER(de.demand_entity_type) = UPPER(#{vo.demandEntityType,
+			jdbcType=VARCHAR})
+		</if>
+
+		<if
+			test='vo.forecastDimensionCategory != null and vo.forecastDimensionCategory !="" '>
+			AND fd.forecast_dimension_category = #{vo.forecastDimensionCategory,
+			jdbcType=VARCHAR}
+		</if>
+		<if
+			test='vo.forecastDimensionCodes != null and vo.forecastDimensionCode !=""'>
+			And gh.forecast_dimension_code In
+			<foreach collection='vo.forecastDimensionCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		<if
+			test='vo.forecastDimensionCodes == null and vo.forecastDimensionCode !=""'>
+			and fd.main_flag = 'Y'
+		</if>
+		AND gh.delete_flag = 'N'
+
+		<if test='vo.planCodeQueryYN == "Y"'>
+			AND exists(
+			Select 1 from dsf_planner_code_t pc
+			Join dsf_planner_code_small_t pcs
+			On(pc.sales_planner_code = pcs.sales_planner_code)
+			Join dsf_pdt_small_t pst
+			On(pst.pdt_small_id = pcs.pdt_small_id)
+			WHERE upper(pc.sales_planner_employee) = upper(#{vo.employeeNumber})
+			AND pst.pdt_large_id = gh.pdt_id
+			AND pcs.enable_flag = 'Y'
+			AND pc.enable_flag = 'Y'
+			)
+		</if>
+
+		<if test='vo.planCodeQueryYN != "Y"'>
+			and ( 1=2
+			<if test='vo.lv1OrgCodes != null'>
+				or po.lv1_org_code in
+				<foreach collection='vo.lv1OrgCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.lv2OrgCodes != null'>
+				or po.lv2_org_code in
+				<foreach collection='vo.lv2OrgCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.lv3OrgCodes != null'>
+				or po.lv3_org_code in
+				<foreach collection='vo.lv3OrgCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.pdtLargeCodes != null and vo.pdtLargeCode!="" '>
+				or pd.pdt_large_code in
+				<foreach collection='vo.pdtLargeCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+
+			<if
+				test='vo.lv1OrgCodes == null and vo.lv2OrgCodes == null and vo.lv3OrgCodes == null and vo.pdtLargeCodes == null and vo.pdtSmallCodes == null '>
+				or 1 = 1
+			</if>
+			)
+			<if test='vo.forecastHeaderIds != null'>
+				and ( 1=2
+				<foreach collection="vo.forecastHeaderIds" item="item">
+					or (
+					gh.DEMAND_ENTITY_ID = #{item.demandEntityId,jdbcType=INTEGER}
+					and gh.PDT_TYPE = #{item.pdtType, jdbcType=VARCHAR}
+					and gh.PDT_ID = #{item.pdtId,jdbcType=INTEGER}
+					and gh.SUPPLY_ENTITY_ID = #{item.supplyEntityId,jdbcType=INTEGER}
+					and gh.BUCKET_DIMENSION = #{item.bucketDimension, jdbcType=VARCHAR}
+					)
+				</foreach>
+				)
+			</if>
+
+		</if>
+	</sql>
+
+	<!--2 -->
+	<select id="queryRegionCurrentForecast"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		Select *
+		From (Select rownum rn, t.* From (
+		<include refid="sqlSelectForecast" />
+		<include refid="sqlWhereForecast" />
+		Order By
+		ao.area_org_code,po.lv0_org_code,po.lv1_org_code,po.lv2_org_code,po.lv3_org_code,gh.pdt_id,fd.sort_id
+		) t
+<![CDATA[WHERE rownum <= #{page.endIndex}]]>
+		)
+<![CDATA[WHERE rn >= #{page.startIndex}]]>
+	</select>
+
+	<select id="queryRegionCurrentForecastCount" resultType="int">
+		Select count(*)
+		From (
+		<include refid="sqlSelectForecast" />
+		<include refid="sqlWhereForecast" />
+		)
+	</select>
+
+
+	<update id="saveRegionForecast">
+		begin
+		
+		<foreach collection='list' item="record" index="index">
+			MERGE INTO dsf_forecast_region_header_t tar
+			USING (SELECT #{record.demandEntityId, jdbcType=INTEGER} demand_entity_id,
+			#{record.pdtType, jdbcType=VARCHAR} pdt_type,
+			#{record.pdtId, jdbcType=VARCHAR} pdt_id,
+			0 supply_entity_id,
+			#{record.bucketDimension, jdbcType=VARCHAR} bucket_dimension,
+			#{record.forecastDimensionCode, jdbcType=VARCHAR} forecast_dimension_code,
+			#{record.forecastStatus, jdbcType=VARCHAR} forecast_status,
+			#{record.deleteFlag, jdbcType=VARCHAR} delete_flag,
+			0 created_by,
+			'0' created_name,
+			sysdate creation_date,
+			#{record.currentUserId, jdbcType=DOUBLE} last_updated_by,
+			#{record.currentUserCN, jdbcType=VARCHAR} last_updated_name,
+			sysdate last_updated_date
+			FROM dual) src
+			ON (
+			tar.DEMAND_ENTITY_ID= src.DEMAND_ENTITY_ID
+			AND tar.PDT_TYPE =src.PDT_TYPE
+			AND tar.PDT_ID = src.PDT_ID
+			AND tar.SUPPLY_ENTITY_ID = src.SUPPLY_ENTITY_ID
+			AND tar.BUCKET_DIMENSION = src.BUCKET_DIMENSION
+			AND tar.FORECAST_DIMENSION_CODE = src.FORECAST_DIMENSION_CODE
+			)
+			WHEN MATCHED THEN
+			UPDATE SET
+			tar.delete_flag = src.delete_flag,
+			tar.last_updated_by = src.last_updated_by,
+			tar.last_updated_name = src.last_updated_name,
+			tar.last_update_date = src.last_updated_date,
+			tar.forecast_status = nvl(src.forecast_status,tar.forecast_status)
+			WHEN NOT MATCHED THEN
+			INSERT
+			(forecast_header_id,
+			demand_entity_id,
+			pdt_type,
+			pdt_id,
+			supply_entity_id,
+			bucket_dimension,
+			forecast_dimension_code,
+			forecast_status,
+			delete_flag,
+			created_by,
+			created_name,
+			creation_date,
+			last_updated_by,
+			last_updated_name,
+			last_update_date)
+			VALUES
+			(DSF_FORECAST_REGION_HEADER_S.nextval*1000,
+			src.demand_entity_id,
+			src.pdt_type,
+			src.pdt_id,
+			src.supply_entity_id,
+			src.bucket_dimension,
+			src.forecast_dimension_code,
+			null,
+			'N',
+			src.created_by,
+			src.created_name,
+			src.creation_date,
+			src.created_by,
+			src.created_name,
+			src.creation_date);
+		</foreach>
+		
+		End;
+	</update>
+
+	<sql id="sqlSmallWhereForecast">
+		WHERE 1=1
+		<!-- <![CDATA[ <addProgram prepend ="and" dimensions2Fields="SalesCategoryLV1:lv1_org_code"></addProgram>]]> 
+			<![CDATA[ <addProgram prepend ="and" dimensions2Fields="Region:de.demand_entity_code"></addProgram>]]> -->
+		<if test='vo.bucketDimension != null and vo.bucketDimension !="" '>
+			AND gh.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.bgCode != null and vo.bgCode !="" '>
+			AND de.bg_code = #{vo.bgCode, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.pdtType != null and vo.pdtType !="" '>
+			AND gh.pdt_type = #{vo.pdtType, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.pdtLargeId != null and vo.pdtLargeId !="" '>
+			And pd.pdt_large_id = #{vo.pdtLargeId,jdbcType=INTEGER}
+		</if>
+		<if test='vo.pdtId != null and vo.pdtId !="" '>
+			And gh.pdt_id = #{vo.pdtId,jdbcType=INTEGER}
+		</if>
+		<if test='vo.demandEntityType != null and vo.demandEntityType !="" '>
+			AND de.demand_entity_type = #{vo.demandEntityType, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.demandEntityCode != null and vo.demandEntityCode !="" '>
+			AND de.demand_entity_code = #{vo.demandEntityCode, jdbcType=VARCHAR}
+		</if>
+		<if test='vo.areaType != null and vo.areaType =="CHINA" '>
+			AND de.demand_entity_code = '027425'
+		</if>
+
+		<if test='vo.areaType != null and vo.areaType =="OVERSEA" '>
+			AND de.demand_entity_code != '027425'
+		</if>
+		<if
+			test='vo.forecastDimensionCategory != null and vo.forecastDimensionCategory !="" '>
+			AND fd.forecast_dimension_category = #{vo.forecastDimensionCategory,
+			jdbcType=VARCHAR}
+		</if>
+		<if
+			test='vo.forecastDimensionCodes != null and vo.forecastDimensionCode !=""'>
+			AND gh.forecast_dimension_code In
+			<foreach collection='vo.forecastDimensionCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		<if
+			test='vo.forecastDimensionCodes == null and vo.forecastDimensionCode !=""'>
+			AND fd.main_flag = 'Y'
+		</if>
+		AND gh.delete_flag = 'N'
+
+		<if test='vo.planCodeQueryYN == "Y"'>
+			AND exists(
+			Select 1 from dsf_planner_code_t pc
+			Join dsf_planner_code_small_t pcs
+			On(pc.sales_planner_code = pcs.sales_planner_code)
+			Where pc.sales_planner_employee = #{vo.employeeNumber}
+			And pcs.pdt_small_id = gh.pdt_id
+			and pcs.enable_flag = 'Y'
+			and pc.enable_flag = 'Y'
+			)
+		</if>
+
+		<if test='vo.planCodeQueryYN != "Y"'>
+			and ( 1=2
+			<if test='vo.lv1OrgCodes != null'>
+				or po.lv1_org_code in
+				<foreach collection='vo.lv1OrgCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.lv2OrgCodes != null'>
+				or po.lv2_org_code in
+				<foreach collection='vo.lv2OrgCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.lv3OrgCodes != null'>
+				or po.lv3_org_code in
+				<foreach collection='vo.lv3OrgCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.pdtLargeCodes != null and vo.pdtLargeCode!="" '>
+				or pd.pdt_large_code in
+				<foreach collection='vo.pdtLargeCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test='vo.pdtSmallCodes != null and vo.pdtSmallCode!="" '>
+				or ps.pdt_small_code in
+				<foreach collection='vo.pdtSmallCodes' item="item" open="("
+					separator="," close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+
+			<if
+				test='vo.lv1OrgCodes == null and vo.lv2OrgCodes == null and vo.lv3OrgCodes == null and vo.pdtLargeCodes == null and vo.pdtSmallCodes == null '>
+				or 1 = 1
+			</if>
+			)
+			<if test='vo.forecastHeaderIds != null'>
+				and ( 1=2
+				<foreach collection="vo.forecastHeaderIds" item="item">
+					or (
+					gh.DEMAND_ENTITY_ID = #{item.demandEntityId,jdbcType=INTEGER}
+					and gh.PDT_TYPE = #{item.pdtType, jdbcType=VARCHAR}
+					and gh.PDT_ID = #{item.pdtId,jdbcType=INTEGER}
+					and gh.SUPPLY_ENTITY_ID = #{item.supplyEntityId,jdbcType=INTEGER}
+					and gh.BUCKET_DIMENSION = #{item.bucketDimension, jdbcType=VARCHAR}
+					)
+				</foreach>
+				)
+			</if>
+
+		</if>
+	</sql>
+
+	<!--333333 -->
+	<sql id="sqlSmallSelectForecast">
+		Select gh.forecast_header_id forecastHeaderId,
+		gh.pdt_type pdtType,
+		gh.pdt_id pdtId,
+		gh.supply_entity_id supplyEntityId,
+		gh.bucket_dimension bucketDimension,
+		gh.forecast_dimension_code forecastDimensionCode,
+		gh.forecast_status forecastStatus,
+		gh.delete_flag deleteFlag,
+		gh.created_by createdBy,
+		gh.created_name creationUserCN,
+		gh.creation_date creationDate,
+		gh.last_updated_by lastUpdatedBy,
+		gh.last_updated_name lastUpdateUserCN,
+		gh.last_update_date lastUpdateDate,
+
+		pd.pdt_large_idpdtLargeId,
+		pd.pdt_large_code pdtLargeCode,
+		pd.pdt_large_name_cn pdtLargeNameCn,
+		pd.pdt_large_name_en pdtLargeNameEn,
+		pd.pdt_large_uom pdtLargeUom,
+
+		fd.forecast_dimension_desc_cn forecastDimensionDescCn,
+		fd.forecast_dimension_desc_en forecastDimensionDescEn,
+		fd.forecast_dimension_category forecastDimensionCategory,
+		fd.edit_flag editFlag,
+		fd.rate_flag rateFlag,
+
+		de.demand_entity_id demandEntityId,
+		de.bg_code bgCode,
+		de.demand_entity_type demandEntityType,
+		de.demand_entity_code demandEntityCode,
+
+		ao.area_org_name_cn areaOrgName,
+		#{vo.period} period,
+
+		po.lv0_org_code lv0OrgCode,
+		po.lv0_type_name lv0TypeName,
+		po.lv0_org_name_cn lv0OrgNameCn,
+		po.lv0_org_name_en lv0OrgNameEn,
+
+		po.lv1_org_code lv1OrgCode,
+		po.lv1_type_name lv1TypeName,
+		po.lv1_org_name_cn lv1OrgNameCn,
+		po.lv1_org_name_en lv1OrgNameEn,
+
+		po.lv2_org_code lv2OrgCode,
+		po.lv2_type_name lv2TypeName,
+		po.lv2_org_name_cn lv2OrgNameCn,
+		po.lv2_org_name_en lv2OrgNameEn,
+
+		po.lv3_org_code lv3OrgCode,
+		po.lv3_type_name lv3TypeName,
+		po.lv3_org_name_cn lv3OrgNameCn,
+		po.lv3_org_name_en lv3OrgNameEn,
+
+		po.lv4_org_code lv4OrgCode,
+		po.lv4_type_name lv4TypeName,
+		po.lv4_org_name_cn lv4OrgNameCn,
+		po.lv4_org_name_en lv4OrgNameEn,
+
+		ps.pdt_small_code pdtSmallCode,
+		ps.pdt_small_name_cn pdtSmallNameCn,
+		ps.pdt_small_name_en pdtSmallNameEn,
+		ps.pdt_small_uom pdtSmallUom
+
+		from dsf_forecast_region_header_t gh
+
+		Join dsf_demand_entity_t de
+		On (gh.demand_entity_id = de.demand_entity_id AND de.enable_flag = 'Y')
+
+		JOIN dsf_area_org_t ao
+		ON (ao.area_org_code = de.demand_entity_code AND
+		upper(ao.area_org_type) = upper('REGION') AND de.demand_entity_id = gh.demand_entity_id)
+
+		Join dsf_pdt_small_t ps
+		On (ps.pdt_small_id = gh.pdt_id AND ps.enable_flag = 'Y')
+
+		Join dsf_pdt_large_t pd
+		On (pd.pdt_large_id = ps.pdt_large_id AND pd.enable_flag = 'Y')
+
+		Join dsf_pdt_org_t po
+		On (po.pdt_org_id = pd.pdt_org_id AND po.enable_flag = 'Y')
+
+		Join dsf_forecast_dimension_t fd
+		On (fd.forecast_dimension_code = gh.forecast_dimension_code
+		AND fd.bg_code = #{vo.bgCode, jdbcType=VARCHAR}
+		AND fd.demand_entity_type = #{vo.demandEntityType, jdbcType=VARCHAR}
+		and fd.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		and gh.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		and fd.bg_code = de.bg_code
+		and de.demand_entity_type = fd.demand_entity_type
+		and fd.bucket_dimension = gh.bucket_dimension
+		)
+	</sql>
+
+	<select id="queryRegionSmallForecastCount" resultType="int">
+		Select count(*)
+		From (
+		<include refid="sqlSmallSelectForecast" />
+		<include refid="sqlSmallWhereForecast" />
+		)
+	</select>
+
+	<select id="queryRegionSmallForecast"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		Select *
+		From (Select rownum rn, t.* From (
+		<include refid="sqlSmallSelectForecast" />
+		<include refid="sqlSmallWhereForecast" />
+		Order By
+		po.lv0_org_code,po.lv1_org_code,po.lv2_org_code,po.lv3_org_code,gh.pdt_id,fd.sort_id
+		) t
+<![CDATA[WHERE rownum <= #{page.endIndex}]]>
+		)
+<![CDATA[WHERE rn >= #{page.startIndex}]]>
+	</select>
+
+	<!-- 初始化远粗对象 -->
+	<update id="initLargeTOForecast">
+		DECLARE
+		begin
+		
+		MERGE INTO dsf_forecast_region_header_t tar
+		USING (
+		Select
+		de.demand_entity_id demand_entity_id,
+		'FAR-OUT' pdt_type,
+		pl.pdt_large_id pdt_id,
+		'0' supply_entity_id,
+		fd.bucket_dimension bucket_dimension,
+		fd.forecast_dimension_code forecast_dimension_code,
+		NULL forecast_status,
+		Case When de.enable_flag = 'Y' AND pl.Enable_Flag = 'Y' AND
+		fd.enable_flag='Y' AND po.enable_flag='Y' Then
+		'N'
+		Else
+		'Y'
+		End delete_flag,
+		0 created_by,
+		'0' created_name,
+		SYSDATE creation_date,
+		0 last_updated_by,
+		'0' last_updated_name,
+		SYSDATE last_updated_date
+		FROM dsf_pdt_large_t pl
+		JOIN dsf_forecast_dimension_t fd
+		ON (1=1)
+		Join dsf_demand_entity_t de
+		On(de.bg_code = fd.bg_code AND de.demand_entity_type = fd.demand_entity_type)
+		Join dsf_pdt_org_t po
+		On(po.pdt_org_id = pl.Pdt_Org_Id)
+		Where fd.bg_code = #{vo.bgCode} AND fd.fo_flag='Y' AND
+		UPPER(fd.demand_entity_type) = UPPER(#{vo.demandEntityType})
+		) src
+		ON (
+		tar.DEMAND_ENTITY_ID= src.DEMAND_ENTITY_ID
+		AND tar.PDT_TYPE =src.PDT_TYPE
+		AND tar.PDT_ID = src.PDT_ID
+		AND tar.SUPPLY_ENTITY_ID = src.SUPPLY_ENTITY_ID
+		AND tar.BUCKET_DIMENSION = src.BUCKET_DIMENSION
+		AND tar.FORECAST_DIMENSION_CODE = src.FORECAST_DIMENSION_CODE
+		)
+		WHEN MATCHED THEN
+		UPDATE SET
+		tar.delete_flag = src.delete_flag,
+		tar.last_updated_by = src.last_updated_by,
+		tar.last_updated_name = src.last_updated_name,
+		tar.last_update_date = src.last_updated_date,
+		tar.forecast_status = nvl(src.forecast_status,tar.forecast_status)
+		WHEN NOT MATCHED THEN
+		INSERT
+		(forecast_header_id,
+		demand_entity_id,
+		pdt_type,
+		pdt_id,
+		supply_entity_id,
+		bucket_dimension,
+		forecast_dimension_code,
+		forecast_status,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		VALUES
+		(dsf_forecast_region_header_s.nextval*1000,
+		src.demand_entity_id,
+		src.pdt_type,
+		src.pdt_id,
+		src.supply_entity_id,
+		src.bucket_dimension,
+		src.forecast_dimension_code,
+		null,
+		src.delete_flag,
+		src.created_by,
+		src.created_name,
+		src.creation_date,
+		src.created_by,
+		src.created_name,
+		src.creation_date);
+		commit;
+		null;
+		EXCEPTION
+		WHEN OTHERS THEN
+		ROLLBACK;
+		raise_application_error(-20000, substr('ERROR:' || dbms_utility.format_error_backtrace ||
+		SQLERRM || ':' || to_char(SQLCODE) || ' ' ||
+		dbms_utility.format_error_stack || ' ' ||
+		dbms_utility.format_call_stack,
+		1,
+		1000));
+		
+		End;
+	</update>
+
+	<!--444444 -->
+	<!-- 初始化近细对象 -->
+	<update id="initSmallTOForecast">
+		DECLARE
+		begin
+		
+		MERGE INTO dsf_forecast_region_header_t tar
+		USING (
+		Select
+		de.demand_entity_id demand_entity_id,
+		'CLOSE-IN' pdt_type,
+		pl.pdt_small_id pdt_id,
+		'0' supply_entity_id,
+		fd.bucket_dimension bucket_dimension,
+		fd.forecast_dimension_code forecast_dimension_code,
+		NULL forecast_status,
+		Case When de.enable_flag = 'Y' AND pl.Enable_Flag = 'Y' AND
+		fd.enable_flag='Y' AND pa.enable_flag='Y' AND po.enable_flag = 'Y' AND
+		pl.transparent_flag = 'N'
+		AND SYSDATE <![CDATA[>]]>
+		nvl(add_Months(pl.effective_date,nvl(pl.effective_delay_month,0)),SYSDATE
+		1) AND SYSDATE <![CDATA[<]]>
+		nvl(pl.disable_date,SYSDATE 1)
+		Then
+		'N'
+		Else
+		'Y'
+		End delete_flag,
+		0 created_by,
+		'0' created_name,
+		SYSDATE creation_date,
+		0 last_updated_by,
+		'0' last_updated_name,
+		SYSDATE last_updated_date
+
+		FROM dsf_pdt_small_t pl
+		JOIN dsf_forecast_dimension_t fd
+		ON (1=1)
+		Join dsf_demand_entity_t de
+		On(de.bg_code = fd.bg_code AND de.demand_entity_type = fd.demand_entity_type)
+		Join dsf_pdt_large_t pa
+		On(Pl.Pdt_Large_Id = pa.pdt_large_id)
+		Join dsf_pdt_org_t po
+		On(pa.pdt_org_id = po.pdt_org_id)
+		WHERE
+		fd.bg_code = #{vo.bgCode} AND de.enable_flag = 'Y'
+		AND UPPER(fd.demand_entity_type) = UPPER(#{vo.demandEntityType}) AND
+		fd.bucket_dimension = 'M'
+		AND fd.fo_flag='N'
+		) src
+		ON (
+		tar.DEMAND_ENTITY_ID= src.DEMAND_ENTITY_ID
+		AND tar.PDT_TYPE =src.PDT_TYPE
+		AND tar.PDT_ID = src.PDT_ID
+		AND tar.SUPPLY_ENTITY_ID = src.SUPPLY_ENTITY_ID
+		AND tar.BUCKET_DIMENSION = src.BUCKET_DIMENSION
+		AND tar.FORECAST_DIMENSION_CODE = src.FORECAST_DIMENSION_CODE
+		)
+		WHEN MATCHED THEN
+		UPDATE SET
+		tar.delete_flag = src.delete_flag,
+		tar.last_updated_by = src.last_updated_by,
+		tar.last_updated_name = src.last_updated_name,
+		tar.last_update_date = src.last_updated_date,
+		tar.forecast_status = nvl(src.forecast_status,tar.forecast_status)
+		WHEN NOT MATCHED THEN
+		INSERT
+		(forecast_header_id,
+		demand_entity_id,
+		pdt_type,
+		pdt_id,
+		supply_entity_id,
+		bucket_dimension,
+		forecast_dimension_code,
+		forecast_status,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		VALUES
+		(dsf_forecast_region_header_s.nextval*1000,
+		src.demand_entity_id,
+		src.pdt_type,
+		src.pdt_id,
+		src.supply_entity_id,
+		src.bucket_dimension,
+		src.forecast_dimension_code,
+		null,
+		src.delete_flag,
+		src.created_by,
+		src.created_name,
+		src.creation_date,
+		src.created_by,
+		src.created_name,
+		src.creation_date);
+		commit;
+		null;
+		EXCEPTION
+		WHEN OTHERS THEN
+		ROLLBACK;
+		raise_application_error(-20000, substr('ERROR:' || dbms_utility.format_error_backtrace ||
+		SQLERRM || ':' || to_char(SQLCODE) || ' ' ||
+		dbms_utility.format_error_stack || ' ' ||
+		dbms_utility.format_call_stack,
+		1,
+		1000));
+		
+		End;
+	</update>
+
+	<update id="updateLastUpdateByDimensionCode">
+		UPDATE dsf_forecast_region_header_t t
+		SET
+		<if test='vo.forecastStatus != null and vo.forecastStatus ==""'>
+			t.forecast_status = #{vo.forecastStatus, jdbcType=VARCHAR},
+		</if>
+		t.last_update_date = sysdate
+		WHERE t.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		AND t.forecast_dimension_code = #{vo.forecastDimensionCode,
+		jdbcType=VARCHAR}
+	</update>
+
+	<select id="queryForecastByAICode"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		SELECT t.forecast_header_id forecastHeaderId,
+		t.forecast_dimension_code forecastDimensionCode,
+		l.pdt_large_code pdtLargeCode,
+		t.pdt_type pdtType,
+		t.pdt_id pdtId,
+		t.supply_entity_id supplyEntityId,
+		t.bucket_dimension bucketDimension,
+		de.demand_entity_code demandEntityCode,
+		ao.area_org_code areaOrgCode
+		FROM dsf_forecast_region_header_t t
+		JOIN dsf_pdt_large_t l
+		ON (t.pdt_id = l.pdt_large_id)
+		Join dsf_demand_entity_t de
+		On(t.demand_entity_id = de.demand_entity_id)
+		JOIN dsf_area_org_t ao
+		ON (ao.area_org_code = de.demand_entity_code AND
+		upper(ao.area_org_type) = upper('REGION') AND
+		de.demand_entity_id = t.demand_entity_id)
+		WHERE t.delete_flag = 'N'
+		<if
+			test='vo.forecastDimensionCodes != null and vo.forecastDimensionCode !=""'>
+			And t.forecast_dimension_code In
+			<foreach collection='vo.forecastDimensionCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		AND t.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+	</select>
+
+	<select id="querySmallForecastByAICode"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		SELECT t.forecast_header_id forecastHeaderId,
+		t.forecast_dimension_code forecastDimensionCode,
+		l.pdt_small_code pdtLargeCode,
+		t.pdt_type pdtType,
+		t.pdt_id pdtId,
+		t.supply_entity_id supplyEntityId,
+		t.bucket_dimension bucketDimension,
+		de.demand_entity_code demandEntityCode,
+		ao.area_org_code areaOrgCode,
+		t.demand_entity_id demandEntityId
+		FROM dsf_forecast_region_header_t t
+
+		JOIN dsf_pdt_small_t l
+		ON (t.pdt_id = l.pdt_small_id)
+
+		JOIN dsf_demand_entity_t de
+		ON (t.demand_entity_id = de.demand_entity_id AND de.enable_flag = 'Y')
+
+		JOIN dsf_area_org_t ao
+		ON (ao.area_org_code = de.demand_entity_code
+		AND upper(ao.area_org_type) = upper('REGION')
+		AND de.demand_entity_id = t.demand_entity_id)
+
+		WHERE t.delete_flag = 'N'
+		<if
+			test='vo.forecastDimensionCodes != null and vo.forecastDimensionCode !=""'>
+			AND t.forecast_dimension_code In
+			<foreach collection='vo.forecastDimensionCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		AND t.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+	</select>
+
+	<!--555555 -->
+	<!-- 提供给代表处使用 -->
+	<select id="queryAIObjectToRepofficeSrc"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		SELECT t.forecast_header_id forecastHeaderId,
+		t.forecast_dimension_code forecastDimensionCode,
+		l.pdt_large_code pdtLargeCode,
+		t.demand_entity_id demandEntityCode,
+		t.pdt_type pdtType,
+		t.pdt_id pdtId,
+		t.supply_entity_id supplyEntityId,
+		t.bucket_dimension bucketDimension,
+		bk.qbucket_desc_cn bucketName,
+		bk.qbucket_id bucketID,
+		gl.quantity bucket1,
+		ao.area_org_code areaOrgCode
+		FROM dsf_forecast_region_header_t t
+		JOIN dsf_pdt_large_t l
+		ON (t.pdt_id = l.pdt_large_id)
+		Join dsf_forecast_region_line_t gl
+		On (t.forecast_header_id = gl.forecast_header_id)
+		Join (SELECT fby.bucket_id ybucket_id,
+		fby.bucket_desc_cn ybucket_desc_cn,
+		fby.bucket_id qbucket_id,
+		fby.bucket_desc_cn qbucket_desc_cn
+		FROM dsf_forecast_bucket_t fby
+		WHERE fby.period = #{srcVO.period, jdbcType=VARCHAR}
+		AND fby.bg_code = #{srcVO.bgCode, jdbcType=VARCHAR}
+		AND fby.demand_entity_type = 'REGION'
+		AND fby.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		) bk
+		On (bk.ybucket_id = gl.bucket_id)
+		JOIN dsf_demand_entity_t de
+		ON (t.demand_entity_id = de.demand_entity_id AND de.enable_flag = 'Y')
+		JOIN dsf_area_org_t ao
+		ON (ao.area_org_code = de.demand_entity_code AND
+		upper(ao.area_org_type) = upper('REGION') AND
+		de.demand_entity_id = t.demand_entity_id)
+		WHERE t.delete_flag = 'N'
+		<if
+			test='srcVO.forecastDimensionCodes != null and srcVO.forecastDimensionCode !=""'>
+			And t.forecast_dimension_code IN
+			<foreach collection='srcVO.forecastDimensionCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		<if test='srcVO.pdtLargeCodes != null and srcVO.pdtLargeCodes !=""'>
+			AND l.pdt_large_code IN
+			<foreach collection='srcVO.pdtLargeCodes' item="item" open="("
+				separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		<if test='srcVO.demandEntityCodes != null and srcVO.demandEntityCodes !=""'>
+			AND de.demand_entity_code IN
+			<foreach collection='srcVO.demandEntityCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+
+	<!-- AI -->
+	<select id="queryAIObject"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		Select tr.forecast_header_id forecastHeaderId,
+		tr.forecast_dimension_code forecastDimensionCode,
+		l.pdt_large_code pdtLargeCode,
+		t.pdt_type pdtType,
+		t.pdt_id pdtId,
+		t.supply_entity_id supplyEntityId,
+		t.bucket_dimension bucketDimension,
+		t.qbucket_desc_cn bucketName,
+		t.qbucket_id bucketID,
+		gl.quantity bucket1,
+		d.demand_entity_code demandEntityCode,
+		d.demand_entity_code areaOrgCode
+		FROM (
+		Select rh.forecast_header_id,
+		rh.pdt_id,
+		rh.demand_entity_id,
+		rh.bucket_dimension,
+		rh.supply_entity_id,
+		rh.pdt_type,
+		rh.forecast_dimension_code,
+		m.ybucket_id,
+		m.qbucket_id,
+		m.qbucket_desc_cn
+		from dsf_forecast_region_header_t rh
+		Join(
+		SELECT fby.bucket_id ybucket_id,fby.bucket_desc_cn
+		ybucket_desc_cn,fbq.bucket_id qbucket_id,fbq.bucket_desc_cn
+		qbucket_desc_cn
+		FROM dsf_forecast_bucket_t fby
+		JOIN dsf_forecast_bucket_t fbq
+		<if test='srcVO.bucketDimension == "Y"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_year)
+		</if>
+		<if test='srcVO.bucketDimension == "Q"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_qtr)
+		</if>
+		WHERE fby.period = #{tarVO.period, jdbcType=VARCHAR}
+		AND fby.bg_code = #{tarVO.bgCode, jdbcType=VARCHAR}
+		AND fby.demand_entity_type = #{tarVO.demandEntityType, jdbcType=VARCHAR}
+		AND fby.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		AND fbq.period = #{tarVO.period, jdbcType=VARCHAR}
+		AND fbq.bg_code = #{tarVO.bgCode, jdbcType=VARCHAR}
+		AND fbq.demand_entity_type = #{tarVO.demandEntityType, jdbcType=VARCHAR}
+		AND fbq.bucket_dimension = #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		) m On(1=1)
+		WHERE rh.delete_flag = 'N'
+		and rh.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and rh.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+
+		) t
+		JOIN dsf_pdt_large_t l
+		ON (t.pdt_id = l.pdt_large_id)
+		Join dsf_demand_entity_t d
+		On(d.demand_entity_id = t.demand_entity_id)
+		Join dsf_forecast_region_header_t tr
+		On(t.demand_entity_id = tr.demand_entity_id
+		And t.pdt_type = tr.pdt_type
+		And t.pdt_id = tr.pdt_id
+		and t.supply_entity_id = tr.supply_entity_id
+		And t.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		And tr.bucket_dimension = #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		And t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		<if
+			test='tarVO.forecastDimensionCodes != null and tarVO.forecastDimensionCode !=""'>
+			And tr.forecast_dimension_code In
+			<foreach collection='tarVO.forecastDimensionCodes' item="item"
+				open="(" separator="," close=")" index="index">
+				#{item}
+			</foreach>
+		</if>
+		)
+		left Join dsf_forecast_region_line_t gl
+		On(t.forecast_header_id = gl.forecast_header_id and t.ybucket_id = gl.bucket_id )
+	</select>
+
+	<select id="queryLargeTOSmallObject"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		Select tr.forecast_header_id forecastHeaderId,
+		l.pdt_large_code pdtLargeCode,
+		s.pdt_small_code pdtSmallCode,
+		t.pdt_type pdtType,
+		t.pdt_id pdtId,
+		t.supply_entity_id supplyEntityId,
+		t.bucket_dimension bucketDimension,
+		bk.qbucket_desc_cn bucketName,
+		bk.qbucket_id bucketID,
+		nvl(gl.quantity,0) bucket1,
+		d.demand_entity_code demandEntityCode,
+		nvl(s.large_to_small,0) bucket3
+		FROM dsf_forecast_region_header_t t
+		JOIN dsf_pdt_small_t s
+		ON (t.pdt_id = s.pdt_large_id)
+		Join dsf_pdt_large_t l
+		On(t.pdt_id =l.pdt_large_id)
+		Join dsf_demand_entity_t d
+		On(d.demand_entity_id = t.demand_entity_id)
+		Join dsf_forecast_region_header_t tr
+		On(t.demand_entity_id = tr.demand_entity_id
+		And t.pdt_type = 'FAR-OUT'
+		And tr.pdt_type = 'CLOSE-IN'
+		And s.pdt_small_id = tr.pdt_id
+		and t.supply_entity_id = tr.supply_entity_id
+		And t.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		And tr.bucket_dimension = #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		And t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and tr.forecast_dimension_code = #{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR})
+		Join dsf_forecast_region_line_t gl
+		On(t.forecast_header_id = gl.forecast_header_id)
+		Join(
+		SELECT fby.bucket_id ybucket_id,fby.bucket_desc_cn
+		ybucket_desc_cn,fbq.bucket_id qbucket_id,fbq.bucket_desc_cn
+		qbucket_desc_cn
+		FROM dsf_forecast_bucket_t fby
+		JOIN dsf_forecast_bucket_t fbq
+		<if test='srcVO.bucketDimension == "Y"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_year)
+		</if>
+		<if test='srcVO.bucketDimension == "Q"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_qtr)
+		</if>
+		WHERE fby.period = #{tarVO.period, jdbcType=VARCHAR}
+		AND fby.bg_code = #{tarVO.bgCode, jdbcType=VARCHAR}
+		AND fby.demand_entity_type = #{tarVO.demandEntityType, jdbcType=VARCHAR}
+		AND fby.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		AND fbq.period = #{tarVO.period, jdbcType=VARCHAR}
+		AND fbq.bg_code = #{tarVO.bgCode, jdbcType=VARCHAR}
+		AND fbq.demand_entity_type = #{tarVO.demandEntityType, jdbcType=VARCHAR}
+		AND fbq.bucket_dimension = #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		) bk
+		On(bk.ybucket_id = gl.bucket_id)
+		WHERE t.delete_flag = 'N'
+		and t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and t.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				t.PDT_TYPE = #{item.pdtType, jdbcType=VARCHAR}
+				and t.PDT_ID = #{item.pdtId,jdbcType=INTEGER}
+				)
+			</foreach>
+			)
+		</if>
+	</select>
+
+	<!--7777777 -->
+	<select id="queryOrderPara"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		Select t.forecast_header_id forecastHeaderId,
+		<if test='vo.pdtType == "FAR-OUT"'>
+			l.pdt_large_code pdtLargeCode,
+		</if>
+		<if test='vo.pdtType == "CLOSE-IN"'>
+			l.pdt_small_code pdtLargeCode,
+		</if>
+		d.demand_entity_code demandEntityCode,
+		t.pdt_type pdtType,
+		t.pdt_id pdtId,
+		t.supply_entity_id supplyEntityId,
+		t.bucket_dimension bucketDimension,
+		ao.area_org_code areaOrgCode
+		FROM dsf_forecast_region_header_t t
+		<if test='vo.pdtType == "FAR-OUT"'>
+			JOIN dsf_pdt_large_t l
+			ON (t.pdt_id = l.pdt_large_id)
+		</if>
+		<if test='vo.pdtType == "CLOSE-IN"'>
+			JOIN dsf_pdt_small_t l
+			ON (t.pdt_id = l.pdt_small_id)
+		</if>
+		Join dsf_demand_entity_t d
+		On(t.demand_entity_id = d.demand_entity_id)
+		JOIN dsf_area_org_t ao
+		ON (ao.area_org_code = d.demand_entity_code
+		AND upper(ao.area_org_type) = upper('REGION')
+		AND d.demand_entity_id = t.demand_entity_id)
+		WHERE t.delete_flag = 'N'
+		and t.forecast_dimension_code = #{vo.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and t.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		and t.pdt_type = #{vo.pdtType, jdbcType=VARCHAR}
+	</select>
+
+</mapper>

@@ -8,13 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.gwtjs.icustom.springsecurity.entity.SysRole;
-import com.gwtjs.icustom.springsecurity.entity.SysUser;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
-public class SecurityUser extends SysUser implements UserDetails {
+public class SecurityUser extends SysUserVO implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	public SecurityUser(SysUser user) {
+	public SecurityUser(SysUserVO user) {
 		if (user != null) {
 			this.setId(user.getId());
 			this.setAccount(user.getAccount());
@@ -29,10 +29,10 @@ public class SecurityUser extends SysUser implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
-		Set<SysRole> userRoles = this.getSysRoles();
+		Set<SysRoleVO> userRoles = this.getSysRoles();
 
 		if (userRoles != null) {
-			for (SysRole role : userRoles) {
+			for (SysRoleVO role : userRoles) {
 				SimpleGrantedAuthority authority = new SimpleGrantedAuthority(
 						role.getRolename());
 				authorities.add(authority);

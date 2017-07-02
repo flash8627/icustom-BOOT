@@ -57,7 +57,6 @@ public class PageInterceptor implements Interceptor {
 		Object[] queryArgs = invocation.getArgs();
 		MappedStatement mappedStatement = (MappedStatement) queryArgs[MAPPED_STATEMENT_INDEX];
 		String sqlId = mappedStatement.getId();
-		log.info("sql id:", sqlId);
 
 		Executor executor = (Executor) invocation.getTarget();
 		Object param = queryArgs[PARAMETER_INDEX];

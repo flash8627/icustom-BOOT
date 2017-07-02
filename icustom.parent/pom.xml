@@ -7,7 +7,7 @@
 
 	<groupId>com.gwtjs.icustom</groupId>
 	<artifactId>icustom-parent</artifactId>
-	<version>0.2.6.28-SNAPSHOT</version>
+	<version>0.7.6.28-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>

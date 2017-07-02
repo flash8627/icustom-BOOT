@@ -2,79 +2,113 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao">
 	
-	<insert id="insert">
-	INSERT INTO sys_resource
-            (id,
-             method_name,
-             method_path,
-             remark,
-             resource_id,
-             resource_name,
-             resource_string)
-		VALUES (id,
-		        method_name,
-		        method_path,
-		        remark,
-		        resource_id,
-		        resource_name,
-		        resource_string)
-	</insert>
+	<update id="saveResources">
+		begin 
+			<foreach collection='list' item="item" index="index">
+				merge into sys_resource_t tar
+				  using (
+				        select 
+				             1              								resource_id,
+				             #{item.remarks,jdbcType=VARCHAR}          		method_name,
+				             #{item.remarks,jdbcType=VARCHAR}        		method_path,
+				             #{item.remarks,jdbcType=VARCHAR}      			remark,
+				             #{item.remarks,jdbcType=VARCHAR}         		resource_name,
+				             #{item.remarks,jdbcType=VARCHAR}            	resource_url,
+				             #{item.orderCode,jdbcType=INTEGER}             order_code,
+				             #{createdUser,jdbcType=NUMERIC}              	created_user,
+				             SYSDATE        								created_date,
+				             #{updateLastUser,jdbcType=NUMERIC}           	update_last_user,
+				             SYSDATE        								update_last_date,
+				             #{item.validFlag,jdbcType=INTEGER}             valid_flag
+				        from dual 
+				  ) src
+				  on (
+				     tar.resource_id=src.resource_id
+				  )
+				  WHEN MATCHED THEN
+				    UPDATE SET
+				      tar.method_name = src.method_name,
+				      tar.method_path = src.method_path,
+				      tar.remark = src.remark,
+				      tar.resource_name = src.resource_name,
+				      tar.resource_url = src.resource_url,
+				      tar.order_code = src.order_code,
+				      tar.created_user = src.created_user,
+				      tar.created_date = src.created_date,
+				      tar.update_last_user = src.update_last_user,
+				      tar.update_last_date = src.update_last_date,
+				      tar.valid_flag = nvl(src.valid_flag,tar.valid_flag)
+				  WHEN NOT MATCHED THEN
+				    INSERT
+				      (resource_id,
+				       method_name,
+				       method_path,
+				       remark,
+				       resource_name,
+				       resource_url,
+				       order_code,
+				       created_user,
+				       update_last_user,
+				       update_last_date,
+				       valid_flag)
+				    VALUES
+				      (SYS_RESOURCE_S.nextval+1000,
+				       src.method_name,
+				       src.method_path,
+				       src.remark,
+				       src.resource_name,
+				       src.resource_url,
+				       src.order_code,
+				       src.created_user,
+				       src.created_date,
+				       src.update_last_user,
+				       src.update_last_date,
+				       1);
+			</foreach>
+		END;
+	</update>
 	
 	<delete id="delete">
 		DELETE
-			FROM sys_resource
-			WHERE id = #{id,jdbcType=NUMERIC} 
+			FROM sys_resource_t
+			WHERE resource_id = #{id,jdbcType=NUMERIC} 
 	</delete>
 	
-	<update id="update">
-		UPDATE sys_resource
-			SET 
-			  method_name = method_name,
-			  method_path = method_path,
-			  remark = remark,
-			  resource_id = resource_id,
-			  resource_name = resource_name,
-			  resource_string = resource_string
-			WHERE id = id
-	</update>
-	
-	<select id="findByRole" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
-		SELECT t.id              id,
-		       t.method_name     methodName,
+	<select id="findResourcesById" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
+		SELECT t.method_name     methodName,
 		       t.method_path     methodPath,
 		       t.remark          remark,
 		       t.resource_id     resourceId,
 		       t.resource_name   resourceName,
-		       t.resource_string resourceString
+		       t.resource_url 	resourceUrl
 		  FROM sys_resource_t t
-		  JOIN sys_resource_role_t rrt
-		  ON (rrt.resource_id=t.resource_id and rrt.valid_flag = 1 )
 		 WHERE t.valid_flag = 1
 				AND (1=2 
 				<foreach collection="list" item="item">
 					OR (
-						t.role_id = #{item}
+						t.resource_id = #{item.resourceId}
 					)
 				</foreach>
 			)
 	</select>
 	
-	<select id="findAll" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
+	<select id="findAll" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
 		<include refid="select_base" />
 	</select>
 	
 	<select id="findResourcePageCount" resultType="int">
 		SELECT
 			  COUNT(1) 
-			FROM sys_resource  tt  
+			FROM sys_resource_t  tt  
 			WHERE  tt.valid_flag = 1 
 			<include refid="select_cond" />
 	</select>
 	
-	<select id="findResourcePage" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
-		<include refid="select_base" />
+	<select id="findResourcePage" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
+		<include refid="page_st" />
+			<include refid="select_base" />
 			<include refid="select_cond" />
-			LIMIT #{page.startIndex} , #{page.endIndex} 
+		<include refid="page_et" />
 	</select>
 	
 	<sql id="select_cond">
@@ -85,22 +119,31 @@
 			AND UPPER(tt.resource_name) LIKE UPPER('#{vo.resourceName,jdbcType=VARCHAR}') 
 		</if>
 		
-		<if test='_parameter.get("vo").resourceString != null and _parameter.get("vo").resourceString != ""'>
-			AND UPPER(tt.resource_string) LIKE UPPER('#{vo.resourceString,jdbcType=VARCHAR}') 
+		<if test='_parameter.get("vo").resourceUrl != null and _parameter.get("vo").resourceUrl != ""'>
+			AND UPPER(tt.resource_url) LIKE UPPER('#{vo.resourceUrl,jdbcType=VARCHAR}') 
 		</if>
 	</sql>
 	
 	<sql id="select_base">
-		SELECT
-			 id id,
-             method_name methodName,
-             method_path methodPath,
-             remark remark,
-             resource_id resourceId,
-             resource_name resourceName,
-             resource_string resourceString
-			FROM sys_resource tt 
-			WHERE tt.valid_flag = 1 
+		SELECT method_name   methodName,
+	       method_path   methodPath,
+	       remark        remark,
+	       resource_id   resourceId,
+	       resource_name resourceName,
+	       resource_url  resourceUrl
+	  FROM sys_resource_t tt
+	 WHERE tt.valid_flag = 1
+	</sql>
+	
+	<sql id="page_st">
+		SELECT * FROM (
+		SELECT TT.* , ROWNUM RN FROM (
+	</sql>
+	<sql id="page_et">
+		) TT
+		<![CDATA[
+		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
+		]]>
 	</sql>
 	
 </mapper>

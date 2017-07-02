@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.icustom.springsecurity.MainApplicationTest;
-import com.gwtjs.icustom.springsecurity.entity.SysResource;
+import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao;
 
 public class ISysResourceDaoTest  extends MainApplicationTest {
@@ -26,28 +26,28 @@ public class ISysResourceDaoTest  extends MainApplicationTest {
 
 	@Test @Ignore
 	public void insertTest() {
-		SysResource sys=new SysResource();
+		SysResourceVO sys=new SysResourceVO();
 		int result = sysResourceDao.insert(sys);
 	}
 
 	@Test @Ignore
 	public void updateTest() {
-		SysResource sys=new SysResource();
+		SysResourceVO sys=new SysResourceVO();
 		int result = sysResourceDao.update(sys);
 	}
 
 	@Test
 	public void findAllTest() {
-		List<SysResource> list = sysResourceDao.findAll();
+		List<SysResourceVO> list = sysResourceDao.findAll();
 	}
 
 	@Test
 	public void findResourcePageTest() {
-		SysResource sys = new SysResource();
+		SysResourceVO sys = new SysResourceVO();
 		PageVO page = new PageVO();
 		page.setCurPage(1);
 		page.setPageSize(18);
-		PagedResult<SysResource> result = sysResourceDao.findResourcePage(sys,
+		PagedResult<SysResourceVO> result = sysResourceDao.findResourcePage(sys,
 				page);
 		System.out.println("resource result:\n"+result);
 		System.out.println("resource page result:\n"+result.getPageVO());

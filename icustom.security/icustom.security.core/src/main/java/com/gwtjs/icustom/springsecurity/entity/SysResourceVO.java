@@ -2,16 +2,14 @@ package com.gwtjs.icustom.springsecurity.entity;
 
 import com.gwtjs.core.entity.BaseResource;
 
-public class SysResource extends BaseResource {
+public class SysResourceVO extends BaseResource {
 
 	/***/
 	private static final long serialVersionUID = -8724114844194419901L;
 
-	private Integer id;
+	private String resourceUrl;// url
 
-	private String resourceString;// url
-
-	private String resourceId;// 资源ID
+	private long resourceId;// 资源ID
 
 	private String remark;// 备注
 
@@ -21,27 +19,22 @@ public class SysResource extends BaseResource {
 
 	private String methodPath;// 资源所对应的包路径
 
-	public Integer getId() {
-		return id;
+	// 上级
+	private long parentId;
+
+	public String getResourceUrl() {
+		return resourceUrl;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setResourceUrl(String resourceUrl) {
+		this.resourceUrl = resourceUrl;
 	}
 
-	public String getResourceString() {
-		return resourceString;
-	}
-
-	public void setResourceString(String resourceString) {
-		this.resourceString = resourceString;
-	}
-
-	public String getResourceId() {
+	public long getResourceId() {
 		return resourceId;
 	}
 
-	public void setResourceId(String resourceId) {
+	public void setResourceId(long resourceId) {
 		this.resourceId = resourceId;
 	}
 
@@ -77,12 +70,12 @@ public class SysResource extends BaseResource {
 		this.methodPath = methodPath;
 	}
 
-	@Override
-	public String toString() {
-		return "SysResource [id=" + id + ", resourceString=" + resourceString
-				+ ", resourceId=" + resourceId + ", remark=" + remark
-				+ ", resourceName=" + resourceName + ", methodName="
-				+ methodName + ", methodPath=" + methodPath + "]";
+	public long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(long parentId) {
+		this.parentId = parentId;
 	}
 
 }

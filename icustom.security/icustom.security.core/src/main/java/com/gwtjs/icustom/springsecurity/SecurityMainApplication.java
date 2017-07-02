@@ -20,7 +20,7 @@ public class SecurityMainApplication {
 
 	@PostConstruct
 	public void initApplication() throws IOException {
-		log.info("Running with Spring profile(s) : {}");
+		log.info("Running with Security profile(s) : {}");
 	}
 
 	public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class SecurityMainApplication {
 
 		/*
 		 * UserService suserService = (UserService)
-		 * Appctx.ctx.getBean("userService"); SysUser su=
+		 * Appctx.ctx.getBean("userService"); SysUserVO su=
 		 * suserService.findByName("TEST"); BCryptPasswordEncoder bc=new
 		 * BCryptPasswordEncoder(4);//将密码加密 可以先设置初始密码：000000
 		 * su.setPassword(bc.encode

@@ -20,12 +20,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
 
-import com.gwtjs.icustom.springsecurity.entity.SysResource;
-import com.gwtjs.icustom.springsecurity.entity.SysResourceRole;
-import com.gwtjs.icustom.springsecurity.entity.SysRole;
+import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceRoleDao;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao;
+import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleResourceDao;
 
 /**
  * 最核心的地方，就是提供某个资源对应的权限定义，即getAttributes方法返回的结果。 
@@ -41,7 +41,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 	@Autowired
 	private ISysResourceDao sysResourceDao;
 	@Autowired
-	private ISysResourceRoleDao sysResourceRoleDao;
+	private ISysRoleResourceDao sysRoleResourceDao;
 
 	@Autowired
 	private ISysRoleDao sysRoleDao;
@@ -54,39 +54,29 @@ public class CustomInvocationSecurityMetadataSourceService implements
 	
 	@PostConstruct
 	// 被@PostConstruct修饰的方法会在服务器加载Servle的时候运行，并且只会被服务器执行一次。PostConstruct在构造函数之后执行,init()方法之前执行。
-	private void loadResourceDefine() {// 一定要加上@PostConstruct注解
+	private void loadResourceDefine() {
 		// 在Web服务器启动时，提取系统中的所有权限。
-		List<SysRole> list = new ArrayList<SysRole>()/*sysRoleDao.findAll()*/;
-		
-		List<String> roleNames = new ArrayList<String>();
-		if (list != null && list.size() > 0) {
-			for (SysRole sr : list) {
-				// String name = sr.get("name")
-				String name = sr.getRolename();
-				roleNames.add(name);
-			}
-		}
+		List<SysRoleVO> roles = sysRoleDao.findAll();
+		logger.debug("\nroles:" + roles);
 		/*
 		 * 应当是资源为key， 权限为value。 资源通常为url， 权限就是那些以ROLE_为前缀的角色。 一个资源可以由多个权限来访问。
 		 */
 		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
 
-		for (String roleName : roleNames) {
-			ConfigAttribute ca = new SecurityConfig(roleName);
+		for (SysRoleVO role : roles) {
+			ConfigAttribute ca = new SecurityConfig(role.getRolename());
 			
 			List<String> urls = new ArrayList<String>();
-			logger.debug("\nsysResourceDao:" + sysResourceDao);
-			SysRole role = sysRoleDao.findByRoleName(roleName);
-			List<SysResourceRole> resourceRoles = sysResourceRoleDao.findByRoleResource(role.getId());
-			logger.info(getRoleIds(resourceRoles).toString());
-			List<SysResource> resources = new ArrayList<>();
-			if(resourceRoles.size()>0)
-				resources = sysResourceDao.findByRole(getRoleIds(resourceRoles));
+			logger.debug("\nca:" + ca);
+			
+			List<SysRoleResourceVO> roleResources = sysRoleResourceDao.findByRoleResource(role.getId());
+			logger.debug("\nroleResources:" + roleResources);
+			List<SysResourceVO> resources = new ArrayList<>();
+			if(roleResources.size()>0)
+				resources = sysResourceDao.findResourcesById(roleResources);
 			if (resources != null && resources.size() > 0) {
-				for (SysResource resource : resources) {
-					// Object value = map.get("resource_string");
-					// String url = String.valueOf(value);
-					urls.add(resource.getResourceString());
+				for (SysResourceVO resource : resources) {
+					urls.add(resource.getResourceUrl());
 				}
 			}
 			for (String res : urls) {
@@ -110,14 +100,6 @@ public class CustomInvocationSecurityMetadataSourceService implements
 
 	}
 	
-	private List<Integer> getRoleIds(List<SysResourceRole> rrs){
-		List<Integer> ids = new ArrayList<Integer>();
-		for (SysResourceRole role : rrs) {
-			ids.add(role.getId());
-		}
-		return ids;
-	}
-
 	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
 		return new ArrayList<ConfigAttribute>();

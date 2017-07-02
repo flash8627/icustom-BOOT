@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceRoleDao">
+<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleResourceDao">
 	
+	<select id="findByRoleResource" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO">
+		<include refid="select_base" />
+		AND srrt.role_id = #{roleId,jdbcType=NUMERIC}
+	</select>
 	
 	<sql id="page_st">
 		SELECT * FROM (
@@ -16,23 +20,23 @@
 	
 	<sql id="select_base">
 		SELECT
-			 resource_role_id id,
-             role_id roleId,
-             resource_id resourceId,
-             update_time updateTime
-			FROM sys_resource_role_t srrt 
-			WHERE srrt.valid_flag = 1 
+			id id,
+			role_id roleId,
+			resource_id resourceId,
+			update_time updateTime
+		FROM SYS_ROLE_RESOURCE_T srrt 
+		WHERE srrt.valid_flag = 1 
 	</sql>
 	
 	<select id="findResourcePageCount" resultType="int">
 		SELECT
 			  COUNT(1) 
-			FROM sys_resource_role_t  
+			FROM SYS_ROLE_RESOURCE_T srrt 
 			WHERE srrt.valid_flag = 1 
 			<include refid="select_cond" />
 	</select>
 	
-	<select id="findResourcePage" resultType="com.gwtjs.icustom.springsecurity.entity.SysResource">
+	<select id="findResourcePage" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO">
 		<include refid="page_st" />
 		<include refid="select_base" />
 		<include refid="select_cond" />

@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.icustom.springsecurity.MainApplicationTest;
-import com.gwtjs.icustom.springsecurity.entity.SysUser;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao;
 
 public class ISysUserDaoTest extends MainApplicationTest {
@@ -38,7 +38,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	public void findUserBynameTest()
 	{
 		String name = "admin";
-		SysUser user = sysUserDao.findUserByname(name);
+		SysUserVO user = sysUserDao.findByUsername(name);
 		System.out.println(user);
 		assertTrue(user!=null);
 	}
@@ -46,7 +46,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	@Test
 	public void findUserPageTest()
 	{
-		SysUser user = new SysUser();
+		SysUserVO user = new SysUserVO();
 		//user.setName("d3g");
 		//user.setEmail("flash8627@hotmail.com");
 		PageVO page = new PageVO();
@@ -54,7 +54,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 		page.setPageSize(12);
 		page.setMysqlStartIndex(0);
 		page.setMysqlEndIndex(8);
-		PagedResult<SysUser> result = sysUserDao.findUserPage(user, page);
+		PagedResult<SysUserVO> result = sysUserDao.findUserPage(user, page);
 		System.out.println("PagedResult:"+result);
 		System.out.println("PagedResult page:"+result.getPageVO());
 		System.out.println("PagedResult vo:"+result.getResult());
@@ -64,7 +64,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	@Test
 	public void findUserTest()
 	{
-		SysUser user = sysUserDao.findUser(1);
+		SysUserVO user = sysUserDao.findUser(1);
 		System.out.println(user);
 		assertTrue(user!=null);
 	}
@@ -74,8 +74,8 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
 		int idCount = sysUserDao.findUserIdCount();
-		List<SysUser> list = new ArrayList<>();
-		SysUser user = new SysUser();
+		List<SysUserVO> list = new ArrayList<>();
+		SysUserVO user = new SysUserVO();
 		user.setId(idCount);
 		user.setUsername("dzg");
 		user.setEmail("8538191@qq.com");
@@ -90,7 +90,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
 		int idCount = sysUserDao.findUserIdCount();
-		SysUser user = new SysUser();
+		SysUserVO user = new SysUserVO();
 		user.setId(idCount);
 		user.setAccount("dzg");
 		user.setUsername("dzg");
@@ -104,7 +104,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	public void updatePwdTest()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
-		SysUser user = new SysUser();
+		SysUserVO user = new SysUserVO();
 		user.setId(1);
 		String password = bc.encode("dddddd");
 		user.setPassword(password);
@@ -115,7 +115,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	@Test @Ignore
 	public void updateTest()
 	{
-		SysUser user = new SysUser();
+		SysUserVO user = new SysUserVO();
 		user.setId(2);
 		user.setAccount("dzg");
 		user.setUsername("dzg");
@@ -127,7 +127,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	@Test
 	public void findAllUserListTest()
 	{
-		List<SysUser> list = sysUserDao.findAllUserList();
+		List<SysUserVO> list = sysUserDao.findAllUserList();
 		System.out.println(list);
 	}
 	

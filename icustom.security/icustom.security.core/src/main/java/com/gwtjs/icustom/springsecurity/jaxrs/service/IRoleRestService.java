@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.springsecurity.entity.SysRole;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
 @Path("/role")
 @Component @Service  
@@ -25,13 +25,13 @@ import com.gwtjs.icustom.springsecurity.entity.SysRole;
 public interface IRoleRestService {
 
 	@POST @Path("/insert")
-	public int insert(SysRole role);
+	public int insert(SysRoleVO role);
 	
 	@DELETE @Path("/delete")
-	public int delete(SysRole role);
+	public int delete(SysRoleVO role);
 	
 	@PUT @Path("/update")
-	public int update(SysRole role);
+	public int update(SysRoleVO role);
 	
 	/**
 	 * 查询所有用户-第一个-测试型
@@ -39,6 +39,6 @@ public interface IRoleRestService {
 	 * @return
 	 */
 	@GET @Path("/findRolePage/{curPage}/{pageSize}") 
-	public PagedResult<SysRole> findRolePage(@QueryParam("")SysRole role,@PathParam("") PageVO page);
+	public PagedResult<SysRoleVO> findRolePage(@QueryParam("")SysRoleVO role,@PathParam("") PageVO page);
 
 }

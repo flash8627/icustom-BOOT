@@ -6,27 +6,38 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gwtjs.icustom.springsecurity.entity.SysUser;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao;
 import com.gwtjs.icustom.springsecurity.jaxrs.service.IUserRestService;
 
 @Api("/user")
 public class UserRestService implements IUserRestService {
 	
-	public SysUser findByName(String account) {
-		return null;
-	}
-	
+
 	@Autowired
 	private ISysUserDao userDao;
-
+	
+	/**
+	 * 用户登陆会用到
+	 */
+	public SysUserVO findByUsername(String username) {
+		return userDao.findByUsername(username);
+	}
+	
+	/**
+	 * 用户登陆会用到
+	 */
+	public SysUserVO findByAccount(String account) {
+		return userDao.findByAccount(account);
+	}
+	
 	@Override
-	public List<SysUser> findAllUserList() {
+	public List<SysUserVO> findAllUserList() {
 		return userDao.findAllUserList();
 	}
 
 	@Override
-	public int insert(List<SysUser> userList) {
+	public int insert(List<SysUserVO> userList) {
 		return userDao.batchInsert(userList);
 	}
 

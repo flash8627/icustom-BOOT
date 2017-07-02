@@ -1,0 +1,1699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.gwtjs.icustom.springsecurity.region.dao.IRegionForecastLineDao">
+
+	<select id="queryLine"
+		resultType="com.gwtjs.icustom.springsecurity.entity.ForecastVO">
+		SELECT bucket1,
+		bucket2, bucket3, bucket4, bucket5, bucket6,
+		bucket7,
+		bucket8, bucket9, bucket10, bucket11,
+		bucket12, bucket13, bucket14,
+		bucket15, bucket16,
+		bucket17, bucket18, bucket19, bucket20, bucket21,
+		bucket22, bucket23, bucket24, bucket25, bucket26,
+		bucket27, bucket28,
+		bucket29, bucket30, bucket31,
+		bucket32, bucket33, bucket34, bucket35,
+		bucket36,
+		bucket37, bucket38, bucket39, bucket40,
+		forecast_header_id
+		forecastheaderid
+		FROM (SELECT gl.forecast_header_id,
+		fc.bucket_name
+		bucket,
+		gl.quantity qty
+		FROM DSF_FORECAST_REGION_LINE_T gl
+		LEFT JOIN
+		dsf_forecast_bucket_t fc
+		ON (fc.period = #{vo.period, jdbcType=VARCHAR}
+		AND fc.bg_code = #{vo.bgCode, jdbcType=VARCHAR}
+		AND
+		fc.demand_entity_type = #{vo.demandEntityType, jdbcType=VARCHAR}
+		AND
+		fc.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+		AND
+		fc.bucket_id = gl.bucket_id
+		)
+		Where ( 1 = 2
+		<foreach collection="list" item="item">
+			or (
+			gl.forecast_header_id =
+			#{item.forecastHeaderId,jdbcType=NUMERIC}
+			)
+		</foreach>
+		)
+		) pivot(SUM(qty) FOR(bucket) IN(
+		'bucket1' bucket1, 'bucket2' bucket2,
+		'bucket3' bucket3,
+		'bucket4' bucket4, 'bucket5' bucket5, 'bucket6'
+		bucket6,
+		'bucket7' bucket7, 'bucket8' bucket8, 'bucket9' bucket9,
+		'bucket10' bucket10, 'bucket11' bucket11, 'bucket12' bucket12,
+		'bucket13' bucket13, 'bucket14' bucket14, 'bucket15' bucket15,
+		'bucket16' bucket16, 'bucket17' bucket17, 'bucket18' bucket18,
+		'bucket19' bucket19, 'bucket20' bucket20, 'bucket21' bucket21,
+		'bucket22' bucket22, 'bucket23' bucket23, 'bucket24' bucket24,
+		'bucket25' bucket25, 'bucket26' bucket26, 'bucket27' bucket27,
+		'bucket28' bucket28, 'bucket29' bucket29, 'bucket30' bucket30,
+		'bucket31' bucket31,
+		'bucket32' bucket32, 'bucket33' bucket33,
+		'bucket34' bucket34,
+		'bucket35' bucket35, 'bucket36' bucket36,
+		'bucket37' bucket37,
+		'bucket38' bucket38, 'bucket39' bucket39,
+		'bucket40' bucket40
+		))
+	</select>
+
+	<update id="saveRegionForecastLine">
+		DECLARE
+		<if test="list != null and !list.isEmpty()">
+			begin
+			
+			<foreach collection='list' item="record" index="index">
+				MERGE INTO
+				DSF_FORECAST_REGION_LINE_T tar
+				USING (SELECT b.forecast_header_id,
+				b.bucket,
+				b.qty,
+				fc.bucket_id
+				FROM (SELECT #{record.forecastHeaderId,
+				jdbcType=NUMERIC}
+				forecast_header_id,
+				#{record.bucket1,
+				jdbcType=DOUBLE} bucket1,
+				#{record.bucket2, jdbcType=DOUBLE} bucket2,
+				#{record.bucket3, jdbcType=DOUBLE} bucket3,
+				#{record.bucket4,
+				jdbcType=DOUBLE} bucket4,
+				#{record.bucket5, jdbcType=DOUBLE} bucket5,
+				#{record.bucket6, jdbcType=DOUBLE} bucket6,
+				#{record.bucket7,
+				jdbcType=DOUBLE} bucket7,
+				#{record.bucket8, jdbcType=DOUBLE} bucket8,
+				#{record.bucket9, jdbcType=DOUBLE} bucket9,
+				#{record.bucket10,
+				jdbcType=DOUBLE} bucket10,
+				#{record.bucket11, jdbcType=DOUBLE}
+				bucket11,
+				#{record.bucket12, jdbcType=DOUBLE} bucket12,
+				#{record.bucket13, jdbcType=DOUBLE} bucket13,
+				#{record.bucket14,
+				jdbcType=DOUBLE} bucket14,
+				#{record.bucket15, jdbcType=DOUBLE}
+				bucket15,
+				#{record.bucket16, jdbcType=DOUBLE} bucket16,
+				#{record.bucket17, jdbcType=DOUBLE} bucket17,
+				#{record.bucket18,
+				jdbcType=DOUBLE} bucket18,
+				#{record.bucket19, jdbcType=DOUBLE}
+				bucket19,
+				#{record.bucket20, jdbcType=DOUBLE} bucket20,
+				#{record.bucket21, jdbcType=DOUBLE} bucket21,
+				#{record.bucket22,
+				jdbcType=DOUBLE} bucket22,
+				#{record.bucket23, jdbcType=DOUBLE}
+				bucket23,
+				#{record.bucket24, jdbcType=DOUBLE} bucket24,
+				#{record.bucket25, jdbcType=DOUBLE} bucket25,
+				#{record.bucket26,
+				jdbcType=DOUBLE} bucket26,
+				#{record.bucket27, jdbcType=DOUBLE}
+				bucket27,
+				#{record.bucket28, jdbcType=DOUBLE} bucket28,
+				#{record.bucket29, jdbcType=DOUBLE} bucket29,
+				#{record.bucket30,
+				jdbcType=DOUBLE} bucket30,
+				#{record.bucket31, jdbcType=DOUBLE}
+				bucket31,
+				#{record.bucket32, jdbcType=DOUBLE} bucket32,
+				#{record.bucket33, jdbcType=DOUBLE} bucket33,
+				#{record.bucket34,
+				jdbcType=DOUBLE} bucket34,
+				#{record.bucket35, jdbcType=DOUBLE}
+				bucket35,
+				#{record.bucket36, jdbcType=DOUBLE} bucket36,
+				#{record.bucket37, jdbcType=DOUBLE} bucket37,
+				#{record.bucket38,
+				jdbcType=DOUBLE} bucket38,
+				#{record.bucket39, jdbcType=DOUBLE}
+				bucket39,
+				#{record.bucket40, jdbcType=DOUBLE} bucket40
+				FROM dual t)
+				unpivot include nulls (qty FOR(bucket) IN(
+				bucket1,bucket2,bucket3,bucket4,bucket5,bucket6,bucket7,bucket8,bucket9,bucket10,
+				bucket11,bucket12,bucket13,bucket14,bucket15,bucket16,bucket17,bucket18,bucket19,
+				bucket20,bucket21,bucket22,bucket23,bucket24,bucket25,bucket26,bucket27,bucket28,bucket29,
+				bucket30,bucket31,bucket32,bucket33,bucket34,bucket35,bucket36,bucket37,bucket38,bucket39,bucket40
+				)) b
+				LEFT JOIN dsf_forecast_bucket_t fc
+				ON (fc.period = #{vo.period,
+				jdbcType=VARCHAR}
+				AND fc.bg_code = #{vo.bgCode, jdbcType=VARCHAR}
+				AND
+				fc.demand_entity_type = #{vo.demandEntityType, jdbcType=VARCHAR}
+				AND
+				fc.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+				AND
+				upper(fc.bucket_name) = b.bucket)
+				where fc.bucket_id is not null
+				and
+				fc.edit_flag = 'Y'
+				) src
+				ON (tar.forecast_header_id =
+				src.forecast_header_id AND tar.bucket_id
+				= src.bucket_id)
+				WHEN MATCHED
+				THEN
+				UPDATE
+				SET tar.quantity = src.qty,
+				tar.last_updated_by =
+				#{record.currentUserId, jdbcType=DOUBLE},
+				tar.last_updated_name =
+				#{record.currentUserCN, jdbcType=VARCHAR},
+				tar.last_update_date =
+				SYSDATE
+				WHEN NOT MATCHED THEN
+				INSERT
+				(forecast_header_id,
+				bucket_id,
+				quantity,
+				delete_flag,
+				created_by,
+				created_name,
+				creation_date,
+				last_updated_by,
+				last_updated_name,
+				last_update_date)
+				VALUES
+				(src.forecast_header_id,
+				src.bucket_id,
+				src.qty,
+				'N',
+				#{record.currentUserId, jdbcType=DOUBLE},
+				#{record.currentUserCN,
+				jdbcType=VARCHAR},
+				SYSDATE,
+				#{record.currentUserId, jdbcType=DOUBLE},
+				#{record.currentUserCN, jdbcType=VARCHAR},
+				SYSDATE);
+			</foreach>
+			End;
+		</if>
+	</update>
+
+	<!--line 2 -->
+	<update id="saveRegionForecastLineByUK">
+		DECLARE
+		<if test="list != null and !list.isEmpty()">
+			begin
+			
+			<foreach collection='list' item="record" index="index">
+				MERGE INTO
+				DSF_FORECAST_REGION_LINE_T tar
+				USING (SELECT forecast_header_id,
+				bucket,
+				qty,
+				bucket_id
+				FROM (SELECT gh.forecast_header_id,
+				#{record.demandEntityId, jdbcType=INTEGER} DEMAND_ENTITY_ID,
+				#{record.pdtType, jdbcType=VARCHAR} PDT_TYPE,
+				#{record.pdtId,
+				jdbcType=VARCHAR} PDT_ID,
+				#{record.supplyEntityId, jdbcType=INTEGER}
+				SUPPLY_ENTITY_ID,
+				#{record.bucketDimension, jdbcType=VARCHAR}
+				BUCKET_DIMENSION,
+				#{record.forecastDimensionCode, jdbcType=VARCHAR}
+				FORECAST_DIMENSION_CODE,
+				#{record.bucket1, jdbcType=DOUBLE} bucket1,
+				#{record.bucket2, jdbcType=DOUBLE} bucket2,
+				#{record.bucket3,
+				jdbcType=DOUBLE} bucket3,
+				#{record.bucket4, jdbcType=DOUBLE} bucket4,
+				#{record.bucket5, jdbcType=DOUBLE} bucket5,
+				#{record.bucket6,
+				jdbcType=DOUBLE} bucket6,
+				#{record.bucket7, jdbcType=DOUBLE} bucket7,
+				#{record.bucket8, jdbcType=DOUBLE} bucket8,
+				#{record.bucket9,
+				jdbcType=DOUBLE} bucket9,
+				#{record.bucket10, jdbcType=DOUBLE}
+				bucket10,
+				#{record.bucket11, jdbcType=DOUBLE} bucket11,
+				#{record.bucket12, jdbcType=DOUBLE} bucket12,
+				#{record.bucket13,
+				jdbcType=DOUBLE} bucket13,
+				#{record.bucket14, jdbcType=DOUBLE}
+				bucket14,
+				#{record.bucket15, jdbcType=DOUBLE} bucket15,
+				#{record.bucket16, jdbcType=DOUBLE} bucket16,
+				#{record.bucket17,
+				jdbcType=DOUBLE} bucket17,
+				#{record.bucket18, jdbcType=DOUBLE}
+				bucket18,
+				#{record.bucket19, jdbcType=DOUBLE} bucket19,
+				#{record.bucket20, jdbcType=DOUBLE} bucket20,
+				#{record.bucket21,
+				jdbcType=DOUBLE} bucket21,
+				#{record.bucket22, jdbcType=DOUBLE}
+				bucket22,
+				#{record.bucket23, jdbcType=DOUBLE} bucket23,
+				#{record.bucket24, jdbcType=DOUBLE} bucket24,
+				#{record.bucket25,
+				jdbcType=DOUBLE} bucket25,
+				#{record.bucket26, jdbcType=DOUBLE}
+				bucket26,
+				#{record.bucket27, jdbcType=DOUBLE} bucket27,
+				#{record.bucket28, jdbcType=DOUBLE} bucket28,
+				#{record.bucket29,
+				jdbcType=DOUBLE} bucket29,
+				#{record.bucket30, jdbcType=DOUBLE}
+				bucket30,
+				#{record.bucket31, jdbcType=DOUBLE} bucket31,
+				#{record.bucket32, jdbcType=DOUBLE} bucket32,
+				#{record.bucket33,
+				jdbcType=DOUBLE} bucket33,
+				#{record.bucket34, jdbcType=DOUBLE}
+				bucket34,
+				#{record.bucket35, jdbcType=DOUBLE} bucket35,
+				#{record.bucket36, jdbcType=DOUBLE} bucket36,
+				#{record.bucket37,
+				jdbcType=DOUBLE} bucket37,
+				#{record.bucket38, jdbcType=DOUBLE}
+				bucket38,
+				#{record.bucket39, jdbcType=DOUBLE} bucket39,
+				#{record.bucket40, jdbcType=DOUBLE} bucket40
+				FROM dual t join
+				dsf_forecast_region_header_t gh
+				on( gh.DEMAND_ENTITY_ID =
+				#{record.demandEntityId, jdbcType=INTEGER}
+				And gh.PDT_TYPE =
+				#{record.pdtType, jdbcType=VARCHAR}
+				And gh.PDT_ID = #{record.pdtId,
+				jdbcType=VARCHAR}
+				And gh.SUPPLY_ENTITY_ID = #{record.supplyEntityId,
+				jdbcType=INTEGER}
+				And gh.BUCKET_DIMENSION = #{record.bucketDimension,
+				jdbcType=VARCHAR}
+				And gh.FORECAST_DIMENSION_CODE =
+				#{record.forecastDimensionCode,
+				jdbcType=VARCHAR}
+				)
+				) unpivot include
+				nulls (qty FOR(bucket)
+				IN(bucket1,bucket2,bucket3,bucket4,bucket5,
+				bucket6,bucket7,bucket8,bucket9,bucket10,
+				bucket11,bucket12,bucket13,bucket14,bucket15,
+				bucket16,bucket17,bucket18,bucket19,bucket20,
+				bucket21,bucket22,bucket23,bucket24,bucket25,
+				bucket26,bucket27,bucket28,bucket29,bucket30,
+				bucket31,bucket32,bucket33,bucket34,bucket35,
+				bucket36,bucket37,bucket38,bucket39,bucket40)) b
+				LEFT JOIN
+				dsf_forecast_bucket_t fc
+				ON (fc.period = #{vo.period,
+				jdbcType=VARCHAR}
+				AND fc.bg_code = #{vo.bgCode, jdbcType=VARCHAR}
+				AND
+				fc.demand_entity_type = #{vo.demandEntityType, jdbcType=VARCHAR}
+				AND
+				fc.bucket_dimension = #{vo.bucketDimension, jdbcType=VARCHAR}
+				AND
+				upper(fc.bucket_name) = b.bucket)
+				where fc.bucket_id is not null
+				) src
+				ON (tar.forecast_header_id = src.forecast_header_id AND
+				tar.bucket_id
+				= src.bucket_id)
+				WHEN MATCHED THEN
+				UPDATE
+				SET tar.quantity
+				= src.qty,
+				tar.last_updated_by = #{record.currentUserId,
+				jdbcType=DOUBLE},
+				tar.last_updated_name = #{record.currentUserCN,
+				jdbcType=VARCHAR},
+				tar.last_update_date = SYSDATE
+				WHEN NOT MATCHED
+				THEN
+				INSERT
+				(forecast_header_id,
+				bucket_id,
+				quantity,
+				delete_flag,
+				created_by,
+				created_name,
+				creation_date,
+				last_updated_by,
+				last_updated_name,
+				last_update_date)
+				VALUES
+				(src.forecast_header_id,
+				src.bucket_id,
+				src.qty,
+				'N',
+				#{record.currentUserId, jdbcType=DOUBLE},
+				#{record.currentUserCN, jdbcType=VARCHAR},
+				SYSDATE,
+				#{record.currentUserId, jdbcType=DOUBLE},
+				#{record.currentUserCN,
+				jdbcType=VARCHAR},
+				SYSDATE);
+			</foreach>
+			
+			End;
+		</if>
+	</update>
+
+	<update id="rollupLastFcst">
+		DECLARE
+		begin
+		
+		DELETE DSF_FORECAST_REGION_LINE_T t
+		WHERE EXISTS (SELECT 1
+		FROM dsf_forecast_region_header_t h
+		WHERE
+		h.forecast_header_id = t.forecast_header_id
+		AND
+		h.forecast_dimension_code = #{lastFcst});
+
+		INSERT INTO
+		DSF_FORECAST_REGION_LINE_T
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		Select hq.forecast_header_id,
+		l.bucket_id,
+		l.quantity,
+		l.delete_flag,
+		l.created_by,
+		l.created_name,
+		l.creation_date,
+		l.last_updated_by,
+		l.last_updated_name,
+		l.last_update_date
+		from dsf_forecast_region_header_t h
+		Join
+		DSF_FORECAST_REGION_LINE_T l
+		On(h.forecast_header_id =
+		l.forecast_header_id)
+		Join dsf_forecast_region_header_t hq
+		On(h.DEMAND_ENTITY_ID = hq.DEMAND_ENTITY_ID
+		And h.PDT_TYPE =
+		hq.PDT_TYPE
+		And h.PDT_ID = hq.PDT_ID
+		And h.SUPPLY_ENTITY_ID =
+		hq.SUPPLY_ENTITY_ID
+		And h.BUCKET_DIMENSION = hq.BUCKET_DIMENSION)
+		Where
+		hq.forecast_dimension_code=#{lastFcst}
+		and
+		h.forecast_dimension_code=#{currentFcst};
+		
+		End;
+	</update>
+
+	<delete id="deleteForecastDimensionCode">
+		DELETE DSF_FORECAST_REGION_LINE_T t
+		WHERE EXISTS (SELECT 1
+		FROM
+		DSF_FORECAST_REGION_HEADER_T h
+		WHERE h.forecast_header_id =
+		t.forecast_header_id
+		AND h.bucket_dimension = #{vo.bucketDimension}
+		AND
+		h.forecast_dimension_code = #{vo.forecastDimensionCode}
+		<if test='vo.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="vo.forecastHeaderIds" item="item">
+				or h.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+			</foreach>
+			)
+		</if>
+		)
+	</delete>
+
+	<delete id="deleteForecastDimensionByCode">
+		DELETE DSF_FORECAST_REGION_LINE_T t
+		WHERE EXISTS
+		(SELECT 1
+		FROM DSF_FORECAST_REGION_HEADER_T h
+		WHERE h.forecast_header_id
+		= t.forecast_header_id
+		AND h.bucket_dimension = #{bucketDimension}
+		AND
+		h.forecast_dimension_code = #{forecastDimensionCode}
+		)
+	</delete>
+
+	<!--line 3 -->
+	<!-- 代表处汇总 -->
+	<update id="rollupRegion">
+		INSERT INTO DSF_FORECAST_REGION_LINE_T
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		SELECT
+		gh.forecast_header_id,
+		bucket_id,
+		SUM(quantity) qty,
+		'N',
+		0,
+		'0',
+		SYSDATE,
+		0,
+		'0',
+		SYSDATE
+		<if test='srcVO.demandEntityType =="REPOFC" '>
+			FROM DSF_FORECAST_REPOFC_HEADER_T rh
+			JOIN
+			DSF_FORECAST_REPOFC_LINE_T rl
+		</if>
+		<if test='srcVO.demandEntityType =="REGACC" '>
+			FROM DSF_FORECAST_REGACC_HEADER_T rh
+			JOIN
+			DSF_FORECAST_REGACC_LINE_T rl
+		</if>
+		<if test='srcVO.demandEntityType =="REGION" '>
+			FROM DSF_FORECAST_REGION_HEADER_T rh
+			JOIN
+			DSF_FORECAST_REGION_LINE_T rl
+		</if>
+		<!-- FROM DSF_FORECAST_REPOFC_HEADER_T rh JOIN DSF_FORECAST_REPOFC_LINE_T 
+			rl -->
+		ON (rh.forecast_header_id = rl.forecast_header_id)
+		JOIN
+		dsf_demand_entity_t de
+		ON (rh.demand_entity_id = de.demand_entity_id
+		AND de.bg_code = #{srcVO.bgCode, jdbcType=VARCHAR}
+		AND
+		de.demand_entity_type = #{srcVO.demandEntityType, jdbcType=VARCHAR}
+		)
+		JOIN DSF_FORECAST_REGION_HEADER_T gh
+		ON (gh.pdt_type = rh.pdt_type AND
+		gh.pdt_id = rh.pdt_id AND
+		gh.supply_entity_id = rh.supply_entity_id AND
+		gh.forecast_dimension_code = #{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR} AND
+		gh.bucket_dimension = rh.bucket_dimension and
+		rh.bucket_dimension =
+		#{srcVO.bucketDimension, jdbcType=VARCHAR})
+		WHERE
+		rh.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and rh.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		GROUP BY gh.forecast_header_id,
+		rh.pdt_type,
+		rh.pdt_id,
+		rh.supply_entity_id,
+		rh.bucket_dimension,
+		rh.forecast_dimension_code,
+		rl.bucket_id
+	</update>
+
+	<!-- 占比 -->
+	<update id="computingQuarterlyRate">
+		INSERT INTO DSF_FORECAST_REGION_LINE_T
+		SELECT
+		htar.forecast_header_id,
+		fgl.bucket_id,
+		CASE
+		WHEN yr.year_qty != 0 THEN
+		fgl.quantity / yr.year_qty
+		ELSE
+		NULL
+		END,
+		'N',
+		'0',
+		'0',
+		SYSDATE,
+		'0',
+		'0',
+		SYSDATE
+		FROM DSF_FORECAST_REGION_LINE_T fgl
+		JOIN dsf_forecast_bucket_t
+		fc
+		ON (fc.period = #{srcVO.period} AND fc.bg_code = #{srcVO.bgCode} AND
+		fc.demand_entity_type = #{srcVO.demandEntityType} AND
+		fc.bucket_dimension = #{srcVO.bucketDimension} AND
+		fc.bucket_id =
+		fgl.bucket_id)
+		JOIN (SELECT gl.forecast_header_id,
+		gh.demand_entity_id,
+		gh.pdt_type,
+		gh.pdt_id,
+		gh.supply_entity_id,
+		gh.bucket_dimension,
+		gh.forecast_dimension_code,
+		fc.bucket_year YEAR,
+		SUM(gl.quantity)
+		year_qty
+		FROM DSF_FORECAST_REGION_LINE_T gl
+		JOIN
+		DSF_FORECAST_REGION_HEADER_T gh
+		ON (gl.forecast_header_id =
+		gh.forecast_header_id)
+		JOIN dsf_forecast_bucket_t fc
+		ON (fc.period =
+		#{srcVO.period} AND fc.bg_code = #{srcVO.bgCode} AND
+		fc.demand_entity_type = #{srcVO.demandEntityType} AND
+		fc.bucket_dimension = #{srcVO.bucketDimension} AND fc.bucket_id =
+		gl.bucket_id)
+		WHERE gh.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode}
+		AND gh.bucket_dimension =
+		#{srcVO.bucketDimension}
+		GROUP BY gl.forecast_header_id,
+		gh.demand_entity_id,
+		gh.pdt_type,
+		gh.pdt_id,
+		gh.supply_entity_id,
+		gh.bucket_dimension,
+		gh.forecast_dimension_code,
+		fc.bucket_year) yr
+		ON
+		(fgl.forecast_header_id = yr.forecast_header_id AND
+		fc.bucket_year =
+		yr.year)
+		JOIN DSF_FORECAST_REGION_HEADER_T htar
+		ON (yr.demand_entity_id
+		= htar.demand_entity_id AND
+		yr.pdt_type = htar.pdt_type AND yr.pdt_id =
+		htar.pdt_id AND
+		yr.supply_entity_id = htar.supply_entity_id AND
+		yr.bucket_dimension = htar.bucket_dimension AND
+		yr.forecast_dimension_code = #{srcVO.forecastDimensionCode} AND
+		htar.forecast_dimension_code = #{tarVO.forecastDimensionCode})
+
+	</update>
+
+	<!-- 增长率 -->
+	<update id="computingRate">
+		INSERT INTO DSF_FORECAST_REGION_LINE_T
+		SELECT
+		b.forecast_header_id,
+		fc1.bucket_id,
+		b.qty,
+		'N',
+		'0',
+		'0',
+		SYSDATE,
+		'0',
+		'0',
+		SYSDATE
+		FROM (SELECT forecast_header_id,
+		(bucket2 - bucket1) / bucket1
+		bucket2,
+		(bucket3 - bucket2) / bucket2 bucket3,
+		(bucket4 - bucket3) /
+		bucket3 bucket4,
+		(bucket5 - bucket4) / bucket4 bucket5,
+		(bucket6 -
+		bucket5) / bucket5 bucket6,
+		(bucket7 - bucket6) / bucket6 bucket7,
+		(bucket8 - bucket7) / bucket7 bucket8,
+		(bucket9 - bucket8) / bucket8
+		bucket9,
+		(bucket10 - bucket9) / bucket9 bucket10
+		FROM (SELECT
+		htar.forecast_header_id,
+		fc.bucket_name bucket,
+		gl.quantity qty
+		FROM
+		DSF_FORECAST_REGION_LINE_T gl
+		JOIN DSF_FORECAST_REGION_HEADER_T gh
+		ON
+		(gl.forecast_header_id = gh.forecast_header_id)
+		JOIN
+		DSF_FORECAST_REGION_HEADER_T htar
+		ON (gh.demand_entity_id =
+		htar.demand_entity_id AND
+		gh.pdt_type = htar.pdt_type AND
+		gh.pdt_id =
+		htar.pdt_id AND
+		gh.supply_entity_id = htar.supply_entity_id AND
+		gh.bucket_dimension = htar.bucket_dimension AND
+		gh.forecast_dimension_code = #{srcVO.forecastDimensionCode} AND
+		htar.forecast_dimension_code =
+		#{tarVO.forecastDimensionCode})
+		JOIN
+		dsf_forecast_bucket_t fc
+		ON (fc.period = #{srcVO.period} AND fc.bg_code
+		= #{srcVO.bgCode} AND
+		fc.demand_entity_type = #{srcVO.demandEntityType}
+		AND
+		fc.bucket_dimension = #{srcVO.bucketDimension} AND
+		fc.bucket_id =
+		gl.bucket_id)
+		WHERE gh.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode}
+		and gh.bucket_dimension =
+		#{srcVO.bucketDimension}) pivot(SUM(qty)
+		FOR(bucket) IN(
+		'bucket1'
+		bucket1, 'bucket2' bucket2,'bucket3' bucket3,'bucket4' bucket4,
+		'bucket5' bucket5,'bucket6' bucket6,'bucket7' bucket7,'bucket8'
+		bucket8,'bucket9' bucket9,
+		'bucket10' bucket10))) unpivot include
+		NULLS(qty FOR(bucket) IN(bucket2,
+		bucket3,bucket4,bucket5,bucket6,bucket7,bucket8,bucket9,bucket10)) b
+		LEFT JOIN dsf_forecast_bucket_t fc1
+		ON (fc1.period = #{srcVO.period}
+		AND fc1.bg_code = #{srcVO.bgCode} AND
+		fc1.demand_entity_type =
+		#{srcVO.demandEntityType} AND
+		fc1.bucket_dimension =
+		#{srcVO.bucketDimension} AND
+		upper(fc1.bucket_name) = b.bucket)
+		WHERE
+		fc1.bucket_id IS NOT NULL
+	</update>
+
+
+	<!--44444444 -->
+	<!-- 写入智能预测值 -->
+	<update id="aiForecastTODsfForecast">
+		begin
+		
+		<foreach collection='list' item="record" index="index">
+			delete
+			dsf_forecast_region_line_t t
+			where t.forecast_header_id =
+			#{record.forecastHeaderId,jdbcType=VARCHAR}
+			and t.bucket_id =
+			#{record.bucketID, jdbcType=VARCHAR};
+			INSERT INTO
+			dsf_forecast_region_line_t
+			(forecast_header_id,
+			bucket_id,
+			quantity,
+			delete_flag,
+			created_by,
+			created_name,
+			creation_date,
+			last_updated_by,
+			last_updated_name,
+			last_update_date)
+			Values
+			(
+			#{record.forecastHeaderId,jdbcType=VARCHAR},
+			#{record.bucketID,jdbcType=VARCHAR},
+			#{record.bucket1,jdbcType=DOUBLE},
+			'N',
+			0,
+			0,
+			sysdate,
+			0,
+			0,
+			sysdate);
+		</foreach>
+		null;
+		
+		end;
+	</update>
+
+	<update id="projectRollupRegion">
+		INSERT INTO dsf_forecast_region_line_t
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		SELECT frh.forecast_header_id,
+		src.bucket_id,
+		src.qty,
+		'N',
+		0,
+		0,
+		SYSDATE,
+		0,
+		0,
+		SYSDATE
+		FROM (SELECT adt.demand_entity_id,
+		ph.pdt_id,
+		ph.supply_entity_id,
+		ph.bucket_dimension,
+		#{vo.forecastDimensionCode} forecast_dimension_code,
+		pl.bucket_id,
+		SUM(pl.quantity) qty
+		FROM dsf_forecast_pjt_header_t ph
+		JOIN
+		dsf_forecast_pjt_line_t pl
+		ON (ph.forecast_header_id =
+		pl.forecast_header_id)
+		JOIN dsf_demand_entity_t dt
+		ON
+		(dt.demand_entity_id = ph.demand_entity_id)
+		JOIN dsf_project_t pt
+		ON
+		(dt.demand_entity_type = 'PROJECT' AND
+		dt.demand_entity_code =
+		pt.project_id AND
+		pt.bg_code = dt.bg_code)
+
+		JOIN dsf_demand_entity_t adt
+		ON (adt.bg_code = dt.bg_code AND
+		adt.demand_entity_type =
+		#{vo.demandEntityType}
+		AND dt.demand_entity_type = 'PROJECT'
+		AND
+		adt.demand_entity_code = pt.rep_office_code
+		)
+		WHERE
+		ph.forecast_dimension_code = 'CI_PROJECT_CURRENT_FCST'
+		AND ph.pdt_type
+		= 'CLOSE-IN'
+		AND ph.bucket_dimension = 'M'
+		and ph.delete_flag = 'N'
+		GROUP BY adt.demand_entity_id,
+		ph.pdt_id,
+		ph.supply_entity_id,
+		ph.bucket_dimension,
+		pl.bucket_id) src
+		JOIN dsf_forecast_region_header_t
+		frh
+		ON (
+		frh.demand_entity_id = src.demand_entity_id AND
+		frh.pdt_type =
+		'CLOSE-IN' AND frh.pdt_id = src.pdt_id AND
+		frh.supply_entity_id =
+		src.supply_entity_id AND
+		frh.bucket_dimension = src.bucket_dimension
+		AND
+		frh.forecast_dimension_code = #{vo.forecastDimensionCode}
+		)
+	</update>
+
+	<!-- 按细对象编码删除粗对象 -->
+	<delete id="deleteDataBySmall">
+		Delete DSF_FORECAST_REGION_LINE_T t
+		Where exists (Select 1
+		from
+		DSF_FORECAST_REGION_HEADER_T h
+		Join dsf_pdt_small_t s
+		On (h.pdt_id =
+		s.pdt_large_id)
+		Where s.pdt_large_id IN
+		<foreach collection='vo.pdtSmallCodes' item="item" open="("
+			separator="," close=")" index="index">
+			#{item}
+		</foreach>
+		And h.pdt_type = 'FAR-OUT'
+		And h.bucket_dimension = 'M'
+		and
+		h.forecast_dimension_code = 'FO_REGION_CURRENT_FCST'
+		And
+		h.forecast_header_id = t.forecast_header_id
+		and h.delete_flag = 'N'
+		and
+		h.demand_entity_id = #{vo.demandEntityId})
+	</delete>
+
+	<!-- 细对象汇总到粗对象 -->
+	<update id="smallRollupToLarge">
+		begin
+		
+		INSERT INTO
+		DSF_FORECAST_REGION_LINE_T
+		SELECT fghp.forecast_header_id,
+		fgh.bucket_id,
+		round(Sum(nvl(fgh.quantity,0))),
+		'N',
+		0,
+		'0',
+		SYSDATE,
+		0,
+		'0',
+		SYSDATE
+		FROM (SELECT fgh.forecast_dimension_code,
+		fgh.demand_entity_id,
+		ps.pdt_large_id,
+		fgl.forecast_header_id,
+		fgl.bucket_id,
+		fgl.quantity*ps.small_to_large quantity
+		FROM
+		dsf_pdt_small_t ps
+		JOIN DSF_FORECAST_REGION_HEADER_T fgh
+		ON (fgh.pdt_id
+		= ps.pdt_small_id AND
+		fgh.pdt_type = 'CLOSE-IN' AND
+		fgh.supply_entity_id = '0' AND
+		fgh.bucket_dimension = 'M' AND
+		fgh.forecast_dimension_code = 'CI_REGION_CURRENT_FCST')
+		JOIN
+		DSF_FORECAST_REGION_LINE_T fgl
+		ON (fgh.forecast_header_id =
+		fgl.forecast_header_id)
+		WHERE 1 = 1
+		AND (1 = 2
+		<foreach collection='vo.pdtSmallCodes' item="item" index="index">
+			or
+			ps.pdt_large_id = #{item}
+		</foreach>
+		)
+		AND fgh.demand_entity_id = #{vo.demandEntityId}
+		AND fgh.delete_flag =
+		'N') fgh
+		JOIN DSF_FORECAST_REGION_HEADER_T fghp
+		ON
+		(fghp.demand_entity_id = fgh.demand_entity_id AND
+		fghp.supply_entity_id = '0' AND fghp.bucket_dimension = 'M' AND
+		fgh.forecast_dimension_code = 'CI_REGION_CURRENT_FCST' and
+		fghp.forecast_dimension_code = 'FO_REGION_CURRENT_FCST' AND
+		fghp.pdt_type = 'FAR-OUT' AND fghp.pdt_id = fgh.pdt_large_id)
+		GROUP BY
+		fghp.forecast_header_id, fgh.bucket_id;
+
+		null;
+		
+		end;
+	</update>
+
+	<update id="insertLastFcstByDimensionCode">
+		INSERT INTO dsf_forecast_regacc_line_t
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		Select hq.forecast_header_id,
+		l.bucket_id,
+		l.quantity,
+		l.delete_flag,
+		l.created_by,
+		l.created_name,
+		l.creation_date,
+		l.last_updated_by,
+		l.last_updated_name,
+		l.last_update_date from
+		dsf_forecast_regacc_header_t h
+		Join dsf_forecast_regacc_line_t l
+		On(h.forecast_header_id = l.forecast_header_id)
+		Join
+		dsf_forecast_regacc_header_t hq
+		On(h.DEMAND_ENTITY_ID =
+		hq.DEMAND_ENTITY_ID
+		And h.PDT_TYPE = hq.PDT_TYPE
+		And h.PDT_ID =
+		hq.PDT_ID
+		And h.SUPPLY_ENTITY_ID = hq.SUPPLY_ENTITY_ID
+		And
+		h.BUCKET_DIMENSION = hq.BUCKET_DIMENSION)
+		Where
+		hq.forecast_dimension_code =#{lastFcst}
+		and h.forecast_dimension_code =
+		#{currentFcst}
+	</update>
+
+
+	<!--55555 -->
+	<update id="largeToSmallRolldown">
+		begin
+		
+		INSERT INTO
+		dsf_forecast_region_line_t
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		SELECT
+		tgh.forecast_header_id,
+		l.bucket_id,
+		l.quantity*s.large_to_small,
+		'N',
+		0,
+		0,
+		sysdate,
+		0,
+		0,
+		sysdate
+		FROM dsf_forecast_region_header_t h
+		JOIN dsf_pdt_small_t s
+		ON (h.pdt_id
+		= s.pdt_large_id)
+		JOIN dsf_forecast_region_line_t l
+		ON
+		(h.forecast_header_id = l.forecast_header_id)
+		Join
+		dsf_forecast_region_header_t tgh
+		On(
+		h.demand_entity_id =
+		tgh.demand_entity_id
+		And tgh.pdt_type = 'CLOSE-IN'
+		And h.pdt_type =
+		'FAR-OUT'
+		And tgh.pdt_id = s.pdt_small_id
+		and tgh.supply_entity_id =
+		h.supply_entity_id
+		And tgh.bucket_dimension = h.bucket_dimension
+		And
+		tgh.forecast_dimension_code = #{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And h.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		)
+		WHERE
+		h.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And h.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				h.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+				and
+				h.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+				and h.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+				and h.supply_entity_id =
+				#{item.supplyEntityId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+		;
+		
+		end;
+	</update>
+
+	<update id="largeToSmallRolldownRate">
+		begin
+		
+		Delete
+		dsf_forecast_region_line_t l
+		Where exists(
+		Select 1 from
+		dsf_forecast_region_header_t h
+		JOIN dsf_pdt_small_t s
+		ON (h.pdt_id =
+		s.pdt_large_id)
+		Join dsf_forecast_region_header_t tgh
+		On(
+		h.demand_entity_id = tgh.demand_entity_id
+		And tgh.pdt_type = 'CLOSE-IN'
+		And h.pdt_type = 'FAR-OUT'
+		And tgh.pdt_id = s.pdt_small_id
+		and
+		tgh.supply_entity_id = h.supply_entity_id
+		And tgh.bucket_dimension =
+		h.bucket_dimension
+		And tgh.forecast_dimension_code =
+		#{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And
+		h.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		)
+		Where l.forecast_header_id = tgh.forecast_header_id
+		and ( 1=2
+		<foreach collection="srcVO.forecastHeaderIds" item="item">
+			or
+			h.forecast_header_id = #{item.forecastHeaderId, jdbcType=VARCHAR}
+		</foreach>
+		)
+		);
+
+		INSERT INTO dsf_forecast_region_line_t
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		Select
+		ghr.forecast_header_id,
+		bucketID,
+		bucket2,
+		'N',
+		0,
+		0,
+		sysdate,
+		0,
+		0,
+		sysdate
+		from dsf_forecast_region_header_t gh
+		JOIN dsf_pdt_small_t s
+		ON
+		(gh.pdt_id = s.pdt_large_id)
+		Join dsf_forecast_region_header_t ghr
+		On(
+		ghr.demand_entity_id = gh.demand_entity_id
+		And ghr.pdt_type =
+		'CLOSE-IN'
+		and gh.pdt_type = 'FAR-OUT'
+		And ghr.pdt_id = s.pdt_small_id
+		And ghr.supply_entity_id = gh.supply_entity_id
+		And ghr.bucket_dimension
+		= gh.bucket_dimension
+		And ghr.forecast_dimension_code
+		=#{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And
+		gh.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		)
+		Join(
+		select 0 forecastHeaderId,'0' bucketID,0.00
+		bucket2 from dual
+		<foreach collection='srcVO.forecastHeaderIds' item="record"
+			index="index">
+			Union All
+			select #{record.forecastHeaderId, jdbcType=VARCHAR}
+			forecastHeaderId,#{record.bucketID, jdbcType=VARCHAR}
+			bucketID,#{record.bucket2, jdbcType=VARCHAR} bucket2 from dual
+		</foreach>
+		) hh
+		On(hh.forecastHeaderId =gh.forecast_header_id )
+		Where 1=1
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				gh.forecast_header_id = #{item.forecastHeaderId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+		;
+		
+		end;
+	</update>
+
+	<update id="largeSynSmallRate">
+		begin
+		
+		INSERT INTO
+		dsf_forecast_region_line_t
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		SELECT
+		tgh.forecast_header_id,
+		l.bucket_id,
+		l.quantity,
+		'N',
+		0,
+		0,
+		sysdate,
+		0,
+		0,
+		sysdate
+		FROM
+		dsf_forecast_region_header_t h
+		JOIN dsf_pdt_small_t s
+		ON (h.pdt_id =
+		s.pdt_large_id)
+		JOIN dsf_forecast_region_line_t l
+		ON
+		(h.forecast_header_id = l.forecast_header_id)
+		Join
+		dsf_forecast_region_header_t tgh
+		On(
+		h.demand_entity_id =
+		tgh.demand_entity_id
+		And tgh.pdt_type = 'CLOSE-IN'
+		And h.pdt_type =
+		'FAR-OUT'
+		And tgh.pdt_id = s.pdt_small_id
+		and tgh.supply_entity_id =
+		h.supply_entity_id
+		And tgh.bucket_dimension = h.bucket_dimension
+		And
+		tgh.forecast_dimension_code = #{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And h.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		)
+		WHERE
+		h.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And h.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				h.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+				and
+				h.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+				and h.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+				and h.supply_entity_id =
+				#{item.supplyEntityId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+		;
+		
+		end;
+	</update>
+
+	<!-- line 666666 -->
+	<update id="orderTOrate">
+		INSERT INTO dsf_forecast_region_line_t
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		Select
+		tar.forecast_header_id,
+		hi.bucket_id,
+		Case When nvl (cu.quantity, 0) = 0
+		Then
+		Null
+		Else
+		(nvl(hi.quantity, 0) - cu.quantity )/ cu.quantity
+		End,
+		'N',
+		0,
+		'0',
+		SYSDATE,
+		0,
+		'0',
+		SYSDATE
+		FROM (SELECT t.demand_entity_id,
+		t.pdt_type,
+		t.pdt_id,
+		t.supply_entity_id,
+		t.bucket_dimension,
+		t.forecast_dimension_code,
+		t.forecast_header_id,
+		l.quantity,
+		l.bucket_id,
+		add_months(b.bucket_start_date, 12) bucket_start_date
+		FROM
+		dsf_forecast_region_header_t t
+		JOIN dsf_forecast_region_line_t l
+		ON
+		(t.forecast_header_id = l.forecast_header_id)
+		JOIN
+		dsf_forecast_bucket_t b
+		ON (l.bucket_id = b.bucket_id
+		AND b.period =
+		#{tarVO.period, jdbcType=VARCHAR}
+		AND b.bg_code = #{tarVO.bgCode,
+		jdbcType=VARCHAR}
+		AND b.demand_entity_type = #{tarVO.demandEntityType,
+		jdbcType=VARCHAR}
+		AND b.bucket_dimension = #{tarVO.bucketDimension,
+		jdbcType=VARCHAR}
+		)
+		WHERE t.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and t.bucket_dimension
+		= #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				t.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+				and
+				t.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+				and t.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+				and t.supply_entity_id =
+				#{item.supplyEntityId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+		) cu
+		JOIN (SELECT t.demand_entity_id,
+		t.pdt_type,
+		t.pdt_id,
+		t.supply_entity_id,
+		t.bucket_dimension,
+		t.forecast_dimension_code,
+		t.forecast_header_id,
+		l.quantity,
+		l.bucket_id,
+		b.bucket_start_date
+		FROM
+		dsf_forecast_region_header_t t
+		JOIN dsf_forecast_region_line_t l
+		ON
+		(t.forecast_header_id = l.forecast_header_id)
+		JOIN
+		dsf_forecast_bucket_t b
+		ON (l.bucket_id = b.bucket_id
+		AND b.period =
+		#{tarVO.period, jdbcType=VARCHAR}
+		AND b.bg_code = #{tarVO.bgCode,
+		jdbcType=VARCHAR}
+		AND b.demand_entity_type = #{tarVO.demandEntityType,
+		jdbcType=VARCHAR}
+		AND b.bucket_dimension = #{tarVO.bucketDimension,
+		jdbcType=VARCHAR})
+		WHERE t.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		and t.bucket_dimension
+		= #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				t.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+				and
+				t.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+				and t.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+				and t.supply_entity_id =
+				#{item.supplyEntityId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+		) hi
+		ON (cu.forecast_header_id = hi.forecast_header_id AND
+		cu.bucket_start_date = hi.bucket_start_date)
+		JOIN
+		dsf_forecast_region_header_t tar
+		ON (cu.demand_entity_id =
+		tar.demand_entity_id AND
+		cu.pdt_type = tar.pdt_type AND cu.pdt_id =
+		tar.pdt_id AND
+		cu.supply_entity_id = tar.supply_entity_id AND
+		cu.bucket_dimension = tar.bucket_dimension AND
+		cu.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR} AND
+		tar.forecast_dimension_code =
+		#{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR} )
+	</update>
+
+
+	<!--line 7 -->
+	<update id="synLargeRollup">
+		begin
+		
+		MERGE INTO dsf_forecast_region_line_t
+		tar
+		USING (SELECT tr.forecast_header_id forecast_header_id,
+		bk.qbucket_id bucket_id,
+		gl.quantity * rategl.quantity quantity,
+		'N'
+		delete_flag,
+		0 created_by,
+		'0' created_name,
+		SYSDATE creation_date,
+		0
+		last_updated_by,
+		'0' last_updated_name,
+		SYSDATE last_update_date
+		FROM
+		dsf_forecast_region_header_t t
+		JOIN dsf_pdt_large_t l
+		ON (t.pdt_id =
+		l.pdt_large_id)
+		JOIN dsf_forecast_region_header_t tr
+		ON
+		(t.demand_entity_id = tr.demand_entity_id AND
+		t.pdt_type = tr.pdt_type
+		AND t.pdt_id = tr.pdt_id AND
+		t.supply_entity_id = tr.supply_entity_id
+		AND t.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		AND tr.bucket_dimension = #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		AND t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		AND tr.forecast_dimension_code =
+		#{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR})
+		JOIN
+		dsf_forecast_region_line_t gl
+		ON (t.forecast_header_id =
+		gl.forecast_header_id)
+		JOIN (SELECT fby.bucket_id ybucket_id,
+		fby.bucket_desc_cn ybucket_desc_cn,
+		fbq.bucket_id qbucket_id,
+		fbq.bucket_desc_cn qbucket_desc_cn
+		FROM dsf_forecast_bucket_t fby
+		JOIN
+		dsf_forecast_bucket_t fbq
+		<if test='srcVO.bucketDimension == "Y"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_year)
+		</if>
+		<if test='srcVO.bucketDimension == "Q"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_qtr)
+		</if>
+		WHERE fby.period = #{srcVO.period, jdbcType=VARCHAR}
+		AND fby.bg_code =
+		#{srcVO.bgCode, jdbcType=VARCHAR}
+		AND fby.demand_entity_type =
+		#{srcVO.demandEntityType, jdbcType=VARCHAR}
+		AND fby.bucket_dimension =
+		#{srcVO.bucketDimension, jdbcType=VARCHAR}
+		AND fbq.period =
+		#{srcVO.period, jdbcType=VARCHAR}
+		AND fbq.bg_code = #{srcVO.bgCode,
+		jdbcType=VARCHAR}
+		AND fbq.demand_entity_type =
+		#{srcVO.demandEntityType, jdbcType=VARCHAR}
+		AND fbq.bucket_dimension =
+		#{tarVO.bucketDimension, jdbcType=VARCHAR})
+		bk
+		ON (bk.ybucket_id =
+		gl.bucket_id)
+		JOIN dsf_forecast_region_header_t rate
+		ON
+		(t.demand_entity_id = rate.demand_entity_id AND
+		t.pdt_type =
+		rate.pdt_type AND t.pdt_id = rate.pdt_id AND
+		t.supply_entity_id =
+		rate.supply_entity_id
+		AND t.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		AND rate.bucket_dimension = #{tarVO.bucketDimension,
+		jdbcType=VARCHAR}
+		AND t.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		AND
+		rate.forecast_dimension_code = #{rateVO.forecastDimensionCode,
+		jdbcType=VARCHAR})
+		JOIN dsf_forecast_region_line_t rategl
+		ON
+		(rate.forecast_header_id = rategl.forecast_header_id AND
+		rategl.bucket_id = bk.qbucket_id)
+		WHERE t.delete_flag = 'N'
+		AND
+		t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		AND t.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				t.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+				and
+				t.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+				and t.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+				and t.supply_entity_id =
+				#{item.supplyEntityId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+
+		) src
+		ON (tar.forecast_header_id = src.forecast_header_id AND
+		tar.bucket_id =
+		src.bucket_id)
+		WHEN MATCHED THEN
+		UPDATE
+		SET tar.quantity =
+		src.quantity,
+		tar.delete_flag = src.delete_flag,
+		tar.created_by =
+		src.created_by,
+		tar.created_name = src.created_name,
+		tar.creation_date =
+		src.creation_date,
+		tar.last_updated_by = src.last_updated_by,
+		tar.last_updated_name = src.last_updated_name,
+		tar.last_update_date =
+		src.last_update_date
+		WHEN NOT MATCHED THEN
+		INSERT
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		VALUES
+		(src.forecast_header_id,
+		src.bucket_id,
+		src.quantity,
+		src.delete_flag,
+		src.created_by,
+		src.created_name,
+		src.creation_date,
+		src.last_updated_by,
+		src.last_updated_name,
+		src.last_update_date);
+
+		MERGE
+		INTO dsf_forecast_region_line_t tar
+		USING (SELECT tr.forecast_header_id
+		forecast_header_id,
+		bk.qbucket_id bucket_id,
+		rategl.quantity quantity,
+		'N' delete_flag,
+		0 created_by,
+		'0' created_name,
+		SYSDATE creation_date,
+		0
+		last_updated_by,
+		'0' last_updated_name,
+		SYSDATE last_update_date
+		FROM
+		dsf_forecast_region_header_t t
+		JOIN dsf_pdt_large_t l
+		ON (t.pdt_id =
+		l.pdt_large_id)
+		JOIN dsf_forecast_region_header_t tr
+		ON
+		(t.demand_entity_id = tr.demand_entity_id AND
+		t.pdt_type = tr.pdt_type
+		AND t.pdt_id = tr.pdt_id AND
+		t.supply_entity_id = tr.supply_entity_id
+		AND t.bucket_dimension = #{srcVO.bucketDimension, jdbcType=VARCHAR}
+		AND tr.bucket_dimension = #{tarVO.bucketDimension, jdbcType=VARCHAR}
+		AND t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		AND tr.forecast_dimension_code =
+		#{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR}||'_RATE')
+		JOIN
+		dsf_forecast_region_line_t gl
+		ON (t.forecast_header_id =
+		gl.forecast_header_id)
+		JOIN (SELECT fby.bucket_id ybucket_id,
+		fby.bucket_desc_cn ybucket_desc_cn,
+		fbq.bucket_id qbucket_id,
+		fbq.bucket_desc_cn qbucket_desc_cn
+		FROM dsf_forecast_bucket_t fby
+		JOIN
+		dsf_forecast_bucket_t fbq
+		<if test='srcVO.bucketDimension == "Y"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_year)
+		</if>
+		<if test='srcVO.bucketDimension == "Q"'>
+			ON (fby.bucket_desc_cn = fbq.bucket_qtr)
+		</if>
+		WHERE fby.period = #{srcVO.period, jdbcType=VARCHAR}
+		AND fby.bg_code =
+		#{srcVO.bgCode, jdbcType=VARCHAR}
+		AND fby.demand_entity_type =
+		#{srcVO.demandEntityType, jdbcType=VARCHAR}
+		AND fby.bucket_dimension =
+		#{srcVO.bucketDimension, jdbcType=VARCHAR}
+		AND fbq.period =
+		#{srcVO.period, jdbcType=VARCHAR}
+		AND fbq.bg_code = #{srcVO.bgCode,
+		jdbcType=VARCHAR}
+		AND fbq.demand_entity_type =
+		#{srcVO.demandEntityType, jdbcType=VARCHAR}
+		AND fbq.bucket_dimension =
+		#{tarVO.bucketDimension, jdbcType=VARCHAR})
+		bk
+		ON (bk.ybucket_id =
+		gl.bucket_id)
+		JOIN dsf_forecast_region_header_t rate
+		ON
+		(t.demand_entity_id = rate.demand_entity_id AND
+		t.pdt_type =
+		rate.pdt_type AND t.pdt_id = rate.pdt_id AND
+		t.supply_entity_id =
+		rate.supply_entity_id
+		AND t.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		AND rate.bucket_dimension = #{tarVO.bucketDimension,
+		jdbcType=VARCHAR}
+		AND t.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		AND
+		rate.forecast_dimension_code = #{rateVO.forecastDimensionCode,
+		jdbcType=VARCHAR})
+		JOIN dsf_forecast_region_line_t rategl
+		ON
+		(rate.forecast_header_id = rategl.forecast_header_id AND
+		rategl.bucket_id = bk.qbucket_id)
+		WHERE t.delete_flag = 'N'
+		AND
+		t.forecast_dimension_code = #{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		AND t.bucket_dimension = #{srcVO.bucketDimension,
+		jdbcType=VARCHAR}
+		<if test='srcVO.forecastHeaderIds != null'>
+			and ( 1=2
+			<foreach collection="srcVO.forecastHeaderIds" item="item">
+				or (
+				t.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+				and
+				t.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+				and t.pdt_id =
+				#{item.pdtId, jdbcType=VARCHAR}
+				and t.supply_entity_id =
+				#{item.supplyEntityId, jdbcType=VARCHAR}
+				)
+			</foreach>
+			)
+		</if>
+
+		) src
+		ON (tar.forecast_header_id = src.forecast_header_id AND
+		tar.bucket_id =
+		src.bucket_id)
+		WHEN MATCHED THEN
+		UPDATE
+		SET tar.quantity =
+		src.quantity,
+		tar.delete_flag = src.delete_flag,
+		tar.created_by =
+		src.created_by,
+		tar.created_name = src.created_name,
+		tar.creation_date =
+		src.creation_date,
+		tar.last_updated_by = src.last_updated_by,
+		tar.last_updated_name = src.last_updated_name,
+		tar.last_update_date =
+		src.last_update_date
+		WHEN NOT MATCHED THEN
+		INSERT
+		(forecast_header_id,
+		bucket_id,
+		quantity,
+		delete_flag,
+		created_by,
+		created_name,
+		creation_date,
+		last_updated_by,
+		last_updated_name,
+		last_update_date)
+		VALUES
+		(src.forecast_header_id,
+		src.bucket_id,
+		src.quantity,
+		src.delete_flag,
+		src.created_by,
+		src.created_name,
+		src.creation_date,
+		src.last_updated_by,
+		src.last_updated_name,
+		src.last_update_date);
+		
+		end;
+	</update>
+
+	<delete id="deleteDataByLargeHeaderID">
+		Delete dsf_forecast_region_line_t t
+		Where exists(
+		Select 1 from
+		dsf_forecast_region_header_t fhp
+		Join dsf_pdt_small_t ps
+		On(fhp.pdt_id =
+		ps.pdt_large_id)
+		Join dsf_forecast_region_header_t tgh
+		On(
+		fhp.demand_entity_id = tgh.demand_entity_id
+		And tgh.pdt_type =
+		'CLOSE-IN'
+		And fhp.pdt_type = 'FAR-OUT'
+		And tgh.pdt_id = ps.pdt_small_id
+		and tgh.supply_entity_id = fhp.supply_entity_id
+		And
+		tgh.bucket_dimension = fhp.bucket_dimension
+		And
+		tgh.forecast_dimension_code = #{tarVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		And fhp.forecast_dimension_code =
+		#{srcVO.forecastDimensionCode,
+		jdbcType=VARCHAR}
+		)
+		Where
+		tgh.forecast_header_id = t.forecast_header_id
+		and ( 1=2
+		<foreach collection="srcVO.forecastHeaderIds" item="item">
+			or (
+			fhp.demand_entity_id = #{item.demandEntityId, jdbcType=VARCHAR}
+			and
+			fhp.pdt_type = #{item.pdtType, jdbcType=VARCHAR}
+			and fhp.pdt_id =
+			#{item.pdtId, jdbcType=VARCHAR}
+			and fhp.supply_entity_id =
+			#{item.supplyEntityId, jdbcType=VARCHAR}
+			)
+		</foreach>
+		)
+		)
+	</delete>
+
+</mapper>

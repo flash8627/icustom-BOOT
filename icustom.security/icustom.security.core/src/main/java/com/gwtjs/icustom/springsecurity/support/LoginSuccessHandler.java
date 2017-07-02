@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import com.gwtjs.icustom.springsecurity.entity.SysUser;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 public class LoginSuccessHandler extends
 		SavedRequestAwareAuthenticationSuccessHandler {
@@ -19,8 +19,8 @@ public class LoginSuccessHandler extends
 			HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		// 获得授权后可得到用户信息 可使用SUserService进行数据库操作
-		SysUser userDetails = (SysUser) authentication.getPrincipal();
-		/* Set<SysRole> roles = userDetails.getSysRoles(); */
+		SysUserVO userDetails = (SysUserVO) authentication.getPrincipal();
+		/* Set<SysRoleVO> roles = userDetails.getSysRoles(); */
 		// 输出登录提示信息
 		logger.debug("user " + userDetails.getUsername() + " login");
 

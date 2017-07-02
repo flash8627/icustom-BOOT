@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.springsecurity.entity.SysUser;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 /**
  * 权限--用户管理--mybatis接口数据管理
@@ -22,28 +22,35 @@ public interface ISysUserDao {
 	 * 
 	 * @return
 	 */
-	SysUser findUser(@Param("id") Integer id);
+	SysUserVO findUser(@Param("id") Integer id);
 	
 	/**
 	 * 查询某用户-第一个-测试型
 	 * 
 	 * @return
 	 */
-	SysUser findUserByname(@Param("account") String account);
+	SysUserVO findByUsername(@Param("username") String username);
+	
+	/**
+	 * 查询某用户-第一个-测试型
+	 * 
+	 * @return
+	 */
+	SysUserVO findByAccount(@Param("account") String account);
 
 	/**
 	 * 查询所有用户-第一个-测试型
 	 * 
 	 * @return
 	 */
-	List<SysUser> findAllUserList();
+	List<SysUserVO> findAllUserList();
 	
 	/**
 	 * 查询所有用户-第一个-测试型
 	 * 
 	 * @return
 	 */
-	PagedResult<SysUser> findUserPage(@Param("user") SysUser user,@Param("page") PageVO page);
+	PagedResult<SysUserVO> findUserPage(@Param("user") SysUserVO user,@Param("page") PageVO page);
 
 	/**
 	 * 批量插入用户数据
@@ -51,7 +58,7 @@ public interface ISysUserDao {
 	 * @param userList
 	 * @return
 	 */
-	int insert(SysUser user);
+	int insert(SysUserVO user);
 
 	/**
 	 * 批量插入用户数据
@@ -59,7 +66,7 @@ public interface ISysUserDao {
 	 * @param userList
 	 * @return
 	 */
-	int update(SysUser user);
+	int update(SysUserVO user);
 	
 	/**
 	 * 批量插入用户数据
@@ -67,7 +74,7 @@ public interface ISysUserDao {
 	 * @param userList
 	 * @return
 	 */
-	int updatePwd(SysUser user);
+	int updatePwd(SysUserVO user);
 
 	/**
 	 * 批量插入用户数据
@@ -75,7 +82,7 @@ public interface ISysUserDao {
 	 * @param userList
 	 * @return
 	 */
-	int batchInsert(List<SysUser> userList);
+	int batchInsert(List<SysUserVO> userList);
 
 	/**
 	 * 查询用户主键ID最大值

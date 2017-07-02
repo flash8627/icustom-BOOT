@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.gwtjs.icustom.springsecurity.entity.SysResource;
+import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
 @Path("/resource")
 @Component @Service  
@@ -23,16 +23,16 @@ import com.gwtjs.icustom.springsecurity.entity.SysResource;
 public interface IResourceRestService {
 	
 	@POST @Path("/insert")
-	int insert(SysResource sys);
+	int insert(SysResourceVO sys);
 	
 	@PUT @Path("/update")
-	int update(SysResource sys);
+	int update(SysResourceVO sys);
 	
 	@DELETE @Path("/delete")
-	public int delete(SysResource role);
+	public int delete(SysResourceVO role);
 	
 	@GET
 	@Path("/findAll")
-	List<SysResource> findAll();
+	List<SysResourceVO> findAll();
 	
 }

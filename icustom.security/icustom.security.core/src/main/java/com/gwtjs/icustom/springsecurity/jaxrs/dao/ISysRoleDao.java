@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.springsecurity.entity.SysRole;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
 /**
  * 权限--用户管理--mybatis接口数据管理
@@ -18,18 +18,20 @@ import com.gwtjs.icustom.springsecurity.entity.SysRole;
 @Mapper
 public interface ISysRoleDao {
 	
-	List<SysRole> findAll();
+	List<SysRoleVO> findAll();
+
+	SysRoleVO findByRoleName(@Param("roleName") String roleName);
 	
-	SysRole findByRoleName(@Param("roleName") String roleName);
-			
-	public Integer findRoleIdCount();
+	List<SysRoleVO> findByUserRoles(@Param("userId") long userId);
 	
-	public int insert(@Param("vo")SysRole role);
+	/*public Integer findRoleIdCount();
 	
-	public int delete(@Param("vo")SysRole role);
+	public int insert(@Param("vo")SysRoleVO role);
 	
-	public int update(@Param("vo")SysRole role);
+	public int delete(@Param("vo")SysRoleVO role);
 	
-	public PagedResult<SysRole> findRolePage(@Param("vo") SysRole role,@Param("page") PageVO page);
+	public int update(@Param("vo")SysRoleVO role);*/
+	
+	public PagedResult<SysRoleVO> findRolePage(@Param("vo") SysRoleVO role,@Param("page") PageVO page);
 	
 }

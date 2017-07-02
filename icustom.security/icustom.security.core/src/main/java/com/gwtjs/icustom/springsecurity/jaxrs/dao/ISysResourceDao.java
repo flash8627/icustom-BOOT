@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.core.entity.PageVO;
 import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.icustom.springsecurity.entity.SysResource;
+import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
 
 /**
  * 权限--资源目录--mybatis接口数据管理
@@ -17,14 +18,14 @@ import com.gwtjs.icustom.springsecurity.entity.SysResource;
 @Mapper
 public interface ISysResourceDao {
 	
-	int insert(SysResource sys);
+	int insert(SysResourceVO sys);
 	
-	int update(SysResource sys);
+	int update(SysResourceVO sys);
 	
-	List<SysResource> findAll();
+	List<SysResourceVO> findAll();
 	
-	PagedResult<SysResource> findResourcePage(@Param("vo")SysResource sys,@Param("page")PageVO page);
+	PagedResult<SysResourceVO> findResourcePage(@Param("vo")SysResourceVO sys,@Param("page")PageVO page);
 	
-	List<SysResource> findByRole(@Param("list")List<Integer> roleIds);
+	List<SysResourceVO> findResourcesById(@Param("list")List<SysRoleResourceVO> roleIds);
 	
 }

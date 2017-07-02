@@ -2,7 +2,7 @@ package com.gwtjs.icustom.springsecurity.jaxrs.service;
 
 import java.util.List;
 
-import com.gwtjs.icustom.springsecurity.entity.SysUser;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 
 
@@ -33,7 +33,15 @@ import org.springframework.stereotype.Service;
 @Service  
 public interface IUserRestService {
 	
-	public SysUser findByName(String account);
+	/**
+	 * 用户登陆会用到
+	 */
+	public SysUserVO findByUsername(String username);
+	
+	/**
+	 * 用户登陆会用到
+	 */
+	public SysUserVO findByAccount(String account);
 	
 	/**
 	 * 查询所有用户-第一个-测试型
@@ -42,7 +50,7 @@ public interface IUserRestService {
 	 */
 	@GET
 	@Path("/findAllUserList")
-	List<SysUser> findAllUserList();
+	List<SysUserVO> findAllUserList();
 	
 	/**
 	 * 批量插入用户数据
@@ -52,6 +60,6 @@ public interface IUserRestService {
 	 */
 	@POST
 	@Path("/insert")
-	int insert(List<SysUser> userList);
+	int insert(List<SysUserVO> userList);
 	
 }
