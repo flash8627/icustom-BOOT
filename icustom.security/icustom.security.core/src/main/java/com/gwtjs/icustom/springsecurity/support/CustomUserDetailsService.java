@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import com.gwtjs.icustom.springsecurity.dao.ISysRoleDao;
+import com.gwtjs.icustom.springsecurity.dao.ISysUserDao;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao;
 
 /**
  * 认证管理器，实现用户认证的入口

@@ -69,4 +69,10 @@ public class SysRoleVO extends BaseResource {
 		this.roledesc = roledesc;
 	}
 
+	@Override
+	public String toString() {
+		return "{'id':'" + id + "', 'rolename':'" + rolename + "', 'roledesc':'"
+				+ roledesc + "'}";
+	}
+
 }

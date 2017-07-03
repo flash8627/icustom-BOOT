@@ -31,7 +31,7 @@ end;
 -- Create table
 create table SYS_USER_T
 (
-  user_id          NUMBER(10) not null,
+  user_id          NUMBER(20) not null,
   user_account     VARCHAR2(120),
   email            VARCHAR2(50),
   password         VARCHAR2(120),
@@ -41,7 +41,10 @@ create table SYS_USER_T
   created_date     DATE default SYSDATE,
   update_last_user NUMBER(20),
   update_last_date DATE default SYSDATE,
-  valid_flag       INTEGER default 1
+  effective_date_end   DATE,
+  effective_date_start DATE default SYSDATE,
+  valid_flag       INTEGER default 1,
+  remark               VARCHAR2(1200)
 )
 tablespace USERS;
 -- Create/Recreate primary, unique and foreign key constraints 

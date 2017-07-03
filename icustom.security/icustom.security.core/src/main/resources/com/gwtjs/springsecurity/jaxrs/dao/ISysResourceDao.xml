@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao">
+<mapper namespace="com.gwtjs.icustom.springsecurity.dao.ISysResourceDao">
 	
 	<update id="saveResources">
 		begin 
@@ -8,18 +8,19 @@
 				merge into sys_resource_t tar
 				  using (
 				        select 
-				             1              								resource_id,
-				             #{item.remarks,jdbcType=VARCHAR}          		method_name,
-				             #{item.remarks,jdbcType=VARCHAR}        		method_path,
+				             #{item.resourceId,jdbcType=VARCHAR}				resource_id,
+				             #{item.parentId,jdbcType=VARCHAR}				PARENT_ID,
+				             #{item.methodName,jdbcType=VARCHAR}          		method_name,
+				             #{item.methodPath,jdbcType=VARCHAR}        		method_path,
 				             #{item.remarks,jdbcType=VARCHAR}      			remark,
-				             #{item.remarks,jdbcType=VARCHAR}         		resource_name,
-				             #{item.remarks,jdbcType=VARCHAR}            	resource_url,
+				             #{item.resourceName,jdbcType=VARCHAR}         		resource_name,
+				             #{item.resourceUrl,jdbcType=VARCHAR}            	resource_url,
 				             #{item.orderCode,jdbcType=INTEGER}             order_code,
-				             #{createdUser,jdbcType=NUMERIC}              	created_user,
+				             #{item.createdUser,jdbcType=NUMERIC}              	created_user,
 				             SYSDATE        								created_date,
-				             #{updateLastUser,jdbcType=NUMERIC}           	update_last_user,
+				             #{item.updateLastUser,jdbcType=NUMERIC}           	update_last_user,
 				             SYSDATE        								update_last_date,
-				             #{item.validFlag,jdbcType=INTEGER}             valid_flag
+				             #{item.item.validFlag,jdbcType=INTEGER}             valid_flag
 				        from dual 
 				  ) src
 				  on (
@@ -30,6 +31,7 @@
 				      tar.method_name = src.method_name,
 				      tar.method_path = src.method_path,
 				      tar.remark = src.remark,
+				      tar.PARENT_ID = src.PARENT_ID,
 				      tar.resource_name = src.resource_name,
 				      tar.resource_url = src.resource_url,
 				      tar.order_code = src.order_code,
@@ -41,6 +43,7 @@
 				  WHEN NOT MATCHED THEN
 				    INSERT
 				      (resource_id,
+				      	PARENT_ID,
 				       method_name,
 				       method_path,
 				       remark,
@@ -53,6 +56,7 @@
 				       valid_flag)
 				    VALUES
 				      (SYS_RESOURCE_S.nextval+1000,
+				       src.PARENT_ID,
 				       src.method_name,
 				       src.method_path,
 				       src.remark,
@@ -79,6 +83,7 @@
 		       t.method_path     methodPath,
 		       t.remark          remark,
 		       t.resource_id     resourceId,
+		       t.PARENT_ID     parentId,
 		       t.resource_name   resourceName,
 		       t.resource_url 	resourceUrl
 		  FROM sys_resource_t t
@@ -129,6 +134,7 @@
 	       method_path   methodPath,
 	       remark        remark,
 	       resource_id   resourceId,
+	       parent_id   	parentId,
 	       resource_name resourceName,
 	       resource_url  resourceUrl
 	  FROM sys_resource_t tt

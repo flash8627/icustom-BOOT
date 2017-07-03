@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao">
+<mapper namespace="com.gwtjs.icustom.springsecurity.dao.ISysRoleDao">
+	
+	<update id="saveRoles">
+		    begin 
+      <foreach collection='list' item="item" index="index">
+          merge into sys_role_t tar
+            using (
+                  select 
+                       #{item.id,jdbcType=VARCHAR}		ROLE_ID,
+                       #{item.account,jdbcType=VARCHAR}      ROLE_NAME,
+                       #{item.email,jdbcType=VARCHAR}        EMAIL,
+                       #{item.remark,jdbcType=VARCHAR}      remark,
+                       #{item.orderCode,jdbcType=VARCHAR}      ORDER_CODE,
+                       #{item.createdUser,jdbcType=VARCHAR}    CREATED_USER,
+                       SYSDATE                  created_date,
+                       #{updateLastUser,jdbcType=NUMERIC}      update_last_user,
+                       SYSDATE                  update_last_date,
+                       #{item.validFlag,jdbcType=INTEGER}      valid_flag
+                  from dual 
+            ) src
+            on (
+               tar.id=src.id
+            )
+            WHEN MATCHED THEN
+              UPDATE SET
+                tar.ROLE_NAME = src.ROLE_NAME,
+                tar.EMAIL = src.email,
+                tar.remark = src.remark,
+                tar.ORDER_CODE = src.orderCode,
+                tar.update_last_user = src.update_last_user,
+                tar.update_last_date = src.update_last_date,
+                tar.valid_flag = nvl(src.valid_flag,tar.valid_flag)
+            WHEN NOT MATCHED THEN
+              INSERT
+                (ROLE_ID,
+                 ROLE_NAME,
+                 EMAIL,
+                 remark,
+                 order_code,
+                 created_user,
+                 update_last_user,
+                 update_last_date,
+                 valid_flag)
+              VALUES
+                (SYS_USER_S.nextval+1000,
+                 src.ROLE_NAME,
+                 src.EMAIL,
+	               src.remark,
+	               src.ORDER_CODE,
+	               src.created_user,
+	               src.created_date,
+	               src.update_last_user,
+	               src.update_last_date,
+	               1);
+	      </foreach>
+	    END;
+	</update>
 	
 	<select id="findAll" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		SELECT

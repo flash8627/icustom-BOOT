@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.service;
+package com.gwtjs.icustom.springsecurity.service;
 
 import java.util.List;
 
@@ -42,15 +42,6 @@ public interface IUserRestService {
 	 * 用户登陆会用到
 	 */
 	public SysUserVO findByAccount(String account);
-	
-	/**
-	 * 查询所有用户-第一个-测试型
-	 * 
-	 * @return
-	 */
-	@GET
-	@Path("/findAllUserList")
-	List<SysUserVO> findAllUserList();
 	
 	/**
 	 * 批量插入用户数据

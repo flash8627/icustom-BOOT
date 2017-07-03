@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.dao;
+package com.gwtjs.icustom.springsecurity.dao;
 
 import java.util.List;
 

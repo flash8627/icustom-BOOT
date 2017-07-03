@@ -3,6 +3,7 @@ package com.gwtjs.icustom.springsecurity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ import com.gwtjs.icustom.springsecurity.support.MyFilterSecurityInterceptor;
 @EnableWebSecurity
 @ConditionalOnClass(SecurityWebSecurityConfig.class)
 // @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,jsr250Enabled=true)
 public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -41,10 +42,13 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 	
+	/*@Inject
+    private UserIpAuthenticationProvider userIpAuthenticationProvider;*/
+	
 	@Autowired  
     DataSource dataSource; 
 
-	@Override @ConditionalOnMissingBean(AuthenticationManager.class)
+	@Bean @Override @ConditionalOnMissingBean(AuthenticationManager.class)
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
@@ -113,7 +117,7 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth)
+	public void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
 		// 指定密码加密所使用的加密器为passwordEncoder()
 		// 需要将密码加密后写入数据库
@@ -121,6 +125,7 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				passwordEncoder());
 		// 不删除凭据，以便记住用户
 		//auth.eraseCredentials(false);
+		//auth.authenticationProvider(userIpAuthenticationProvider);
 	}
 
 	@Bean @ConditionalOnMissingBean(BCryptPasswordEncoder.class)

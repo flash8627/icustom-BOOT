@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.service;
+package com.gwtjs.icustom.springsecurity.service;
 
 import java.util.List;
 

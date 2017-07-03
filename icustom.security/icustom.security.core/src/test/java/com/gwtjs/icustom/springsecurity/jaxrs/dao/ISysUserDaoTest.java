@@ -12,11 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.springsecurity.MainApplicationTest;
+import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
+import com.gwtjs.icustom.springsecurity.dao.ISysUserDao;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao;
 
-public class ISysUserDaoTest extends MainApplicationTest {
+public class ISysUserDaoTest extends SecurityMainApplicationTest {
 	
 	@Autowired
 	private ISysUserDao sysUserDao;
@@ -25,13 +25,6 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	public void serviceAocTest()
 	{
 		System.out.println(sysUserDao);
-	}
-	
-	@Test
-	public void userCountIdTest()
-	{
-		int idCount = sysUserDao.findUserIdCount();
-		assertTrue(idCount>0);
 	}
 	
 	@Test
@@ -73,31 +66,27 @@ public class ISysUserDaoTest extends MainApplicationTest {
 	public void batchInsertTest()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
-		int idCount = sysUserDao.findUserIdCount();
 		List<SysUserVO> list = new ArrayList<>();
 		SysUserVO user = new SysUserVO();
-		user.setId(idCount);
 		user.setUsername("dzg");
 		user.setEmail("8538191@qq.com");
 		user.setPassword(bc.encode("dddddd"));
 		//user.setSRoles(SysRoles);
 		list.add(user);
-		sysUserDao.batchInsert(list);
+		sysUserDao.saveUsers(list);
 	}
 	
 	@Test @Ignore
 	public void insertTest()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
-		int idCount = sysUserDao.findUserIdCount();
 		SysUserVO user = new SysUserVO();
-		user.setId(idCount);
 		user.setAccount("dzg");
 		user.setUsername("dzg");
 		user.setEmail("8538191@qq.com");
 		user.setPassword(bc.encode("dddddd"));
 		//user.setSRoles(SysRoles);
-		sysUserDao.insert(user);
+		//sysUserDao.saveUsers(user);
 	}
 	
 	@Test @Ignore
@@ -121,14 +110,7 @@ public class ISysUserDaoTest extends MainApplicationTest {
 		user.setUsername("dzg");
 		user.setEmail("8538191@qq.com");
 		//user.setSRoles(SysRoles);
-		sysUserDao.update(user);
-	}
-	
-	@Test
-	public void findAllUserListTest()
-	{
-		List<SysUserVO> list = sysUserDao.findAllUserList();
-		System.out.println(list);
+		//sysUserDao.update(user);
 	}
 	
 }

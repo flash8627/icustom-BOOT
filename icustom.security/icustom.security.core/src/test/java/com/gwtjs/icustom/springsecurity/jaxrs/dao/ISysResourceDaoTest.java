@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.springsecurity.MainApplicationTest;
+import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
+import com.gwtjs.icustom.springsecurity.dao.ISysResourceDao;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao;
 
-public class ISysResourceDaoTest  extends MainApplicationTest {
+public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
 
 	@Autowired
 	private ISysResourceDao sysResourceDao;

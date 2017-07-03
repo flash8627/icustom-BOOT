@@ -32,7 +32,7 @@ end;
 -- Create table
 create table SYS_ROLE_T
 (
-  role_id          NUMBER(10) not null,
+  role_id          NUMBER(20) not null,
   role_name        VARCHAR2(100),
   role_desc        VARCHAR2(100),
   order_code       INTEGER default 1,
@@ -40,6 +40,7 @@ create table SYS_ROLE_T
   created_date     DATE default SYSDATE,
   update_last_user NUMBER,
   update_last_date DATE default SYSDATE,
+  remark           VARCHAR2(1000),
   valid_flag       INTEGER default 1
 )
 tablespace USERS;

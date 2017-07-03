@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.gwtjs.icustom.springsecurity.jaxrs.service.impl.ResourceRestService;
-import com.gwtjs.icustom.springsecurity.jaxrs.service.impl.RoleRestService;
-import com.gwtjs.icustom.springsecurity.jaxrs.service.impl.UserRestService;
+import com.gwtjs.icustom.springsecurity.service.impl.ResourceRestService;
+import com.gwtjs.icustom.springsecurity.service.impl.RoleRestService;
+import com.gwtjs.icustom.springsecurity.service.impl.UserRestService;
 
 @Component
 public class CxfConfig {

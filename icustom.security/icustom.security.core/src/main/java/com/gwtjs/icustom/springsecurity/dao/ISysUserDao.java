@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.dao;
+package com.gwtjs.icustom.springsecurity.dao;
 
 import java.util.List;
 
@@ -43,13 +43,6 @@ public interface ISysUserDao {
 	 * 
 	 * @return
 	 */
-	List<SysUserVO> findAllUserList();
-	
-	/**
-	 * 查询所有用户-第一个-测试型
-	 * 
-	 * @return
-	 */
 	PagedResult<SysUserVO> findUserPage(@Param("user") SysUserVO user,@Param("page") PageVO page);
 
 	/**
@@ -58,37 +51,14 @@ public interface ISysUserDao {
 	 * @param userList
 	 * @return
 	 */
-	int insert(SysUserVO user);
+	int saveUsers(@Param("users")List<SysUserVO> users);
 
 	/**
-	 * 批量插入用户数据
-	 * 
-	 * @param userList
-	 * @return
-	 */
-	int update(SysUserVO user);
-	
-	/**
-	 * 批量插入用户数据
+	 * 更新用户密码
 	 * 
 	 * @param userList
 	 * @return
 	 */
 	int updatePwd(SysUserVO user);
-
-	/**
-	 * 批量插入用户数据
-	 * 
-	 * @param userList
-	 * @return
-	 */
-	int batchInsert(List<SysUserVO> userList);
-
-	/**
-	 * 查询用户主键ID最大值
-	 * 
-	 * @return
-	 */
-	int findUserIdCount();
 
 }

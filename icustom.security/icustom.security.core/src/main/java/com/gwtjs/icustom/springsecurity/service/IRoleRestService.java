@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.service;
+package com.gwtjs.icustom.springsecurity.service;
 
 import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;

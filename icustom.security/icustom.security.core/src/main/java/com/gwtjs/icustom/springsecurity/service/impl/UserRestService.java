@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.service.impl;
+package com.gwtjs.icustom.springsecurity.service.impl;
 
 import io.swagger.annotations.Api;
 
@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gwtjs.icustom.springsecurity.dao.ISysUserDao;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysUserDao;
-import com.gwtjs.icustom.springsecurity.jaxrs.service.IUserRestService;
+import com.gwtjs.icustom.springsecurity.service.IUserRestService;
 
 @Api("/user")
 public class UserRestService implements IUserRestService {
@@ -32,13 +32,8 @@ public class UserRestService implements IUserRestService {
 	}
 	
 	@Override
-	public List<SysUserVO> findAllUserList() {
-		return userDao.findAllUserList();
-	}
-
-	@Override
 	public int insert(List<SysUserVO> userList) {
-		return userDao.batchInsert(userList);
+		return userDao.saveUsers(userList);
 	}
 
 }

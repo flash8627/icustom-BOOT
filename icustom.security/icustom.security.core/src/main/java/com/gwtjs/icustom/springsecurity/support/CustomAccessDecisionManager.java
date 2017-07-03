@@ -43,12 +43,12 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
 			ConfigAttribute ca = ite.next();
 			//该资源需要何种权限
 			String needRole = ((SecurityConfig) ca).getAttribute();
-			logger.info("needRole",needRole);
+			logger.info("\nAuthorities:"+authentication.getAuthorities());
 			// ga 为用户所被赋予的权限。 needRole 为访问相应的资源应该具有的权限。
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
 				//用户具备的权限 
 				String ownRole = ga.getAuthority();
-				logger.info(needRole,ownRole);
+				logger.info("\n"+needRole+" , "+ownRole);
 				//如果有权限则认证直接返回,即通过
 				if (needRole.trim().equals(ownRole)) {
 					return;

@@ -20,12 +20,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
 
+import com.gwtjs.icustom.springsecurity.dao.ISysResourceDao;
+import com.gwtjs.icustom.springsecurity.dao.ISysRoleDao;
+import com.gwtjs.icustom.springsecurity.dao.ISysRoleResourceDao;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleResourceDao;
 
 /**
  * 最核心的地方，就是提供某个资源对应的权限定义，即getAttributes方法返回的结果。 
@@ -58,7 +58,6 @@ public class CustomInvocationSecurityMetadataSourceService implements
 	private void loadResourceDefine() {
 		// 在Web服务器启动时，提取系统中的所有权限。
 		List<SysRoleVO> roles = sysRoleDao.findAll();
-		logger.debug("\nroles:" + roles);
 		/*
 		 * 应当是资源为key， 权限为value。 资源通常为url， 权限就是那些以ROLE_为前缀的角色。 一个资源可以由多个权限来访问。
 		 */
@@ -68,10 +67,9 @@ public class CustomInvocationSecurityMetadataSourceService implements
 			ConfigAttribute ca = new SecurityConfig(role.getRolename());
 			
 			List<String> urls = new ArrayList<String>();
-			logger.debug("\nca:" + ca);
 			
 			List<SysRoleResourceVO> roleResources = sysRoleResourceDao.findByRoleResource(role.getId());
-			logger.debug("\nroleResources:" + roleResources);
+			
 			List<SysResourceVO> resources = new ArrayList<>();
 			if(roleResources.size()>0)
 				resources = sysResourceDao.findResourcesById(roleResources);
@@ -80,6 +78,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 					urls.add(resource.getResourceUrl());
 				}
 			}
+			logger.debug("\n"+ca+" urls:" + urls);
 			for (String url : urls) {
 
 				/*
@@ -97,7 +96,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 
 			}
 		}
-
+		
 	}
 	
 	@Override
@@ -109,7 +108,6 @@ public class CustomInvocationSecurityMetadataSourceService implements
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object)
 			throws IllegalArgumentException {
-		logger.debug("object", object.toString());
 		// object 是一个URL，被用户请求的url。
 		FilterInvocation filterInvocation = (FilterInvocation) object;
 		if (resourceMap == null) {

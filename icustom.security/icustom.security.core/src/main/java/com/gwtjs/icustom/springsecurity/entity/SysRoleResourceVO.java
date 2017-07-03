@@ -56,4 +56,11 @@ public class SysRoleResourceVO extends BaseResource {
 		this.resourceName = resourceName;
 	}
 
+	@Override
+	public String toString() {
+		return "{'id':'" + id + "', 'roleId':'" + roleId
+				+ "', 'roleName':'" + roleName + "', 'resourceId':'" + resourceId
+				+ "', 'resourceName':'" + resourceName + "'}";
+	}
+
 }

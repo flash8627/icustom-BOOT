@@ -17,7 +17,7 @@ import com.gwtjs.icustom.springsecurity.SecurityMainApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SecurityMainApplication.class)
 @WebAppConfiguration
-public class MainApplicationTest {
+public class SecurityMainApplicationTest {
 	
 	MockMvc mvc;
 

@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.icustom.springsecurity.MainApplicationTest;
+import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
+import com.gwtjs.icustom.springsecurity.dao.ISysRoleDao;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysRoleDao;
 
-public class ISysRoleDaoTest extends MainApplicationTest {
+public class ISysRoleDaoTest extends SecurityMainApplicationTest {
 	
 	@Autowired
 	private ISysRoleDao sysRoleDao;

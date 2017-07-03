@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.service.impl;
+package com.gwtjs.icustom.springsecurity.service.impl;
 
 import io.swagger.annotations.Api;
 
@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gwtjs.icustom.springsecurity.dao.ISysResourceDao;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
-import com.gwtjs.icustom.springsecurity.jaxrs.dao.ISysResourceDao;
-import com.gwtjs.icustom.springsecurity.jaxrs.service.IResourceRestService;
+import com.gwtjs.icustom.springsecurity.service.IResourceRestService;
 
 @Api("/resource")
 public class ResourceRestService implements IResourceRestService {

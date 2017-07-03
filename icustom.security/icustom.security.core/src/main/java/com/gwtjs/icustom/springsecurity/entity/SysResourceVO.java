@@ -78,4 +78,12 @@ public class SysResourceVO extends BaseResource {
 		this.parentId = parentId;
 	}
 
+	@Override
+	public String toString() {
+		return "{'resourceUrl':'" + resourceUrl + "', 'resourceId':'"
+				+ resourceId + "', 'remark':'" + remark + "', 'resourceName':'"
+				+ resourceName + "', 'methodName':'" + methodName + "', 'methodPath':'"
+				+ methodPath + "', 'parentId':'" + parentId + "'}";
+	}
+
 }
