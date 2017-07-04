@@ -2,14 +2,7 @@ package com.gwtjs.icustom.springsecurity.service;
 
 import java.util.List;
 
-import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
-
-
-
-
-
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 /**
  * http://localhost:8080/api/application.wadl

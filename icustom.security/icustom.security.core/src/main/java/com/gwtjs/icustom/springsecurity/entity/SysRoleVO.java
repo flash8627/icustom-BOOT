@@ -14,7 +14,7 @@ public class SysRoleVO extends BaseResource {
 
 	private String rolename;// 角色名称
 
-	private String roledesc;// 角色描述
+	private String remark;// 角色描述
 
 	public long getId() {
 		return id;
@@ -61,18 +61,18 @@ public class SysRoleVO extends BaseResource {
 		return true;
 	}
 
-	public String getRoledesc() {
-		return roledesc;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setRoledesc(String roledesc) {
-		this.roledesc = roledesc;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	@Override
 	public String toString() {
-		return "{'id':'" + id + "', 'rolename':'" + rolename + "', 'roledesc':'"
-				+ roledesc + "'}";
+		return "{'id':'" + id + "', 'rolename':'" + rolename + "', 'remark':'"
+				+ remark + "'}";
 	}
 
 }

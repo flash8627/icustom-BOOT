@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.dao;
+package com.gwtjs.icustom.springsecurity.dao;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,17 +28,20 @@ public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
 	public void insertTest() {
 		SysResourceVO sys=new SysResourceVO();
 		int result = sysResourceDao.insert(sys);
+		System.out.println(result);
 	}
 
 	@Test @Ignore
 	public void updateTest() {
 		SysResourceVO sys=new SysResourceVO();
 		int result = sysResourceDao.update(sys);
+		System.out.println(result);
 	}
 
 	@Test
 	public void findAllTest() {
 		List<SysResourceVO> list = sysResourceDao.findAll();
+		System.out.println(list);
 	}
 
 	@Test

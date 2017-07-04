@@ -3,7 +3,6 @@ package com.gwtjs.icustom.springsecurity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -109,7 +109,7 @@
 		SELECT USER_ID              id,
 			USER_ACCOUNT         account,
 			EMAIL                email,
-			PASSWORD             password,
+			--PASSWORD             password,
 			USER_NAME            username,
 			remark					remark,
 			ORDER_CODE           orderCode,

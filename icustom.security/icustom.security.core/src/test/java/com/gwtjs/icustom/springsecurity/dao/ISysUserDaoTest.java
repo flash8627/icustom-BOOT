@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.jaxrs.dao;
+package com.gwtjs.icustom.springsecurity.dao;
 
 import static org.junit.Assert.assertTrue;
 
