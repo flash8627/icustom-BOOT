@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gwtjs.icustom.springsecurity.dao.ISysRoleDao">
 	
-	<update id="saveRoles">
+	<update id="saveOrUpdate">
 		    begin 
-      <foreach collection='list' item="item" index="index">
+      <foreach collection='roles' item="item" index="index">
           merge into sys_role_t tar
             using (
                   select 
@@ -14,19 +14,18 @@
                        #{item.orderCode,jdbcType=VARCHAR}      ORDER_CODE,
                        #{item.createdUser,jdbcType=VARCHAR}    CREATED_USER,
                        SYSDATE                  created_date,
-                       #{updateLastUser,jdbcType=NUMERIC}      update_last_user,
+                       #{item.updateLastUser,jdbcType=NUMERIC}      update_last_user,
                        SYSDATE                  update_last_date,
                        #{item.validFlag,jdbcType=INTEGER}      valid_flag
                   from dual 
             ) src
             on (
-               tar.id=src.id
+               tar.ROLE_NAME=src.ROLE_NAME
             )
             WHEN MATCHED THEN
               UPDATE SET
-                tar.ROLE_NAME = src.ROLE_NAME,
                 tar.remark = src.remark,
-                tar.ORDER_CODE = src.orderCode,
+                tar.ORDER_CODE = src.ORDER_CODE,
                 tar.update_last_user = src.update_last_user,
                 tar.update_last_date = src.update_last_date,
                 tar.valid_flag = nvl(src.valid_flag,tar.valid_flag)
@@ -37,6 +36,7 @@
                  remark,
                  order_code,
                  created_user,
+                 created_date,
                  update_last_user,
                  update_last_date,
                  valid_flag)

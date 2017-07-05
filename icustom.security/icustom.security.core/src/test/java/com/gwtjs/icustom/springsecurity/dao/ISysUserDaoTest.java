@@ -21,7 +21,7 @@ public class ISysUserDaoTest extends SecurityMainApplicationTest {
 	@Autowired
 	private ISysUserDao sysUserDao;
 	
-	@Test
+	@Test @Ignore
 	public void serviceAocTest()
 	{
 		System.out.println(sysUserDao);
@@ -62,8 +62,8 @@ public class ISysUserDaoTest extends SecurityMainApplicationTest {
 		assertTrue(user!=null);
 	}
 	
-	@Test @Ignore
-	public void batchInsertTest()
+	@Test
+	public void saveOrUpdateTest()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
 		List<SysUserVO> list = new ArrayList<>();
@@ -71,46 +71,51 @@ public class ISysUserDaoTest extends SecurityMainApplicationTest {
 		user.setUsername("dzg");
 		user.setEmail("8538191@qq.com");
 		user.setPassword(bc.encode("dddddd"));
+		user.setAccount("dzg");
+		user.setCreatedUser(0);
+		user.setUpdateLastUser(0);
 		//user.setSRoles(SysRoles);
 		list.add(user);
-		sysUserDao.saveUsers(list);
+		int result = sysUserDao.saveOrUpdate(list);
+		System.out.println(result);
 	}
 	
-	@Test @Ignore
-	public void insertTest()
+	@Test
+	public void saveOrUpdateTest2()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
+		List<SysUserVO> list = new ArrayList<>();
 		SysUserVO user = new SysUserVO();
-		user.setAccount("dzg");
 		user.setUsername("dzg");
 		user.setEmail("8538191@qq.com");
 		user.setPassword(bc.encode("dddddd"));
+		user.setAccount("dzg");
+		user.setCreatedUser(0);
+		user.setUpdateLastUser(0);
 		//user.setSRoles(SysRoles);
-		//sysUserDao.saveUsers(user);
+		list.add(user);
+		int result = sysUserDao.saveOrUpdate(list);
+		System.out.println(result);
 	}
 	
-	@Test @Ignore
+	@Test
+	public void deleteTest()
+	{
+		SysUserVO user = new SysUserVO();
+		user.setId(new Long("1001"));
+		//user.setAccount("dzg");
+		sysUserDao.delete(user);
+	}
+	
+	@Test
 	public void updatePwdTest()
 	{
 		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
 		SysUserVO user = new SysUserVO();
-		user.setId(1);
+		user.setId(new Long("1002"));
+		//user.setAccount("dzg");
 		String password = bc.encode("dddddd");
 		user.setPassword(password);
-		//user.setSRoles(SysRoles);
-		sysUserDao.updatePwd(user);
-	}
-	
-	@Test @Ignore
-	public void updateTest()
-	{
-		SysUserVO user = new SysUserVO();
-		user.setId(2);
-		user.setAccount("dzg");
-		user.setUsername("dzg");
-		user.setEmail("8538191@qq.com");
-		//user.setSRoles(SysRoles);
-		//sysUserDao.update(user);
 	}
 	
 }

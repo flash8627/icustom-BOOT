@@ -45,7 +45,7 @@ public interface IUserRestService {
 	 * @return
 	 */
 	@POST
-	@Path("/insert")
-	int insert(List<SysUserVO> userList);
+	@Path("/saveOrUpdate")
+	int saveOrUpdate(List<SysUserVO> userList);
 	
 }

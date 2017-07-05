@@ -24,7 +24,7 @@ public interface ISysRoleDao {
 	
 	List<SysRoleVO> findByUserRoles(@Param("userId") long userId);
 	
-	int saveRoles(@Param("roles")List<SysRoleVO> role);
+	int saveOrUpdate(@Param("roles")List<SysRoleVO> role);
 	
 	public PagedResult<SysRoleVO> findRolePage(@Param("vo") SysRoleVO role,@Param("page") PageVO page);
 	

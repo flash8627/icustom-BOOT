@@ -51,7 +51,7 @@ public interface ISysUserDao {
 	 * @param userList
 	 * @return
 	 */
-	int saveUsers(@Param("users")List<SysUserVO> users);
+	int saveOrUpdate(@Param("users")List<SysUserVO> users);
 
 	/**
 	 * 更新用户密码
@@ -60,5 +60,13 @@ public interface ISysUserDao {
 	 * @return
 	 */
 	int updatePwd(SysUserVO user);
+	
+	/**
+	 * 删除用户
+	 * valid_flag = 2
+	 * @param userList
+	 * @return
+	 */
+	int delete(SysUserVO user);
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gwtjs.icustom.springsecurity.dao.ISysResourceDao">
 	
-	<update id="saveResources">
+	<update id="saveOrUpdate">
 		begin 
 			<foreach collection='list' item="item" index="index">
 				merge into sys_resource_t tar
@@ -12,7 +12,7 @@
 				             #{item.parentId,jdbcType=VARCHAR}				PARENT_ID,
 				             #{item.methodName,jdbcType=VARCHAR}          		method_name,
 				             #{item.methodPath,jdbcType=VARCHAR}        		method_path,
-				             #{item.remarks,jdbcType=VARCHAR}      			remark,
+				             #{item.remark,jdbcType=VARCHAR}      			remark,
 				             #{item.resourceName,jdbcType=VARCHAR}         		resource_name,
 				             #{item.resourceUrl,jdbcType=VARCHAR}            	resource_url,
 				             #{item.orderCode,jdbcType=INTEGER}             order_code,
@@ -20,11 +20,12 @@
 				             SYSDATE        								created_date,
 				             #{item.updateLastUser,jdbcType=NUMERIC}           	update_last_user,
 				             SYSDATE        								update_last_date,
-				             #{item.item.validFlag,jdbcType=INTEGER}             valid_flag
+				             #{item.validFlag,jdbcType=INTEGER}             valid_flag
 				        from dual 
 				  ) src
 				  on (
 				     tar.resource_id=src.resource_id
+				     OR tar.resource_url=src.resource_url
 				  )
 				  WHEN MATCHED THEN
 				    UPDATE SET
@@ -33,7 +34,6 @@
 				      tar.remark = src.remark,
 				      tar.PARENT_ID = src.PARENT_ID,
 				      tar.resource_name = src.resource_name,
-				      tar.resource_url = src.resource_url,
 				      tar.order_code = src.order_code,
 				      tar.created_user = src.created_user,
 				      tar.created_date = src.created_date,
@@ -51,6 +51,7 @@
 				       resource_url,
 				       order_code,
 				       created_user,
+				       created_date,
 				       update_last_user,
 				       update_last_date,
 				       valid_flag)

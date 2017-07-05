@@ -18,9 +18,7 @@ import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
 @Mapper
 public interface ISysResourceDao {
 	
-	int insert(SysResourceVO sys);
-	
-	int update(SysResourceVO sys);
+	int saveOrUpdate(List<SysResourceVO> sys);
 	
 	List<SysResourceVO> findAll();
 	

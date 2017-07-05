@@ -2,16 +2,16 @@ package com.gwtjs.icustom.springsecurity.dao;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
-import com.gwtjs.icustom.springsecurity.dao.ISysRoleDao;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
-import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 public class ISysRoleDaoTest extends SecurityMainApplicationTest {
 	
@@ -24,18 +24,23 @@ public class ISysRoleDaoTest extends SecurityMainApplicationTest {
 		assertTrue(sysRoleDao!=null);
 	}
 	
-	@Test @Ignore
-	public void insertTest()
+	@Test
+	public void saveOrUpdateTest()
 	{
-		/*Integer id = sysRoleDao.findRoleIdCount();
+		List<SysRoleVO> roles = new ArrayList<SysRoleVO>();
 		SysRoleVO role = new SysRoleVO();
-		role.setId(id);
 		role.setRolename("site_test");
-		
-		SysUserVO user = new SysUserVO();
-		user.setId(8);
-		
-		sysRoleDao.insert(role);*/
+		role.setRemark("junit test");
+		roles.add(role);
+		role = new SysRoleVO();
+		role.setRolename("user");
+		role.setRemark("junit test");
+		roles.add(role);
+		role = new SysRoleVO();
+		role.setRolename("test");
+		role.setRemark("junit test");
+		roles.add(role);
+		sysRoleDao.saveOrUpdate(roles);
 	}
 	
 	@Test
@@ -47,19 +52,10 @@ public class ISysRoleDaoTest extends SecurityMainApplicationTest {
 	}
 	
 	@Test
-	public void updateTest()
-	{
-		/*SysRoleVO role = new SysRoleVO();
-		role.setRolename("supuser");
-		role.setId(3);
-		sysRoleDao.update(role);*/
-	}
-	
-	@Test
 	public void findRolePageTest()
 	{
 		SysRoleVO role = new SysRoleVO();
-		role.setRolename("user");
+		//role.setRolename("user");
 		
 		PageVO page = new PageVO();
 		page.setCurPage(1);

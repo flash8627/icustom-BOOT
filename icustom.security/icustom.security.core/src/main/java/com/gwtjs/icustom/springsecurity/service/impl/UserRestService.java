@@ -32,8 +32,8 @@ public class UserRestService implements IUserRestService {
 	}
 	
 	@Override
-	public int insert(List<SysUserVO> userList) {
-		return userDao.saveUsers(userList);
+	public int saveOrUpdate(List<SysUserVO> userList) {
+		return userDao.saveOrUpdate(userList);
 	}
 
 }

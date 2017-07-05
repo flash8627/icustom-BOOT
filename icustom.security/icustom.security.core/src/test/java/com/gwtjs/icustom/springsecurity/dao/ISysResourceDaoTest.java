@@ -2,16 +2,16 @@ package com.gwtjs.icustom.springsecurity.dao;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.core.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
-import com.gwtjs.icustom.springsecurity.dao.ISysResourceDao;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
 public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
@@ -19,23 +19,25 @@ public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
 	@Autowired
 	private ISysResourceDao sysResourceDao;
 
-	@Test
+	@Test @Ignore
 	public void serviceAocTest() {
 		assertTrue(sysResourceDao != null);
 	}
 
-	@Test @Ignore
-	public void insertTest() {
+	@Test
+	public void saveOrUpdateTest() {
+		List<SysResourceVO> list = new ArrayList<SysResourceVO>();
+		
 		SysResourceVO sys=new SysResourceVO();
-		int result = sysResourceDao.insert(sys);
-		System.out.println(result);
-	}
-
-	@Test @Ignore
-	public void updateTest() {
-		SysResourceVO sys=new SysResourceVO();
-		int result = sysResourceDao.update(sys);
-		System.out.println(result);
+		sys.setCreatedUser(0);
+		sys.setUpdateLastUser(0);
+		sys.setResourceName("test");
+		sys.setResourceUrl("/test");
+		sys.setMethodName("test");
+		sys.setMethodPath("/test");
+		sys.setRemark("junit test");
+		list.add(sys);
+		sysResourceDao.saveOrUpdate(list);
 	}
 
 	@Test

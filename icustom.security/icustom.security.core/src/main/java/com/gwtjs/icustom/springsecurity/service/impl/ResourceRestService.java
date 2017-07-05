@@ -17,16 +17,11 @@ public class ResourceRestService implements IResourceRestService {
 	private ISysResourceDao sysResourceDao;
 
 	@Override
-	public int insert(SysResourceVO sys) {
+	public int saveOrUpdate(List<SysResourceVO> sys) {
 		// TODO Auto-generated method stub
-		return sysResourceDao.insert(sys);
+		return sysResourceDao.saveOrUpdate(sys);
 	}
 
-	@Override
-	public int update(SysResourceVO sys) {
-		// TODO Auto-generated method stub
-		return sysResourceDao.update(sys);
-	}
 
 	@Override
 	public int delete(SysResourceVO role) {
