@@ -41,6 +41,19 @@ public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
 	}
 
 	@Test
+	public void findResourcesTreeRootTest() {
+		List<SysResourceVO> list = sysResourceDao.findResourcesTreeRoot();
+		System.out.println(list);
+	}
+	
+	@Test
+	public void findResourcesTreeTest() {
+		SysResourceVO record = new SysResourceVO();
+		List<SysResourceVO> list = sysResourceDao.findResourcesTree(record);
+		System.out.println(list);
+	}
+
+	@Test
 	public void findAllTest() {
 		List<SysResourceVO> list = sysResourceDao.findAll();
 		System.out.println(list);

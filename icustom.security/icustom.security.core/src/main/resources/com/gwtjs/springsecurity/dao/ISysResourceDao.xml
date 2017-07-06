@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gwtjs.icustom.springsecurity.dao.ISysResourceDao">
 	
+	<select id="findResourcesTreeRoot" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
+		<include refid="select_base" />
+				AND tt.parent_id is null
+	</select>
+	
+	<select id="findResourcesTree" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
+		<include refid="select_base" />
+			AND tt.PARENT_ID = #{parentId,jdbcType=NUMERIC}
+		ORDER BY tt.ORDER_CODE ASC 
+	</select>
+	
 	<update id="saveOrUpdate">
 		begin 
 			<foreach collection='list' item="item" index="index">
@@ -144,10 +155,10 @@
 	
 	<sql id="page_st">
 		SELECT * FROM (
-		SELECT TT.* , ROWNUM RN FROM (
+		SELECT TP.* , ROWNUM RN FROM (
 	</sql>
 	<sql id="page_et">
-		) TT
+		) TP
 		<![CDATA[
 		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
 		]]>
