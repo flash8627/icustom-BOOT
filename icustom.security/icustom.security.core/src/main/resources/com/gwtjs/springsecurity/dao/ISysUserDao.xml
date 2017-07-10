@@ -118,18 +118,19 @@
 		
 	<sql id="Base_Column_List">
 		SELECT USER_ID              id,
-			USER_ACCOUNT         account,
-			EMAIL                email,
-			USER_NAME            username,
+			USER_ACCOUNT			account,
+			EMAIL					email,
+			USER_NAME				username,
+			PASSWORD				password,
 			remark					remark,
-			ORDER_CODE           orderCode,
-			CREATED_USER         createdUser,
-			CREATED_DATE         createdDate,
-			UPDATE_LAST_USER     updateLastUser,
-			UPDATE_LAST_DATE     updateLastDate,
-			VALID_FLAG           validFlag,
-			EFFECTIVE_DATE_END   effectiveDateEnd,
-			EFFECTIVE_DATE_START effectiveDateStart
+			ORDER_CODE           	orderCode,
+			CREATED_USER         	createdUser,
+			CREATED_DATE         	createdDate,
+			UPDATE_LAST_USER     	updateLastUser,
+			UPDATE_LAST_DATE     	updateLastDate,
+			VALID_FLAG           	validFlag,
+			EFFECTIVE_DATE_END   	effectiveDateEnd,
+			EFFECTIVE_DATE_START 	effectiveDateStart
 		FROM sys_user_t su
 			WHERE su.VALID_FLAG = 1
 	</sql>

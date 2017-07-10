@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom.lookup</artifactId>
-		<version>0.7.6.28-SNAPSHOT</version>
+		<version>0.7.6.28</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 

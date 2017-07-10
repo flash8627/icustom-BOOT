@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ImportResource;
  * Created by aGuang on 2016/12/9.
  */
 @Configuration
-@ImportResource("classpath*:/config/icustom.webservice.support.services.xml")
+@ImportResource("classpath*:/config/*-service.xml")
 public class WebServiceAutoConfiguration {
 
 	@Bean
@@ -27,17 +27,19 @@ public class WebServiceAutoConfiguration {
 	@Bean
 	@ConditionalOnClass({ CXFServlet.class })
 	public ServletRegistrationBean CXFServlet() {
-		CXFServletConstants cfg = this.cxfServletConfigure();
+		// CXFServletConstants cfg = this.cxfServletConfigure();
 		CXFServlet servlet = new CXFServlet();
 		ServletRegistrationBean registration = new ServletRegistrationBean(
 				servlet);
 		registration.setName("cxfServlet");
-		/*registration.addInitParameter("hide-service-list-page",
-				Boolean.toString(cfg.isHideServiceListPage()));
-		registration.addInitParameter("disable-address-updates",
-				Boolean.toString(cfg.isDisableAddressUpdates()));*/
+		/*
+		 * registration.addInitParameter("hide-service-list-page",
+		 * Boolean.toString(cfg.isHideServiceListPage()));
+		 * registration.addInitParameter("disable-address-updates",
+		 * Boolean.toString(cfg.isDisableAddressUpdates()));
+		 */
 		registration.addUrlMappings("/services/*");
-		registration.setLoadOnStartup(1);
+		// registration.setLoadOnStartup(1);
 		return registration;
 	}
 

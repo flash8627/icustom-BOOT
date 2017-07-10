@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom.security</artifactId>
-		<version>0.7.6.28-SNAPSHOT</version>
+		<version>0.7.6.28</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
@@ -29,25 +29,25 @@
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.api.test.ui</artifactId>
-			<version>0.7.6.28-SNAPSHOT</version>
+			<version>0.7.6.28</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
-			<version>0.7.6.28-SNAPSHOT</version>
+			<version>0.7.6.28</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.core</artifactId>
-			<version>0.7.6.28-SNAPSHOT</version>
+			<version>0.7.6.28</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.resources</artifactId>
-			<version>0.7.6.28-SNAPSHOT</version>
+			<version>0.7.6.28</version>
 			<optional>true</optional>
 		</dependency>
 		

@@ -1,5 +1,8 @@
 package com.gwtjs.icustom.webservice.autoconfigure;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CXFServletConstants {
 
 	private boolean hideServiceListPage = true;

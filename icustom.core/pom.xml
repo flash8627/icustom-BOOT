@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
-		<version>0.7.6.28-SNAPSHOT</version>
+		<version>0.7.6.28</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.log</artifactId>
-			<version>0.7.6.28-SNAPSHOT</version>
+			<version>0.7.6.28</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.util</artifactId>
-			<version>0.7.6.28-SNAPSHOT</version>
+			<version>0.7.6.28</version>
 		</dependency>
 
 		<dependency>
