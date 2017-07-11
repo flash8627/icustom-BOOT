@@ -1,4 +1,5 @@
-package com.gwtjs.icustom.springsecurity.api.api.service;
+package com.gwtjs.icustom.springsecurity.api;
+
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
-@Path("/rest")
+
+@Path("/api/resource")
 @Component @Service  
 @Produces(MediaType.APPLICATION_JSON) 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -30,5 +32,6 @@ public interface IResourceService {
 	@GET
 	@Path("/findAll")
 	List<SysResourceVO> findAll();
+
 	
 }

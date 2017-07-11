@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.springsecurity.api.api.service.impl;
+package com.gwtjs.icustom.springsecurity.api.impl;
 
 import io.swagger.annotations.Api;
 
@@ -8,11 +8,10 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gwtjs.icustom.springsecurity.api.api.service.IResourceService;
+import com.gwtjs.icustom.springsecurity.api.IResourceService;
 import com.gwtjs.icustom.springsecurity.dao.ISysResourceDao;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
-@Api("/rest")
 @Named
 public class ResourceService implements IResourceService {
 
@@ -38,3 +37,4 @@ public class ResourceService implements IResourceService {
 	}
 
 }
+

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.gwtjs.icustom.springsecurity.api.impl.ResourceService;
 import com.gwtjs.icustom.springsecurity.service.impl.ResourceRestService;
 import com.gwtjs.icustom.springsecurity.service.impl.RoleRestService;
 import com.gwtjs.icustom.springsecurity.service.impl.UserRestService;
@@ -37,12 +38,12 @@ public class SecurityCoreCxfConfig {
         beans.add(new UserRestService());
         beans.add(new RoleRestService());
         beans.add(new ResourceRestService());
+        beans.add(new ResourceService());
         
         endpoint.setServiceBeans(beans);
         endpoint.setAddress("/security");
         endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
         
-        endpoint.setServiceBeans(beans);
         BindingFactoryManager manager=endpoint.getBus().getExtension(BindingFactoryManager.class);
         JAXRSBindingFactory factory=new JAXRSBindingFactory();
         factory.setBus(endpoint.getBus());
