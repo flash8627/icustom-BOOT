@@ -13,6 +13,21 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.core</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gwtjs.icustom</groupId>
+			<artifactId>icustom.resources</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.gwtjs.icustom</groupId>
 			<artifactId>icustom.log</artifactId>

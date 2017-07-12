@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
 
-@Path("/api/resource")
+@Path("/resourcesService/api")
 @Component @Service  
 @Produces(MediaType.APPLICATION_JSON) 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -32,6 +32,12 @@ public interface IResourceService {
 	@GET
 	@Path("/findAll")
 	List<SysResourceVO> findAll();
-
 	
+	/**
+	 * 系统主菜单
+	 * @return
+	 */
+	@GET
+	@Path("/findResourcesSiteMenu")
+	List<SysResourceVO> findResourcesSiteMenu();
 }

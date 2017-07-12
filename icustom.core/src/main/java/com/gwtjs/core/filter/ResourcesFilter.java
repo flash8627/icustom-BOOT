@@ -65,11 +65,10 @@ public class ResourcesFilter implements Filter {
 		int userAgentFlag = userAgent.lastIndexOf("Java/1.");
 		// url = getResourcePath(url);
 		if(userAgentFlag>-1){
-			//log.debug("\nUser-Agent init:"+userAgentFlag+" - "+userAgent);
+			log.debug("\nUser-Agent init:"+userAgentFlag+" - "+userAgent);
 			//log.info("\nComplete system startup");
 			chain.doFilter(request, response);
 		}else{
-			//log.debug("\nUser-Agent init:"+userAgentFlag+" - "+userAgent+" - "+uri);
 			//项目主页(/)或模块目录主页(/nav/)
 			String url = getRequestResourceFilePath(uri);
 			boolean rootFlag = validateRootPath(uri);

@@ -2,7 +2,7 @@
  * 头部功能
  */
 $(function() {
-	var url = "/services/sys/resourcesService/findResourcesSiteMenu";
+	var url = "/services/security/resourcesService/api/findResourcesSiteMenu";
 	AjaxUtil.sendGetRequest(url, menuCallback);	
 })
 

@@ -11,6 +11,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.gwtjs.core.filter.RequestContextFilter;
 import com.gwtjs.core.filter.ResourcesFilter;
+import com.gwtjs.core.filter.StampParameterDateFilter;
 
 /**
  * web应用程序的配置，注册servlet，listener，filter等类。
@@ -44,6 +45,19 @@ public class WebApplicationConfig {
     public FilterRegistrationBean characterEncodingFilter(){
         FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CharacterEncodingFilter());
         registrationBean.setName("ICustomCharacterEncodingFilter");
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
+        return  registrationBean;
+    }
+
+    /**
+     * UTF-8编码过滤器。
+     * @return
+     */
+    @Bean @ConditionalOnMissingBean(FilterRegistrationBean.class)
+    public FilterRegistrationBean stampParameterDateFilter(){
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean(new StampParameterDateFilter());
+        registrationBean.setName("ICustomStampParameterDateFilter");
         registrationBean.addUrlPatterns("/*");
         registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
         return  registrationBean;

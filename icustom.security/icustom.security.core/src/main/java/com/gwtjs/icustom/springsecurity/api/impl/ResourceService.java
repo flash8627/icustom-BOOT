@@ -1,7 +1,6 @@
 package com.gwtjs.icustom.springsecurity.api.impl;
 
-import io.swagger.annotations.Api;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
@@ -35,6 +34,14 @@ public class ResourceService implements IResourceService {
 		// TODO Auto-generated method stub
 		return sysResourceDao.findAll();
 	}
+	
+	/**
+	 * 系统导航
+	 */
+	@Override
+	public List<SysResourceVO> findResourcesSiteMenu() {
+		// TODO Auto-generated method stub
+		return new ArrayList<SysResourceVO>();
+	}
 
 }
-

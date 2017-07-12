@@ -52,12 +52,12 @@ public class StampParameterDateFilter implements Filter {
 		
 		String requestURL = req.getRequestURL().toString();
 		String queryStr = req.getQueryString();
-		System.out.println("----------- queryStr --"+queryStr);
 		System.out.println("----------requestURL --"+requestURL);
 		System.out.println("----------requestURI --"+uri);
+		/*System.out.println("----------- queryStr --"+queryStr);
 		
 		System.out.println("-----------     URI:"+getRequestTime(uri));
-		System.out.println(" LastFileUpdateTime:"+getLastFileUpdateTime("1"));
+		System.out.println(" LastFileUpdateTime:"+getLastFileUpdateTime("1"));*/
 		// add timestamp to static resource, to avoid cache
 		if (requestURL != null
 				&& (requestURL.endsWith(".js") || requestURL.endsWith(".css"))) { // static resource
