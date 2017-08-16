@@ -5,12 +5,13 @@ import io.swagger.annotations.Api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gwtjs.icustom.springsecurity.dao.ISysResourceDao;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 import com.gwtjs.icustom.springsecurity.service.IResourceRestService;
 
-@Api("/resource")
+@Api("/resource") @Service("resourceRestService")
 public class ResourceRestService implements IResourceRestService {
 
 	@Autowired

@@ -25,99 +25,105 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.resources</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.api.test.ui</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.core</artifactId>
 			<version>${project.version}</version>
 			<!-- <optional>true</optional> -->
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.security.core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.security.api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.security.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.metrics</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.version}</version>
 			<!-- <optional>true</optional> -->
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.register.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.register.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.lookup.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.lookup.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.international.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.international.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.icustom.entity.PageVO;
 
 /**
  * <b>function:</b> 

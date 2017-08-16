@@ -6,9 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.ResultWrapper;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
+import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.lookup.dao.ILookupItemDAO;
 import com.gwtjs.icustom.lookup.entity.LookupItemVO;
 import com.gwtjs.icustom.lookup.services.ILookupItemService;

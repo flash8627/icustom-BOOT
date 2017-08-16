@@ -25,21 +25,21 @@
 	<dependencies>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.core</artifactId>
 			<version>0.7.6.28</version>
 			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>0.7.6.28</version>
 			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.util</artifactId>
 			<version>0.7.6.28</version>
 			<optional>true</optional>

@@ -15,21 +15,21 @@
 	<dependencies>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter-jedis</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>

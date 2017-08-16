@@ -39,7 +39,7 @@ public class WebServiceAutoConfiguration {
 		 * Boolean.toString(cfg.isDisableAddressUpdates()));
 		 */
 		registration.addUrlMappings("/services/*");
-		// registration.setLoadOnStartup(1);
+		registration.setLoadOnStartup(1);
 		return registration;
 	}
 

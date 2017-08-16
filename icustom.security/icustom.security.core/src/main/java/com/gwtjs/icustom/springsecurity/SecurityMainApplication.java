@@ -7,11 +7,10 @@ import javax.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.gwtjs.core.log.ICustomLogger;
-import com.gwtjs.core.log.ICustomLoggerFactory;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 import com.gwtjs.icustom.springsecurity.support.Appctx;
 
-//@MapperScan("com.gwtjs")
 @SpringBootApplication 	
 public class SecurityMainApplication {
 

@@ -24,10 +24,12 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-import com.gwtjs.core.log.ICustomLogger;
-import com.gwtjs.core.log.ICustomLoggerFactory;
-import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
+import com.gwtjs.icustom.intercepts.PageInterceptor;
+import com.gwtjs.icustom.intercepts.ProgramInterceptor;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 @Intercepts({ @Signature(type = Executor.class, method = "query", args = {
 		MappedStatement.class, Object.class, RowBounds.class,

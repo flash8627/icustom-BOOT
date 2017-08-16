@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.gwtjs.core.log.ICustomLogger;
-import com.gwtjs.core.log.ICustomLoggerFactory;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 @SpringBootApplication
 public class ICustomAttachmentsApplication {

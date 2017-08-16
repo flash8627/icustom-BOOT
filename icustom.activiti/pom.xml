@@ -7,7 +7,7 @@
 	<packaging>jar</packaging>
 
 	<parent>
-		<groupId>com.gwtjs.icustom</groupId>
+		<groupId>${project.groupId}</groupId>
 		<artifactId>icustom</artifactId>
 		<version>0.7.6.28</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
@@ -20,14 +20,14 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>

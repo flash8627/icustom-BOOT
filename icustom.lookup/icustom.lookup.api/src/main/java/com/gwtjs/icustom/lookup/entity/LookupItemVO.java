@@ -1,6 +1,6 @@
 package com.gwtjs.icustom.lookup.entity;
 
-import com.gwtjs.core.entity.BaseResource;
+import com.gwtjs.icustom.entity.BaseResource;
 
 public class LookupItemVO extends BaseResource {
 	/**

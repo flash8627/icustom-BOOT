@@ -14,8 +14,8 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
 @Path("/role")

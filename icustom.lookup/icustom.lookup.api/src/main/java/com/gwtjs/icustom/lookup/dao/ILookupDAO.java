@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.PagedResult;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.lookup.entity.LookupVO;
 
 public interface ILookupDAO{

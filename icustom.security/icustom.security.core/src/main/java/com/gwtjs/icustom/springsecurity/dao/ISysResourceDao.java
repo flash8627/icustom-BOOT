@@ -2,11 +2,15 @@ package com.gwtjs.icustom.springsecurity.dao;
 
 import java.util.List;
 
+import javax.inject.Named;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.PagedResult;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
 
@@ -16,14 +20,11 @@ import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
  * @author aGuang
  *
  */
-@Mapper
+@Mapper @Named("isysResourceDao")/* @Component  @Service*/
 public interface ISysResourceDao {
 
 	// 1027新增
-	List<SysResourceVO> findResourcesTreeRoot();
-		
-	// 1027新增
-	List<SysResourceVO> findResourcesTree(SysResourceVO record);
+	List<SysResourceVO> findResourcesTree(@Param("parentId") long parentId);
 
 	int saveOrUpdate(List<SysResourceVO> sys);
 

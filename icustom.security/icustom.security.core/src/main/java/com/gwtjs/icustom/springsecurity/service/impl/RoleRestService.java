@@ -4,8 +4,8 @@ import io.swagger.annotations.Api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.PagedResult;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.dao.ISysRoleDao;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 import com.gwtjs.icustom.springsecurity.service.IRoleRestService;

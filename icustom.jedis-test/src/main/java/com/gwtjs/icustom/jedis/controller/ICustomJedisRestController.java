@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gwtjs.core.log.ICustomLogger;
-import com.gwtjs.core.log.ICustomLoggerFactory;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 import com.gwtjs.icustom.jedis.client.RedisClient;
 
 /*@RestController

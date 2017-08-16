@@ -1,6 +1,6 @@
 package com.gwtjs.icustom.register.entity;
 
-import com.gwtjs.core.entity.TreeModel;
+import com.gwtjs.icustom.entity.TreeModel;
 
 /**
  * 数据字典

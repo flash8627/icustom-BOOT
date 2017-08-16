@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.gwtjs.core.entity.BaseResource;
+import com.gwtjs.icustom.entity.BaseResource;
 
 public class SysUserVO extends BaseResource {
 
@@ -19,6 +19,7 @@ public class SysUserVO extends BaseResource {
 	private String username; // 用户姓名
 	private String email;// 用户邮箱
 	private String password;// 用户密码
+	private Integer userEnabled;
 
 	private String remark; // 用户描述
 
@@ -100,6 +101,14 @@ public class SysUserVO extends BaseResource {
 
 	public void setEffectiveDateEnd(Date effectiveDateEnd) {
 		this.effectiveDateEnd = effectiveDateEnd;
+	}
+
+	public Integer getUserEnabled() {
+		return userEnabled;
+	}
+
+	public void setUserEnabled(Integer userEnabled) {
+		this.userEnabled = userEnabled;
 	}
 
 	@Override

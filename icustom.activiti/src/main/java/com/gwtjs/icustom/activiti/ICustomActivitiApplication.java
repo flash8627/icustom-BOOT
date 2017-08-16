@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.gwtjs.core.log.ICustomLogger;
-import com.gwtjs.core.log.ICustomLoggerFactory;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 import com.gwtjs.icustom.activiti.dao.CompRepository;
 import com.gwtjs.icustom.activiti.dao.PersonRepository;
 import com.gwtjs.icustom.activiti.model.Comp;

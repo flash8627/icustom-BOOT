@@ -43,14 +43,19 @@ create table SYS_RESOURCE_T
   parent_id        NUMBER(20),
   resource_name    VARCHAR2(400),
   resource_url     VARCHAR2(1000),
+  icon             VARCHAR2(30),
   order_code       INTEGER default 1,
   created_user     NUMBER,
   created_date     DATE default SYSDATE,
   update_last_user NUMBER,
   update_last_date DATE default SYSDATE,
+  main_view_flag   INTEGER default 1,
   valid_flag       INTEGER default 1
 )
 tablespace USERS;
+-- Add comments to the columns 
+comment on column SYS_RESOURCE_T.main_view_flag
+  is '显示在页面菜单里的资源,1为显示,0为不显示';
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table SYS_RESOURCE_T
   add constraint SYS_RESOURCE_T_PK primary key (resource_id)

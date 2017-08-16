@@ -3,8 +3,8 @@ package com.gwtjs.icustom.springsecurity.region.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.PagedResult;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.entity.ForecastVO;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 

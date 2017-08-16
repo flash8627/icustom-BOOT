@@ -16,7 +16,9 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-import static com.gwtjs.core.util.StringUtil.*;
+import com.gwtjs.icustom.intercepts.ExtendedSqlSource;
+
+import static com.gwtjs.icustom.util.StringUtil.*;
 
 @Intercepts({
 	@Signature(type = Executor.class,method="query",args={MappedStatement.class,Object.class,RowBounds.class,ResultHandler.class}),

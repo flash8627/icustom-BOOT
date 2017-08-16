@@ -27,25 +27,25 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.api.test.ui</artifactId>
 			<version>0.7.6.28</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
 			<version>0.7.6.28</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.core</artifactId>
 			<version>0.7.6.28</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.resources</artifactId>
 			<version>0.7.6.28</version>
 			<optional>true</optional>

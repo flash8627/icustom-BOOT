@@ -12,9 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.ResultWrapper;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
+import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.lookup.entity.LookupItemVO;
 
 /**

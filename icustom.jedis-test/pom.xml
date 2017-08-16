@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.gwtjs.icustom</groupId>
+		<groupId>${project.groupId}</groupId>
 		<artifactId>icustom</artifactId>
 		<version>0.7.6.28</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
@@ -15,14 +15,14 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
@@ -30,7 +30,7 @@
 
 		<!-- Compile -->
 		<dependency>
-			<groupId>com.gwtjs.icustom</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter-jedis</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>

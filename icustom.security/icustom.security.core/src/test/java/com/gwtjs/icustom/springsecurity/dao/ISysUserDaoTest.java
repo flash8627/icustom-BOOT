@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.gwtjs.core.entity.PagedResult;
-import com.gwtjs.core.entity.PageVO;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
 import com.gwtjs.icustom.springsecurity.dao.ISysUserDao;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;

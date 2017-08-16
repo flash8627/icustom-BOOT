@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.gwtjs.core.api.test.ApiTestUiMainApplication;
+import com.gwtjs.icustom.api.test.ApiTestUiMainApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ApiTestUiMainApplication.class)

@@ -9,8 +9,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gwtjs.core.entity.PageVO;
-import com.gwtjs.core.entity.PagedResult;
+import com.gwtjs.icustom.entity.PageVO;
+import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.SecurityMainApplicationTest;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
@@ -19,7 +19,7 @@ public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
 	@Autowired
 	private ISysResourceDao sysResourceDao;
 
-	@Test @Ignore
+	@Test
 	public void serviceAocTest() {
 		assertTrue(sysResourceDao != null);
 	}
@@ -41,15 +41,14 @@ public class ISysResourceDaoTest  extends SecurityMainApplicationTest {
 	}
 
 	@Test
-	public void findResourcesTreeRootTest() {
-		List<SysResourceVO> list = sysResourceDao.findResourcesTreeRoot();
+	public void findResourcesSiteMenuTest() {
+		List<SysResourceVO> list = sysResourceDao.findResourcesTree(0);
 		System.out.println(list);
 	}
 	
 	@Test
-	public void findResourcesTreeTest() {
-		SysResourceVO record = new SysResourceVO();
-		List<SysResourceVO> list = sysResourceDao.findResourcesTree(record);
+	public void findResourcesSiteMenuTest2() {
+		List<SysResourceVO> list = sysResourceDao.findResourcesTree(1);
 		System.out.println(list);
 	}
 

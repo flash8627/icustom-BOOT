@@ -27,7 +27,7 @@ import com.gwtjs.icustom.intercepts.PageInterceptor;
  *
  */
 @Configuration
-@MapperScan({"com.gwtjs.**.dao"})
+@MapperScan(basePackages={"com.gwtjs.icustom"}/*,markerInterface=SqlMapper.class*/)//value={"com.gwtjs.**.dao"}
 @ConditionalOnClass(MyBatisConfig.class)// 当Service这个类在类路径中时，且当前容器中没有这个Bean的情况下，开始自动配置 
 public class MyBatisConfig implements TransactionManagementConfigurer {
 	
@@ -40,21 +40,21 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
 	public SqlSessionFactory sqlSessionFactoryBean() {
 		//PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		
-		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setTypeAliasesPackage("com.gwtjs.**.entity");
+		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+		sqlSessionFactory.setDataSource(dataSource());
+		sqlSessionFactory.setTypeAliasesPackage("com.gwtjs.**.entity");
 		
 		PageInterceptor pageInterceptor = new PageInterceptor();
 
 		// 添加分页拦截器插件
-		sessionFactory.setPlugins(new Interceptor[] { pageInterceptor });
+		sqlSessionFactory.setPlugins(new Interceptor[] { pageInterceptor });
 
 		// 添加XML目录
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		try {
-			sessionFactory.setMapperLocations(resolver
+			sqlSessionFactory.setMapperLocations(resolver
 					.getResources("classpath*:com/gwtjs/**/dao/*Dao.xml"));
-			return sessionFactory.getObject();
+			return sqlSessionFactory.getObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

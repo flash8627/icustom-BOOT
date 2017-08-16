@@ -1,6 +1,6 @@
 package com.gwtjs.icustom.springsecurity.entity;
 
-import com.gwtjs.core.entity.BaseResource;
+import com.gwtjs.icustom.entity.BaseResource;
 
 //系统角色表
 public class SysRoleVO extends BaseResource {

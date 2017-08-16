@@ -25,6 +25,8 @@
 	<modules>
 		<module>icustom.security.annotation</module>
 		<module>icustom.security.core</module>
+		<module>icustom.security.api</module>
+		<module>icustom.security.impl</module>
 		<module>icustom.security.ui</module>
 	</modules>
 

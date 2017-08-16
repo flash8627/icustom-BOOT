@@ -1,6 +1,6 @@
 package com.gwtjs.icustom.springsecurity.entity;
 
-import com.gwtjs.core.entity.BaseResource;
+import com.gwtjs.icustom.entity.BaseResource;
 
 public class SysResourceVO extends BaseResource {
 

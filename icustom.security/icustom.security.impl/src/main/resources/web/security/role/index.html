@@ -1,0 +1,273 @@
+
+<link href="../css/content.css" rel="stylesheet">
+
+<div class="container">
+	<div class="page-header">
+		<h1>Role Manager</h1>
+	</div>
+
+	<div id="Role_tt" class="easyui-tabs" data-options="tabWidth:118"
+		style="height: 580px">
+		<div title="Role List">
+
+			<form class="form-inline" method="post" id="role_search_form"
+				style="padding: 8px;">
+
+				<div class="form-group my-form-group" style="width: 36%;">
+					<label for="formRoleName" style="width: 18%; text-align: right;">角色名称:</label>
+					<input type="text" class="form-control" style="width: 78%;"
+						placeholder="role code" id="formRoleName">
+				</div>
+
+				<div class="form-group my-form-group" style="width: 36%;">
+					<label for="formRoleDesc" style="width: 18%; text-align: right;">角色描述:</label>
+					<input type="text" class="form-control" style="width: 78%;"
+						placeholder="role name" id="formRoleDesc">
+				</div>
+
+				<div class="form-group my-form-group form-search-btn-group"
+					style="width: 20%; text-align: center;">
+					<button type="submit" class="btn btn-success">
+						<i class="fa fa-search"></i> Search
+					</button>
+					<button type="submit" class="btn btn-success">
+						<i class="fa fa-undo"></i> Reset
+					</button>
+				</div>
+
+			</form>
+
+			<div
+				style="padding: 8px 3px; margin: 6px; height: 36px; display: inline">
+				<button class="btn btn-success actionbtn" type="button" id="role_create">
+					<i class="fa fa-plus"></i> 新增
+				</button>
+				<button class="btn btn-success optionbtn l-btn-disabled" id="role_remove"
+					type="button">
+					<i class="fa fa-remove fa-trash-o fa-lg" aria-hidden="true"></i> 删除
+				</button>
+				<a href="javascript:void(0)" id="role_modal_submit"
+					class="btn btn-primary formbtn l-btn-disabled"
+					><i
+					class="fa fa-save fa-trash-o fa-lg"></i> Save</a> 
+
+				<div class="btn-group actionbtn">
+					<a href="javascript:;" class="btn btn-primary"><i
+						class="fa fa-file-excel-o"></i> 导入导出</a> <a href="javascript:;"
+						data-toggle="dropdown" class="btn btn-primary dropdown-toggle"
+						aria-expanded="false"> <span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;"><i class="i"></i> 导出Excel</a></li>
+						<li><a href="javascript:;"><i class="i"></i> 下载Excel模板</a></li>
+						<li class="divider"></li>
+						<li><a href="javascript:;"><i class="i"></i> 导入Excel</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="role_list" style="margin: 6px; border: 1px solid #EEEEEE;">
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 分页组件 -->
+<script type="text/x-handlebars-template-partial"
+	id="role_table_pager_template">
+	<tr id="role_pager_template">
+		<th colspan="5"><span>1</span> <span>...</span> <span>12</span> <span>13</span>
+			<span>14</span> <span>15</span> <span>16</span> <span>...</span> <span>116</span>
+			<span>&nbsp;</span> <span>{{totalRows}}</span> <span>/</span> <span>{{totalPage}}</span>
+		</th>
+		<th colspan="5">&nbsp;</th>
+	</tr>
+</script>
+
+<!--角色****** 表头 -->
+<script type="text/x-handlebars-template" id="role_table_template">
+	<table class="table table-hover" id="role_table">
+		<thead>
+			<tr>
+				<th>选择</th>
+				<th>角色名称 <span class="required">*</span></th>
+				<th>角色编码</th>
+				<th>角色说明</th>
+				<th>排序码</th>
+				<th>创建用户</th>
+				<th>创建时间</th>
+				<th>最后更新用户</th>
+				<th>最后更新时间</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#if data}}
+			{{#data}} {{> tr}} {{/data}} {{else}}
+			<div class="alert alert-warning">Can not find any data!</div>
+			{{/if}}
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+</script>
+
+<!-- 角色 行模板 -->
+<script type="text/x-handlebars-template-partial"
+	id="role_table_tr_template">
+	<tr data-id="{{roleId}}" data-name="id">
+		<td>
+			<form>
+				<label class="checkbox-inline"> <input type="checkbox"
+					id="id" name="id" value="{{roleId}}"
+					onclick="validateRemoveBtn()">
+				</label>
+			</form>
+		</td>
+		<td data-id="{{roleName}}" data-name="roleName">{{roleName}}</td>
+		<td data-id="{{roleCode}}" data-name="roleCode">{{roleCode}}</td>
+		<td data-id="{{roleDesc}}" data-name="roleDesc">{{roleDesc}}</td>
+		<td>{{orderCode}}</td>
+		<td>{{createdUser}}</td>
+		<td>{{createdDate}}</td>
+		<td>{{updateLastUser}}</td>
+		<td>{{updateLastDate}}</td>
+		<td>
+			<button class="btn btn-xs btn-primary role_edit" title="Edit Role Info">
+				<i class="fa fa-edit"></i>
+			</button>
+			<button class="btn btn-xs btn-primary role_gears" title="Role Authorities">
+				<i class="fa fa-gears"></i>
+			</button>
+		</td>
+	</tr>
+</script>
+
+<!-- 角色　行编辑模板 -->
+<script type="text/x-handlebars-template" id="role_modal_form_template">
+    <tr data-id="{{roleId}}" data-name="roleId" class="template">
+		<td>
+			<input type="hidden" name="roleId" id="roleId" value="{{roleId}}">&nbsp;
+		</td>
+		<td><input type="text" value="{{roleName}}" id="roleName" class="form-control"></td>
+		<td><input type="text" value="{{roleCode}}" id="roleCode" class="form-control"></td>
+		<td><input type="text" value="{{roleDesc}}" id="roleDesc" class="form-control"></td>
+		<td><input type="text" value="{{orderCode}}" id="orderCode" class="form-control"></td>
+		<td>{{createdUser}}</td>
+		<td>{{createdDate}}</td>
+		<td>{{updateLastUser}}</td>
+		<td>{{updateLastDate}}</td>
+		<td>
+			<button class="btn btn-xs btn-primary role_edit_cancel" title="cancel Edit">
+				<i class="fa fa-fw fa-remove"></i>
+			</button>
+		</td>
+	</tr>
+</script>
+
+<!-- 角色权限视图 -->
+<script type="text/x-handlebars-template-partial" id="role_auths_table_template">
+	
+<div style="margin: 8px;">
+	<div class="page-header">
+		<h5>角色信息</h5>
+	</div>
+	<div style="" class="my-form-group-row">
+		<span class="form-group my-form-group" style="width: 38%;"> 
+			<label for="roleName" style="">角色名称:</label> 
+			<span class="curEditorRoleName">{{roleName}}</span>
+			<input type="hidden" name="curEditorRoleId" value="{{roleId}}" />
+		</span>
+		<span class="form-group my-form-group" style="width: 38%;"> 
+			<label for="roleCode" style="width: 18%; text-align: right;">角色编码:</label> 
+			<span>{{roleCode}}</span>
+		</span>
+	</div>
+</div>
+
+<div id="Role_Auth_Item_{{roleId}}"
+	style="height: auto; margin: 6px;">
+
+	<button class="btn btn-success itemFormActionbtn l-btn-disabled" 
+		type="button" onclick="roleAuthItemsSave()">
+		<i class="fa fa-save" aria-hidden="true"></i> 保存
+	</button>
+
+	<!--
+	<button class="btn btn-success l-btn-disabled" id="removeRoleAuths"
+		type="button" onclick="removeRoleAuthsSubmit()">
+		<i class="fa fa-remove fa-trash-o fa-lg" aria-hidden="true"></i> 删除
+	</button>
+	-->
+
+	<button class="btn btn-success actionbtn" type="button"
+		onclick="roleAuthItemsBack()">
+		<i class="fa fa-reply" aria-hidden="true"></i>&nbsp;返回
+	</button>
+
+</div>
+
+<div id="Role_Auth_Item_{{roleId}}_grid" class="{{roleId}}">
+	<table class="table table-hover" id="role_item_{{roleId}}_table">
+		<thead>
+			<tr>
+				<th width="56">选择</th>
+				<th width="156">权限名称 <span class="required">*</span></th>
+				<th width="156" data-id="{{authCode}}" data-name="authCode">权限编码</th>
+				<th width="116">我的权限</th>
+				<th width="56">删除</th>
+				<th>权限说明</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#if data}} 
+				{{#data}} {{> tr}} {{/data}} 
+			{{else}}
+				<div class="alert alert-warning">Can not find any data!</div>
+			{{/if}}
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+</div>
+
+</script>
+
+<script type="text/x-handlebars-template" id="roles_auth_info_template">
+	<tr data-id="{{id}}" data-name="id">
+		<td>
+			<form>
+				<label class="checkbox-inline"> 
+					<input type="checkbox" tagId="{{tagId}}" id="id" name="id" value="{{id}}"
+						 onchange="roleAuthSaveState()" onclick="validateRoleAuthRemoveBtn()">
+					<input type="hidden" name="roleId" id="roleId" value="{{roleId}}">&nbsp;
+					<input type="hidden" name="tagId" id="tagId" value="{{tagId}}">
+				</label>
+			</form>
+		</td>
+		<td data-id="{{authName}}" data-name="roleName">{{authName}}</td>
+		<td data-id="{{authCode}}" data-name="authCode">{{authCode}}</td>
+		<td data-id="{{myAuth}}" data-name="tagId">{{myAuth}}</td>
+		<td data-id="{{myAuth}}" data-name="myAuth">
+
+			{{#if myAuth}}
+			<button class="btn btn-xs role_auths_remove" title="delete Role Authorities">
+				<i class="fa fa-remove"></i>
+			</button>
+			{{/if}}
+
+		</td>
+		<td data-id="{{authDesc}}" data-name="roleDesc">{{authDesc}}</td>
+	</tr>
+</script>
+
+<script src="../global.js"></script>
+<script src="RoleView.js"></script>
+<script src="RoleService.js"></script>
+<script src="auth/RoleAuthoritiesView.js"></script>
+<script src="auth/RoleAuthoritiesService.js"></script>
+
+<!-- 全局参数 -->
+<script type="text/javascript" src="RoleMgr.js">
+</script>
+
+
+
