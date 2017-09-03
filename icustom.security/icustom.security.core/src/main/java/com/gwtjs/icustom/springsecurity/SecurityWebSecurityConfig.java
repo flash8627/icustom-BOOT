@@ -105,7 +105,13 @@ public class SecurityWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		List<String> list=new ArrayList<String>();
         list.add("/js/**");
         list.add("/scripts/**");
+        list.add("/**/js/**");
+        list.add("/**/*.js");
+        list.add("/**/scripts/**");
         list.add("/css/**");
+        list.add("/**/css/**");
+        list.add("/css/**/*.css");
+        list.add("/**/css/*.css");
         list.add("/image/**");
         list.add("/images/**");
         list.add("/resources/**");

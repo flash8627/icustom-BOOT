@@ -74,6 +74,7 @@ public class ResourcesFilter implements Filter {
 			boolean rootFlag = validateRootPath(uri);
 			
 			if(rootFlag){
+				//response.setContentType("text/html");
 				//加载项目或目录下的index.html
 				String contentFile = url+HOME_NAME;
 				//log.info("\n content File PATH:"+contentFile);
@@ -91,6 +92,7 @@ public class ResourcesFilter implements Filter {
 					
 					//如果不空,则加载拼装html
 					if(contentIn!=null){
+						//response.setContentType("text/html");
 						buildPageToStream(contentIn,response);
 					}else{
 						//如果是项目下的html,或是404都会朝这里走
@@ -106,6 +108,7 @@ public class ResourcesFilter implements Filter {
 					
 					//如果不空,则加载拼装html
 					if(contentIn!=null){
+						//response.setContentType("text/html");
 						IOUtils.copy(contentIn, response.getOutputStream());
 					}else{
 						//如果是项目下的html,或是404都会朝这里走

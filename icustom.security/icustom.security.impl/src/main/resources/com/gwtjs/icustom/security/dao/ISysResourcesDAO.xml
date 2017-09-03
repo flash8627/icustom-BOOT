@@ -13,7 +13,7 @@
 	<select id="findAuthResourcesTreeRoot" resultType="com.gwtjs.icustom.security.entity.SysResourcesVO">
 		SELECT
 		<include refid="auth_resource_tree_col" />
-		 FROM SYS_RESOURCES_T T1 
+		 FROM SYS_RESOURCE_T T1 
 		where T1.VALID_FLAG=1 
 				AND parent_id is null
 	</select>
@@ -21,7 +21,7 @@
 	<select id="findAuthResourcesTree" resultType="com.gwtjs.icustom.security.entity.SysResourcesVO">
 		SELECT
 		<include refid="auth_resource_tree_col" />
-		 FROM SYS_RESOURCES_T T1 
+		 FROM SYS_RESOURCE_T T1 
 		where T1.VALID_FLAG=1 
 			AND T1.PARENT_ID = #{parentId,jdbcType=NUMERIC}
 		ORDER BY T1.ORDER_CODE ASC 
@@ -30,16 +30,16 @@
 	<sql id="auth_resource_tree_col">
 		RESOURCE_ID 		 id,
 		RESOURCE_NAME 		 text,
-		RES_URL			 	resUrl,
-		resource_desc        resourceDesc,
+		RESOURCE_URL			 	resUrl,
+		REMARK        resourceDesc,
 		ISSYS            issys,
 		PARENT_ID 		 parentId, 
 		ORDER_CODE orderCode,
-		(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID = to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
-		(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID = to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn,
-		(decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID = T1.RESOURCE_ID),0,0,1)) leaf,
-	    (decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID = T1.RESOURCE_ID),0,'', '[]' )) children,
-	    (decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID = T1.RESOURCE_ID),0,'', 'closed' )) state,
+		(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID = to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
+		(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID = to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn,
+		(decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID = T1.RESOURCE_ID),0,0,1)) leaf,
+	    (decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID = T1.RESOURCE_ID),0,'', '[]' )) children,
+	    (decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID = T1.RESOURCE_ID),0,'', 'closed' )) state,
 	    CREATED_USER createdUser,
 	    CREATED_DATE createdDate,
 	    UPDATE_LAST_USER updateLastUser,
@@ -53,7 +53,7 @@
 	<!-- treegrid专用  -->
 	<select id="findResourcesGridTreeRoot" resultType="com.gwtjs.icustom.security.entity.SysResourcesVO">
 		<include refid="nav_base_column" />
-		where parent_id is null and rownum = 1
+		where (parent_id is null or parent_id = 0) and rownum = 1
 	</select>
 	
 	<select id="selectByPrimaryKey" resultType="com.gwtjs.icustom.security.entity.SysResourcesVO">
@@ -62,18 +62,18 @@
 	</select>
 
 	<delete id="deleteByPrimaryKey">
-		delete from SYS_RESOURCES_T where RESOURCE_ID = #{resourceId,jdbcType=NUMERIC}
+		delete from SYS_RESOURCE_T where RESOURCE_ID = #{resourceId,jdbcType=NUMERIC}
 	</delete>
 
 	<insert id="insert" parameterType="com.gwtjs.icustom.security.entity.SysResourcesVO">
-		insert into SYS_RESOURCES_T
+		insert into SYS_RESOURCE_T
 		(
 		RESOURCE_ID,
 		RESOURCE_NAME,
 		PARENT_ID,
 		ICON,
-		RES_URL,
-		resource_desc, 
+		RESOURCE_URL,
+		REMARK, 
 		USE_STATUS,
 		RESOURCE_TYPE,
 		ORDER_CODE,
@@ -102,14 +102,14 @@
 
 	<update id="updateByPrimaryKey" parameterType="com.gwtjs.icustom.security.entity.SysResourcesVO">
 		update
-		SYS_RESOURCES_T
+		SYS_RESOURCE_T
 		set 
 			RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
 			PARENT_ID = #{parentId,jdbcType=NUMERIC},
 			ICON = #{icon,jdbcType=VARCHAR},
-			RES_URL = #{resUrl,jdbcType=VARCHAR},
+			RESOURCE_URL = #{resUrl,jdbcType=VARCHAR},
 			RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR},
-			RESOURCE_DESC = #{resourceDesc,jdbcType=VARCHAR},
+			REMARK = #{resourceDesc,jdbcType=VARCHAR},
 			USE_STATUS = #{useStatus,jdbcType=INTEGER},
 			ORDER_CODE = #{orderCode,jdbcType=NUMERIC},
 			UPDATE_LAST_USER = #{updateLastUser,jdbcType=NUMERIC},
@@ -119,7 +119,7 @@
 	</update>
 
 	<delete id="batchRemoveNavigationPks" parameterType="java.util.List">
-		DELETE FROM SYS_RESOURCES_T WHERE RESOURCE_ID in
+		DELETE FROM SYS_RESOURCE_T WHERE RESOURCE_ID in
 		<foreach item="item" index="index" collection="list" open="("
 			separator="," close=")">
 			#{item.resourceId}
@@ -131,14 +131,14 @@
 		<if test="list!=null and !list.isEmpty()">
 			begin
 			<foreach collection="list" item="item">
-				insert into SYS_RESOURCES_T
+				insert into SYS_RESOURCE_T
 				(
 					RESOURCE_ID,
 					RESOURCE_NAME,
 					PARENT_ID,
 					ICON,
-					RES_URL,
-					resource_desc, 
+					RESOURCE_URL,
+					REMARK, 
 					USE_STATUS,
 					RESOURCE_TYPE, 
 					ORDER_CODE,
@@ -174,27 +174,27 @@
 			T1.RESOURCE_ID resourceId,
 			T1.RESOURCE_NAME resourceName,
 			T1.PARENT_ID parentId,
-			nvl((select T2.RESOURCE_NAME parentName FROM SYS_RESOURCES_T T2 WHERE RESOURCE_ID =
+			nvl((select T2.RESOURCE_NAME parentName FROM SYS_RESOURCE_T T2 WHERE RESOURCE_ID =
 			T1.PARENT_ID AND ROWNUM=1),'') parentName,
 			T1.ICON icon,
-			T1.RES_URL resUrl,
+			T1.RESOURCE_URL resUrl,
 			T1.RESOURCE_TYPE resourceType,
-			T1.resource_desc resourceDesc,
+			T1.REMARK resourceDesc,
 			T1.USE_STATUS useStatus,
-			(decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID =
+			(decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID =
 			T1.RESOURCE_ID),0,0,1)) leaf,
-			(decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID =
+			(decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID =
 			T1.RESOURCE_ID),0,'','[]')) children,
 			T1.ORDER_CODE orderCode,
 			T1.CREATED_USER createdUser,
 			T1.CREATED_DATE createdDate,
-			(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID =
+			(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID =
 			to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
 			T1.UPDATE_LAST_USER updateLastUser,
 			T1.UPDATE_LAST_DATE updateLastDate,
-			(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID =
+			(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID =
 			to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn
-		FROM SYS_RESOURCES_T T1
+		FROM SYS_RESOURCE_T T1
 		START WITH T1.PARENT_ID IS NULL
 		CONNECT BY PRIOR T1.RESOURCE_ID = PARENT_ID
 	</sql>
@@ -204,29 +204,29 @@
 			T1.RESOURCE_ID resourceId,
 			T1.RESOURCE_NAME resourceName,
 			T1.PARENT_ID parentId,
-			nvl((select T2.RESOURCE_NAME parentName FROM SYS_RESOURCES_T T2 WHERE RESOURCE_ID =
+			nvl((select T2.RESOURCE_NAME parentName FROM SYS_RESOURCE_T T2 WHERE RESOURCE_ID =
 			T1.PARENT_ID AND ROWNUM=1),'') parentName,
 			T1.ICON icon,
-			T1.RES_URL resUrl,
+			T1.RESOURCE_URL resUrl,
 			T1.RESOURCE_TYPE resourceType,
-			T1.resource_desc resourceDesc,
+			T1.REMARK resourceDesc,
 			T1.USE_STATUS useStatus,
-			(decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID =
+			(decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID =
 			T1.RESOURCE_ID),0,0,1)) leaf,
-			(decode((select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID =
+			(decode((select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID =
 			T1.RESOURCE_ID),0,'','[]')) children,
-			(select count(1) FROM SYS_RESOURCES_T TC WHERE TC.PARENT_ID =
+			(select count(1) FROM SYS_RESOURCE_T TC WHERE TC.PARENT_ID =
 			T1.RESOURCE_ID) childrenCount,
 			T1.ORDER_CODE orderCode,
 			T1.CREATED_USER createdUser,
 			T1.CREATED_DATE createdDate,
-			(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID =
+			(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID =
 			to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
 			T1.UPDATE_LAST_USER updateLastUser,
 			T1.UPDATE_LAST_DATE updateLastDate,
-			(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID =
+			(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID =
 			to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn
-		FROM SYS_RESOURCES_T T1
+		FROM SYS_RESOURCE_T T1
 	</sql>
 	
 	<select id="findMenuList" resultType="com.gwtjs.icustom.security.entity.SysResourcesVO">

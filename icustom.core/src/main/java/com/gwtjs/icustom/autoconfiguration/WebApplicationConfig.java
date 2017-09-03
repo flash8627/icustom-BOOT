@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -25,13 +26,14 @@ import com.gwtjs.icustom.filter.StampParameterDateFilter;
  */
 @Configuration 
 @ConditionalOnClass(WebApplicationConfig.class)
-/*@PropertySource("classpath*:jdbc.oracle.properties")*/
-@ImportResource({ "classpath*:/config/*.configs.xml","classpath*:/config/*.configs.xml",
-		"classpath*:/config/*.beans.xml",
-		"classpath*:/config/*.exceptions.xml",
-		})//"classpath*:spring.xml" 
+@PropertySource("classpath:application.properties")
+@ImportResource({ "classpath*:/config/*.configs.xml",
+	"classpath*:/config/*.beans.xml",
+	"classpath*:/config/*.service.xml",
+	"classpath*:/config/*.services.xml",
+	"classpath*:/config/*.exceptions.xml", })
+//"classpath*:spring.xml"
 @ComponentScan({ "com.gwtjs.icustom.filter", "com.gwtjs.icustom.servlet",
-	"com.gwtjs.icustom.autoconfiguration",
 	"com.gwtjs.icustom.autoconfiguration" })
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE - 1)
 public class WebApplicationConfig implements EnvironmentAware {

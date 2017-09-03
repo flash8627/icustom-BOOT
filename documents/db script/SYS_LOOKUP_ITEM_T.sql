@@ -25,10 +25,7 @@ create table SYS_LOOKUP_ITEM_T
   update_last_date DATE default SYSDATE,
   valid_flag       NUMBER(1) default 1
 )
-tablespace USERS
-  pctfree 10
-  initrans 1
-  maxtrans 255;
+tablespace USERS;
 -- Add comments to the table 
 comment on table SYS_LOOKUP_ITEM_T
   is 'lookup条目类,一个分类对应多条　';
@@ -53,21 +50,12 @@ comment on column SYS_LOOKUP_ITEM_T.update_last_date
 alter table SYS_LOOKUP_ITEM_T
   add primary key (ITEM_ID)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+  tablespace USERS;
 alter table SYS_LOOKUP_ITEM_T
   add constraint SYS_LOOKUP_ITEM_CODE_UNIQUE unique (CLASS_ID, ITEM_CODE)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+  tablespace USERS;
 alter table SYS_LOOKUP_ITEM_T
   add constraint SYS_LOOKUP_ITEM_NAME_UNIQUE unique (CLASS_ID, ITEM_NAME)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255;
+  tablespace USERS;

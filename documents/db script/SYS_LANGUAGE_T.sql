@@ -1,3 +1,28 @@
+
+-- Drop SEQUENCE
+declare
+  v_num number;
+begin
+  select count(*)
+    into v_num
+    from user_sequences
+   where sequence_name = 'SYS_LANGUAGE_S';
+  if v_num > 0 then
+    execute immediate 'drop SEQUENCE SYS_LANGUAGE_S';
+  end if;
+end;
+/
+
+
+-- Create sequence 
+create sequence SYS_LANGUAGE_S
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 141
+increment by 1
+cache 20;
+
+
 declare
 v_num number;
 begin
@@ -33,17 +58,7 @@ create table SYS_LANGUAGE_T
   update_last_date DATE default SYSDATE,
   valid_flag       NUMBER(1) default 1
 )
-tablespace USERS
-  pctfree 10
-  initrans 1
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+tablespace USERS;
 -- Add comments to the columns 
 comment on column SYS_LANGUAGE_T.lan_id
   is '主键,序列自增';
@@ -71,28 +86,8 @@ comment on column SYS_LANGUAGE_T.update_last_date
 alter table SYS_LANGUAGE_T
   add primary key (LAN_ID)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  tablespace USERS;
 alter table SYS_LANGUAGE_T
   add constraint SYS_LANGUAGE_UNIQUE unique (LAN_VALUE, LAN_TYPE)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  tablespace USERS;

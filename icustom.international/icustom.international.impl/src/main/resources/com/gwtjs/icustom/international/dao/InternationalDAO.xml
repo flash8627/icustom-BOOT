@@ -78,11 +78,11 @@
 		ATTRIBUTE8 attribute8, 
 		ATTRIBUTE9 attribute9,
 		ATTRIBUTE10 attribute10, 
-		(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID = to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
+		(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID = to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
 		ORDER_CODE orderCode, 
 		CREATED_USER createdUser,
 		TO_CHAR(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS') createdDate,
-		(nvl((select TU.USER_NAME userName FROM SYS_USERS_T TU WHERE TU.USER_ID = to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn,
+		(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID = to_char(T1.UPDATE_LAST_USER)),T1.UPDATE_LAST_USER) ) lastNameCn,
 		UPDATE_LAST_USER updateLastUser,
 		TO_CHAR(CREATED_DATE,'YYYY-MM-DD HH24:MI:SS') updateLastDate
 	</sql>

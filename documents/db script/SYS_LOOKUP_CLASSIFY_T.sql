@@ -1,3 +1,4 @@
+
 declare
 v_num number;
 begin
@@ -22,17 +23,7 @@ create table SYS_LOOKUP_CLASSIFY_T
   update_last_date DATE default SYSDATE,
   valid_flag       NUMBER(1) default 1
 )
-tablespace USERS
-  pctfree 10
-  initrans 1
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+tablespace USERS;
 -- Add comments to the table 
 comment on table SYS_LOOKUP_CLASSIFY_T
   is 'lookup分类信息';
@@ -57,42 +48,12 @@ comment on column SYS_LOOKUP_CLASSIFY_T.update_last_date
 alter table SYS_LOOKUP_CLASSIFY_T
   add primary key (CLASS_ID)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  tablespace USERS;
 alter table SYS_LOOKUP_CLASSIFY_T
   add constraint SYS_LOOKUP_CLASS_CODE_UNIQUE unique (CLASS_CODE)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  tablespace USERS;
 alter table SYS_LOOKUP_CLASSIFY_T
   add constraint SYS_LOOKUP_CLASS_NAME_UNIQUE unique (CLASS_NAME)
   using index 
-  tablespace USERS
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  tablespace USERS;
