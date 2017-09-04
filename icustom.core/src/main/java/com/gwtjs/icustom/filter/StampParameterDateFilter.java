@@ -68,7 +68,7 @@ public class StampParameterDateFilter implements Filter {
 					&& queryStr.trim().indexOf(ParameterConfig.STATIC_TAIL) == -1) {
 				newURL = requestURL + "?" + queryStr + "&"
 						+ ParameterConfig.STATIC_TAIL + new Date().getTime();
-				System.out.println("-----------已经加了时间戳-"+newURL);
+				//System.out.println("-----------已经加了时间戳-"+newURL);
 				logger.error(newURL.toString());
 				resp.sendRedirect(newURL);
 				//chain.doFilter(request, response);
@@ -76,7 +76,7 @@ public class StampParameterDateFilter implements Filter {
 			if (StringUtils.isBlank(queryStr)) {
 				newURL = requestURL + "?" + ParameterConfig.STATIC_TAIL
 						+ new Date().getTime();
-				System.out.println("-----------直接增加时间戳-"+newURL);
+				//System.out.println("-----------直接增加时间戳-"+newURL);
 				resp.sendRedirect(newURL);
 				//chain.doFilter(request, response);
 			}

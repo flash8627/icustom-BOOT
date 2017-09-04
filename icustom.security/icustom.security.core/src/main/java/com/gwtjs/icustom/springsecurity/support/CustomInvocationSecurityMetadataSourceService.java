@@ -78,7 +78,7 @@ public class CustomInvocationSecurityMetadataSourceService implements
 					urls.add(resource.getResourceUrl());
 				}
 			}
-			logger.debug("\n"+ca+" urls:" + urls);
+			//logger.debug("\n"+ca+" urls:" + urls);
 			for (String url : urls) {
 
 				/*

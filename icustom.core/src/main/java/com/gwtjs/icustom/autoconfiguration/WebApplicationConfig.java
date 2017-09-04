@@ -31,8 +31,8 @@ import com.gwtjs.icustom.filter.StampParameterDateFilter;
 	"classpath*:/config/*.beans.xml",
 	"classpath*:/config/*.service.xml",
 	"classpath*:/config/*.services.xml",
-	"classpath*:/config/*.exceptions.xml", })
-//"classpath*:spring.xml"
+	"classpath*:/config/*.exceptions.xml"})
+//, "classpath*:spring.xml"
 @ComponentScan({ "com.gwtjs.icustom.filter", "com.gwtjs.icustom.servlet",
 	"com.gwtjs.icustom.autoconfiguration" })
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE - 1)
@@ -96,7 +96,7 @@ public class WebApplicationConfig implements EnvironmentAware {
 				new StampParameterDateFilter());
 		registrationBean.setName("ICustomStampParameterDateFilter");
 		registrationBean.addUrlPatterns("/*");
-		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE - 1);// 在最高优先级之后执行。
+		//registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE - 1);// 在最高优先级之后执行。
 		return registrationBean;
 	}
 

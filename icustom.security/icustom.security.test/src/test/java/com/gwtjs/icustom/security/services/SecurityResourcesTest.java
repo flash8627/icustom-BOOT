@@ -27,15 +27,20 @@ public class SecurityResourcesTest extends SecurityMainApiApplicationTest {
 
 	/*
 	 * @Autowired private ISysResourceDao sysResourceDao;
-	 @Autowired
-	private ISysResourcesService resourcesService;
+	 
 	@Inject
-	private ISysResourcesDAO resourcesDAO;*/
+	private ISysResourcesDAO resourcesDAO;
 	
+	@Autowired
+	private ISysResourcesService resourcesService;
+	
+	*/
+	@Inject
+	private ISysResourcesDAO isysResourcesDAO;
 	
 	@Test
 	public void serviceAocTest() {
-		//assertTrue(resourcesService != null);
+		assertTrue(isysResourcesDAO != null);
 	}
 
 	@Test

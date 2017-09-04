@@ -5,6 +5,8 @@ import static com.gwtjs.icustom.util.RequestUtil.getUserAgent;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -63,6 +65,7 @@ public class ResourcesFilter implements Filter {
 		
 		String userAgent = getUserAgent(req);
 		int userAgentFlag = userAgent.lastIndexOf("Java/1.");
+		
 		// url = getResourcePath(url);
 		if(userAgentFlag>-1){
 			log.debug("\nUser-Agent init:"+userAgentFlag+" - "+userAgent);
@@ -73,8 +76,12 @@ public class ResourcesFilter implements Filter {
 			String url = getRequestResourceFilePath(uri);
 			boolean rootFlag = validateRootPath(uri);
 			
+			if(suffixMatcher(uri)){
+				response.setContentType("text/html;charset=UTF-8");
+				//System.out.println("\n********"+uri);
+			}
+			
 			if(rootFlag){
-				//response.setContentType("text/html");
 				//加载项目或目录下的index.html
 				String contentFile = url+HOME_NAME;
 				//log.info("\n content File PATH:"+contentFile);
@@ -92,7 +99,6 @@ public class ResourcesFilter implements Filter {
 					
 					//如果不空,则加载拼装html
 					if(contentIn!=null){
-						//response.setContentType("text/html");
 						buildPageToStream(contentIn,response);
 					}else{
 						//如果是项目下的html,或是404都会朝这里走
@@ -108,7 +114,6 @@ public class ResourcesFilter implements Filter {
 					
 					//如果不空,则加载拼装html
 					if(contentIn!=null){
-						//response.setContentType("text/html");
 						IOUtils.copy(contentIn, response.getOutputStream());
 					}else{
 						//如果是项目下的html,或是404都会朝这里走
@@ -256,5 +261,17 @@ public class ResourcesFilter implements Filter {
 			IOUtils.closeQuietly(stream);
 		}
 	}
+	
+	private boolean suffixMatcher(String uri/*,String suffix*/)
+	  {
+		if(uri.lastIndexOf(".html")!=-1)
+			return true;
+		else if(uri.lastIndexOf(".htm")!=-1)
+			return true;
+		else if(uri.lastIndexOf("/")==0)
+			return true;
+		else
+			return false;
+	  }
 	
 }
