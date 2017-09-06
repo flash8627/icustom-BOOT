@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>${project.groupId}</groupId>
+		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
 		<version>0.7.6.28</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
@@ -12,14 +12,39 @@
 	<artifactId>icustom.test</artifactId>
 	<packaging>jar</packaging>
 	
-	<!--
 	<dependencies>
+		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>ICustom.international.api</artifactId>
+			<artifactId>icustom-spring-boot-starter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.core</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.log</artifactId>
+			<version>${project.version}</version>
+			<!-- <optional>true</optional> -->
+		</dependency>
 	</dependencies>
-	-->
 	
 </project>

@@ -83,7 +83,7 @@ public abstract class StringUtils {
 	public static boolean isEmpty(Object str) {
 		return (str == null || "".equals(str));
 	}
-
+	
 	/**
 	 * Check that the given CharSequence is neither {@code null} nor of length 0.
 	 * Note: Will return {@code true} for a CharSequence that purely consists of whitespace.

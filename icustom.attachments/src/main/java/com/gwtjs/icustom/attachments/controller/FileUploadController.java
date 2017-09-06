@@ -26,7 +26,7 @@ import com.gwtjs.icustom.attachments.util.MultiFileValidator;
 @Controller
 public class FileUploadController {
 
-	private static String UPLOAD_LOCATION="C:/mytemp/";
+	private static String UPLOAD_LOCATION="E:/mytemp/";
 
 	@Autowired
 	FileValidator fileValidator;

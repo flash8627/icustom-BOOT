@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class FileDownloadController {
 	
 	private static final String INTERNAL_FILE="irregular-verbs-list.pdf";
-	private static final String EXTERNAL_FILE_PATH="C:/mytemp/SpringMVCHibernateManyToManyCRUDExample.zip";
+	private static final String EXTERNAL_FILE_PATH="E:/SpringMVCHibernateManyToManyCRUDExample.zip";
 	
 
 	@RequestMapping(value={"/","/welcome"}, method = RequestMethod.GET)

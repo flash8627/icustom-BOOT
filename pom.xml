@@ -70,6 +70,7 @@
 		<module>icustom.session</module>
 
 		<!--?-->
+		<module>icustom.activiti</module>
 		<module>icustom.cache</module>
 		<module>icustom.druid</module>
 		<!-- project group -->

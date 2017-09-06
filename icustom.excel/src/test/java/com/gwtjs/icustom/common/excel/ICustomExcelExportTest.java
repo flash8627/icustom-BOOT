@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.excel;
+package com.gwtjs.icustom.common.excel;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,9 +7,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = ICustomExcelApplicationTest.class)
+@SpringBootTest(classes = ICustomExcelExportTest.class)
 @WebAppConfiguration
-public class ICustomExcelApplicationTest {
+public class ICustomExcelExportTest {
 
 	@Test
 	public void contextLoads() {
