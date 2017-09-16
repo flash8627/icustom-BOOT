@@ -87,8 +87,8 @@
 		<module>icustom.email</module>
 		<module>icustom.bbs</module>
 		
-		<module>icustom.ear</module>
 		<module>icustom.web</module>
+		<module>icustom.ear</module>
 	</modules>
 
 

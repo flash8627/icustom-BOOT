@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.springframework.boot.test.rule.OutputCapture;
 
 /**
- * Tests for {@link ICustomRedisApplication}.
+ * Tests for {@link ICustomLogApplication}.
  *
  * @author Dave Syer
  */

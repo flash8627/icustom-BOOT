@@ -23,7 +23,7 @@
 	</properties>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter</artifactId>
@@ -41,7 +41,7 @@
 			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.resources</artifactId>
@@ -78,7 +78,7 @@
 			<artifactId>icustom.security.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.metrics</artifactId>
@@ -111,7 +111,7 @@
 			<artifactId>icustom.register.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.register.impl</artifactId>
@@ -123,7 +123,7 @@
 			<artifactId>icustom.lookup.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.lookup.impl</artifactId>
@@ -135,13 +135,13 @@
 			<artifactId>icustom.international.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.international.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -163,6 +163,30 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>WEB-INF/lib/**/*,classpath:jetty-env.xml</packagingExcludes>
+					<packagingIncludes>**/*.xmi,WEB-INF/classes/**/*</packagingIncludes>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+					<!-- <webXml>src\main\WebContent\WEB-INF\web.xml</webXml> -->
+					<packagingIncludes>**/*.xml,**/*.properties,**/*.xmi,**/*.jar</packagingIncludes>
+					<warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+					<warSourceIncludes>WEB-INF/*.xmi</warSourceIncludes>
 				</configuration>
 			</plugin>
 		</plugins>

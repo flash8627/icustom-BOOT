@@ -13,14 +13,14 @@ import com.gwtjs.icustom.log.ICustomLoggerFactory;
 /*加载spring资源文件*/
 //@ImportResource({"classpath:applicationContext.xml"})
 /*SpringBoot之Servlet、Filter、Listener配置*/
-@ServletComponentScan(value={"com.gwtjs"})
+@ServletComponentScan(value={"com.gwtjs.icustom"})
 public class ICustomCoreApplication {
 	
 	private static final ICustomLogger log = ICustomLoggerFactory.getLogger(ICustomCoreApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ICustomCoreApplication.class, args);
-		log.info("ICustom SpringBoot Start Success...");
+		log.info("ICustom Core Start Success...");
 	}
 	
 }
