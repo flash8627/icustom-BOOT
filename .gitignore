@@ -45,10 +45,10 @@ hs_err_pid*
 *.bak
 *.iml
 *.iws
-*.log
+#*.log
 /.idea
 /bin
-/log
+#/log
 /cobertura.ser
 /grails-spring-security-jaxrs-*.zip
 /grails-spring-security-jaxrs-*.zip.sha1
