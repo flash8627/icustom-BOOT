@@ -28,7 +28,21 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.log</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>

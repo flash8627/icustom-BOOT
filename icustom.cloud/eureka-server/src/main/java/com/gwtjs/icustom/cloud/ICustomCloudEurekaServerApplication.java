@@ -18,19 +18,18 @@ package com.gwtjs.icustom.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-/*import com.gwtjs.icustom.log.ICustomLogger;
-import com.gwtjs.icustom.log.ICustomLoggerFactory;*/
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 @SpringBootApplication
 public class ICustomCloudEurekaServerApplication {
 	
-	/*private static final ICustomLogger log = ICustomLoggerFactory
-			.getLogger(ICustomCloudEurekaServerApplication.class);*/
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(ICustomCloudEurekaServerApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ICustomCloudEurekaServerApplication.class, args);
-		//log.info("Running with ICustom Log successfull------");
+		log.info("Running with ICustom cloud eureka server start======> successfull");
 	}
 
 }

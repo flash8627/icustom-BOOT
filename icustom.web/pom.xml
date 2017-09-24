@@ -81,12 +81,6 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.metrics</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.log</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
@@ -94,10 +88,16 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.metrics</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.attachments</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>

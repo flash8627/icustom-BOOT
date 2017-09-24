@@ -13,9 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.gwtjs.icustom.SecurityMainApiApplicationTest;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 import com.gwtjs.icustom.entity.ResultWrapper;
-import com.gwtjs.icustom.security.SecurityMainApiApplicationTest;
 import com.gwtjs.icustom.security.dao.ISysResourcesDAO;
 import com.gwtjs.icustom.security.entity.SysResourcesVO;
 import com.gwtjs.icustom.security.services.ISysResourcesService;
