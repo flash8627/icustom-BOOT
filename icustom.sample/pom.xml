@@ -19,8 +19,8 @@
 	</parent>
 
 	<modules>
-		<module>icustom.product</module>
-		<module>icustom.parstore</module>
+		<module>icustom.sample.product</module>
+		<module>icustom.sample.parstore</module>
 	</modules>
 
 

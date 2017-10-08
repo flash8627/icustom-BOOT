@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 	
-	<artifactId>icustom.product</artifactId>
+	<artifactId>icustom.sample.product</artifactId>
 	<packaging>jar</packaging>
 	<name>icustom.sample.product</name>
 	
