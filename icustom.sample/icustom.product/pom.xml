@@ -11,6 +11,7 @@
 	
 	<artifactId>icustom.product</artifactId>
 	<packaging>jar</packaging>
+	<name>icustom.sample.product</name>
 	
 	<!--
 	<dependencies>
