@@ -29,14 +29,14 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.log</artifactId>
+			<artifactId>icustom.common.log</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.devtools</artifactId>
+			<artifactId>icustom.common.devtools</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
@@ -50,7 +50,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.resources</artifactId>
+			<artifactId>icustom.common.resources</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>

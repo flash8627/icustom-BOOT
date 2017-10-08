@@ -14,14 +14,14 @@
 	
 	
 	<modules>
-		<module>icustom.attachments</module>
-		<module>icustom.cache</module>
-		<module>icustom.devtools</module>
-		<module>icustom.excel</module>
-		<module>icustom.log</module>
-		<module>icustom.resources</module>
-		<module>icustom.util</module>
-		<module>icustom.api.test.ui</module>
+		<module>icustom.common.attachments</module>
+		<module>icustom.common.cache</module>
+		<module>icustom.common.devtools</module>
+		<module>icustom.common.excel</module>
+		<module>icustom.common.log</module>
+		<module>icustom.common.resources</module>
+		<module>icustom.common.util</module>
+		<module>icustom.common.api.test</module>
 	</modules>
 	
 </project>

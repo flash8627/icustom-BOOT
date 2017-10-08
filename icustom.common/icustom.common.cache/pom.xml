@@ -8,8 +8,8 @@
 		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
-	<artifactId>icustom.cache</artifactId>
-	<name>icustom.cache</name>
+	<artifactId>icustom.common.cache</artifactId>
+	<name>icustom.common.cache</name>
 	<description>icustom Cache core</description>
 	<dependencies>
 		<!-- Compile -->

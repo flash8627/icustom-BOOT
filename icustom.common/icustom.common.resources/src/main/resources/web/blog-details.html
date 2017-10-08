@@ -6,6 +6,7 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style2.css" rel="stylesheet">
 		<!--link href="css/blog-single.css" rel="stylesheet">
 		<link href="css/responsive.css" rel="stylesheet"-->
     </head>   
@@ -24,9 +25,9 @@
 									<div class="dropdown">
 										<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img  src="images/is.png" alt="" /> English <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="#">Japani</a></li>
-											<li><a href="#">Hindi</a></li>
-											<li><a href="#">Chinis</a></li>
+											<li><a href="#">English</a></li>
+											<li><a href="#">US English</a></li>
+											<li><a href="#">Simplified Chinese</a></li>
 										</ul>
 									</div>
 								</li>
@@ -100,7 +101,7 @@
 												<li><a href="index-2.html">Home Page 2</a></li>
 											</ul>	
 										</li>
-										<li class="active"><a href="product-detail.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a><span class="label label-danger text-center hidden-xs">New <i class="fa fa-caret-right"></i></span>
+										<li><a href="product-detail.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a><span class="label label-danger text-center hidden-xs">New <i class="fa fa-caret-right"></i></span>
 											<ul class="dropdown-menu">
 												<li><a href="product.html">Products</a></li>
 												<li><a href="product-detail.html">Product Details</a></li>
@@ -109,7 +110,7 @@
 										</li>
 										<li><a href="faq.html">FAQ</a></li>
 										<li><a href="blog.html">Blog</a></li>
-										<li><a href="blog-details.html">Blog Detail</a></li>
+										<li class="active"><a href="blog-details.html">Blog Detail</a></li>
 										<li><a href="about-us.html">About Us</a> <span class="label label-info text-center hidden-xs">New <i class="fa fa-caret-right"></i></span></li>
 										<li><a href="contact-us.html">Contac Us</a></li>
 									</ul>
@@ -126,429 +127,245 @@
 				</div>	
 			</div>	
 		</header>	
-		
+			
 		<!-- desktop bar -->
 		<section class="desktop-bar">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
-					 	<h3>New Products <i class="fa fa-bars"></i></h3>
+					 <h3>Blog Details <i class="fa fa-bars"></i></h3>
 					</div>
 					<div class="col-sm-8">
 						<ol class="breadcrumb hidden-xs pull-right">
 							<li><a href="#">Home</a></li>
-							<li><a href="#">Shop</a></li>
-							<li class="active"><a href="#">New Products</a></li>
+							<li class="active"><a href="#">Blog Details</a></li>
 						</ol>
 					</div>
 				</div>
 			</div>
 		</section>
-		
-		<!-- recommented products -->
-		<section class="featured-product recommented-product">
+
+		<section class="blog-detail">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="sidebar">
 							<div class="well wedget">
-							 	<strong>Fillter by price</strong>
-								<div class="heading-border b-color-6"></div>
-								
-								<div class="progress">
-								  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-									<span class="sr-only">20% Complete</span>
-								  </div>
-								</div>
-								
-								<small>Currency Shopping By :</small>
-								<p>Price : <span>$260 - $980</span></p>
-								
-								<a class="btn btn-default btn-block" href="#">Fillter Now</a>
+								<form class="navbar-form" role="search">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Search...">
+										<span class="nav-search"><a href="#"><i class="fa fa-search"></i></a></span>
+									</div>	
+								</form>
 							</div>
 							<div class="well wedget">
-							 	<strong>Fillter by Brand</strong>
+							 	<strong>Categories</strong>
 								<div class="heading-border b-color-6"></div>
 								
-								 <ul class="check-box">
-									<li>
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-primary active">
-												<input type="checkbox" autocomplete="off" checked><i class="fa fa-check"></i>
-											</label>Asus - <span class="pull-right">846</span>
-										</div>
-									 </li>
-									 <li>
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-primary active">
-												<input type="checkbox" autocomplete="off" checked><i class="fa fa-check"></i>
-											</label>HP - <span class="pull-right">789</span>
-										</div>
-									 </li>
-									  <li>
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-primary active">
-												<input type="checkbox" autocomplete="off" checked><i class="fa fa-check"></i>
-											</label>Apple - <span class="pull-right">313</span>
-										</div>
-									 </li>
-									  <li>
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-primary active">
-												<input type="checkbox" autocomplete="off" checked><i class="fa fa-check"></i>
-											</label>Dell - <span class="pull-right">452</span>
-										</div>
-									 </li>
-									  <li>
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-primary active">
-												<input type="checkbox" autocomplete="off" checked><i class="fa fa-check"></i>
-											</label>Acer - <span class="pull-right">46</span>
-										</div>
-									 </li>
+								 <ul class="category-2">
+									<li>Wordpress Themes <span class="pull-right">446</span></li>
+									<li>PSD Templates <span class="pull-right">126</span></li>
+									<li>Site Temapltes <span class="pull-right">346</span></li>
+									<li>Joomla Themes <span class="pull-right">656</span></li>
+									<li>Technology <span class="pull-right">87</span></li>
+									<li>Design <span class="pull-right">56</span></li>
 								</ul>
 							</div>
 							<div class="well wedget footer-top">
-							 	<strong>Special Offers</strong>
+							 	<strong>Recent Post</strong>
 								<div class="heading-border b-color-6"></div>
-								<ul class="media-list">
+								<ul class="media-list recent-post">
 									<li class="media">
 										<div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
 										<div class="media-body">
-											<p class="media-heading">Lorem ipsum dolor</p>
-											<div class="category">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star-o"></i>
-											</div>
-											<strong>$899.99</strong>
+											<p class="media-heading">Lorem ipsum dolor sit amet mea aeterno</p>
+											<small> March 14, 2015</small>
 										</div>
 									</li>
 									<li class="media">
 										<div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
 										<div class="media-body">
-											<p class="media-heading">Lorem ipsum dolor</p>
-											<div class="category">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star-o"></i>
-											</div>
-											<strong>$899.99</strong>
+											<p class="media-heading">Lorem ipsum dolor sit amet mea aeterno</p>
+											<small> March 14, 2015</small>
 										</div>
 									</li>
 									<li class="media">
 										<div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
 										<div class="media-body">
-											<p class="media-heading">Lorem ipsum dolor</p>
-											<div class="category">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star-o"></i>
-											</div>
-											<strong>$899.99</strong>
+											<p class="media-heading">Lorem ipsum dolor sit amet mea aeterno</p>
+											<small> March 14, 2015</small>
 										</div>
 									</li>
-									
+									<li class="media">
+										<div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
+										<div class="media-body">
+											<p class="media-heading">Lorem ipsum dolor sit amet mea aeterno</p>
+											<small> March 14, 2015</small>
+										</div>
+									</li>
 								</ul>
 							</div>
-							
 							<div class="single-add">
 								<h4>Get <span>50%</span> Discount</h4>
 								<a href="#" class="btn btn-default" role="button">Learn More</a>
 								<span class="img-add"><img class="img-responsive" src="images/red-tablet.png" width="120px" alt="" /></span>
 							</div>
-							
-							<div class="well wedget footer-top">
-							 	<strong>Featured Products</strong>
+							<div class="well wedget">
+								<strong>Tags Widget</strong>
 								<div class="heading-border b-color-6"></div>
-								<ul class="media-list">
-									<li class="media">
-										<div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
-										<div class="media-body">
-											<p class="media-heading">Lorem ipsum dolor</p>
-											<div class="category">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star-o"></i>
-											</div>
-											<strong>$899.99</strong>
-										</div>
-									</li>
-									<li class="media">
-										<div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
-										<div class="media-body">
-											<p class="media-heading">Lorem ipsum dolor</p>
-											<div class="category">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star"></i> 
-												<i class="fa fa-star-o"></i>
-											</div>
-											<strong>$899.99</strong>
-										</div>
-									</li>
-								</ul>
+								
+								<a class="btn btn-default" href="#" role="button">Joomla</a>
+								<a class="btn btn-default" href="#" role="button">Wordpress</a>
+								<a class="btn btn-default" href="#" role="button">Art</a>
+								<a class="btn btn-default" href="#" role="button">Ui</a>
+								<a class="btn btn-default" href="#" role="button">Print</a>
+								<a class="btn btn-default" href="#" role="button">PhotoShop</a>
+								<a class="btn btn-default" href="#" role="button">Megento</a>
+								<a class="btn btn-default" href="#" role="button">Icons</a>
 							</div>
 							<div class="well text-widget wedget">
 								<strong>Text Widget</strong>
 								<div class="heading-border b-color-6"></div>
 								<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo.</p>
 							</div>
-						</div> <!-- sidebar -->
+						</div>
 					</div>
-					<div class="col-sm-9">
-						<div class="row">
-							<div class="col-sm-12">
-								<div id="desk-slide" class="carousel slide" data-ride="carousel">
-									<div class="carousel-inner" role="listbox">
-										<div class="item active">
-											<div class="row">
-												<div class="col-sm-8">
-													<h2>Harry up! i-custom is the Best and Perfect Solution for Online Store</h2>
-													<a class="btn btn-default" href="#">Buy Now</a>
-												</div>
-												<div class="col-sm-4">
-													<img class="img-responsive" src="images/desk-slide.png" alt="" />
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="row">
-												<div class="col-sm-8">
-													<h2>Harry up! i-custom is the Best and Perfect Solution for Online Store</h2>
-													<a class="btn btn-default" href="#">Buy Now</a>
-												</div>
-												<div class="col-sm-4">
-													<img class="img-responsive" src="images/desk-slide.png" alt="" />
-												</div>
-											</div>
-										</div>
-									</div>
-									<a class="left carousel-control" href="#desk-slide" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-									<a class="right carousel-control" href="#desk-slide" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-								</div>
+					<div class="col-sm-9 blog-detail-wrap">
+						<div id="pro-img" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner" role="listbox">
+								<div class="item active"><img src="images/blog-details.jpg" alt=""></div>
+								<div class="item"><img src="images/blog-details.jpg" alt=""></div>
+								<div class="item"><img src="images/blog-details.jpg" alt=""></div>
 							</div>
-						</div> <!-- slide -->
-						
-						<!-- slide desktop -->
-						<div class="slide-desktop">
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="row">
-										<div class="col-sm-12">
-											<h1><span class="t-color-6">Desktops</span></h1>
-											<div class="heading-border b-color-6"></div>
-										</div>
-									</div> <!-- section title -->
-									<div class="row hidden-xs">
-										<div class="col-sm-12">
-											<nav class="navbar navbar-default desk-nav">
-												<!-- Brand and toggle get grouped for better mobile display -->
-												<div class="navbar-header">
-													<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#desktop" aria-expanded="false">
-														<span class="sr-only">Toggle navigation</span>
-														<span class="icon-bar"></span>
-														<span class="icon-bar"></span>
-														<span class="icon-bar"></span>
-													</button>
-												</div>
-
-												<!-- Collect the nav links, forms, and other content for toggling -->
-												<div class="collapse navbar-collapse" id="desktop">
-													<div class="navbar-form nav navbar-nav navbar-left">
-														<div class="selection"> Sort by
-															<select class="form-control">
-																<option>Position</option>
-																<option>2</option>
-																<option>3</option>
-																<option>4</option>
-																<option>5</option>
-															</select>
-															<i class="fa fa-long-arrow-up"></i>
-														</div>
-
-														<div class="selection"> Show
-															<select class="form-control ">
-																<option>12 Per Page</option>
-																<option>2</option>
-																<option>3</option>
-																<option>4</option>
-																<option>5</option>
-															</select>
-														</div>	
-													</div>	
-
-													<ul class="nav navbar-nav navbar-right">
-														<li class="active"><a href="#"><i class="fa fa-th"></i> Grid</a></li>
-														<li><a href="#"><i class="fa fa-th-list"></i> List</a></li>
-													</ul>
-												</div>
-											</nav>
-										</div>
-									</div>	
-								</div>
-							</div>
-							
-							<div class="best-selling">
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="media desk-media">
-											<div class="media-left">
-												<img src="images/e-add-1.jpg" alt="">
-												<div class="thumb-overlay text-center"><i class="fa fa-eye"></i></div>
-											</div>
-											<div class="media-body">
-												<div class="category"> category
-													<div class="pull-right">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<h3>Lorem ipsum dolor sit amet dolorem molestie</h3>
-												<p>Lorem ipsum dolor sit amet dolorem molestie assentior ei, utquo eros posse verterem. Cum eu error congue saperet treer eam exerci utquo eros posse verterem error</p>
-
-												<div class="list-inline">
-													<li><strong>$899.00</strong></li>
-													<li><a href="#" class="btn btn-default" role="button">Add to Cart</a></li>
-													<li><span class="wish"><i class="fa fa-heart-o"></i> Add to Wishlist</span></li>
-													<li><span><i class="fa fa-file-pdf-o"></i> Compare</span></li>
-												</div>
-											</div>
-										</div>
-										<div class="media desk-media">
-											<div class="media-left">
-												<img src="images/e-add-1.jpg" alt="">
-												<div class="thumb-overlay text-center"><i class="fa fa-eye"></i></div>
-											</div>
-											<div class="media-body">
-												<div class="category"> category
-													<div class="pull-right">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<h3>Lorem ipsum dolor sit amet dolorem molestie</h3>
-												<p>Lorem ipsum dolor sit amet dolorem molestie assentior ei, utquo eros posse verterem. Cum eu error congue saperet treer eam exerci utquo eros posse verterem error</p>
-
-												<div class="list-inline">
-													<li><strong>$899.00</strong></li>
-													<li><a href="#" class="btn btn-default" role="button">Add to Cart</a></li>
-													<li><span class="wish"><i class="fa fa-heart-o"></i> Add to Wishlist</span></li>
-													<li><span><i class="fa fa-file-pdf-o"></i> Compare</span></li>
-												</div>
-											</div>
-										</div>
-										<div class="media desk-media">
-											<div class="media-left">
-												<img src="images/e-add-1.jpg" alt="">
-												<div class="thumb-overlay text-center"><i class="fa fa-eye"></i></div>
-											</div>
-											<div class="media-body">
-												<div class="category"> category
-													<div class="pull-right">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<h3>Lorem ipsum dolor sit amet dolorem molestie</h3>
-												<p>Lorem ipsum dolor sit amet dolorem molestie assentior ei, utquo eros posse verterem. Cum eu error congue saperet treer eam exerci utquo eros posse verterem error</p>
-
-												<div class="list-inline">
-													<li><strong>$899.00</strong></li>
-													<li><a href="#" class="btn btn-default" role="button">Add to Cart</a></li>
-													<li><span class="wish"><i class="fa fa-heart-o"></i> Add to Wishlist</span></li>
-													<li><span><i class="fa fa-file-pdf-o"></i> Compare</span></li>
-												</div>
-											</div>
-										</div>
-										<div class="media desk-media">
-											<div class="media-left">
-												<img src="images/e-add-1.jpg" alt="">
-												<div class="thumb-overlay text-center"><i class="fa fa-eye"></i></div>
-											</div>
-											<div class="media-body">
-												<div class="category"> category
-													<div class="pull-right">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<h3>Lorem ipsum dolor sit amet dolorem molestie</h3>
-												<p>Lorem ipsum dolor sit amet dolorem molestie assentior ei, utquo eros posse verterem. Cum eu error congue saperet treer eam exerci utquo eros posse verterem error</p>
-
-												<div class="list-inline">
-													<li><strong>$899.00</strong></li>
-													<li><a href="#" class="btn btn-default" role="button">Add to Cart</a></li>
-													<li><span class="wish"><i class="fa fa-heart-o"></i> Add to Wishlist</span></li>
-													<li><span><i class="fa fa-file-pdf-o"></i> Compare</span></li>
-												</div>
-											</div>
-										</div>
-										<div class="media desk-media">
-											<div class="media-left">
-												<img src="images/e-add-1.jpg" alt="">
-												<div class="thumb-overlay text-center"><i class="fa fa-eye"></i></div>
-											</div>
-											<div class="media-body">
-												<div class="category"> category
-													<div class="pull-right">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<h3>Lorem ipsum dolor sit amet dolorem molestie</h3>
-												<p>Lorem ipsum dolor sit amet dolorem molestie assentior ei, utquo eros posse verterem. Cum eu error congue saperet treer eam exerci utquo eros posse verterem error</p>
-
-												<div class="list-inline">
-													<li><strong>$899.00</strong></li>
-													<li><a href="#" class="btn btn-default" role="button">Add to Cart</a></li>
-													<li><span class="wish"><i class="fa fa-heart-o"></i> Add to Wishlist</span></li>
-													<li><span><i class="fa fa-file-pdf-o"></i> Compare</span></li>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> <!-- slide desktop -->
-						<!-- pagination -->
-						<nav>
-							<ul class="pagination">
-								<li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-								<li><a href="#">1</a></li>
-								<li class="active"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-							</li>
+							<a class="left carousel-control" href="#pro-img" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+							<a class="right carousel-control" href="#pro-img" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+						</div>
+						<div class="blog-content">
+							<h2>Lorem ipsum dolor sit amet mea aeterno</h2>
+							<ul class="list-inline post-info">
+								<li>Septembar 12, 2016</li>
+								<li><i class="fa fa-user"></i> Jhon Ray</li>
+								<li><i class="fa fa-bookmark"></i> Category Name</li>
+								<li><i class="fa fa-comment"></i> 5 Comments</li>
 							</ul>
-						</nav>
-					</div><!--div 9 -->
+							
+							<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at. Ad brute veritus theophrastus vis, an quo mutat voluptaria mnesarchum.</p>
+							<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at. Ad brute veritus theophrastus vis, an quo mutat voluptaria mnesarchum, eum impetus numquam 								intellegam in. Eu alii oratio aliquip mea, eum inani tantas ex. In sit vidit eirmod, ceteros reprimique sit cu, 								    facilisis assueverit disputationi ad est.</p>
+							<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at.</p> 
+								
+							<div class="well well-sm">
+							<blockquote>
+								<h3><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere 								erat a ante aliquip mea, eum inani tantas.</h3>
+								<footer>No mea aeterno indoctum percipitur</footer>
+							</blockquote>	
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-sm-4">
+								<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at. Ad brute veritus theophrastus vis, an quo mutat voluptaria mnesarchum eum.</p>
+							</div>
+							<div class="col-sm-4">
+								<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at. Ad brute veritus theophrastus vis, an quo mutat voluptaria mnesarchum eum.</p>
+							</div>
+							<div class="col-sm-4">
+								<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at. Ad brute veritus theophrastus vis, an quo mutat voluptaria mnesarchum eum.</p>
+							</div>
+						</div>	
+							<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. In pro decore tamquam 									appetere, ea mentitum mediocrem efficiantur quo. Quo no assentior conclusionemque. Qui cu ceteros accusata. Partem 									utamur explicari eos at. Ad brute veritus theophrastus vis, an quo mutat voluptaria mnesarchum.</p><br>
+						
+						<div class="well well-bg">
+							<p class="tags">Tags :  <a href="#">laptops</a>, <a href="#">desktops</a>, <a href="#">tablets</a>, <a href="#">tablets</a>, <a href="#">tablets</a></p>
+						</div>
+						
+						<div class="well well-bg">
+							<ul class="list-inline p-d-social">
+								<li>Share with Friends : </li>
+								<li><i class="fa fa-flickr"></i></li>
+								<li><i class="fa fa-pinterest-square"></i></li>
+								<li><i class="fa fa-facebook-square"></i></li>
+								<li><i class="fa fa-twitter-square"></i></li>
+								<li><i class="fa fa-linkedin-square"></i></li>
+							</ul>
+						</div>
+						<div class="blog-comment">
+							<h2 class="t-color-6">4 Comments</h2>
+							<div class="heading-border b-color-6"></div>
+							<ul class="media-list">
+								<li class="media">
+									<div class="media-left">
+										<a href="#"><img class="media-object" src="images/team-1.png" width="64" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<ul class="list-inline comment-info">
+											<li><strong>Rohan Doe</strong></li>
+											<li>05.02.2015</li>
+											<li>Reply</li>
+										</ul>
+										<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. 
+										In pro decore tamquam appetere, ea mentitum mediocrem efficiantur. Quo no assentior conclusionemque.</p>
+										
+										<div class="media">
+											<div class="media-left">
+												<a href="#"><img class="media-object" src="images/team-1.png" width="64" alt="..."></a>
+											</div>
+											<div class="media-body">
+												<h4 class="media-heading">Jhon Doe</h4>
+												<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. 
+												In pro decore tamquam appetere, ea mentitum mediocrem efficiantur.</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="media">
+									<div class="media-left">
+										<a href="#"><img class="media-object" src="images/team-1.png" width="64" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<h4 class="media-heading">Jhon Doe</h4>
+										<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. 
+										In pro decore tamquam appetere, ea mentitum mediocrem efficiantur. Quo no assentior conclusionemque.</p>
+										
+										<div class="media">
+											<div class="media-left">
+												<a href="#"><img class="media-object" src="images/team-1.png" width="64" alt="..."></a>
+											</div>
+											<div class="media-body">
+												<h4 class="media-heading">Jhon Doe</h4>
+												<p>Lorem ipsum dolor sit amet, no mea aeterno indoctum percipitur. Homero quaerendum ius ei. 
+												In pro decore tamquam appetere, ea mentitum mediocrem efficiantur.</p>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h2 class="t-color-6">Leave a Comment</h2>
+							<div class="heading-border b-color-6"></div>
+							<div class="row form">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Website">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<textarea class="form-control" rows="6" placeholder="Message"></textarea>
+									</div>
+									<button class="btn btn-Primary btn-lg" type="submit">Post Comment</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

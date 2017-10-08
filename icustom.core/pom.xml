@@ -23,7 +23,7 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.log</artifactId>
+			<artifactId>icustom.common.log</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 			<optional>true</optional>
@@ -31,7 +31,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.util</artifactId>
+			<artifactId>icustom.common.util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

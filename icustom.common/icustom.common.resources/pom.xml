@@ -9,17 +9,17 @@
 		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 	
-	<artifactId>icustom.util</artifactId>
+	<artifactId>icustom.common.resources</artifactId>
 	<packaging>jar</packaging>
 	
+	<!--
 	<dependencies>
-		
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>ICustom.international.api</artifactId>
+			<version>${project.version}</version>
 		</dependency>
-		
 	</dependencies>
+	-->
 	
 </project>

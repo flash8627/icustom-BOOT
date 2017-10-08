@@ -44,13 +44,27 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.resources</artifactId>
+			<artifactId>icustom.common.resources</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.api.test.ui</artifactId>
+			<artifactId>icustom.common.attachments</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.common.log</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.common.api.test</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -81,27 +95,13 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.log</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.metrics</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.attachments</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.excel</artifactId>
+			<artifactId>icustom.common.excel</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
