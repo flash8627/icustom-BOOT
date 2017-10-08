@@ -6,10 +6,10 @@
 		<groupId>${project.groupId}</groupId>
 		<artifactId>icustom</artifactId>
 		<version>0.7.10.8</version>
-		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
+		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
-	<artifactId>icustom.jedis-test</artifactId>
-	<name>icustom redis</name>
+	<artifactId>icustom.data.jedis-test</artifactId>
+	<name>icustom.data redis</name>
 	<description>icustom redis</description>
 
 	<dependencies>

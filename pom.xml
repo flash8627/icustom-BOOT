@@ -58,21 +58,18 @@
 		<!--starters-->
 		<module>icustom-spring-boot-starters</module>
 		<!--cloud core-->
-		<module>icustom.metrics</module>
 		<module>icustom.cloud</module>
 		<!--ICustom Data-->
-		<module>icustom.redis</module>
-		<module>icustom.mongodb</module>
-		<module>icustom.session</module>
+		<module>icustom.data</module>
 
-		<!--?-->
-		<module>icustom.activiti</module>
-		<module>icustom.druid</module>
 		<!-- project group -->
 		<module>icustom.security</module>
 		<module>icustom.register</module>
 		<module>icustom.lookup</module>
 		<module>icustom.international</module>
+		<!--?-->
+		<module>icustom.activiti</module>
+		<module>icustom.metrics</module>
 		<module>icustom.sample</module>
 		<module>icustom.lottery</module>
 		<!--1-->
