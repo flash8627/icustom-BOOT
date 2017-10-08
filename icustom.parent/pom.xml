@@ -7,7 +7,7 @@
 
 	<groupId>${project.groupId}</groupId>
 	<artifactId>icustom-parent</artifactId>
-	<version>0.7.6.28</version>
+	<version>0.7.10.8</version>
 	<packaging>pom</packaging>
 
 	<properties>

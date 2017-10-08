@@ -3,17 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>icustom.cas</artifactId>
+	<artifactId>icustom.security.cas</artifactId>
 	<packaging>jar</packaging>
 
-	<name>icustom.cas</name>
-	<description>Demo project for Spring Boot</description>
+	<name>icustom.security.cas</name>
+	<description>SSO project for icustom security cas</description>
 
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
 		<artifactId>icustom</artifactId>
-		<version>0.7.6.28</version>
-		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
+		<version>0.7.10.8</version>
+		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -24,7 +24,7 @@
 
 	<dependencies>
 		
-		 <!-- security 对CAS支持 -->  
+		 <!-- security 锟斤拷CAS支锟斤拷 -->  
         <dependency>  
             <groupId>org.springframework.security</groupId>  
             <artifactId>spring-security-cas</artifactId>  

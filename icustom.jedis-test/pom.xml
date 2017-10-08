@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>${project.groupId}</groupId>
 		<artifactId>icustom</artifactId>
-		<version>0.7.6.28</version>
+		<version>0.7.10.8</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 	<artifactId>icustom.jedis-test</artifactId>
