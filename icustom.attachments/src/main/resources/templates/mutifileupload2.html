@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>多个文件上传进度条</title>
+
+<script type="text/javascript" src="../upload/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../upload//bootstrap/js/bootstrap.min.js"></script>
+
+
+<link type="text/css" rel="stylesheet" href="../upload/css/app.css"></link>
+<link type="text/css" rel="stylesheet"
+	href="../upload/bootstrap/css/bootstrap.css"></link>
+<link type="text/css" rel="stylesheet"
+	href="../upload/css/progressBar.css"></link>
+
+<script type="text/javascript">
+	$(function() {
+		// 批量导入按钮
+		$("#batchImportBtn").click(function() {
+			$('#batchImportModal').modal('show');
+		});
+		var base = $("#base").val();
+		// 上传按钮
+		$("#batchUploadBtn").attr('disabled', true);
+		// 上传文件按钮点击的时候
+		$("#batchUploadBtn").click(function() {
+			// 进度条归零
+			$("#progressBar").width("0%");
+			// 上传按钮禁用
+			$(this).attr('disabled', true);
+			// 进度条显示
+			$("#progressBar").parent().show();
+			$("#progressBar").parent().addClass("active");
+			// 上传文件
+			UpladFile();
+		});
+
+		// 文件修改时
+		$("#batchFile").change(function() {
+			$("#batchUploadBtn").val("上传");
+			$("#progressBar").width("0%");
+			var file = $(this).prop('files');
+			if (file.length != 0) {
+				$("#batchUploadBtn").attr('disabled', false);
+			}
+
+		});
+
+		function UpladFile() {
+			var fileObj = $("#batchFile").get(0).files[0]; // js 获取文件对象
+			console.info("上传的文件：" + fileObj);
+			var FileController = "upload/files"; // 接收上传文件的后台地址 
+			// FormData 对象
+			var form = new FormData();
+			// form.append("author", "hooyes"); // 可以增加表单数据
+			form.append("file", fileObj); // 文件对象
+			// XMLHttpRequest 对象
+			var xhr = new XMLHttpRequest();
+			xhr.open("post", FileController, true);
+			xhr.onload = function() {
+				// ShowSuccess("上传完成");
+				alert("上传完成");
+				$("#batchUploadBtn").attr('disabled', false);
+				$("#batchUploadBtn").val("上传");
+				$("#progressBar").parent().removeClass("active");
+				$("#progressBar").parent().hide();
+				//$('#myModal').modal('hide');
+			};
+			xhr.upload.addEventListener("progress", progressFunction, false);
+			xhr.send(form);
+		}
+		function progressFunction(evt) {
+			var progressBar = $("#progressBar");
+			if (evt.lengthComputable) {
+				var completePercent = Math.round(evt.loaded / evt.total * 100)
+						+ "%";
+				progressBar.width(completePercent);
+				$("#batchUploadBtn").val("正在上传 " + completePercent);
+			}
+		}
+
+	})
+</script>
+
+</head>
+<body style="width: 80%; margin: 0px auto;">
+	<input type="button" value="上传" id="batchImportBtn" />
+	<!-- Modal -->
+	<div id="batchImportModal" class="modal fade" role="dialog"
+		aria-labelledby="gridSystemModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">批量导入附件</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group" id="passwordDiv">
+						<label>选择附件数据文件</label> <input class="form-control" type="file"
+							id="batchFile" />
+					</div>
+					<div class="progress progress-striped active" style="display: none">
+						<div id="progressBar" class="progress-bar progress-bar-info"
+							role="progressbar" aria-valuemin="0" aria-valuenow="0"
+							aria-valuemax="100" style="width: 0%"></div>
+					</div>
+					<div class="form-group">
+						<input id="batchUploadBtn" type="submit" name="submit"
+							class="btn btn-success" value="上传" />
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+
+</body>
+
+</html>

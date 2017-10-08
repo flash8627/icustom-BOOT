@@ -1,106 +1,120 @@
 package com.gwtjs.icustom.attachments.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.gwtjs.icustom.attachments.model.FileBucket;
-import com.gwtjs.icustom.attachments.model.MultiFileBucket;
-import com.gwtjs.icustom.attachments.util.FileValidator;
-import com.gwtjs.icustom.attachments.util.MultiFileValidator;
-
+/**
+ * 文件上传的Controller
+ * 
+ * create 2017年1月11日
+ */
 @Controller
 public class FileUploadController {
 
-	private static String UPLOAD_LOCATION="E:/mytemp/";
-
-	@Autowired
-	FileValidator fileValidator;
-
-	@Autowired
-	MultiFileValidator multiFileValidator;
-
-	@InitBinder("fileBucket")
-	protected void initBinderFileBucket(WebDataBinder binder) {
-		binder.setValidator(fileValidator);
+	// 页面访问路径为
+	@RequestMapping(value = {"/attachments","/attachments/index","/upload/index","/attachments/upload/index"}, method = RequestMethod.GET)
+	public String index() {
+		return "/index";
 	}
 
-	@InitBinder("multiFileBucket")
-	protected void initBinderMultiFileBucket(WebDataBinder binder) {
-		binder.setValidator(multiFileValidator);
+	// 页面访问路径为
+	@RequestMapping(value = "/attachments/upload", method = RequestMethod.GET)
+	public String upload() {
+		return "/fileupload";
 	}
 
-	@RequestMapping(value = { "/upload/", "/upload/welcome" }, method = RequestMethod.GET)
-	public String getHomePage(ModelMap model) {
-		return "welcome";
+	// 页面访问路径为：http://ip:port/upload/batch
+	@RequestMapping(value = "/attachments/uploadfiles", method = RequestMethod.GET)
+	public String batchUpload() {
+		return "/mutifileupload";
 	}
 
-	@RequestMapping(value = "/singleUpload", method = RequestMethod.GET)
-	public String getSingleUploadPage(ModelMap model) {
-		FileBucket fileModel = new FileBucket();
-		model.addAttribute("fileBucket", fileModel);
-		return "singleFileUploader";
+	// 页面访问路径为：http://ip:port/upload/batch
+	@RequestMapping(value = "/attachments/uploads", method = RequestMethod.GET)
+	public String mutifileUpload() {
+		return "/mutifileupload2";
 	}
 
-	@RequestMapping(value = "/singleUpload", method = RequestMethod.POST)
-	public String singleFileUpload(@Valid FileBucket fileBucket,
-			BindingResult result, ModelMap model) throws IOException {
-
-		if (result.hasErrors()) {
-			System.out.println("validation errors");
-			return "singleFileUploader";
-		} else {
-			System.out.println("Fetching file");
-			MultipartFile multipartFile = fileBucket.getFile();
-
-			// Now do something with file...
-			FileCopyUtils.copy(fileBucket.getFile().getBytes(), new File( UPLOAD_LOCATION + fileBucket.getFile().getOriginalFilename()));
-			String fileName = multipartFile.getOriginalFilename();
-			model.addAttribute("fileName", fileName);
-			return "success";
-		}
-	}
-
-	@RequestMapping(value = "/multiUpload", method = RequestMethod.GET)
-	public String getMultiUploadPage(ModelMap model) {
-		MultiFileBucket filesModel = new MultiFileBucket();
-		model.addAttribute("multiFileBucket", filesModel);
-		return "multiFileUploader";
-	}
-
-	@RequestMapping(value = "/multiUpload", method = RequestMethod.POST)
-	public String multiFileUpload(@Valid MultiFileBucket multiFileBucket,
-			BindingResult result, ModelMap model) throws IOException {
-
-		if (result.hasErrors()) {
-			System.out.println("validation errors in multi upload");
-			return "multiFileUploader";
-		} else {
-			System.out.println("Fetching files");
-			List<String> fileNames = new ArrayList<String>();
-			// Now do something with file...
-			for (FileBucket bucket : multiFileBucket.getFiles()) {
-				FileCopyUtils.copy(bucket.getFile().getBytes(), new File(UPLOAD_LOCATION + bucket.getFile().getOriginalFilename()));
-				fileNames.add(bucket.getFile().getOriginalFilename());
+	/**
+	 * 文件上传具体实现方法（单文件上传）
+	 *
+	 * @param file
+	 * @return
+	 * 
+	 * @author a g
+	 * @create 2017年1月11日
+	 */
+	@RequestMapping(value = "/attachments/upload/file", method = RequestMethod.POST)
+	@ResponseBody
+	public String upload(@RequestParam("file") MultipartFile file) {
+		if (!file.isEmpty()) {
+			try {
+				// 这里只是简单例子，文件直接输出到项目路径下。
+				// 实际项目中，文件需要输出到指定位置，需要在增加代码处理。
+				// 还有关于文件格式限制、文件大小限制，详见：中配置。
+				BufferedOutputStream out = new BufferedOutputStream(
+						new FileOutputStream(new File(file.getOriginalFilename())));
+				out.write(file.getBytes());
+				out.flush();
+				out.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return "上传失败," + e.getMessage();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "上传失败," + e.getMessage();
 			}
-
-			model.addAttribute("fileNames", fileNames);
-			return "multiSuccess";
+			return "上传成功";
+		} else {
+			return "上传失败，因为文件是空的.";
 		}
 	}
 
+	/**
+	 * 多文件上传 主要是使用了MultipartHttpServletRequest和MultipartFile
+	 *
+	 * @param request
+	 * @return
+	 * 
+	 * @author a g
+	 * @create 2017年1月11日
+	 */
+	@RequestMapping(value = "/attachments/upload/files", method = RequestMethod.POST)
+	public @ResponseBody String batchUpload(HttpServletRequest request) {
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+		MultipartFile file = null;
+		BufferedOutputStream stream = null;
+
+		for (int i = 0; i < files.size(); ++i) {
+			file = files.get(i);
+			if (!file.isEmpty()) {
+				try {
+					byte[] bytes = file.getBytes();
+					stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+					stream.write(bytes);
+					stream.close();
+				} catch (Exception e) {
+					stream = null;
+					return "You failed to upload " + i + " => " + e.getMessage();
+				}
+			} else {
+				return "You failed to upload " + i + " because the file was empty.";
+			}
+		}
+		return "upload successful";
+	}
 }

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,13 +20,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gwtjs.icustom.security.SecurityImplMainApplication;
 import com.gwtjs.icustom.security.dao.ISysResourcesDAO;
 import com.gwtjs.icustom.security.services.ISysResourcesService;
-import com.gwtjs.icustom.springsecurity.SecurityMainApplication;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SecurityMainApplication.class)
+@SpringBootTest(classes = SecurityImplMainApplication.class)
 @WebAppConfiguration
 //@EnableAutoConfiguration
 @ContextConfiguration(locations = { 
@@ -49,7 +50,7 @@ public class SecurityMainApiApplicationTest {
 	WebApplicationContext webApplicationConnect;
 
 	@Autowired
-	private ISysResourcesService ISysResourcesService;
+	private ISysResourcesService isysResourcesService;
 
 	@Inject
 	private ISysResourcesDAO isysResourcesDAO;
@@ -57,6 +58,7 @@ public class SecurityMainApiApplicationTest {
 	@Test
 	public void serviceAocTest() {
 		assertTrue(isysResourcesDAO != null);
+		assertTrue(isysResourcesService != null);
 	}
 
 	@Before

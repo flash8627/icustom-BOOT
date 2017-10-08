@@ -26,6 +26,8 @@ a, a:active, a:visited {
 
 .app {
 	-webkit-box-flex: 1;
+	width:80%;
+	margin:8px auto;
 }
 #loader-screen{
 	

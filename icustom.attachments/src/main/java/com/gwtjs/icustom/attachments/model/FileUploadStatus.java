@@ -1,38 +1,38 @@
 package com.gwtjs.icustom.attachments.model;
 
 public class FileUploadStatus {
-	
-	private long pBytesRead = 0L;
-	private long pContentLength = 0L;
-	private int pItems;
+
+	private long bytesRead = 0L;
+	private long contentLength = 0L;
+	private int items;
 
 	public FileUploadStatus() {
-		pBytesRead = 0L;
-		pContentLength = 0L;
+		bytesRead = 0L;
+		contentLength = 0L;
 	}
 
-	public long getPBytesRead() {
-		return pBytesRead;
+	public long getBytesRead() {
+		return bytesRead;
 	}
 
-	public void setPBytesRead(long bytesRead) {
-		pBytesRead = bytesRead;
+	public void setBytesRead(long bytesRead) {
+		this.bytesRead = bytesRead;
 	}
 
-	public long getPContentLength() {
-		return pContentLength;
+	public long getContentLength() {
+		return contentLength;
 	}
 
-	public void setPContentLength(long contentLength) {
-		pContentLength = contentLength;
+	public void setContentLength(long contentLength) {
+		this.contentLength = contentLength;
 	}
 
-	public int getPItems() {
-		return pItems;
+	public int getItems() {
+		return items;
 	}
 
-	public void setPItems(int items) {
-		pItems = items;
+	public void setItems(int items) {
+		this.items = items;
 	}
-	
+
 }

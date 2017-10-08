@@ -39,7 +39,7 @@ public class SecurityCoreCxfConfig {
         beans.add(new ResourceRestService());
         
         endpoint.setServiceBeans(beans);
-        endpoint.setAddress("/security");
+        endpoint.setAddress("/security/core");
         endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
         
         BindingFactoryManager manager=endpoint.getBus().getExtension(BindingFactoryManager.class);

@@ -18,9 +18,12 @@ package com.gwtjs.icustom.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
 import com.gwtjs.icustom.log.ICustomLogger;
 import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
+@EnableEurekaServer
 @SpringBootApplication
 public class ICustomCloudEurekaServerApplication {
 	

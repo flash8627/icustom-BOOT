@@ -15,6 +15,12 @@
 	</organization>
 	
 	<dependencies>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		
 		<!-- Compile -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

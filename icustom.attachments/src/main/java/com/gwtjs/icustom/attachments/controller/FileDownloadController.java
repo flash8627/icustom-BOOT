@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FileDownloadController {
 	
-	private static final String INTERNAL_FILE="irregular-verbs-list.pdf";
-	private static final String EXTERNAL_FILE_PATH="E:/SpringMVCHibernateManyToManyCRUDExample.zip";
+	private static final String INTERNAL_FILE="src.rar";
+	private static final String EXTERNAL_FILE_PATH="D:/Workspaces/icustom-boot/icustom-boot/icustom.attachments/src.rar";
 	
 
-	@RequestMapping(value={"/","/welcome"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/download","/downloads"}, method = RequestMethod.GET)
 	public String getHomePage(ModelMap model) {
-		return "welcome";
+		return "index";
 	}
 
 	/*
@@ -41,8 +41,10 @@ public class FileDownloadController {
 		File file = null;
 		
 		if(type.equalsIgnoreCase("internal")){
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			file = new File(classloader.getResource(INTERNAL_FILE).getFile());
+			/*待扩展ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			String filepath = classloader.getResource(INTERNAL_FILE).getFile();
+			System.out.println("filepath:"+filepath);
+			file = new File(filepath);*/
 		}else{
 			file = new File(EXTERNAL_FILE_PATH);
 		}

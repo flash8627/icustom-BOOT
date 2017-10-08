@@ -14,13 +14,13 @@ import com.gwtjs.icustom.interceptor.SpringRestServiceRequestInterceptor;
 @Configuration  
 @EnableWebMvc
 public class SpringMvcAutoConfiguration extends WebMvcConfigurerAdapter {
-
+	
 	@Bean
 	@ConditionalOnClass({ DispatcherServlet.class })
 	public ServletRegistrationBean springMvc(DispatcherServlet dispatcherServlet) {
 		ServletRegistrationBean registration = new ServletRegistrationBean(
 				dispatcherServlet);
-		registration.setName("springMvcServlet");
+		registration.setName("springMvcServlet");	
 		registration.getUrlMappings().clear();
 		registration.addUrlMappings(String.format("/%s/services/*",
 				RequestContextConstants.TYPE_SPRINGMVC));// 鍏ч儴鏈嶅姟
@@ -29,6 +29,8 @@ public class SpringMvcAutoConfiguration extends WebMvcConfigurerAdapter {
 		registration.addUrlMappings(String.format("/%s/publicservices/*",
 				RequestContextConstants.TYPE_SPRINGMVC));// 澶栭儴鍏叡鏈嶅姟锛孲gavence绠℃帶
 		registration.setLoadOnStartup(2);
+		//registration.setLoadOnStartup(0);
+		//registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
 		return registration;
 	}
