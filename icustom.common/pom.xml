@@ -21,6 +21,7 @@
 		<module>icustom.common.log</module>
 		<module>icustom.common.resources</module>
 		<module>icustom.common.util</module>
+		<module>icustom.common.htmlarea</module>
 		<module>icustom.common.api.test</module>
 	</modules>
 	

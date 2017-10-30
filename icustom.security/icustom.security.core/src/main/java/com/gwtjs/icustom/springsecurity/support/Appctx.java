@@ -9,4 +9,5 @@ public class Appctx {
 	public static Object getObject(String string) {
 		return ctx.getBean(string);
 	}
+	
 }

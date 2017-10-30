@@ -3,11 +3,11 @@ package com.gwtjs.icustom.autoconfiguration;
 //import com.gwtjs.icustom.log.ILogger;
 //import com.gwtjs.icustom.log.LoggerFactory;
 
-public class Application implements IApplicationPrincipal {
+public class ApplicationPrincipal implements IApplicationPrincipal {
 
 	/*
 	 * private static final ILogger log = LoggerFactory
-	 * .getLogger(Application.class);
+	 * .getLogger(ApplicationPrincipal.class);
 	 */
 	private static final long serialVersionUID = 3088642430828812087L;
 

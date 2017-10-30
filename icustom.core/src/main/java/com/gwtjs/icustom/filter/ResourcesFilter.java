@@ -5,8 +5,6 @@ import static com.gwtjs.icustom.util.RequestUtil.getUserAgent;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

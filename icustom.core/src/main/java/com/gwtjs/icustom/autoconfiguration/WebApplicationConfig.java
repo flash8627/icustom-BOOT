@@ -43,12 +43,12 @@ public class WebApplicationConfig implements EnvironmentAware {
 	@Bean
 	public IApplicationPrincipal applicationPrincipal(/*ICustomCoreProperties properties*/) {
 		// 利用参数设置应用实例信息。
-		Application application = new Application();
-		application.setAppId(this.env.getProperty(EnvConstants.APPLICATION_ID));
-		application.setAppName(this.env
+		ApplicationPrincipal applicationPrincipal = new ApplicationPrincipal();
+		applicationPrincipal.setAppId(this.env.getProperty(EnvConstants.APPLICATION_ID));
+		applicationPrincipal.setAppName(this.env
 				.getProperty(EnvConstants.APPLICATION_NAME));
 		//application.setScope(properties.getScope());
-		return application;
+		return applicationPrincipal;
 	}
 
 	/**

@@ -55,6 +55,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- <dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.common.htmlarea</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency> -->
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.common.log</artifactId>

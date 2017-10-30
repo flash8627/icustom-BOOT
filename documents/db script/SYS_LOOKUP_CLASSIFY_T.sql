@@ -1,11 +1,14 @@
 
 declare
-v_num number;
+  v_num number;
 begin
-select count(*) into v_num from user_tables where table_name='SYS_LOOKUP_CLASSIFY_T';
-if v_num > 0 then
-execute immediate 'drop table SYS_LOOKUP_CLASSIFY_T';
-end if;
+  select count(*)
+    into v_num
+    from user_tables
+   where table_name = 'SYS_LOOKUP_CLASSIFY_T';
+  if v_num > 0 then
+    execute immediate 'drop table SYS_LOOKUP_CLASSIFY_T';
+  end if;
 end;
 /
 
