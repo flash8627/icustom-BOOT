@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.gwtjs.icustom.common.htmlarea.vo.HtmlAreaVO;
-import com.gwtjs.icustom.entity.ResultWrapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

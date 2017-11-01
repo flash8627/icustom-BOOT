@@ -22,6 +22,7 @@
 		<module>icustom.common.resources</module>
 		<module>icustom.common.util</module>
 		<module>icustom.common.htmlarea</module>
+		<module>common.kindeditor</module>
 		<module>icustom.common.api.test</module>
 	</modules>
 	
