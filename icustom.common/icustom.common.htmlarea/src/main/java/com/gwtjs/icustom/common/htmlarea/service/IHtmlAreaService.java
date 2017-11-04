@@ -23,8 +23,6 @@ import com.gwtjs.icustom.entity.ResultWrapper;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/") 
-@Component
-@Service  
 public interface IHtmlAreaService {
 	
 	/**
@@ -49,7 +47,7 @@ public interface IHtmlAreaService {
 	 */
 	@GET
 	@Path("/findByHtmlArea/{htmlAreaId}")
-	public HtmlAreaVO findByHtmlArea(@PathParam("htmlAreaId") Integer htmlAreaId);
+	public HtmlAreaVO findHtmlArea(@PathParam("htmlAreaId") Integer htmlAreaId);
 	
 	/**
 	 * 查询名称,模糊查询

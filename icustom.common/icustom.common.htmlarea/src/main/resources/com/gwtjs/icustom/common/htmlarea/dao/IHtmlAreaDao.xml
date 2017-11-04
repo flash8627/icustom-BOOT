@@ -118,7 +118,7 @@
 		<include refid="queryBaseSql" />
 	</select>
 
-	<select id="findByHtmlArea" resultType="com.gwtjs.icustom.common.htmlarea.vo.HtmlAreaVO">
+	<select id="findHtmlArea" resultType="com.gwtjs.icustom.common.htmlarea.vo.HtmlAreaVO">
 		<include refid="queryBaseSql" />
 		AND tha.html_area_id = #{htmlAreaId,jdbcType=INTEGER}
 	</select>
@@ -178,15 +178,15 @@
 			AND sr.content LIKE '%#{vo.content,jdbcType=VARCHAR}%'
 		</if>
 		<if
-			test='_parameter.get("vo").mapping_url != null and _parameter.get("vo").mapping_url != "" and _parameter.get("vo").mapping_url != "null"'>
+			test='_parameter.get("vo").mappingUrl != null and _parameter.get("vo").mappingUrl != "" and _parameter.get("vo").mappingUrl != "null"'>
 			AND sr.mapping_url LIKE '%#{vo.mapping_url,jdbcType=VARCHAR}%'
 		</if>
 		<if
-			test='_parameter.get("vo").second_level_type != null and _parameter.get("vo").second_level_type != "" and _parameter.get("vo").second_level_type != "null"'>
+			test='_parameter.get("vo").secondLevelType != null and _parameter.get("vo").secondLevelType != "" and _parameter.get("vo").secondLevelType != "null"'>
 			AND upper(sr.second_level_type) = upper(#{vo.secondLevelType,jdbcType=VARCHAR})
 		</if>
 		<if
-			test='_parameter.get("vo").third_level_type != null and _parameter.get("vo").third_level_type != "" and _parameter.get("vo").third_level_type != "null"'>
+			test='_parameter.get("vo").thirdLevelType != null and _parameter.get("vo").thirdLevelType != "" and _parameter.get("vo").thirdLevelType != "null"'>
 			AND upper(sr.third_level_type) = upper(#{vo.thirdLevelType,jdbcType=VARCHAR})
 		</if>
 		<if

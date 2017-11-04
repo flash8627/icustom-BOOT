@@ -163,7 +163,7 @@
     <logger name="org.apache.cxf.jaxrs.provider.ProviderFactory" level="ERROR"  />
     <logger name="org.apache.cxf.transport.servlet.ServletDestination" level="ERROR"  />
     <logger name="org.apache.cxf.configuration.spring.ConfigurerImpl" level="ERROR"  />
-    
+    <logger name="org.thymeleaf" level="INFO"  />
     <logger name="org.apache.cxf.endpoint.ServerImpl" level="INFO"  />
     
 </configuration>

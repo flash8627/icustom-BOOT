@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.gwtjs.icustom.common.htmlarea.dao.IHtmlAreaDao;
@@ -16,7 +15,7 @@ import com.gwtjs.icustom.entity.ResultWrapper;
 
 import io.swagger.annotations.Api;
 
-@Api("/")  @Service("htmlAreaService")
+@Api("/htmlArea")  @Service("htmlAreaService")
 public class HtmlAreaService implements IHtmlAreaService {
 	
 	@Inject
@@ -29,6 +28,7 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public ResultWrapper saveOrUpdate(List<HtmlAreaVO> list) {
+		htmlAreaDao.saveOrUpdate(list);
 		return null;
 	}
 	
@@ -38,6 +38,7 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public List<HtmlAreaVO> findAll() {
+		htmlAreaDao.findAll();
 		return null;
 	}
 	
@@ -46,7 +47,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 * @return
 	 */
 	@Override
-	public HtmlAreaVO findByHtmlArea(@Param("htmlAreaId") Integer htmlAreaId) {
+	public HtmlAreaVO findHtmlArea(Integer htmlAreaId) {
+		htmlAreaDao.findHtmlArea(htmlAreaId);
 		return null;
 	}
 	
@@ -55,7 +57,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 * @return
 	 */
 	@Override
-	public PagedResult<HtmlAreaVO> findHtmlAreaPage(@Param("vo") HtmlAreaVO sys,@Param("page") PageVO page) {
+	public PagedResult<HtmlAreaVO> findHtmlAreaPage(HtmlAreaVO vo,PageVO page) {
+		htmlAreaDao.findHtmlAreaPage(vo, page);
 		return null;
 	}
 	
@@ -66,6 +69,7 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public ResultWrapper batchRemovePks(List<HtmlAreaVO> records) {
+		htmlAreaDao.batchRemovePks(records);
 		return null;
 	}
 	

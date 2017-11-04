@@ -1,5 +1,7 @@
 package com.gwtjs.icustom.common.htmlarea.vo;
 
+import java.util.Date;
+
 import com.gwtjs.icustom.entity.BaseResource;
 
 /**
@@ -39,6 +41,10 @@ public class HtmlAreaVO extends BaseResource {
 	private String secondLevelType;
 	/** 二级类型 **/
 	private String thirdLevelType;
+	/** 修建日期-结束日期 */
+	private Date createToDate;
+	/** 创建日期-开始时间 */
+	private Date createFromDate;
 	/**
 	 * 是否启用了富文本的program过滤
 	 * 
@@ -148,6 +154,22 @@ public class HtmlAreaVO extends BaseResource {
 
 	public void setProgramFilterEnable(boolean programFilterEnable) {
 		this.programFilterEnable = programFilterEnable;
+	}
+
+	public Date getCreateToDate() {
+		return createToDate;
+	}
+
+	public void setCreateToDate(Date createToDate) {
+		this.createToDate = createToDate;
+	}
+
+	public Date getCreateFromDate() {
+		return createFromDate;
+	}
+
+	public void setCreateFromDate(Date createFromDate) {
+		this.createFromDate = createFromDate;
 	}
 
 }

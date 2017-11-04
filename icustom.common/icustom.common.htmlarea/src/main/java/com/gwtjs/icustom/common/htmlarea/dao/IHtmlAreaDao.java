@@ -36,13 +36,13 @@ public interface IHtmlAreaDao {
 	 * 查询特定富文本  htmlAreaId
 	 * @return
 	 */
-	public HtmlAreaVO findByHtmlArea(@Param("htmlAreaId") Integer htmlAreaId);
+	public HtmlAreaVO findHtmlArea(@Param("htmlAreaId") Integer htmlAreaId);
 	
 	/**
 	 * 查询名称,模糊查询
 	 * @return
 	 */
-	public PagedResult<HtmlAreaVO> findHtmlAreaPage(@Param("vo") HtmlAreaVO sys,@Param("page") PageVO page);
+	public PagedResult<HtmlAreaVO> findHtmlAreaPage(@Param("vo") HtmlAreaVO vo,@Param("page") PageVO page);
 	
 	/**
 	 * 删除数据,批量

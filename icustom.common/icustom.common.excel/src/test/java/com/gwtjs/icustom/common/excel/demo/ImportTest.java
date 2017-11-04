@@ -6,8 +6,8 @@ import java.util.List;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.gwtjs.icustom.common.excel.FlagInfoExcelUtils;
-import com.gwtjs.icustom.common.excel.UploadDataResultDto;
+import com.gwtjs.icustom.common.excel.annotation.util.FlagInfoExcelUtils;
+import com.gwtjs.icustom.common.excel.vo.UploadDataResultDto;
 
 /**
  * 导入测试
