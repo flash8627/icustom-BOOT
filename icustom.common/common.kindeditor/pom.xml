@@ -8,18 +8,53 @@
 		<version>0.7.10.8</version>
 		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
-	
+
 	<artifactId>common.kindeditor</artifactId>
 	<packaging>jar</packaging>
-	
-	<!--
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>ICustom.international.api</artifactId>
+			<artifactId>icustom.common.devtools</artifactId>
 			<version>${project.version}</version>
+			<optional>true</optional>
 		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom-spring-boot-starter</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>icustom.common.log</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.json</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
-	-->
-	
+
 </project>

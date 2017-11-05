@@ -12,9 +12,10 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gwtjs.icustom.common.htmlarea.vo.HtmlAreaVO;
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
+import com.gwtjs.icustom.htmlarea.dao.IHtmlAreaDao;
+import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

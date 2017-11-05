@@ -1,3 +1,3 @@
 #autoconfigure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.gwtjs.icustom.common.htmlarea.configuration.HtmlAreaWebConfig
+com.gwtjs.icustom.htmlarea.configuration.HtmlAreaWebConfig

@@ -1,5 +1,4 @@
-package com.gwtjs.icustom;
-
+package com.gwtjs.icustom.htmlarea;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,14 +7,14 @@ import com.gwtjs.icustom.log.ICustomLogger;
 import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 @SpringBootApplication
-public class ICustomWebApplication {
+public class HtmlAreaApplication {
 	
 	private static final ICustomLogger log = ICustomLoggerFactory
-			.getLogger(ICustomWebApplication.class);
+			.getLogger(HtmlAreaApplication.class);
 	
 	public static void main(String[] args) {
-		SpringApplication.run(ICustomWebApplication.class, args);
-		log.info("\nRunning with icustom web successfull------");
+		SpringApplication.run(HtmlAreaApplication.class, args);
+		log.info("Running with Spring successfull------");
 	}
 	
 }

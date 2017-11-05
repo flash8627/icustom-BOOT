@@ -23,6 +23,7 @@
 		<module>icustom.common.util</module>
 		<module>icustom.common.htmlarea</module>
 		<module>common.kindeditor</module>
+		<module>common.json</module>
 		<module>icustom.common.api.test</module>
 	</modules>
 	
