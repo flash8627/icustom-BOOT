@@ -12,9 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.gwtjs.icustom.common.htmlarea.vo.HtmlAreaVO;
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;

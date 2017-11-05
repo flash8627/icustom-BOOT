@@ -5,7 +5,7 @@ insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PAREN
 values (1, 'home', 'home', '系统首页，根目录', null, 'zh_cn=HOME,zh_en=Home', '/home', 1, null, to_date('01-07-2017 23:51:49', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('01-07-2017 23:51:49', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, null, null, null);
 
 insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
-values (2, 'admin', 'admin', 'admin', null, 'admin', '/admin', 1, null, to_date('01-07-2017 23:51:49', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('01-07-2017 23:51:49', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, null, null, null);
+values (2, 'admin', 'admin', null, 8, 'zh_cn=附件管理,zh_en=attachments Manager', 'attachments/', 84, null, to_date('01-07-2017 23:51:49', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:16:42', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, 1, null, 0);
 
 insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
 values (3, 'user', 'user', null, null, null, '/user', 1, null, to_date('01-07-2017 23:52:36', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('01-07-2017 23:52:36', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, null, null, null);
@@ -14,7 +14,37 @@ insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PAREN
 values (4, 'hello', null, 'hello', null, 'hello', '/hello', 1, null, to_date('01-07-2017 23:52:36', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('01-07-2017 23:52:36', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, null, null, null);
 
 insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
-values (1001, 'test', '/test', 'junit test', 0, 'test', '/test', null, 0, to_date('03-09-2017 15:25:55', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('03-09-2017 15:25:55', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, null, null, null);
+values (1001, 'test', '/test', 'junit test', 0, 'test', '/test', null, 0, to_date('08-10-2017 16:29:57', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('08-10-2017 16:29:57', 'dd-mm-yyyy hh24:mi:ss'), 1, 0, null, null, null, null);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1002, null, null, null, 8, 'zh_cn=excel管理,zh_en=excel Manager', 'excel/index.html', 37, 10001, to_date('05-11-2017 13:03:59', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:07:25', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1003, null, null, null, 8, 'zh_cn=富文本管理,zh_en=html area Manager', 'htmlarea/index.html', 33, 10001, to_date('05-11-2017 13:04:16', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:07:38', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1004, null, null, null, 1002, 'zh_cn=我的导入,zh_en=excel import', 'excel/import/index.html', 20, 10001, to_date('05-11-2017 13:09:28', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:09:28', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1005, null, null, null, 1002, 'zh_cn=我的导出,zh_en=excel export', 'excel/export/index.html', 82, 10001, to_date('05-11-2017 13:09:45', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:09:45', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1006, null, null, null, 8, '中控台', null, 78, 10001, to_date('05-11-2017 13:15:12', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:15:12', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1007, null, null, null, 1006, '系统监控', 'metrics/', 30, 10001, to_date('05-11-2017 13:16:36', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:16:36', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1008, null, null, null, 8, '工作流', 'activiti/', 59, 10001, to_date('05-11-2017 13:18:03', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:18:03', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1009, null, null, null, 1006, 'session', 'session/', 47, 10001, to_date('05-11-2017 13:18:51', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:18:51', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1011, null, null, null, 1006, 'redis', 'redis/', 85, 10001, to_date('05-11-2017 13:20:02', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:20:02', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
+
+insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
+values (1012, null, null, null, 1006, 'mongodb', 'mongodb/', 80, 10001, to_date('05-11-2017 13:20:25', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:20:25', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, 0);
 
 insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
 values (5, null, null, null, 1, 'SHOP', null, 3, null, to_date('03-09-2017 13:48:39', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('03-09-2017 13:48:39', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, null);
@@ -56,6 +86,6 @@ insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PAREN
 values (13, null, null, null, 8, 'zh_cn=国际化,zh_en=international', 'international/index.html', 1, null, to_date('03-09-2017 15:58:43', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('03-09-2017 15:58:43', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, null);
 
 insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS, RESOURCE_DESC, RESOURCE_TYPE)
-values (14, null, null, 'demo页面,可以把地址复制过去查看', 8, 'zh_cn=System Menu,zh_en=System Menu', null, 1, null, to_date('03-09-2017 15:58:43', 'dd-mm-yyyy hh24:mi:ss'), null, to_date('03-09-2017 15:58:43', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 1, null, null);
+values (14, null, null, 'demo页面,可以把地址复制过去查看', 8, 'zh_cn=System Menu,zh_en=System Menu', null, 1, null, to_date('03-09-2017 15:58:43', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:10:59', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 0, null, 0);
 
 prompt Done.

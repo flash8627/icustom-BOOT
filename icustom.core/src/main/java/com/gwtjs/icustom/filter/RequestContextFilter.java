@@ -20,7 +20,7 @@ public class RequestContextFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		chain.doFilter(request, response);
 
 	}
 

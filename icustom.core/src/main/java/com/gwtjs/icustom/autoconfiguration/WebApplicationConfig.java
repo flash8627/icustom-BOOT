@@ -85,10 +85,9 @@ public class WebApplicationConfig implements EnvironmentAware {
 	}
 
 	/**
-	 * UTF-8编码过滤器。
+	 * UTF-8文件资源增加时间戳过滤器-暂停使用。
 	 * 
 	 * @return
-	 */
 	@Bean
 	@ConditionalOnMissingBean(FilterRegistrationBean.class)
 	public FilterRegistrationBean stampParameterDateFilter() {
@@ -99,6 +98,7 @@ public class WebApplicationConfig implements EnvironmentAware {
 		//registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE - 1);// 在最高优先级之后执行。
 		return registrationBean;
 	}
+	 */
 
 	/**
 	 * 注册dispatch-servlet

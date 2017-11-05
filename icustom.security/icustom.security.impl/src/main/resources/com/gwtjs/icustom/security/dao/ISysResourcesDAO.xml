@@ -47,7 +47,7 @@
 	</sql>
 	
 	<select id="selectByItemId" resultType="java.lang.Integer">
-		select SYS_RESOURCES_S.NEXTVAL from DUAL
+		select SYS_RESOURCE_S.NEXTVAL from DUAL
 	</select>
 	
 	<!-- treegrid专用  -->
@@ -149,7 +149,7 @@
 				)
 				values
 				(
-					SYS_RESOURCES_S.NEXTVAL,
+					SYS_RESOURCE_S.NEXTVAL,
 					#{item.resourceName,jdbcType=VARCHAR},
 					#{item.parentId,jdbcType=NUMERIC},
 					#{item.icon,jdbcType=VARCHAR},

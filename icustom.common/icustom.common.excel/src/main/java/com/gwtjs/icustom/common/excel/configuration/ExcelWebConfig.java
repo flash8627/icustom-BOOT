@@ -1,4 +1,4 @@
-package com.gwtjs.icustom.common.excel;
+package com.gwtjs.icustom.common.excel.configuration;
 
 /**
  * Excel WEB配置

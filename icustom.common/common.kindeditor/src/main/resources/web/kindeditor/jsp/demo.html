@@ -1,15 +1,17 @@
 
-
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>KindEditor JSP</title>
+	<!-- 本应用运行 -->
 	<link rel="stylesheet" href="../themes/default/default.css" />
 	<link rel="stylesheet" href="../plugins/code/prettify.css" />
 	<script charset="utf-8" src="../kindeditor-all.js"></script>
 	<script charset="utf-8" src="../lang/zh-CN.js"></script>
 	<script charset="utf-8" src="../plugins/code/prettify.js"></script>
+	<!-- 其它模块预览 -->
+	<link rel="stylesheet" href="/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="/kindeditor/plugins/code/prettify.css" />
+	<script charset="utf-8" src="/kindeditor/kindeditor-all.js"></script>
+	<script charset="utf-8" src="/kindeditor/lang/zh-CN.js"></script>
+	<script charset="utf-8" src="/kindeditor/plugins/code/prettify.js"></script>
+	
 	<script>
 		KindEditor.ready(function(K) {
 			var editor1 = K.create('textarea[name="content1"]', {
@@ -32,13 +34,8 @@
 			prettyPrint();
 		});
 	</script>
-</head>
-<body>
-	
 	<form name="example" method="post" action="demo.jsp">
 		<textarea name="content1" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
 		<br />
 		<input type="submit" name="button" value="提交内容" /> (提交快捷键: Ctrl + Enter)
 	</form>
-</body>
-</html>

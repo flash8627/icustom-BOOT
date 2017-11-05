@@ -67,6 +67,14 @@
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
+	
+		<!-- 富文本模块 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.kindeditor</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
 		
 		<!-- 日志模块 -->
 		<dependency>
