@@ -16,14 +16,14 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter</artifactId>
+			<artifactId>boot-starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.log</artifactId>
+			<artifactId>common.log</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 			<optional>true</optional>
@@ -31,7 +31,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.util</artifactId>
+			<artifactId>common.util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

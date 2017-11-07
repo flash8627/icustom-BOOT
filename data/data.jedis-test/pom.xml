@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>${project.groupId}</groupId>
+		<artifactId>icustom</artifactId>
+		<version>0.7.10.8</version>
+		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
+	</parent>
+	<artifactId>data.jedis-test</artifactId>
+	<name>icustom.data redis</name>
+	<description>icustom redis</description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>boot-starter</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.log</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- Compile -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>boot-starter-jedis</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
+        <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-test</artifactId>  
+            <scope>test</scope>  
+        </dependency> 
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>production</id>
+			<dependencies>
+				<!-- This sample is a test for the autoconfig when commons-pool is *absent*. 
+					In production it would be useful to enable pooling by using this dependency. -->
+				<dependency>
+					<groupId>commons-pool</groupId>
+					<artifactId>commons-pool</artifactId>
+					<type>pom.lastUpdated</type>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>com.gwtjs.icustom.jedis.ICustomJedisApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<!--<version>0.7.8-SNAPSHOT</version> -->
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

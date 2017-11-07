@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.gwtjs.icustom</groupId>
+		<artifactId>icustom</artifactId>
+		<version>0.7.10.8</version>
+		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<springframework.version>4.3.5.RELEASE</springframework.version>
+		<springsecurity.version>4.2.2.RELEASE</springsecurity.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
+		<mysql.version>5.1.31</mysql.version>
+	</properties>
+
+	<artifactId>security</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>security.annotation</module>
+		<module>security.core</module>
+		<module>security.api</module>
+		<module>security.impl</module>
+		<module>security.ui</module>
+		<module>security.cas</module>
+	</modules>
+
+</project>

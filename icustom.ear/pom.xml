@@ -16,43 +16,43 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter</artifactId>
+			<artifactId>boot-starter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<artifactId>boot-starter-mybatis</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
+			<artifactId>boot-starter-cxf</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.resources</artifactId>
+			<artifactId>common.resources</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.attachments</artifactId>
+			<artifactId>common.attachments</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.log</artifactId>
+			<artifactId>common.log</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.api.test</artifactId>
+			<artifactId>common.api.test</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -65,31 +65,31 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.security.core</artifactId>
+			<artifactId>security.core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.security.api</artifactId>
+			<artifactId>security.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.security.impl</artifactId>
+			<artifactId>security.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.metrics</artifactId>
+			<artifactId>metrics</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.excel</artifactId>
+			<artifactId>common.excel</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -168,37 +168,37 @@
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom-spring-boot-starter</artifactId>
+							<artifactId>boot-starter</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+							<artifactId>boot-starter-mybatis</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom-spring-boot-starter-cxf</artifactId>
+							<artifactId>boot-starter-cxf</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.common.resources</artifactId>
+							<artifactId>common.resources</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.common.attachments</artifactId>
+							<artifactId>common.attachments</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.common.log</artifactId>
+							<artifactId>common.log</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.common.api.test</artifactId>
+							<artifactId>common.api.test</artifactId>
 						</jarModule>
 
 						<jarModule>
@@ -208,27 +208,27 @@
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.security.core</artifactId>
+							<artifactId>security.core</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.security.api</artifactId>
+							<artifactId>security.api</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.security.impl</artifactId>
+							<artifactId>security.impl</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.metrics</artifactId>
+							<artifactId>metrics</artifactId>
 						</jarModule>
 
 						<jarModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>icustom.common.excel</artifactId>
+							<artifactId>common.excel</artifactId>
 						</jarModule>
 
 						<jarModule>

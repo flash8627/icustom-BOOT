@@ -54,27 +54,26 @@
 	<modules>
 		<!--common core-->
 		<module>icustom.core</module>
-		<module>icustom.common</module>
+		<module>common</module>
 		<!--starters-->
-		<module>icustom-spring-boot-starters</module>
+		<module>boot-starters</module>
 		<!--cloud core-->
-		<module>icustom.cloud</module>
+		<module>cloud</module>
 		<!--ICustom Data-->
-		<module>icustom.data</module>
+		<module>data</module>
 
 		<!-- project group -->
-		<module>icustom.security</module>
+		<module>security</module>
 		<module>icustom.register</module>
 		<module>icustom.lookup</module>
 		<module>icustom.international</module>
 		<!--?-->
-		<module>icustom.activiti</module>
-		<module>icustom.metrics</module>
-		<module>icustom.sample</module>
-		<module>icustom.lottery</module>
+		<module>activiti</module>
+		<module>metrics</module>
+		<module>sample</module>
 		<!--1-->
-		<module>icustom.email</module>
-		<module>icustom.bbs</module>
+		<module>email</module>
+		<module>bbs</module>
 		
 		<module>icustom.web</module>
 		<module>icustom.ear</module>

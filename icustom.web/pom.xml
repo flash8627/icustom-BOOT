@@ -27,35 +27,35 @@
 		<!-- 启动模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter</artifactId>
+			<artifactId>boot-starter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- mybatis扩展支持 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<artifactId>boot-starter-mybatis</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- cxf扩展支持 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter-cxf</artifactId>
+			<artifactId>boot-starter-cxf</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- 系统资源,页面,头和版权部分 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.resources</artifactId>
+			<artifactId>common.resources</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- 附件模块,文件上传下载 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.attachments</artifactId>
+			<artifactId>common.attachments</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
@@ -63,7 +63,7 @@
 		<!-- 富文本模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.htmlarea</artifactId>
+			<artifactId>common.htmlarea</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
@@ -79,7 +79,7 @@
 		<!-- 日志模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.log</artifactId>
+			<artifactId>common.log</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
@@ -87,7 +87,7 @@
 		<!-- api测试UI -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.api.test</artifactId>
+			<artifactId>common.api.test</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -101,33 +101,33 @@
 		<!-- security权限模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.security.core</artifactId>
+			<artifactId>security.core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.security.api</artifactId>
+			<artifactId>security.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.security.impl</artifactId>
+			<artifactId>security.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- 监控 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.metrics</artifactId>
+			<artifactId>metrics</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- excel模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom.common.excel</artifactId>
+			<artifactId>common.excel</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>

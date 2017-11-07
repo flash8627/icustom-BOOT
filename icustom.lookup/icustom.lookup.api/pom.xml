@@ -30,7 +30,7 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>icustom-spring-boot-starter-mybatis</artifactId>
+			<artifactId>boot-starter-mybatis</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
