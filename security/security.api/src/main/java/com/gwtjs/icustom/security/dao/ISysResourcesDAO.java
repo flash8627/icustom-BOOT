@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gwtjs.icustom.security.entity.SysResourcesVO;
+import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
 /**
  * 栏目，菜单，导航
@@ -14,31 +14,31 @@ import com.gwtjs.icustom.security.entity.SysResourcesVO;
 public interface ISysResourcesDAO {
 	
 	//菜单专用
-	List<SysResourcesVO> findMenuList(SysResourcesVO record);
+	List<SysResourceVO> findMenuList(SysResourceVO record);
 	
 	//1027新增
-	List<SysResourcesVO> findAuthResourcesTree(SysResourcesVO record);
+	List<SysResourceVO> findAuthResourcesTree(SysResourceVO record);
 	
 	//1027新增
-	List<SysResourcesVO> findAuthResourcesTreeRoot();
+	List<SysResourceVO> findAuthResourcesTreeRoot();
 	
-	SysResourcesVO findResourcesGridTreeRoot();
+	SysResourceVO findResourcesGridTreeRoot();
 	
-	List<SysResourcesVO> findResourcesList(SysResourcesVO record);
+	List<SysResourceVO> findResourcesList(SysResourceVO record);
 	
-	int batchInsert(List<SysResourcesVO> list);
+	int batchInsert(List<SysResourceVO> list);
 	
-	int batchRemoveResourcesPks(List<SysResourcesVO> list);
+	int batchRemoveResourcesPks(List<SysResourceVO> list);
 	
 	int deleteByPrimaryKey(@Param("resourceId") long resourceId);
 
-    int insert(SysResourcesVO record);
+    int insert(SysResourceVO record);
 
     Integer selectByItemId();
     
-    SysResourcesVO selectByPrimaryKey(@Param("resourceId") long resourceId);
+    SysResourceVO selectByPrimaryKey(@Param("resourceId") long resourceId);
 
-    int updateByPrimaryKey(SysResourcesVO record);
+    int updateByPrimaryKey(SysResourceVO record);
 	
 }
 

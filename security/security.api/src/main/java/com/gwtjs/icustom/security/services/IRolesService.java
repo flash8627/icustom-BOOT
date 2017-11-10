@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.entity.ResultWrapper;
-import com.gwtjs.icustom.security.entity.SysRolesVO;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
 
 @Path("/rolesService")
@@ -27,15 +27,15 @@ public interface IRolesService {
 	ResultWrapper findItem(@PathParam("roleId")long roleId);
 	
 	@GET @Path("findRolesList/{pageSize}/{curPage}")
-	PagedResult<SysRolesVO> findRolesList(@QueryParam("")SysRolesVO record,@PathParam("")PageVO page);
+	PagedResult<SysRoleVO> findRolesList(@QueryParam("")SysRoleVO record,@PathParam("")PageVO page);
 
 	@PUT @Path("batchRemovePks")
-	ResultWrapper batchRemovePks(List<SysRolesVO> records);
+	ResultWrapper batchRemovePks(List<SysRoleVO> records);
 
 	@PUT @Path("batchUpdate")
-	ResultWrapper batchUpdate(List<SysRolesVO> records);
+	ResultWrapper batchUpdate(List<SysRoleVO> records);
 
 	@POST @Path("batchInsert")
-	ResultWrapper batchInsert(List<SysRolesVO> records);
+	ResultWrapper batchInsert(List<SysRoleVO> records);
 	
 }

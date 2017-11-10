@@ -10,8 +10,8 @@ import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.security.dao.ISysRolesDAO;
-import com.gwtjs.icustom.security.entity.SysRolesVO;
 import com.gwtjs.icustom.security.services.IRolesService;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
 @Named("rolesService")
 public class RolesService implements IRolesService {
@@ -26,35 +26,35 @@ public class RolesService implements IRolesService {
 	}
 
 	@Override
-	public PagedResult<SysRolesVO> findRolesList(SysRolesVO record, PageVO page) {
+	public PagedResult<SysRoleVO> findRolesList(SysRoleVO record, PageVO page) {
 		return rolesDao.findSysRoles(record, page);
 	}
 
 	@Override
-	public ResultWrapper batchRemovePks(List<SysRolesVO> records) {
+	public ResultWrapper batchRemovePks(List<SysRoleVO> records) {
 		// TODO Auto-generated method stub
 		rolesDao.batchRemovePks(records);
 		return ResultWrapper.successResult(records);
 	}
 
 	@Override
-	public ResultWrapper batchUpdate(List<SysRolesVO> records) {
+	public ResultWrapper batchUpdate(List<SysRoleVO> records) {
 		records = setRecordsRoles(records);
 		rolesDao.batchUpdate(records);
 		return ResultWrapper.successResult(records);
 	}
 
 	@Override
-	public ResultWrapper batchInsert(List<SysRolesVO> records) {
+	public ResultWrapper batchInsert(List<SysRoleVO> records) {
 		records = setRecordsRoles(records);
 		rolesDao.batchInsert(records);
 		return genericResult(records);
 	}
 
-	private ResultWrapper genericResult(List<SysRolesVO> list)
+	private ResultWrapper genericResult(List<SysRoleVO> list)
 	{
-		List<SysRolesVO> records = new ArrayList<SysRolesVO>();
-		for (SysRolesVO user : list) {
+		List<SysRoleVO> records = new ArrayList<SysRoleVO>();
+		for (SysRoleVO user : list) {
 			records.add(rolesDao.findByItem(user));
 		}
 		return ResultWrapper.successResult(records);
@@ -65,11 +65,11 @@ public class RolesService implements IRolesService {
 	 * @param records
 	 * @return
 	 */
-	private List<SysRolesVO> setRecordsRoles(List<SysRolesVO> records){
-		List<SysRolesVO> result = new ArrayList<SysRolesVO>();
+	private List<SysRoleVO> setRecordsRoles(List<SysRoleVO> records){
+		List<SysRoleVO> result = new ArrayList<SysRoleVO>();
 		long createdUser = new Long(1);
 		
-		for (SysRolesVO vo : records) {
+		for (SysRoleVO vo : records) {
 			vo.setCreatedUser(createdUser);
 			vo.setUpdateLastUser(createdUser);
 			result.add(vo);

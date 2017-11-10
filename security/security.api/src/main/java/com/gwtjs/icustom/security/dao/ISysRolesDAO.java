@@ -6,26 +6,26 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
-import com.gwtjs.icustom.security.entity.SysRolesVO;
+import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
 public interface ISysRolesDAO {
 	
 	//
-	SysRolesVO findByItem(SysRolesVO record);
+	SysRoleVO findByItem(SysRoleVO record);
 	
 	//
-	SysRolesVO findItem(@Param("roleId")long roleId);
+	SysRoleVO findItem(@Param("roleId")long roleId);
 
 	//
-	PagedResult<SysRolesVO> findSysRoles(SysRolesVO record,PageVO page);
+	PagedResult<SysRoleVO> findSysRoles(SysRoleVO record,PageVO page);
 
 	//
-	int batchRemovePks(List<SysRolesVO> records);
+	int batchRemovePks(List<SysRoleVO> records);
 
 	//
-	int batchUpdate(List<SysRolesVO> records);
+	int batchUpdate(List<SysRoleVO> records);
 
 	//
-	int batchInsert(List<SysRolesVO> records);
+	int batchInsert(List<SysRoleVO> records);
 	
 }

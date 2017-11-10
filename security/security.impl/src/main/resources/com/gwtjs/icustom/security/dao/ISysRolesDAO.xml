@@ -8,7 +8,7 @@
 		size指缓存多少个对象，默认值为1024 readOnly是否只读，如果为true，则所有相同的sql语句返回的是同一个对象（有助于提高性能，但并发操作同一条数据时，可能不安全），如果设置为false，则相同的sql，后面访问的是cache的clone副本。 -->
 	
 	
-	<select id="findByItem" resultType="com.gwtjs.icustom.security.entity.SysRolesVO">
+	<select id="findByItem" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM SYS_ROLES_T T1 
@@ -16,7 +16,7 @@
 			AND T1.ROLE_NAME = #{roleName,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="findItem" resultType="com.gwtjs.icustom.security.entity.SysRolesVO">
+	<select id="findItem" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM SYS_ROLES_T T1 
@@ -60,7 +60,7 @@
 	</sql>
 	
 	<select id="findSysRoles" parameterType="hashmap"
-		resultType="com.gwtjs.icustom.security.entity.SysRolesVO">
+		resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		<include refid="page_st" />
 		SELECT
 		<include refid="Base_Column_List" />
