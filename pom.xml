@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.gwtjs.icustom</groupId>
-	<artifactId>icustom</artifactId>
-	<version>0.7.10.8</version>
+	<artifactId>icustom-boot</artifactId>
+	<version>0.7.11.8</version>
 	<packaging>pom</packaging>
 	
-	<name>icustom</name>
+	<name>icustom-boot</name>
 	<description>ICustom project for Spring Boot</description>
 
 	<parent>

@@ -4,8 +4,8 @@
 
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
-		<artifactId>icustom</artifactId>
-		<version>0.7.10.8</version>
+		<artifactId>icustom-boot</artifactId>
+		<version>0.7.11.8</version>
 		<relativePath>../../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>common.log</artifactId>
-			<version>0.7.10.8</version>
+			<version>0.7.11.8</version>
 			<optional>true</optional>
 		</dependency>
 		
