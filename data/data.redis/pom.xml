@@ -18,7 +18,7 @@
 		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>boot-starter</artifactId>
+			<artifactId>boot.starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
@@ -32,7 +32,7 @@
 		
 		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>boot-starter-jedis</artifactId>
+			<artifactId>boot.starter.jedis</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency> -->

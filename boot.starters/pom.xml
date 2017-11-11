@@ -10,17 +10,17 @@
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
-	<artifactId>boot-starters</artifactId>
+	<artifactId>boot.starters</artifactId>
 	<packaging>pom</packaging>
 	
-	<name>boot-starters</name>
+	<name>icustom.boot.starters</name>
 	<description>ICustom project for Spring Boot</description>
 
 	<modules>
-		<module>boot-starter</module>
-		<module>boot-starter-cxf</module>
-		<module>boot-starter-mybatis</module>
-		<module>boot-starter-jedis</module>
+		<module>boot.starter</module>
+		<module>boot.starter.cxf</module>
+		<module>boot.starter.mybatis</module>
+		<module>boot.starter.jedis</module>
 	</modules>
 
 

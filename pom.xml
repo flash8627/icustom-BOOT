@@ -52,11 +52,12 @@
 	</dependencies>
 
 	<modules>
-		<!--common core-->
+		
 		<module>icustom.core</module>
+		<!--common core-->
 		<module>common</module>
 		<!--starters-->
-		<module>boot-starters</module>
+		<module>boot.starters</module>
 		<!--cloud core-->
 		<module>cloud</module>
 		<!--ICustom Data-->

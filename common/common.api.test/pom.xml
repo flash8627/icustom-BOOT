@@ -37,7 +37,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>boot-starter</artifactId>
+			<artifactId>boot.starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>

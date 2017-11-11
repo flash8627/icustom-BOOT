@@ -4,17 +4,17 @@
 	
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
-		<artifactId>boot-starters</artifactId>
+		<artifactId>boot.starters</artifactId>
 		<version>0.7.11.8</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
-    <artifactId>boot-starter-jedis</artifactId>
+    <artifactId>icustom.boot.starter.jedis</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>boot-starter</artifactId>
+			<artifactId>boot.starter</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
