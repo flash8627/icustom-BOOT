@@ -1,54 +1,54 @@
-var NavigationService = function() {
+var HtmlAreaService = function() {
     var BASE = '../services/nav';
     return {
-    	findNavigations: function(callback) {
-            AjaxUtil.sendGetRequest(BASE + '/findNavigationList', function(navigationList) {
-                NavigationView.renderNavigationTable(navigationList);
+    	findHtmlAreas: function(callback) {
+            AjaxUtil.sendGetRequest(BASE + '/findHtmlAreaList', function(navigationList) {
+                HtmlAreaView.renderHtmlAreaTable(navigationList);
                 callback();
             });
         },
         findChildren: function(callback,itemId) {
-            AjaxUtil.sendGetRequest(BASE + '/findNavigationList/'+itemId, function(navigationList) {
-                NavigationView.renderNavigationTable(navigationList);
+            AjaxUtil.sendGetRequest(BASE + '/findHtmlAreaList/'+itemId, function(navigationList) {
+                HtmlAreaView.renderHtmlAreaTable(navigationList);
                 callback();
             });
         },
-        findNavigationById: function(itemId) {
-            AjaxUtil.sendGetRequest(BASE + '/findNavigation/' + itemId, function(navigation) {
-                var title = 'Edit Navigation';
-                NavigationView.renderNavigationModal(title, navigation);
+        findHtmlAreaById: function(itemId) {
+            AjaxUtil.sendGetRequest(BASE + '/findHtmlArea/' + itemId, function(navigation) {
+                var title = 'Edit HtmlArea';
+                HtmlAreaView.renderHtmlAreaModal(title, navigation);
             });
         },/*
-        findNavigationsByName: function(name) {
+        findHtmlAreasByName: function(name) {
             AjaxUtil.sendFormData(BASE + '/navigations', {
                 itemName: name
             }, function(navigationList) {
-                NavigationView.renderNavigationTable(navigationList);
+                HtmlAreaView.renderHtmlAreaTable(navigationList);
             });
         },*/
-        createNavigation: function(navigation) {
+        createHtmlArea: function(navigation) {
             AjaxUtil.sendPostData(BASE + '/insert', navigation, function(navigation) {
-                NavigationView.insertNavigationRow(navigation.obj);
+                HtmlAreaView.insertHtmlAreaRow(navigation.obj);
             });
         },
-        batchInsertNavigation: function(items) {
+        batchInsertHtmlArea: function(items) {
             AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(items) {
-                NavigationView.insertNavigationRows(items);
+                HtmlAreaView.insertHtmlAreaRows(items);
             });
         },
-        updateNavigation: function(navigation) {
+        updateHtmlArea: function(navigation) {
             AjaxUtil.sendPostData(BASE + '/updateByKey', navigation, function(navigation) {
-                NavigationView.updateNavigationRow(navigation.obj);
+                HtmlAreaView.updateHtmlAreaRow(navigation.obj);
             });
         },
-        deleteNavigationById: function(id) {
+        deleteHtmlAreaById: function(id) {
             AjaxUtil.sendDeleteRequest(BASE + '/deleteBy/' + id, function() {
-                NavigationView.deleteNavigationRow(id);
+                HtmlAreaView.deleteHtmlAreaRow(id);
             });
         },
-        deleteNavigationRows: function(items) {
+        deleteHtmlAreaRows: function(items) {
             AjaxUtil.sendBatchRemove(BASE + '/batchRemove',items, function() {
-                NavigationView.deleteNavigationRows(items);
+                HtmlAreaView.deleteHtmlAreaRows(items);
             });
         }
     }

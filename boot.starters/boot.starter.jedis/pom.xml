@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
-    <artifactId>icustom.boot.starter.jedis</artifactId>
+    <artifactId>boot.starter.jedis</artifactId>
 
 	<dependencies>
 		<dependency>

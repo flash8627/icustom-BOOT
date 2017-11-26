@@ -23,7 +23,7 @@ public class ApiTestUiMainApplication {
 
 	public static void main(String[] args) {
 		// SpringApplication.run(MainApplication.class, args);
-		SpringApplication app = new SpringApplication(ApiTestUiMainApplication.class);
+		SpringApplication app = new SpringApplication(ApiTestUiMainApplication.class, args);
 		app.run(args);
 		log.info("Running with Spring successfull------");
 

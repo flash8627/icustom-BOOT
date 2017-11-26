@@ -2,6 +2,7 @@ package com.gwtjs.icustom.htmlarea.vo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gwtjs.icustom.entity.BaseResource;
 
 /**
@@ -10,12 +11,17 @@ import com.gwtjs.icustom.entity.BaseResource;
  * @author aGuang
  *
  */
+@JsonIgnoreProperties({ "category", "name", "description", "title", "mappingUrl", "attr1", "attr2", "attr3", "content",
+		"secondLevelType", "thirdLevelType" })
 public class HtmlAreaVO extends BaseResource {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6970590248287107679L;
+
+	public HtmlAreaVO() {
+	}
 
 	/** 富文本类型 **/
 	private String category;

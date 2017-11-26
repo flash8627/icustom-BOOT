@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title></title>
+<script src="FileSaver.js" type="text/javascript"></script>
+<script>
+	/** function clickDownload(aLink)  
+	 { 
+		var str = "col1,col2,col3\nvalue1,value2,value3";
+	      aLink.href = "data:text/csv;charset=utf-8,\ufeff"+str;  
+	      
+	 }  **/
+
+	function clickDownload() {
+		var data = "col111111,col2,col3\nvalue1,value2,value3";
+		var blob = new Blob([ data ], {
+			type : 'text/xlsx'
+		}); //new way  
+		var csvUrl = URL.createObjectURL(blob);
+		document.getElementById("test").href = csvUrl;
+	}
+
+	function clickDownload2() {
+		// using the Blob constructor
+		var textBlob1 = new Blob([ "Hello", " world!" ], {
+			type : "text/csv",
+			endings : "transparent"
+		});
+
+	}
+
+	function downloadFile() {
+		var aLink = document.createElement('a');
+		var blob = new Blob([ "Hello", " world!" ], {
+			type : "text/plain",
+			endings : "transparent"
+		});
+		var evt = document.createEvent("HTMLEvents");
+		evt.initEvent("click", false, false);
+		aLink.download = 'downlaod.txt';
+		aLink.href = URL.createObjectURL(blob);
+		aLink.dispatchEvent(evt);
+	}
+</script>
+</head>
+<body>
+	<a id="test" onclick="clickDownload2(this)" download="downlaod.xlsx"
+		href="#">downlaod.csv</a>
+
+	<a id="downId" onclick="downloadFile()" download="downlaod.txt"
+		href="#">downlaod.txt</a>
+
+	<a id="clickDownload" onclick="clickDownload()" download="downlaod.html"
+		href="#">clickDownload</a>
+</body>
+</html>

@@ -6,11 +6,14 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import org.omg.CORBA.portable.ApplicationException;
 
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
@@ -61,5 +64,71 @@ public interface IHtmlAreaService {
 	 */
 	@DELETE @Path("/delete")
 	ResultWrapper batchRemovePks(List<HtmlAreaVO> records);
+	
+	/**
+	* 新增HtmlArea
+	* @param vo
+	* @return
+	* @throws ApplicationException
+	*/
+	@POST
+	@Path("/single")
+	void createHtmlArea(HtmlAreaVO vo) throws ApplicationException;
+	/**
+	* 编辑HtmlArea
+	* @param vo
+	* @return
+	* @throws ApplicationException
+	*/
+	@PUT
+	@Path("/single")
+	void updateHtmlArea(HtmlAreaVO vo) throws ApplicationException;
+	/**
+	* 删除HtmlArea
+	* @param vo
+	* @return
+	* @throws ApplicationException
+	*/
+	@DELETE
+	@Path("/d/single")
+	void deleteHtmlArea(HtmlAreaVO vo) throws ApplicationException;
+	/**
+	* 批量删除HtmlArea
+	* @param vo
+	* @return
+	* @throws ApplicationException
+	*/
+	@PUT
+	@Path("/d/list")
+	void deleteHtmlAreaList(List<HtmlAreaVO> htmlAreaVO) throws ApplicationException;
+	/**
+	* 分页查找HtmlArea
+	* @param queryHtmlArea
+	* @param pageVO
+	* @return
+	*/
+	@GET
+	@Path("/list/page/{pageSize}/{curPage}")
+	public PagedResult<HtmlAreaVO> findPagedHtmlAreaList(@QueryParam("") HtmlAreaVO queryHtmlArea,
+	@PathParam("") PageVO pageVO)throws ApplicationException;
+	/**
+	* 查询单个HtmlArea
+	* @param htmlArea
+	* @return
+	*/
+	@GET
+	@Path("/single/{htmlAreaId}")
+	public HtmlAreaVO findHtmlArea(@PathParam("") HtmlAreaVO htmlArea)throws ApplicationException;
+
+	/**
+	* export导出
+	* @param htmlAreaVO
+	* @throws ApplicationException
+	*/
+	@GET
+	@Path("/exportHtmlArea")
+	public void exportHtmlArea(@QueryParam("") HtmlAreaVO htmlAreaVO) throws ApplicationException;
+	
+	
 	
 }

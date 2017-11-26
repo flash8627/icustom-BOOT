@@ -73,8 +73,7 @@
 		<module>metrics</module>
 		<module>sample</module>
 		<!--1-->
-		<module>email</module>
-		<module>bbs</module>
+		<module>modules</module>
 		
 		<module>icustom.web</module>
 		<module>icustom.ear</module>

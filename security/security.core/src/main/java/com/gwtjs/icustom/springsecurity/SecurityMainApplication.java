@@ -23,7 +23,7 @@ public class SecurityMainApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(SecurityMainApplication.class);
+		SpringApplication app = new SpringApplication(SecurityMainApplication.class, args);
 		Appctx.ctx = app.run(args);
 		/*
 		System.out.println(Appctx.getObject("customInvocationSecurityMetadataSourceService"));

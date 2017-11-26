@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.omg.CORBA.portable.ApplicationException;
 import org.springframework.stereotype.Service;
 
 import com.gwtjs.icustom.entity.PageVO;
@@ -71,6 +72,49 @@ public class HtmlAreaService implements IHtmlAreaService {
 	public ResultWrapper batchRemovePks(List<HtmlAreaVO> records) {
 		htmlAreaDao.batchRemovePks(records);
 		return null;
+	}
+
+	@Override
+	public void createHtmlArea(HtmlAreaVO vo) throws ApplicationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateHtmlArea(HtmlAreaVO vo) throws ApplicationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteHtmlArea(HtmlAreaVO vo) throws ApplicationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteHtmlAreaList(List<HtmlAreaVO> htmlAreaVO) throws ApplicationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PagedResult<HtmlAreaVO> findPagedHtmlAreaList(HtmlAreaVO queryHtmlArea, PageVO pageVO)
+			throws ApplicationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HtmlAreaVO findHtmlArea(HtmlAreaVO htmlArea) throws ApplicationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void exportHtmlArea(HtmlAreaVO htmlAreaVO) throws ApplicationException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

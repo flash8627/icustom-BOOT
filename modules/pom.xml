@@ -1,6 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	
+	<artifactId>modules</artifactId>
+	
+	<packaging>pom</packaging>
+	
+	<name>modules</name>
+	<description>ICustom project for Spring Boot</description>
 
 	<parent>
 		<groupId>com.gwtjs.icustom</groupId>
@@ -8,17 +17,11 @@
 		<version>0.7.11.8</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
-	
-	<artifactId>bbs</artifactId>
-	<packaging>jar</packaging>
-	
-	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>common.log</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-	</dependencies>
-	
+
+	<modules>
+		<module>modules.bbs</module>
+		<module>modules.email</module>
+	</modules>
+
+
 </project>
