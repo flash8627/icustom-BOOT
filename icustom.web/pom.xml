@@ -52,30 +52,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		
-		<!-- 附件模块,文件上传下载 -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>common.attachments</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-	
-		<!-- 富文本模块 -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>common.htmlarea</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-	
-		<!-- 富文本模块 -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>common.kindeditor</artifactId>
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
-		
 		<!-- 日志模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -124,6 +100,29 @@
 			<version>${project.version}</version>
 		</dependency>
 		
+		<!-- 附件模块,文件上传下载 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.attachments</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+	
+		<!-- 富文本模块 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.htmlarea</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+	
+		<!-- 富文本模块 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.kindeditor</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
 		<!-- excel模块 -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

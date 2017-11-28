@@ -15,12 +15,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.entity.ResultWrapper;
+import com.gwtjs.icustom.htmlarea.HtmlAreaApplication;
 import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
 import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=HtmlAreaApplication.class)
 public class IHtmlAreaServiceTests {
+	
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(IHtmlAreaServiceTests.class);
 	
 	@Inject
 	private IHtmlAreaService htmlAreaService;
@@ -28,7 +34,7 @@ public class IHtmlAreaServiceTests {
 	@Test
 	public void contextLoads() {
 		assertNotNull(htmlAreaService);
-		System.out.println(htmlAreaService);
+		log.info("htmlAreaService",htmlAreaService);
 	}
 	
 	@Test
@@ -36,7 +42,7 @@ public class IHtmlAreaServiceTests {
 	{
 		List<HtmlAreaVO> list = new ArrayList<HtmlAreaVO>();
 		ResultWrapper result = htmlAreaService.saveOrUpdate(list);
-		System.out.println(result);
+		log.info("saveOrUpdate result",result);
 	}
 	
 	@Test
@@ -44,7 +50,7 @@ public class IHtmlAreaServiceTests {
 	{
 		Integer htmlAreaId = 0;
 		HtmlAreaVO result = htmlAreaService.findHtmlArea(htmlAreaId);
-		System.out.println(result);
+		log.info("findHtmlArea result,"+result);
 	}
 	
 	@Test
@@ -52,7 +58,7 @@ public class IHtmlAreaServiceTests {
 	{
 		HtmlAreaVO vo=new HtmlAreaVO();PageVO page = new PageVO();
 		PagedResult<HtmlAreaVO> result = htmlAreaService.findHtmlAreaPage(vo,page);
-		System.out.println(result);
+		log.info("findHtmlAreaPage result,"+result);
 	}
 	
 	@Test
@@ -60,14 +66,14 @@ public class IHtmlAreaServiceTests {
 	{
 		List<HtmlAreaVO> list = new ArrayList<HtmlAreaVO>();
 		ResultWrapper result = htmlAreaService.batchRemovePks(list);
-		System.out.println(result);
+		log.info("batchRemovePks result,"+result);
 	}
 	
 	@Test
 	public void testFindAll()
 	{
 		List<HtmlAreaVO> list = htmlAreaService.findAll();
-		System.out.println(list);
+		log.info("batchRemovePks findAll,"+list);
 	}
 
 }

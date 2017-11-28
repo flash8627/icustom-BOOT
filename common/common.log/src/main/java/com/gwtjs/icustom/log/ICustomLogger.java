@@ -33,6 +33,13 @@ public interface ICustomLogger {
 	 * 记录调试日志信息
 	 * 
 	 * @param message
+	 */
+	void debug(String message,Object obj);
+
+	/**
+	 * 记录调试日志信息
+	 * 
+	 * @param message
 	 * @param params
 	 */
 	void debug(String message, Object... params);
@@ -67,6 +74,19 @@ public interface ICustomLogger {
 	 * @param message
 	 */
 	void info(String message);
+	/**
+	 * 记录Info日志
+	 * 
+	 * @param message
+	 */
+	void info(Object message);
+
+	/**
+	 * 记录Info日志
+	 * 
+	 * @param message
+	 */
+	void info(String message,Object obj);
 
 	/**
 	 * 记录Info日志

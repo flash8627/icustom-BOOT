@@ -1,8 +1,8 @@
 var HtmlAreaService = function() {
-    var BASE = '../services/nav';
+    var BASE = '../services/htmlarea';
     return {
     	findHtmlAreas: function(callback) {
-            AjaxUtil.sendGetRequest(BASE + '/findHtmlAreaList', function(navigationList) {
+            AjaxUtil.sendGetRequest(BASE + '/findHtmlAreaPage/20/1', function(navigationList) {
                 HtmlAreaView.renderHtmlAreaTable(navigationList);
                 callback();
             });

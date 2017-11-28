@@ -117,11 +117,11 @@ public class PageVO {
 
 	@Override
 	public String toString() {
-		return "PagerVO [totalRows=" + totalRows + ", curPage=" + curPage
-				+ ", pageSize=" + pageSize + ", resultMode=" + resultMode
-				+ ", startIndex=" + startIndex + ", endIndex=" + endIndex
-				+ ", mysqlStartIndex=" + mysqlStartIndex + ", mysqlEndIndex="
-				+ mysqlEndIndex + ", orderBy=" + orderBy + "]";
+		return "{'totalRows':'" + totalRows + "', 'curPage':'" + curPage
+				+ "', 'pageSize':'" + pageSize + "', 'resultMode':'" + resultMode
+				+ "', 'startIndex':'" + startIndex + "', 'endIndex':'" + endIndex
+				+ "', 'mysqlStartIndex':'" + mysqlStartIndex + "', 'mysqlEndIndex':'"
+				+ mysqlEndIndex + "', 'orderBy':'" + orderBy + "'}";
 	}
 
 }

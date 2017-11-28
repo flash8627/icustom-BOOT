@@ -178,4 +178,15 @@ public class HtmlAreaVO extends BaseResource {
 		this.createFromDate = createFromDate;
 	}
 
+	@Override
+	public String toString() {
+		return "{'category':'" + category + "', 'name':'" + name + "', 'description':'" + description + "', 'content':'"
+				+ content + "', 'title':'" + title + "', 'mappingUrl':'" + mappingUrl + "', 'attr1':'" + attr1 + "', 'attr2':'" + attr2
+				+ "', 'attr3':'" + attr3 + "', 'account':'" + account + "', 'secondLevelType':'" + secondLevelType
+				+ "', 'thirdLevelType':'" + thirdLevelType + "', 'createToDate':'" + createToDate + "', 'createFromDate':'"
+				+ createFromDate + "', 'programFilterEnable':'" + programFilterEnable + "'}";
+	}
+	
+	
+
 }

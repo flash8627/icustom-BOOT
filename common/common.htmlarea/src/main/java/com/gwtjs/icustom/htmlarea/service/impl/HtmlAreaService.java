@@ -3,6 +3,7 @@ package com.gwtjs.icustom.htmlarea.service.impl;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.omg.CORBA.portable.ApplicationException;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,16 @@ import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.htmlarea.dao.IHtmlAreaDao;
 import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
 import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 import io.swagger.annotations.Api;
 
-@Api("/htmlArea")  @Service("htmlAreaService")
+@Api("/htmlArea")  @Service("htmlAreaService") @Named("htmlAreaService")
 public class HtmlAreaService implements IHtmlAreaService {
+	
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(HtmlAreaService.class);
 	
 	@Inject
 	private IHtmlAreaDao htmlAreaDao;
@@ -29,8 +35,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public ResultWrapper saveOrUpdate(List<HtmlAreaVO> list) {
-		htmlAreaDao.saveOrUpdate(list);
-		return null;
+		int result = htmlAreaDao.saveOrUpdate(list);
+		return ResultWrapper.successResult(result);
 	}
 	
 	/**
@@ -39,8 +45,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public List<HtmlAreaVO> findAll() {
-		htmlAreaDao.findAll();
-		return null;
+		
+		return htmlAreaDao.findAll();
 	}
 	
 	/**
@@ -49,8 +55,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public HtmlAreaVO findHtmlArea(Integer htmlAreaId) {
-		htmlAreaDao.findHtmlArea(htmlAreaId);
-		return null;
+		
+		return htmlAreaDao.findHtmlArea(htmlAreaId);
 	}
 	
 	/**
@@ -59,8 +65,11 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public PagedResult<HtmlAreaVO> findHtmlAreaPage(HtmlAreaVO vo,PageVO page) {
-		htmlAreaDao.findHtmlAreaPage(vo, page);
-		return null;
+		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo);
+		log.info("\n>>>>>>>>findHtmlAreaPage po------",page);
+		log.info("\n>>>>>>>>findHtmlAreaPage dao-----",htmlAreaDao);
+		
+		return new PagedResult<HtmlAreaVO>();//htmlAreaDao.findHtmlAreaPage(vo, page);
 	}
 	
 	/**
@@ -70,8 +79,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public ResultWrapper batchRemovePks(List<HtmlAreaVO> records) {
-		htmlAreaDao.batchRemovePks(records);
-		return null;
+		int result = htmlAreaDao.batchRemovePks(records);
+		return ResultWrapper.successResult(result);
 	}
 
 	@Override

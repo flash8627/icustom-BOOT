@@ -23,7 +23,7 @@ import com.gwtjs.icustom.htmlarea.service.impl.HtmlAreaService;
 @Component
 public class HtmlAreaCxfConfig {
 	
-	@Autowired
+	/*@Autowired
     private Bus bus;
 	
 	@Autowired
@@ -51,5 +51,5 @@ public class HtmlAreaCxfConfig {
         factory.setBus(endpoint.getBus());
         manager.registerBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID,factory);
         return endpoint.create();
-    }
+    }*/
 }

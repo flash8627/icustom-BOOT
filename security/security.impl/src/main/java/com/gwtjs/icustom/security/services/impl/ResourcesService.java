@@ -16,12 +16,12 @@ import com.gwtjs.icustom.security.services.ISysResourcesService;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
 @Named("resourcesService")
-public class SysResourcesService implements ISysResourcesService {
+public class ResourcesService implements ISysResourcesService {
 	
 	@Inject
 	private ISysResourcesDAO resourcesDAO;
 
-	private static final Logger log = LoggerFactory.getLogger(SysResourcesService.class);
+	private static final Logger log = LoggerFactory.getLogger(ResourcesService.class);
 	
 	@Override
 	public Integer selectByItemId() {
@@ -39,22 +39,22 @@ public class SysResourcesService implements ISysResourcesService {
 		for (SysResourceVO menu : menus) {
 			List<SysResourceVO> child = this
 					.findMenus(menu.getResourceId());
-			/*if(child.size()>0){
+			if(child.size()>0){
 				menu.setChildren(child);
-			}*/
+			}
 		}
 		return menus;
 	}
 	
 	private List<SysResourceVO> findMenus(long parentId) {
 		List<SysResourceVO> list = this.findSiteMenuChildren(parentId);
-		/*for (SysResourceVO record : list) {
+		for (SysResourceVO record : list) {
 			if (record.isLeaf()) {
 				List<SysResourceVO> children = this
 						.findSiteMenuChildren(record.getResourceId());
 				record.setChildren(children);
 			}
-		}*/
+		}
 		return list;
 	}
 	
@@ -73,13 +73,13 @@ public class SysResourcesService implements ISysResourcesService {
 	@Override
 	public List<SysResourceVO> findResourcesGridTree(long parentId) {
 		List<SysResourceVO> list = this.findResourcesChildren(parentId);
-		/*for (SysResourceVO record : list) {
+		for (SysResourceVO record : list) {
 			if (record.isLeaf()) {
 				List<SysResourceVO> children = this
 						.findResourcesChildren(record.getResourceId());
 				record.setChildren(children);
 			}
-		}*/
+		}
 		return list;
 	}
 	
@@ -88,10 +88,10 @@ public class SysResourcesService implements ISysResourcesService {
 		SysResourceVO record = resourcesDAO.findResourcesGridTreeRoot();
 		List<SysResourceVO> list = new ArrayList<SysResourceVO>();
 
-		/*if(record!=null && record.isLeaf()){
+		if(record!=null && record.isLeaf()){
 			List<SysResourceVO> children = this.findResourcesChildren(record.getResourceId());
 			record.setChildren(children);
-		}*/
+		}
 		list.add(record);
 		log.debug("", list);
 		return list;

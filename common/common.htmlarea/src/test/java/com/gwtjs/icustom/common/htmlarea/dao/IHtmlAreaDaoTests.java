@@ -14,11 +14,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
+import com.gwtjs.icustom.htmlarea.HtmlAreaApplication;
 import com.gwtjs.icustom.htmlarea.dao.IHtmlAreaDao;
 import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=HtmlAreaApplication.class)
 public class IHtmlAreaDaoTests {
 	
 	@Inject

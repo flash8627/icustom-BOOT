@@ -1,8 +1,8 @@
 package com.gwtjs.icustom.springsecurity.entity;
 
-import com.gwtjs.icustom.entity.BaseResource;
+import com.gwtjs.icustom.entity.TreeModel;
 
-public class SysResourceVO extends BaseResource {
+public class SysResourceVO extends TreeModel<SysResourceVO> {
 
 	/***/
 	private static final long serialVersionUID = -8724114844194419901L;
@@ -21,6 +21,8 @@ public class SysResourceVO extends BaseResource {
 
 	// 上级
 	private long parentId;
+	
+	
 
 	public String getResourceUrl() {
 		return resourceUrl;

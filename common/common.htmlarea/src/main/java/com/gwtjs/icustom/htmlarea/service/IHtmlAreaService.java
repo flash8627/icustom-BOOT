@@ -54,7 +54,7 @@ public interface IHtmlAreaService {
 	 * @return
 	 */
 	@GET
-	@Path("/findHtmlAreaPage/{curPage}/{pageSize}")
+	@Path("/findHtmlAreaPage/{pageSize}/{curPage}")
 	public PagedResult<HtmlAreaVO> findHtmlAreaPage(@QueryParam("") HtmlAreaVO sys,@PathParam("") PageVO page);
 	
 	/**

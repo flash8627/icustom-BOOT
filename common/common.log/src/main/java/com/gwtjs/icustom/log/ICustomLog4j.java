@@ -43,6 +43,24 @@ public class ICustomLog4j implements ICustomLogger {
 	/*
 	 * （非 Javadoc）
 	 * 
+	 * @see log.ILogger#debug(java.lang.String)
+	 */
+	public void debug(Object message) {
+		logger.log(FQCN, Level.DEBUG, message, null);
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see log.ILogger#debug(java.lang.String)
+	 */
+	public void debug(String message,Object obj) {
+		logger.log(FQCN, Level.DEBUG, message+"\t"+obj.toString(), null);
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see log.ILogger#debug(java.lang.String,
 	 * java.lang.Object[])
 	 */
@@ -90,6 +108,24 @@ public class ICustomLog4j implements ICustomLogger {
 	 */
 	public void info(String message) {
 		logger.log(FQCN, Level.INFO, message, null);
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see log.ILogger#info(java.lang.String)
+	 */
+	public void info(Object message) {
+		logger.log(FQCN, Level.INFO, message.toString(), null);
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see log.ILogger#info(java.lang.String)
+	 */
+	public void info(String message,Object obj) {
+		logger.log(FQCN, Level.INFO, message+"\t"+obj.toString(), null);
 	}
 
 	/*

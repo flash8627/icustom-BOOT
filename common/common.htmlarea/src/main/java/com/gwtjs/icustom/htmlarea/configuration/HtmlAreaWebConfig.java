@@ -17,7 +17,7 @@ import com.gwtjs.icustom.htmlarea.filter.ResourcesUrlMappingFilter;
 
 @Component @Configuration 
 @ConditionalOnClass(HtmlAreaWebConfig.class)
-@ComponentScan({ "com.gwtjs.icustom.common.kindeditor.filter" })
+@ComponentScan({ "com.gwtjs.icustom.htmlarea.filter" })
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE - 1)
 public class HtmlAreaWebConfig {
 	

@@ -56,8 +56,7 @@
 
 	<script type="text/x-handlebars-template"
 		id="htmlarea_table_template">
-    {{#if data}}
-        <table class="table table-hover" id="htmlarea_table">
+    	<table class="table table-hover" id="htmlarea_table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -81,14 +80,12 @@
                 {{/data}}
             </tbody>
         </table>
-    {{else}}
-        <div class="alert alert-warning">Can not find any data!</div>
-    {{/if}}
 </script>
 
 	<script type="text/x-handlebars-template-partial"
 		id="htmlarea_table_tr_template">
-    <tr data-id="{{itemId}}" data-name="{{itemName}}">
+	{{#if data}}
+        <tr data-id="{{itemId}}" data-name="{{itemName}}">
         <td>{{itemId}}</td>
         <td>{{itemName}}</td>
         <td>{{url}}</td>
@@ -103,7 +100,14 @@
             <button class="btn btn-xs btn-primary htmlarea_edit" title="Edit"><i class="fa fa-fw fa-edit"></i></button>
             <button class="btn btn-xs btn-default htmlarea_delete" title="Delete"><i class="fa fa-fw fa-trash-o"></i></button>
         </td>
-    </tr>
+    	</tr>
+    {{else}}
+		<tr ><td colspan="11">
+        	<div class="alert alert-warning">Can not find any data!</div>
+		</td>
+    	</tr>
+    {{/if}}
+    
 </script>
 
 
@@ -152,10 +156,11 @@
 		$(function() {
 
 			// 显示所有产品
-			$('body').hide(); // 隐藏界面
+			// $('body').hide(); 隐藏界面
 			HtmlAreaService.findHtmlAreas(function() {
+				//$('body').show(); // 显示界面
 			});
-			    $('body').show(); // 显示界面
+			//HtmlAreaView.renderHtmlAreaTable(null);
 
 			// 根据关键字查询产品
 			$('#htmlarea_search_form').on('submit', function() {

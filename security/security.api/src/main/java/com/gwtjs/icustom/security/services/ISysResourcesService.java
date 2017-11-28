@@ -19,7 +19,7 @@ import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
  * @author aGuang
  *
  */
-@Path("/resourcesService")
+@Path("/sysResourcesService")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface ISysResourcesService {
