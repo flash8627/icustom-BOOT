@@ -10,9 +10,9 @@ $(function() {
 })
 
 var viewGrid = function(resourceId) {
-	var resUrl = BASE + '/findResourcesGridTree';
+	var resourceUrl = BASE + '/findResourcesGridTree';
 	if (resourceId != undefined) {
-		resUrl = resUrl + '/' + resourceId;
+		resourceUrl = resourceUrl + '/' + resourceId;
 	}
 	$('#tg').treegrid({
 		url : BASE + '/findResourcesGridTree',
@@ -23,9 +23,9 @@ var viewGrid = function(resourceId) {
 		treeField : 'resourceName',
 		onBeforeExpand : function(row) {
 			if (row) {
-				$('#tg').treegrid('options').url = resUrl+"/"+row.resourceId;
+				$('#tg').treegrid('options').url = resourceUrl+"/"+row.resourceId;
 			}else{
-				$('#tg').treegrid('options').url = resUrl;
+				$('#tg').treegrid('options').url = resourceUrl;
 			}
 		},
 		onClick : function(node) {
@@ -57,7 +57,7 @@ var viewGrid = function(resourceId) {
 		}, {
 			title : '上级',field : 'parentName',	width : 180,align : 'left',formatter : resourceNameFormatter,editor : 'text'
 		}, {
-			title : '地址',field : 'resUrl',	width : 180,align : 'left',editor : 'text'
+			title : '地址',field : 'resourceUrl',	width : 180,align : 'left',editor : 'text'
 		}, {
 			title : '启用',field : 'useStatus',	width : 60,editor:{type:'checkbox',options:{on:1,off:0}},
 			formatter : resourceUseStatus		
@@ -213,7 +213,7 @@ function addSequence(sequence){
 		resourceId : index,
 		resourceName : '',
 		parentName:parentName,
-		resUrl : '',
+		resourceUrl : '',
 		resourceType : 0,
 		resourceDesc : '',
 		useStatus:1,
@@ -257,7 +257,7 @@ function onSaveItem() {
 			resourceId : row.resourceId,
 			resourceName : row.resourceName,
 			parentId : row._parentId,
-			resUrl : row.resUrl,
+			resourceUrl : row.resourceUrl,
 			resourceType : row.resourceType,
 			resourceDesc : row.resourceDesc,
 			useStatus:row.useStatus,

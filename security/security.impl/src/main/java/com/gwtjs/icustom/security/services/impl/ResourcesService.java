@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 
 import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.security.dao.ISysResourcesDAO;
-import com.gwtjs.icustom.security.services.ISysResourcesService;
+import com.gwtjs.icustom.security.services.IResourcesService;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
 @Named("resourcesService")
-public class ResourcesService implements ISysResourcesService {
+public class ResourcesService implements IResourcesService {
 	
 	@Inject
 	private ISysResourcesDAO resourcesDAO;

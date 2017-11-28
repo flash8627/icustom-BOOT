@@ -25,8 +25,8 @@ resourceNameFormatter = function(value, rowData) {
 var anode = function(item){
 	var name = resourceNameFormatter(item.resourceName,item);
 	var url = "#";
-	if(item.resUrl!=null){
-		url = "/"+item.resUrl;
+	if(item.resourceUrl!=null){
+		url = "/"+item.resourceUrl;
 	}
 	var node = '';
 	node += '<a href="';

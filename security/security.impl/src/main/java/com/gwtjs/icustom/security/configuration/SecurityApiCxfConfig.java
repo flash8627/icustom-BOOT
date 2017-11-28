@@ -5,7 +5,7 @@ import org.apache.cxf.bus.spring.SpringBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.gwtjs.icustom.security.services.ISysResourcesService;
+import com.gwtjs.icustom.security.services.IResourcesService;
 import com.gwtjs.icustom.security.services.impl.ResourcesService;
 
 
@@ -18,7 +18,7 @@ public class SecurityApiCxfConfig {
     }
     
     @Bean
-    public ISysResourcesService sysResourcesService() {
+    public IResourcesService sysResourcesService() {
         return new ResourcesService();
     }
     

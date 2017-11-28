@@ -11,7 +11,6 @@
 	
 	<!-- 树专用  -->
 	<select id="findAuthResourcesTreeRoot" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
-		SELECT
 		<include refid="auth_resource_tree_col" />
 		 FROM SYS_RESOURCE_T T1 
 		where T1.VALID_FLAG=1 
@@ -19,7 +18,6 @@
 	</select>
 	
 	<select id="findAuthResourcesTree" resultType="com.gwtjs.icustom.springsecurity.entity.SysResourceVO">
-		SELECT
 		<include refid="auth_resource_tree_col" />
 		 FROM SYS_RESOURCE_T T1 
 		where T1.VALID_FLAG=1 
@@ -28,11 +26,11 @@
 	</select>
 	
 	<sql id="auth_resource_tree_col">
+		SELECT 
 		RESOURCE_ID 		 id,
 		RESOURCE_NAME 		 text,
-		RESOURCE_URL			 	resUrl,
+		RESOURCE_URL			 	resourceUrl,
 		REMARK        resourceDesc,
-		ISSYS            issys,
 		PARENT_ID 		 parentId, 
 		ORDER_CODE orderCode,
 		(nvl((select TU.USER_NAME userName FROM SYS_USER_T TU WHERE TU.USER_ID = to_char(T1.CREATED_USER)),T1.CREATED_USER) ) nameCn,
@@ -88,7 +86,7 @@
 		#{resourceName,jdbcType=VARCHAR},
 		#{parentId,jdbcType=NUMERIC},
 		#{icon,jdbcType=VARCHAR},
-		#{resUrl,jdbcType=VARCHAR},
+		#{resourceUrl,jdbcType=VARCHAR},
 		#{resourceDesc,jdbcType=VARCHAR}, 
 		#{useStatus,jdbcType=INTEGER},
 		#{resourceType,jdbcType=INTEGER},
@@ -107,7 +105,7 @@
 			RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
 			PARENT_ID = #{parentId,jdbcType=NUMERIC},
 			ICON = #{icon,jdbcType=VARCHAR},
-			RESOURCE_URL = #{resUrl,jdbcType=VARCHAR},
+			RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR},
 			RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR},
 			REMARK = #{resourceDesc,jdbcType=VARCHAR},
 			USE_STATUS = #{useStatus,jdbcType=INTEGER},
@@ -153,7 +151,7 @@
 					#{item.resourceName,jdbcType=VARCHAR},
 					#{item.parentId,jdbcType=NUMERIC},
 					#{item.icon,jdbcType=VARCHAR},
-					#{item.resUrl,jdbcType=VARCHAR},
+					#{item.resourceUrl,jdbcType=VARCHAR},
 					#{item.resourceDesc,jdbcType=VARCHAR}, 
 					#{item.useStatus,jdbcType=INTEGER},
 					#{item.resourceType,jdbcType=INTEGER}, 
@@ -177,7 +175,7 @@
 			nvl((select T2.RESOURCE_NAME parentName FROM SYS_RESOURCE_T T2 WHERE RESOURCE_ID =
 			T1.PARENT_ID AND ROWNUM=1),'') parentName,
 			T1.ICON icon,
-			T1.RESOURCE_URL resUrl,
+			T1.RESOURCE_URL resourceUrl,
 			T1.RESOURCE_TYPE resourceType,
 			T1.REMARK resourceDesc,
 			T1.USE_STATUS useStatus,
@@ -207,7 +205,7 @@
 			nvl((select T2.RESOURCE_NAME parentName FROM SYS_RESOURCE_T T2 WHERE RESOURCE_ID =
 			T1.PARENT_ID AND ROWNUM=1),'') parentName,
 			T1.ICON icon,
-			T1.RESOURCE_URL resUrl,
+			T1.RESOURCE_URL resourceUrl,
 			T1.RESOURCE_TYPE resourceType,
 			T1.REMARK resourceDesc,
 			T1.USE_STATUS useStatus,

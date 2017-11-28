@@ -24,18 +24,25 @@ public class ResourcesServiceTest {
 			.getLogger(ResourcesServiceTest.class);
 	
 	@Inject
-	private ISysResourcesService resourcesService;
+	private IResourcesService resourcesService;
 	
 	@Test
 	public void contextLoads() {
 		assertNotNull(resourcesService);
-		log.info("htmlAreaService",resourcesService);
+		log.info("IResourcesService",resourcesService);
 	}
 	
 	@Test
 	public void findResourcesListTest()
 	{
 		List<SysResourceVO> list = resourcesService.findResourcesList();
+		log.info("findResourcesList List",list);
+	}
+	
+	@Test
+	public void findMenuTest()
+	{
+		List<SysResourceVO> list = resourcesService.findResourcesSiteMenu();
 		log.info("findResourcesList List",list);
 	}
 	
