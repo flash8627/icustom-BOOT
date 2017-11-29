@@ -4,7 +4,6 @@ var HtmlAreaView = function() {
     };
     return {
         renderHtmlAreaTable: function(htmlareaList) {
-        	console.warn('htmlareaList1?',htmlareaList);
             TemplateUtil.registerPartical('tr', 'htmlarea_table_tr_template');
             var html = TemplateUtil.renderHtml('htmlarea_table_template', {
                 data: htmlareaList
