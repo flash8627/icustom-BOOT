@@ -1,4 +1,27 @@
 
+-- Drop SEQUENCE
+declare
+  v_num number;
+begin
+  select count(*)
+    into v_num
+    from user_sequences
+   where sequence_name = 'SYS_LOOKUP_CLASSIFY_S';
+  if v_num > 0 then
+    execute immediate 'drop SEQUENCE SYS_LOOKUP_CLASSIFY_S';
+  end if;
+end;
+/
+
+
+-- Create sequence 
+create sequence SYS_LOOKUP_CLASSIFY_S
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20;
+
 declare
   v_num number;
 begin
