@@ -1,4 +1,6 @@
 
+
+
 -- Drop SEQUENCE
 declare
   v_num number;
@@ -37,28 +39,54 @@ end;
 /
 
 -- Create table
-create table SYS_HTML_AREA_T(
-       html_area_id INTEGER not null,
-                             category VARCHAR2(1000) not null,
-                             name VARCHAR2(1000) not null,
-                             description VARCHAR2(4000),
-                             content CLOB not null,
-                             title VARCHAR2(2000),
-                             mapping_url VARCHAR2(200),
-                             second_level_type VARCHAR2(1000),
-                             third_level_type VARCHAR2(1000),
-                             app_name VARCHAR2(20),
-                             created_by NUMBER(15) not null,
-                             creation_date     DATE default sysdate not null,
-                             last_updated_by NUMBER(15) not null,
-                             last_update_date  DATE default sysdate not null,
-                             attr1 VARCHAR2(200),
-                             attr2 VARCHAR2(200),
-                             attr3 VARCHAR2(200)
-);
+create table SYS_HTML_AREA_T
+(
+  html_area_id          INTEGER not null,
+  name                  VARCHAR2(1000) not null,
+  title                 VARCHAR2(2000),
+  mapping_url           VARCHAR2(200),
+  content               CLOB not null,
+  category              VARCHAR2(1000) not null,
+  description           VARCHAR2(4000),
+  
+  program_filter_enable NUMBER default 1,
+  create_from_date      DATE default sysdate,
+  create_to_date        DATE,
 
--- Add comments to the columns
-comment on column SYS_HTML_AREA_T.created_by is '创建人';
-comment on column SYS_HTML_AREA_T.creation_date is '创建时间';
-comment on column SYS_HTML_AREA_T.last_updated_by is '最后修改人';
-comment on column SYS_HTML_AREA_T.last_update_date is '最后修改时间';
+  second_level_type     VARCHAR2(1000),
+  third_level_type      VARCHAR2(1000),
+  app_name              VARCHAR2(20),
+  ATTRIBUTE1                 VARCHAR2(200),
+  ATTRIBUTE2                 VARCHAR2(200),
+  ATTRIBUTE3                 VARCHAR2(200),
+  
+  created_by            NUMBER(15) not null,
+  creation_date         DATE default sysdate not null,
+  update_last_user      NUMBER(15) not null,
+  update_last_date      DATE default sysdate not null
+)
+tablespace USERS;
+-- Add comments to the columns 
+comment on column SYS_HTML_AREA_T.mapping_url
+  is '映射路径,js,css,html等资源都可以用映射路径替换原来的内容';
+comment on column SYS_HTML_AREA_T.title
+  is 'html title';
+comment on column SYS_HTML_AREA_T.content
+  is '主体内容';
+comment on column SYS_HTML_AREA_T.created_by
+  is '创建人';
+comment on column SYS_HTML_AREA_T.creation_date
+  is '创建时间';
+comment on column SYS_HTML_AREA_T.update_last_user
+  is '最后修改人';
+comment on column SYS_HTML_AREA_T.update_last_date
+  is '最后修改时间';
+comment on column SYS_HTML_AREA_T.create_from_date
+  is '从什么时间开始';
+comment on column SYS_HTML_AREA_T.create_to_date
+  is '到什么时间结束';
+comment on column SYS_HTML_AREA_T.program_filter_enable
+  is '程序过滤器开关,1打开,0关闭';
+
+
+

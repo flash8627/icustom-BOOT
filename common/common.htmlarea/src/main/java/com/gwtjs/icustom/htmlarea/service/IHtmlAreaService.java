@@ -22,16 +22,24 @@ import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/") 
+@Path("/htmlAreaService") 
 public interface IHtmlAreaService {
 	
 	/**
 	 * 保存或修改  merge动作
-	 * @param sys
+	 * @param HtmlAreaVO
 	 * @return
 	 */
 	@POST @Path("/saveOrUpdate")
-	public ResultWrapper saveOrUpdate(List<HtmlAreaVO> list);
+	public ResultWrapper saveOrUpdate(HtmlAreaVO vo);
+	
+	/**
+	 * 保存或修改  merge动作
+	 * @param HtmlAreaVO
+	 * @return
+	 */
+	@POST @Path("/batchSaveOrUpdate")
+	public ResultWrapper batchSaveOrUpdate(List<HtmlAreaVO> list);
 	
 	/**
 	 * 查询所有,没有过滤条件
@@ -55,7 +63,7 @@ public interface IHtmlAreaService {
 	 */
 	@GET
 	@Path("/findHtmlAreaPage/{pageSize}/{curPage}")
-	public PagedResult<HtmlAreaVO> findHtmlAreaPage(@QueryParam("") HtmlAreaVO sys,@PathParam("") PageVO page);
+	public PagedResult<HtmlAreaVO> findHtmlAreaPage(@QueryParam("") HtmlAreaVO vo,@PathParam("") PageVO page);
 	
 	/**
 	 * 删除数据,批量
@@ -64,71 +72,5 @@ public interface IHtmlAreaService {
 	 */
 	@DELETE @Path("/delete")
 	ResultWrapper batchRemovePks(List<HtmlAreaVO> records);
-	
-	/**
-	* 新增HtmlArea
-	* @param vo
-	* @return
-	* @throws ApplicationException
-	*/
-	@POST
-	@Path("/single")
-	void createHtmlArea(HtmlAreaVO vo) throws ApplicationException;
-	/**
-	* 编辑HtmlArea
-	* @param vo
-	* @return
-	* @throws ApplicationException
-	*/
-	@PUT
-	@Path("/single")
-	void updateHtmlArea(HtmlAreaVO vo) throws ApplicationException;
-	/**
-	* 删除HtmlArea
-	* @param vo
-	* @return
-	* @throws ApplicationException
-	*/
-	@DELETE
-	@Path("/d/single")
-	void deleteHtmlArea(HtmlAreaVO vo) throws ApplicationException;
-	/**
-	* 批量删除HtmlArea
-	* @param vo
-	* @return
-	* @throws ApplicationException
-	*/
-	@PUT
-	@Path("/d/list")
-	void deleteHtmlAreaList(List<HtmlAreaVO> htmlAreaVO) throws ApplicationException;
-	/**
-	* 分页查找HtmlArea
-	* @param queryHtmlArea
-	* @param pageVO
-	* @return
-	*/
-	@GET
-	@Path("/list/page/{pageSize}/{curPage}")
-	public PagedResult<HtmlAreaVO> findPagedHtmlAreaList(@QueryParam("") HtmlAreaVO queryHtmlArea,
-	@PathParam("") PageVO pageVO)throws ApplicationException;
-	/**
-	* 查询单个HtmlArea
-	* @param htmlArea
-	* @return
-	*/
-	@GET
-	@Path("/single/{htmlAreaId}")
-	public HtmlAreaVO findHtmlArea(@PathParam("") HtmlAreaVO htmlArea)throws ApplicationException;
 
-	/**
-	* export导出
-	* @param htmlAreaVO
-	* @throws ApplicationException
-	*/
-	@GET
-	@Path("/exportHtmlArea")
-	public void exportHtmlArea(@QueryParam("") HtmlAreaVO htmlAreaVO) throws ApplicationException;
-	
-	
-	
 }

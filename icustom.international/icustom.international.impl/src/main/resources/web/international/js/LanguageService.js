@@ -35,15 +35,14 @@ var LanguageService = function() {
             batchInsertLanguage(lans);
         },
         batchInsertLanguage: function(items,callback) {
-        	alert(123);
-        	alert(items);
-            AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(items) {
-                LanguageView.insertLanguageRows(items.obj,callback);
+            AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(object) {
+            	console.warn(object);
+                LanguageView.insertLanguageRows(object.data,callback);
             });
         },
         batchUpdateLanguage: function(items) {
             AjaxUtil.sendPutData(BASE + '/batchUpdate', items, function(language) {
-                LanguageView.updateLanguageRow(language.obj);
+                LanguageView.updateLanguageRow(language);
             });
         },
         deleteLanguageById: function(id) {

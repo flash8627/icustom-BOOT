@@ -36,8 +36,8 @@ public class HtmlAreaWebConfig {
 				new ResourcesUrlMappingFilter());
 		registration.setName("ResourcesUrlMappingFilter");
 		registration.addUrlPatterns("/*");
-		// registration.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
-		// registration.setOrder(1000);
+		registration.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
+		registration.setOrder(1000);
 		return registration;
 	}
 }

@@ -8,68 +8,72 @@
 	      tha.name AS name,
 	      tha.description AS description,
 	      tha.content AS content,
+	      tha.CREATE_TO_DATE AS createToDate,
+	      tha.CREATE_FROM_DATE AS createFromDate,
 	      tha.created_by AS createdBy,
 	      tha.creation_date AS creationDate,
-	      tha.last_updated_by AS lastUpdatedBy,
-	      tha.last_update_date AS lastUpdateDate,
+	      tha.update_last_user AS lastUpdatedBy,
+	      tha.update_last_date AS lastUpdateDate,
 	      u.user_name AS creationUserCN,
 	      tha.title AS title,
 	      tha.mapping_url AS mappingUrl,
-	      tha.attr1 AS attr1,
-	      tha.attr2 AS attr2,
-	      tha.attr3 AS attr3,
+	      tha.PROGRAM_FILTER_ENABLE AS programFilterEnable,
+	      tha.attribute1 AS attribute1,
+	      tha.attribute2 AS attribute2,
+	      tha.attribute3 AS attribute3,
 	      tha.second_level_type AS secondLevelType,
 	      tha.third_level_type AS thirdLevelType
 	    FROM SYS_HTML_AREA_T tha
 	    LEFT JOIN sys_user_t u ON tha.created_by = u.user_id
-	    LEFT JOIN sys_user_t c ON tha.last_updated_by = c.user_id 
+	    LEFT JOIN sys_user_t c ON tha.update_last_user = c.user_id 
 	    WHERE 1=1 
 	</sql>
 
 	<update id="saveOrUpdate">
 		begin
 		<foreach collection='list' item="item" index="index">
-			merge into SYS_HTML_AREA_T tar
+			merge into SYS_HTML_AREA_T tar 
 			using (
 				select
-					#{item.NAME,jdbcType=VARCHAR} NAME,
-					#{item.MAPPING_URL,jdbcType=VARCHAR} MAPPING_URL,
-					#{item.CATEGORY,jdbcType=VARCHAR} CATEGORY,
-					#{item.DESCRIPTION,jdbcType=VARCHAR} DESCRIPTION,
-					#{item.CONTENT,jdbcType=INTEGER} CONTENT,
-					#{item.SECOND_LEVEL_TYPE,jdbcType=INTEGER} SECOND_LEVEL_TYPE,
-					#{item.THIRD_LEVEL_TYPE,jdbcType=INTEGER} THIRD_LEVEL_TYPE,
-					#{item.APP_NAME,jdbcType=INTEGER} APP_NAME,
-					#{item.ATTR1,jdbcType=INTEGER} ATTR1,
-					#{item.ATTR2,jdbcType=INTEGER} ATTR2,
-					#{item.ATTR3,jdbcType=INTEGER} ATTR3,
-					#{item.createdUser,jdbcType=VARCHAR} CREATED_USER,
-					SYSDATE created_date,
-					#{item.updateLastUser,jdbcType=NUMERIC} update_last_user,
-					SYSDATE update_last_date
+					#{item.htmlAreaId,jdbcType=VARCHAR} HTML_AREA_ID,
+					#{item.name,jdbcType=VARCHAR} NAME,
+					#{item.title,jdbcType=VARCHAR} TITLE,
+					#{item.mappingUrl,jdbcType=VARCHAR} MAPPING_URL,
+					#{item.content,jdbcType=CLOB} CONTENT,
+					#{item.category,jdbcType=VARCHAR} CATEGORY,
+					#{item.programFilterEnable,jdbcType=INTEGER} PROGRAM_FILTER_ENABLE,
+					#{item.createFromDate,jdbcType=DATE} CREATE_FROM_DATE,
+					#{item.createToDate,jdbcType=DATE} CREATE_TO_DATE,
+					#{item.description,jdbcType=VARCHAR} DESCRIPTION,
+					#{item.secondLevelType,jdbcType=INTEGER} SECOND_LEVEL_TYPE,
+					#{item.thirdLevelType,jdbcType=INTEGER} THIRD_LEVEL_TYPE,
+					#{item.attribute1,jdbcType=VARCHAR} attribute1,
+					#{item.attribute2,jdbcType=VARCHAR} attribute2,
+					#{item.attribute3,jdbcType=VARCHAR} attribute3,
+					#{item.createdUser,jdbcType=NUMERIC} CREATED_BY,
+					#{item.updateLastUser,jdbcType=NUMERIC} update_last_user
 				from dual
 			) src
 			on (
 				tar.NAME=src.NAME
 				AND tar.MAPPING_URL=src.MAPPING_URL
-				AND tar.APP_NAME=src.APP_NAME
 			)
 			WHEN MATCHED THEN
 			UPDATE SET
-				tar.NAME = src.NAME,
-				tar.MAPPING_URL = src.MAPPING_URL,
+				tar.TITLE = src.TITLE,
+				tar.CONTENT = src.CONTENT,
 				tar.CATEGORY = src.CATEGORY,
 				tar.DESCRIPTION = src.DESCRIPTION,
-				tar.CONTENT = src.CONTENT,
-				tar.TITLE = src.TITLE,
-				tar.MAPPING_URL = src.MAPPING_URL,
-				tar.LAST_UPDATED_BY = src.LAST_UPDATED_BY,
-				tar.update_last_date = src.update_last_date,
+				tar.update_last_user = src.update_last_user,
+				tar.CREATE_FROM_DATE = src.CREATE_FROM_DATE,
+				tar.CREATE_TO_DATE = src.CREATE_TO_DATE,
+				tar.update_last_date = SYSDATE,
 				tar.SECOND_LEVEL_TYPE = src.SECOND_LEVEL_TYPE,
 				tar.THIRD_LEVEL_TYPE = src.THIRD_LEVEL_TYPE,
-				tar.ATTR1 = src.ATTR1,
-				tar.ATTR2 = src.ATTR2,
-				tar.ATTR3 = src.ATTR3
+				tar.PROGRAM_FILTER_ENABLE = src.PROGRAM_FILTER_ENABLE,
+				tar.attribute1 = src.attribute1,
+				tar.attribute2 = src.attribute2,
+				tar.attribute3 = src.attribute3
 			WHEN NOT MATCHED THEN
 			INSERT
 			(
@@ -80,37 +84,43 @@
 				CONTENT,
 				TITLE,
 				MAPPING_URL,
+				PROGRAM_FILTER_ENABLE,
 				SECOND_LEVEL_TYPE,
 				THIRD_LEVEL_TYPE,
 				APP_NAME,
+				CREATE_FROM_DATE,
+				CREATE_TO_DATE,
 				CREATED_BY,
 				CREATION_DATE,
-				LAST_UPDATED_BY,
-				LAST_UPDATE_DATE,
-				ATTR1,
-				ATTR2,
-				ATTR3
+				update_last_user,
+				update_last_date,
+				attribute1,
+				attribute2,
+				attribute3
 			) VALUES (
 				SYS_HTML_AREA_S.nextval,
-				CATEGORY,
-				NAME,
-				DESCRIPTION,
-				CONTENT,
-				TITLE,
-				MAPPING_URL,
-				SECOND_LEVEL_TYPE,
-				THIRD_LEVEL_TYPE,
-				APP_NAME,
-				CREATED_BY,
-				CREATION_DATE,
-				LAST_UPDATED_BY,
-				LAST_UPDATE_DATE,
-				ATTR1,
-				ATTR2,
-				ATTR3
+				src.CATEGORY,
+				src.NAME,
+				src.DESCRIPTION,
+				src.CONTENT,
+				src.TITLE,
+				src.MAPPING_URL,
+				src.PROGRAM_FILTER_ENABLE,
+				src.SECOND_LEVEL_TYPE,
+				src.THIRD_LEVEL_TYPE,
+				null,
+				src.CREATE_FROM_DATE,
+				src.CREATE_TO_DATE,
+				src.CREATED_BY,
+				SYSDATE,
+				src.update_last_user,
+				SYSDATE,
+				src.attribute1,
+				src.attribute2,
+				src.attribute3
 			);
 		</foreach>
-		COMMIT;
+		null;
 		END;
 	</update>
 
@@ -128,7 +138,7 @@
 		COUNT(1)
 		FROM SYS_HTML_AREA_T tha 
 	    LEFT JOIN sys_user_t u ON tha.created_by = u.user_id
-	    LEFT JOIN sys_user_t c ON tha.last_updated_by = c.user_id 
+	    LEFT JOIN sys_user_t c ON tha.update_last_user = c.user_id 
 	    WHERE 1=1 
 		<include refid="select_cond" />
 	</select>
@@ -141,13 +151,16 @@
 	</select>
 	
 	<delete id="batchRemovePks" parameterType="java.util.List">
+		BEGIN
 		DELETE FROM SYS_HTML_AREA_T tha 
 		WHERE 1=1
 		AND ( 1=2
 		<foreach collection='list' item="item">
-			OR tha.HTML_AREA_ID=#{item}
+			OR tha.HTML_AREA_ID=#{item.htmlAreaId,jdbcType=INTEGER}
 		</foreach>
-		)
+		);
+		null;
+		end;
 	</delete>
 
 	<sql id="select_cond">

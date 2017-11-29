@@ -20,13 +20,14 @@ var LookupItemView = function() {
     		//lookup_item_{{code}}_table
     		var table = 'lookup_item_'+code+'_table';
     		var tbody = $('#'+table).find('tbody');
-    		if(items.length>0){
+    		if(items&&items.length>0){
     			$('.alert-warning').detach();
+
+                for(var i=0;i<items.length;i++){
+                	var html = generateLookupItemTableTrHtml(items[i]);
+                    $(tbody).prepend(html);
+                }
     		}
-            for(var i=0;i<items.length;i++){
-            	var html = generateLookupItemTableTrHtml(items[i]);
-                $(tbody).prepend(html);
-            }
         },
         deleteLookupItemRow:function(classCode,items) {
         	var table = 'lookup_item_'+classCode+'_table';

@@ -1,5 +1,6 @@
 package com.gwtjs.icustom.htmlarea.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,12 +15,13 @@ import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.htmlarea.dao.IHtmlAreaDao;
 import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
 import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
+import com.gwtjs.icustom.kindeditor.util.HtmlSpecialChars;
 import com.gwtjs.icustom.log.ICustomLogger;
 import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 import io.swagger.annotations.Api;
 
-@Api("/htmlArea")  @Service("htmlAreaService") @Named("htmlAreaService")
+@Api("/htmlAreaService")  @Service("htmlAreaService") @Named("htmlAreaService")
 public class HtmlAreaService implements IHtmlAreaService {
 	
 	private static final ICustomLogger log = ICustomLoggerFactory
@@ -34,7 +36,25 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 * @return
 	 */
 	@Override
-	public ResultWrapper saveOrUpdate(List<HtmlAreaVO> list) {
+	public ResultWrapper saveOrUpdate(HtmlAreaVO vo) {
+		
+		String html = HtmlSpecialChars.inHtmlspecialchars(vo.getContent());
+
+		log.info("\n>>>>>>>>findHtmlAreaPage html-----",html);
+		//vo.setContent(html);
+		
+		List<HtmlAreaVO> list = new ArrayList<HtmlAreaVO>();
+		list.add(vo);
+		return batchSaveOrUpdate(list);
+	}
+	
+	/**
+	 * 保存或修改  merge动作
+	 * @param sys
+	 * @return
+	 */
+	@Override
+	public ResultWrapper batchSaveOrUpdate(List<HtmlAreaVO> list) {
 		int result = htmlAreaDao.saveOrUpdate(list);
 		return ResultWrapper.successResult(result);
 	}
@@ -61,15 +81,14 @@ public class HtmlAreaService implements IHtmlAreaService {
 	
 	/**
 	 * 查询名称,模糊查询
-	 * @return
+	 * @return 
 	 */
 	@Override
 	public PagedResult<HtmlAreaVO> findHtmlAreaPage(HtmlAreaVO vo,PageVO page) {
 		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo);
 		log.info("\n>>>>>>>>findHtmlAreaPage po------",page);
 		log.info("\n>>>>>>>>findHtmlAreaPage dao-----",htmlAreaDao);
-		
-		return new PagedResult<HtmlAreaVO>();//htmlAreaDao.findHtmlAreaPage(vo, page);
+		return htmlAreaDao.findHtmlAreaPage(vo, page);
 	}
 	
 	/**
@@ -81,49 +100,6 @@ public class HtmlAreaService implements IHtmlAreaService {
 	public ResultWrapper batchRemovePks(List<HtmlAreaVO> records) {
 		int result = htmlAreaDao.batchRemovePks(records);
 		return ResultWrapper.successResult(result);
-	}
-
-	@Override
-	public void createHtmlArea(HtmlAreaVO vo) throws ApplicationException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateHtmlArea(HtmlAreaVO vo) throws ApplicationException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteHtmlArea(HtmlAreaVO vo) throws ApplicationException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteHtmlAreaList(List<HtmlAreaVO> htmlAreaVO) throws ApplicationException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public PagedResult<HtmlAreaVO> findPagedHtmlAreaList(HtmlAreaVO queryHtmlArea, PageVO pageVO)
-			throws ApplicationException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HtmlAreaVO findHtmlArea(HtmlAreaVO htmlArea) throws ApplicationException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void exportHtmlArea(HtmlAreaVO htmlAreaVO) throws ApplicationException {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

@@ -3,13 +3,13 @@ var LookupItemService = function() {
     return {
     	initLookupItems: function(lookup,callback) {
             AjaxUtil.sendGetRequest(BASE + '/findLookupItems/'+lookup.classId, function(resp) {
-            	LookupItemView.addTabPanel(lookup,resp.obj);
+            	LookupItemView.addTabPanel(lookup,resp.data);
                 callback();
             });
         },
     	findLookupItems: function(lookup,callback) {
             AjaxUtil.sendGetRequest(BASE + '/findLookupItems/'+lookup.classId, function(resp) {
-            	LookupItemView.addTabPanel(lookup,resp.obj);
+            	LookupItemView.addTabPanel(lookup,resp.data);
                 callback();
             });
         },
@@ -22,20 +22,20 @@ var LookupItemService = function() {
             return item;
         },
         batchInsertLookupItem: function(classCode,items) {
-            AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(lookupItems) {
-            	var items = lookupItems.obj;
-            	for(var i=0;i<items.length;i++){
+            AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(obj) {
+            	var lookupItems = obj.data;
+            	for(var i=0;i<lookupItems.length;i++){
             		//插入行
-            		LookupItemView.insertLookupItemRow(lookup.classCode,items[i]);
+            		LookupItemView.insertLookupItemRow(lookup.classCode,lookupItems[i]);
             	}
             });
         },
         batchUpdateLookupItem: function(classCode,items) {
             AjaxUtil.sendPutData(BASE + '/batchUpdate', items, function(lookupItems) {
-            	var items = lookupItems.obj;
-            	for(var i=0;i<items.length;i++){
+            	var objs = lookupItems.data;
+            	for(var i=0;i<objs.length;i++){
             		//插入行
-            		LookupItemView.insertLookupItemRow(lookup.classCode,items[i]);
+            		LookupItemView.insertLookupItemRow(lookup.classCode,objs[i]);
             	}
             });
         },

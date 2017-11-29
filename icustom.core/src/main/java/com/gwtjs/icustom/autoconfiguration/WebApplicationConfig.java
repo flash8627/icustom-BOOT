@@ -69,6 +69,23 @@ public class WebApplicationConfig implements EnvironmentAware {
 	}
 
 	/**
+	 * 字符转义拦截器
+	 * 
+	 * @return
+	 */
+	@Bean
+	@ConditionalOnMissingBean(FilterRegistrationBean.class)
+	public FilterRegistrationBean transferredMeaningFilter() {
+		FilterRegistrationBean registration = new FilterRegistrationBean(
+				new ResourcesFilter());
+		registration.setName("TransferredMeaningFilter");
+		registration.addUrlPatterns("/*");
+		registration.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
+		registration.setOrder(1000);
+		return registration;
+	}
+
+	/**
 	 * UTF-8编码过滤器。
 	 * 
 	 * @return
@@ -80,7 +97,8 @@ public class WebApplicationConfig implements EnvironmentAware {
 				new CharacterEncodingFilter());
 		registrationBean.setName("ICustomCharacterEncodingFilter");
 		registrationBean.addUrlPatterns("/*");
-		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE - 1);// 在最高优先级之后执行。
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
+		registrationBean.setOrder(1000);
 		return registrationBean;
 	}
 
@@ -88,6 +106,7 @@ public class WebApplicationConfig implements EnvironmentAware {
 	 * UTF-8文件资源增加时间戳过滤器-暂停使用。
 	 * 
 	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean(FilterRegistrationBean.class)
 	public FilterRegistrationBean stampParameterDateFilter() {
@@ -95,10 +114,10 @@ public class WebApplicationConfig implements EnvironmentAware {
 				new StampParameterDateFilter());
 		registrationBean.setName("ICustomStampParameterDateFilter");
 		registrationBean.addUrlPatterns("/*");
-		//registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE - 1);// 在最高优先级之后执行。
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE-1);//在最高优先级之后执行。
+		registrationBean.setOrder(1000);
 		return registrationBean;
 	}
-	 */
 
 	/**
 	 * 注册dispatch-servlet

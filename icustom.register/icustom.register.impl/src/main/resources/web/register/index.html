@@ -1,10 +1,6 @@
 
 <link rel="stylesheet" type="text/css" href="../resources/jquery/themes/icon.css">
 
-<script src="js/global.js"></script>
-<script src="js/RegisterView.js"></script>
-<script src="js/RegisterService.js"></script>
-
 <div class="container">
 	<div class="page-header">
 		<h1>Register Manager</h1>
@@ -146,6 +142,11 @@
         </div>
     </div>
 </div>
+
+
+<script src="js/global.js"></script>
+<script src="js/RegisterView.js"></script>
+<script src="js/RegisterService.js"></script>
 
 <script>
 var BASE = '../services/register/registerService/';
@@ -305,16 +306,16 @@ var initRegTree = function(itemId) {
 			//提交[values]
 		}else{
 			var result = RegisterService.batchInsertRegister([values]);
-			for(var i=0;i<result.obj.length;i++){
-				result.obj[i].id = result.obj[i].regId;
-				result.obj[i].text = result.obj[i].regName;
+			for(var i=0;i<result.data.length;i++){
+				result.data[i].id = result.data[i].regId;
+				result.data[i].text = result.data[i].regName;
 			}
 			if(selected==null){
 				selected = {};
 			}
 			$('#regTree').tree('append', {
 				parent: selected.target,
-				data: result.obj
+				data: result.data
 			});
 		}
 		resetForm();

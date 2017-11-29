@@ -80,7 +80,7 @@ $(function() {
 		// 删除当前行
 		LookupView.deleteLookupRow(itemId);
 		// 插入编辑行
-		LookupView.insertLookupEditorRow(lookup.obj);
+		LookupView.insertLookupEditorRow(lookup.data);
 		$(".actionbtn").toggleClass("l-btn-disabled");
 	});
 
@@ -156,7 +156,7 @@ $(function() {
 		// 删除当前行
 		$tr.detach();
 		// 插入编辑行
-		LookupItemView.insertLookupItemRow(lookup.classCode, lookupItem.obj);
+		LookupItemView.insertLookupItemRow(lookup.classCode, lookupItem.data);
 		$(".itemActionbtn").removeClass("l-btn-disabled");
 		$(".itemFormActionbtn").addClass("l-btn-disabled");
 		$(".lookup_item_row_edit").removeClass("l-btn-disabled");
@@ -174,7 +174,7 @@ $(function() {
 				$tr.detach();
 				// 插入编辑行
 				LookupItemView.insertLookupItemEditorRow(lookup.classCode,
-						lookupItem.obj);
+						lookupItem.data);
 				$(".itemActionbtn").addClass("l-btn-disabled");
 				$(".itemFormActionbtn").removeClass("l-btn-disabled");
 				$(".lookup_item_row_edit").addClass("l-btn-disabled");
@@ -201,7 +201,7 @@ lookupItemSave = function() {
 		itemStatus : $('#itemStatus').val().trim(),
 		remarks : $('#remarks').val().trim(),
 		orderCode : $('#orderCode').val().trim(),
-	} ];
+	}];
 	if (id == 0) {
 		LookupItemService.batchInsertLookupItem(lookup.classCode, lookupItem);
 	} else {

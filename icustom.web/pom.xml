@@ -60,6 +60,13 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common.devtools</artifactId>
+			<version>${project.version}</version>
+			<optional>true</optional>
+		</dependency>
+		
 		<!-- api测试UI -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

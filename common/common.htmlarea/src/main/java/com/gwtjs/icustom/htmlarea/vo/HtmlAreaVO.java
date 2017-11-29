@@ -11,8 +11,6 @@ import com.gwtjs.icustom.entity.BaseResource;
  * @author aGuang
  *
  */
-@JsonIgnoreProperties({ "category", "name", "description", "title", "mappingUrl", "attr1", "attr2", "attr3", "content",
-		"secondLevelType", "thirdLevelType" })
 public class HtmlAreaVO extends BaseResource {
 
 	/**
@@ -23,26 +21,20 @@ public class HtmlAreaVO extends BaseResource {
 	public HtmlAreaVO() {
 	}
 
-	/** 富文本类型 **/
-	private String category;
-	/** 名称 **/
-	private String name;
-	/** 描述 **/
-	private String description;
-	/** 内容 **/
-	private String content;
+	private int htmlAreaId;
 	/** 标题 **/
 	private String title;
+	/** 名称 **/
+	private String name;
 	/** 映射URL **/
 	private String mappingUrl;
-	/** 属性1 **/
-	private String attr1;
-	/** 属性2 **/
-	private String attr2;
-	/** 属性3 **/
-	private String attr3;
-	/** 账号 **/
-	private String account;
+	/** 内容 **/
+	private String content;
+	/** 描述 **/
+	private String description;
+	/** 富文本类型 **/
+	private String category;
+
 	/** 一级类型 **/
 	private String secondLevelType;
 	/** 二级类型 **/
@@ -57,6 +49,14 @@ public class HtmlAreaVO extends BaseResource {
 	 * @since 2017-10-07
 	 */
 	private boolean programFilterEnable;
+
+	public int getHtmlAreaId() {
+		return htmlAreaId;
+	}
+
+	public void setHtmlAreaId(int htmlAreaId) {
+		this.htmlAreaId = htmlAreaId;
+	}
 
 	public String getCategory() {
 		return category;
@@ -106,38 +106,6 @@ public class HtmlAreaVO extends BaseResource {
 		this.mappingUrl = mappingUrl;
 	}
 
-	public String getAttr1() {
-		return attr1;
-	}
-
-	public void setAttr1(String attr1) {
-		this.attr1 = attr1;
-	}
-
-	public String getAttr2() {
-		return attr2;
-	}
-
-	public void setAttr2(String attr2) {
-		this.attr2 = attr2;
-	}
-
-	public String getAttr3() {
-		return attr3;
-	}
-
-	public void setAttr3(String attr3) {
-		this.attr3 = attr3;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
 	public String getSecondLevelType() {
 		return secondLevelType;
 	}
@@ -181,12 +149,9 @@ public class HtmlAreaVO extends BaseResource {
 	@Override
 	public String toString() {
 		return "{'category':'" + category + "', 'name':'" + name + "', 'description':'" + description + "', 'content':'"
-				+ content + "', 'title':'" + title + "', 'mappingUrl':'" + mappingUrl + "', 'attr1':'" + attr1 + "', 'attr2':'" + attr2
-				+ "', 'attr3':'" + attr3 + "', 'account':'" + account + "', 'secondLevelType':'" + secondLevelType
-				+ "', 'thirdLevelType':'" + thirdLevelType + "', 'createToDate':'" + createToDate + "', 'createFromDate':'"
-				+ createFromDate + "', 'programFilterEnable':'" + programFilterEnable + "'}";
+				+ content + "', 'title':'" + title + "', 'mappingUrl':'" + mappingUrl + "', 'secondLevelType':'"
+				+ secondLevelType + "', 'thirdLevelType':'" + thirdLevelType + "', 'createToDate':'" + createToDate
+				+ "', 'createFromDate':'" + createFromDate + "', 'programFilterEnable':'" + programFilterEnable + "'}";
 	}
-	
-	
 
 }

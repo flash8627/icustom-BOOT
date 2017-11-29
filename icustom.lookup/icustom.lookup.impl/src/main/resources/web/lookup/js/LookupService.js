@@ -18,12 +18,12 @@ var LookupService = function() {
         },
         batchInsertLookup: function(items) {
             AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(result) {
-                LookupView.insertLookupRows(result.obj);
+                LookupView.insertLookupRows(result.data);
             });
         },
         batchUpdateLookup: function(items) {
             AjaxUtil.sendPutData(BASE + '/batchUpdate', items, function(result) {
-                LookupView.insertLookupRows(result.obj);
+                LookupView.insertLookupRows(result.data);
             });
         },
         deleteLookupRows: function(items) {

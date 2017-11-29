@@ -51,41 +51,13 @@ public interface IHtmlAreaDao {
 	 */
 	int batchRemovePks(List<HtmlAreaVO> records);
 	
-	/**new add */
-	/**
-	* 创建HtmlArea
-	* @param vo
-	*/
-	public int createHtmlArea(HtmlAreaVO vo) ;
-	/**
-	* 更新HtmlArea
-	* @param vo
-	*/
-	public int updateHtmlArea(HtmlAreaVO vo) ;
-	/**
-	* 删除HtmlArea
-	* @param vo
-	*/
-	public int deleteHtmlArea(HtmlAreaVO vo) ;
+	
 	/**
 	* 查询单个HtmlArea
 	* @param queryHtmlArea
 	* @return
 	*/
 	public HtmlAreaVO findHtmlArea(HtmlAreaVO queryHtmlArea);
-	/**
-	* 分页查找HtmlArea
-	* @param queryHtmlArea
-	* @return
-	*/
-	public List<HtmlAreaVO> findHtmlAreaList(HtmlAreaVO queryHtmlArea);
-	/**
-	* 查找HtmlAreaList
-	* @param queryHtmlArea
-	* @param pageVO
-	* @return
-	*/
-	public PagedResult<HtmlAreaVO> findPagedHtmlAreaList(HtmlAreaVO queryHtmlArea,PageVO pageVO);
 
 	/**
 	* 通过ID查找
@@ -109,34 +81,5 @@ public interface IHtmlAreaDao {
 	* @return
 	*/
 	public HtmlAreaVO findHtmlAreaByUrl(HtmlAreaVO queryHtmlArea);
-	/**
-	* 批量删除HtmlArea
-	* @param vo
-	*/
-	public int deleteHtmlAreaList(List<HtmlAreaVO> htmlAreaVO);
-
-	/**
-	* export导出数据查询
-	* @param queryHtmlArea
-	* @param pageVO
-	*/
-	public PagedResult<HtmlAreaVO> findExportHtmlAreaList(HtmlAreaVO queryHtmlArea,PageVO pageVO);
-
-	/**
-	* 导入htmlArea
-	* @param htmlAreaVOList
-	* @return
-	*/
-	public int importHtmlArea(List<HtmlAreaVO> htmlAreaVOList);
-
-	/** 根据多个条件对象返回list数据
-	*/
-	public List<HtmlAreaVO> findHtmlAreaListByVONames(List<HtmlAreaVO> list);
-
-	public int importHtmlAreaCount(HtmlAreaVO htmlAreaVO);
-
-	public int importHtmlAreaUpdate(HtmlAreaVO htmlAreaVO);
-
-	public int importHtmlAreaInsert(HtmlAreaVO htmlAreaVO);
 	
 }
