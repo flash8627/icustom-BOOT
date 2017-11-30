@@ -11,7 +11,7 @@ import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 public interface ISysUserMgrDao{
 	
 	//
-	PagedResult<SysUserVO> queryUserByPage(SysUserVO record);
+	PagedResult<SysUserVO> queryUserByPage(@Param("vo")SysUserVO record);
 	
 	/**
 	 *@author aGuang 2011-3-30 下午03:51:48
@@ -38,7 +38,7 @@ public interface ISysUserMgrDao{
 	//
 	SysUserVO findItem(@Param("userId")long userId);
 
-	PagedResult<SysUserVO> findUserByPage(SysUserVO record,PageVO page);
+	PagedResult<SysUserVO> findUserByPage(@Param("vo")SysUserVO record,@Param("page")PageVO page);
 
 	//
 	int batchRemovePks(List<SysUserVO> records);

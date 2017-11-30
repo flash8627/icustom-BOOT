@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gwtjs.icustom.security.dao.ISysRolesDAO">
+<mapper namespace="com.gwtjs.icustom.security.dao.ISysRolesMgrDao">
 	
 	
 	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false" />
@@ -55,7 +55,7 @@
 	<sql id="page_et">
 		) TT
 		<![CDATA[
-		) WHERE RN<=#{1.endIndex} AND RN>=#{1.startIndex}
+		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
 		]]>
 	</sql>
 	
@@ -68,7 +68,7 @@
 		where T1.VALID_FLAG=1
 		<include refid="select_cond" />
 		ORDER BY ROLE_ID DESC 
-		<!-- <if test="#{1.order != null}"> order by #{1.order} asc </if> -->
+		<!-- <if test="#{page.order != null}"> order by #{page.order} asc </if> -->
 		<include refid="page_et" />
 	</select>
 
@@ -82,19 +82,19 @@
 
 	<sql id="select_cond">
 		<if test='_parameter.get("0").roleName != null'>
-			AND T1.ROLE_NAME LIKE ('%'||#{0.roleName,jdbcType=VARCHAR}||'%')
+			AND T1.ROLE_NAME LIKE ('%'||#{vo.roleName,jdbcType=VARCHAR}||'%')
 		</if>
 		<if test='_parameter.get("0").roleCode != null'>
-			AND upper(T1.ROLE_CODE) LIKE ('%'||upper(#{0.roleCode,jdbcType=VARCHAR})||'%')
+			AND upper(T1.ROLE_CODE) LIKE ('%'||upper(#{vo.roleCode,jdbcType=VARCHAR})||'%')
 		</if>
 		<if test='_parameter.get("0").roleDesc != null'>
-			AND T1.ROLE_DESC LIKE ('%'||#{0.roleDesc,jdbcType=VARCHAR}||'%')
+			AND T1.ROLE_DESC LIKE ('%'||#{vo.roleDesc,jdbcType=VARCHAR}||'%')
 		</if>
 		<if test='_parameter.get("0").createdDate != null'>
-			AND T1.CREATED_DATE <![CDATA[>=]]> TO_CHAR(#{0.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
+			AND T1.CREATED_DATE <![CDATA[>=]]> TO_CHAR(#{vo.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
 		</if>
 		<if test='_parameter.get("0").createdDate != null'>
-			AND T1.CREATED_DATE <![CDATA[<=]]> TO_CHAR(#{0.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
+			AND T1.CREATED_DATE <![CDATA[<=]]> TO_CHAR(#{vo.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
 		</if>
 
 	</sql>

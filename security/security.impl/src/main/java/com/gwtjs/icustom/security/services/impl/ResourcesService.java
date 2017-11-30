@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.gwtjs.icustom.entity.ResultWrapper;
-import com.gwtjs.icustom.security.dao.ISysResourcesDAO;
+import com.gwtjs.icustom.security.dao.ISysResourcesMgrDao;
 import com.gwtjs.icustom.security.services.IResourcesService;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 
@@ -19,7 +19,7 @@ import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 public class ResourcesService implements IResourcesService {
 	
 	@Inject
-	private ISysResourcesDAO resourcesDAO;
+	private ISysResourcesMgrDao resourcesDAO;
 
 	private static final Logger log = LoggerFactory.getLogger(ResourcesService.class);
 	

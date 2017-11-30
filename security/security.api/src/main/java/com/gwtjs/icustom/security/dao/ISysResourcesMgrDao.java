@@ -11,7 +11,7 @@ import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
  * @author aGuang
  *
  */
-public interface ISysResourcesDAO {
+public interface ISysResourcesMgrDao {
 	
 	//菜单专用
 	List<SysResourceVO> findMenuList(SysResourceVO record);

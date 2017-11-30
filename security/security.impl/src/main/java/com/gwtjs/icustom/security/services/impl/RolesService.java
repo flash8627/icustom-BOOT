@@ -9,7 +9,7 @@ import javax.inject.Named;
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.entity.ResultWrapper;
-import com.gwtjs.icustom.security.dao.ISysRolesDAO;
+import com.gwtjs.icustom.security.dao.ISysRolesMgrDao;
 import com.gwtjs.icustom.security.services.IRolesService;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
@@ -17,7 +17,7 @@ import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 public class RolesService implements IRolesService {
 	
 	@Inject
-	private ISysRolesDAO rolesDao;
+	private ISysRolesMgrDao rolesDao;
 	
 	@Override
 	public ResultWrapper findItem(long roleId) {

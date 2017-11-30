@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
-<mapper namespace="com.gwtjs.icustom.security.dao.ISysResourcesDAO">
+<mapper namespace="com.gwtjs.icustom.security.dao.ISysResourcesMgrDao">
 
 	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false" />
 	<!-- eviction是缓存的淘汰算法，可选值有"LRU"、"FIFO"、"SOFT"、"WEAK"，缺省值是LRU flashInterval指缓存过期时间，单位为毫秒，60000即为60秒，缺省值为空，即只要容量足够，永不过期 

@@ -19,17 +19,17 @@ import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
 public class ISysResourcesDAOTest {
 	
 	@Inject
-	private ISysResourcesDAO sysResourcesDAO;
+	private ISysResourcesMgrDao sysResourcesMgrDao;
 	
 	@Test
 	public void contextLoads() {
-		assertNotNull(sysResourcesDAO);
-		System.out.println(sysResourcesDAO);
+		assertNotNull(sysResourcesMgrDao);
+		System.out.println(sysResourcesMgrDao);
 	}
 	
 	@Test
 	public void findAuthResourcesTreeRootTest() {
-		List<SysResourceVO>result =  sysResourcesDAO.findAuthResourcesTreeRoot();
+		List<SysResourceVO>result =  sysResourcesMgrDao.findAuthResourcesTreeRoot();
 		System.out.println("findAuthResourcesTreeRoot result:"+result);
 	}
 	

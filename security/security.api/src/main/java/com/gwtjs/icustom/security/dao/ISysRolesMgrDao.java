@@ -8,7 +8,7 @@ import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 
-public interface ISysRolesDAO {
+public interface ISysRolesMgrDao {
 	
 	//
 	SysRoleVO findByItem(SysRoleVO record);
@@ -17,7 +17,7 @@ public interface ISysRolesDAO {
 	SysRoleVO findItem(@Param("roleId")long roleId);
 
 	//
-	PagedResult<SysRoleVO> findSysRoles(SysRoleVO record,PageVO page);
+	PagedResult<SysRoleVO> findSysRoles(@Param("vo")SysRoleVO record,@Param("page")PageVO page);
 
 	//
 	int batchRemovePks(List<SysRoleVO> records);
