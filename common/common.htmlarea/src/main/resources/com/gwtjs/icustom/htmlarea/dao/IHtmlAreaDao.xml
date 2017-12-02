@@ -8,8 +8,8 @@
 	      tha.name AS name,
 	      tha.description AS description,
 	      tha.content AS content,
-	      tha.CREATE_TO_DATE AS createToDate,
-	      tha.CREATE_FROM_DATE AS createFromDate,
+	      tha.VALID_TO_DATE AS validToDate,
+	      tha.VALID_FROM_DATE AS validFromDate,
 	      tha.created_by AS createdBy,
 	      tha.creation_date AS creationDate,
 	      tha.update_last_user AS lastUpdatedBy,
@@ -29,7 +29,7 @@
 	    WHERE 1=1 
 	</sql>
 
-	<update id="saveOrUpdate">
+	<update id="saveOrUpdate" keyProperty="htmlAreaId">
 		begin
 		<foreach collection='list' item="item" index="index">
 			merge into SYS_HTML_AREA_T tar 
@@ -42,8 +42,8 @@
 					#{item.content,jdbcType=CLOB} CONTENT,
 					#{item.category,jdbcType=VARCHAR} CATEGORY,
 					#{item.programFilterEnable,jdbcType=INTEGER} PROGRAM_FILTER_ENABLE,
-					#{item.createFromDate,jdbcType=DATE} CREATE_FROM_DATE,
-					#{item.createToDate,jdbcType=DATE} CREATE_TO_DATE,
+					#{item.validFromDate,jdbcType=DATE} VALID_FROM_DATE,
+					#{item.validToDate,jdbcType=DATE} VALID_TO_DATE,
 					#{item.description,jdbcType=VARCHAR} DESCRIPTION,
 					#{item.secondLevelType,jdbcType=INTEGER} SECOND_LEVEL_TYPE,
 					#{item.thirdLevelType,jdbcType=INTEGER} THIRD_LEVEL_TYPE,
@@ -55,18 +55,21 @@
 				from dual
 			) src
 			on (
-				tar.NAME=src.NAME
-				AND tar.MAPPING_URL=src.MAPPING_URL
+				tar.HTML_AREA_ID=src.HTML_AREA_ID OR tar.MAPPING_URL=src.MAPPING_URL
+				/*AND tar.MAPPING_URL=src.MAPPING_URL
+				AND tar.NAME=src.NAME*/
 			)
 			WHEN MATCHED THEN
 			UPDATE SET
+				/*tar.MAPPING_URL = src.MAPPING_URL,*/
+				tar.NAME = src.NAME,
 				tar.TITLE = src.TITLE,
 				tar.CONTENT = src.CONTENT,
 				tar.CATEGORY = src.CATEGORY,
 				tar.DESCRIPTION = src.DESCRIPTION,
 				tar.update_last_user = src.update_last_user,
-				tar.CREATE_FROM_DATE = src.CREATE_FROM_DATE,
-				tar.CREATE_TO_DATE = src.CREATE_TO_DATE,
+				tar.VALID_FROM_DATE = src.VALID_FROM_DATE,
+				tar.VALID_TO_DATE = src.VALID_TO_DATE,
 				tar.update_last_date = SYSDATE,
 				tar.SECOND_LEVEL_TYPE = src.SECOND_LEVEL_TYPE,
 				tar.THIRD_LEVEL_TYPE = src.THIRD_LEVEL_TYPE,
@@ -88,8 +91,8 @@
 				SECOND_LEVEL_TYPE,
 				THIRD_LEVEL_TYPE,
 				APP_NAME,
-				CREATE_FROM_DATE,
-				CREATE_TO_DATE,
+				VALID_FROM_DATE,
+				VALID_TO_DATE,
 				CREATED_BY,
 				CREATION_DATE,
 				update_last_user,
@@ -109,8 +112,8 @@
 				src.SECOND_LEVEL_TYPE,
 				src.THIRD_LEVEL_TYPE,
 				null,
-				src.CREATE_FROM_DATE,
-				src.CREATE_TO_DATE,
+				src.VALID_FROM_DATE,
+				src.VALID_TO_DATE,
 				src.CREATED_BY,
 				SYSDATE,
 				src.update_last_user,
@@ -132,12 +135,17 @@
 		<include refid="queryBaseSql" />
 		AND tha.html_area_id = #{htmlAreaId,jdbcType=INTEGER}
 	</select>
+	
+	<select id="findHtmlAreaByMappingUrl" resultType="com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO">
+		<include refid="queryBaseSql" />
+		AND tha.mapping_url = #{mappingUrl,jdbcType=VARCHAR}
+	</select>
 
 	<select id="findHtmlAreaPageCount" resultType="int">
 		SELECT
 		COUNT(1)
 		FROM SYS_HTML_AREA_T tha 
-	    LEFT JOIN sys_user_t u ON tha.created_by = u.user_id
+	    LEFT JOIN sys_user_t u ON tha.created_by = u.user_id 
 	    LEFT JOIN sys_user_t c ON tha.update_last_user = c.user_id 
 	    WHERE 1=1 
 		<include refid="select_cond" />
@@ -171,9 +179,9 @@
 			trunc(to_date(#{poInfoVO.CREATION_DATE,jdbcType=VARCHAR},'yyyy-mm-dd'))]]>
 		</if>
 		<if
-			test='_parameter.get("vo").createToDate!=null and _parameter.get("vo").createToDate!=""'>
+			test='_parameter.get("vo").createdToDate!=null and _parameter.get("vo").createdToDate!=""'>
 			<![CDATA[	and trunc(vo.CREATION_DATE) <=
-			trunc(to_date(#{poInfoVO.createToDate,jdbcType=VARCHAR},'yyyy-mm-dd')) ]]>
+			trunc(to_date(#{poInfoVO.createdToDate,jdbcType=VARCHAR},'yyyy-mm-dd')) ]]>
 		</if>
 		
 		<if

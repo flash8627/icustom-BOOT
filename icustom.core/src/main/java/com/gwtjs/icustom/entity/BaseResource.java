@@ -23,6 +23,10 @@ public class BaseResource implements Serializable {
 	private Date updateLastDate;
 	private String lastNameCn;
 	private String language;
+	/*查询用-日期查询起*/
+	private Date createFromDate;
+	/*查询用-日期止*/
+	private Date createdToDate;
 
 	private String attribute1;
 	private String attribute2;
@@ -197,6 +201,22 @@ public class BaseResource implements Serializable {
 
 	public void setAttribute10(String attribute10) {
 		this.attribute10 = attribute10;
+	}
+
+	public Date getCreateFromDate() {
+		return createFromDate;
+	}
+
+	public void setCreateFromDate(Date createFromDate) {
+		this.createFromDate = createFromDate;
+	}
+
+	public Date getCreatedToDate() {
+		return createdToDate;
+	}
+
+	public void setCreatedToDate(Date createdToDate) {
+		this.createdToDate = createdToDate;
 	}
 
 	public Integer getValidFlag() {

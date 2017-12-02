@@ -39,6 +39,12 @@ public interface IHtmlAreaDao {
 	public HtmlAreaVO findHtmlArea(@Param("htmlAreaId") Integer htmlAreaId);
 	
 	/**
+	 * 查询特定富文本  mappingUrl
+	 * @return
+	 */
+	public HtmlAreaVO findHtmlAreaByMappingUrl(@Param("mappingUrl") String mappingUrl);
+	
+	/**
 	 * 查询名称,模糊查询
 	 * @return
 	 */

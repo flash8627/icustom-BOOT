@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omg.CORBA.portable.ApplicationException;
 import org.springframework.stereotype.Service;
 
 import com.gwtjs.icustom.entity.PageVO;
@@ -15,7 +14,6 @@ import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.htmlarea.dao.IHtmlAreaDao;
 import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
 import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
-import com.gwtjs.icustom.kindeditor.util.HtmlSpecialChars;
 import com.gwtjs.icustom.log.ICustomLogger;
 import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
@@ -42,10 +40,17 @@ public class HtmlAreaService implements IHtmlAreaService {
 
 		//log.info("\n>>>>>>>>findHtmlAreaPage html-----",html);
 		//vo.setContent(html);
-		
+		log.info("\n>>>>>>>>saveOrUpdate html-----",vo);
 		List<HtmlAreaVO> list = new ArrayList<HtmlAreaVO>();
 		list.add(vo);
-		return batchSaveOrUpdate(list);
+		int result = htmlAreaDao.saveOrUpdate(list);
+		
+		if(vo.getHtmlAreaId()==0) {
+			vo = htmlAreaDao.findHtmlAreaByMappingUrl(vo.getMappingUrl());
+			list.clear();
+			list.add(vo);
+		}
+		return ResultWrapper.successResult(result,list);
 	}
 	
 	/**
@@ -56,7 +61,7 @@ public class HtmlAreaService implements IHtmlAreaService {
 	@Override
 	public ResultWrapper batchSaveOrUpdate(List<HtmlAreaVO> list) {
 		int result = htmlAreaDao.saveOrUpdate(list);
-		return ResultWrapper.successResult(result);
+		return ResultWrapper.successResult(result,list);
 	}
 	
 	/**
@@ -75,8 +80,18 @@ public class HtmlAreaService implements IHtmlAreaService {
 	 */
 	@Override
 	public HtmlAreaVO findHtmlArea(Integer htmlAreaId) {
-		
+		log.info("\n>>>>>>>>findHtmlArea html-----",htmlAreaId);
 		return htmlAreaDao.findHtmlArea(htmlAreaId);
+	}
+	
+	/**
+	 * 查询特定富文本  findHtmlAreaByMappingUrl
+	 * @return
+	 */
+	@Override
+	public HtmlAreaVO findHtmlAreaByMappingUrl(String mappingUrl) {
+		log.info("\n>>>>>>>>findHtmlAreaByMappingUrl html-----",mappingUrl);
+		return htmlAreaDao.findHtmlAreaByMappingUrl(mappingUrl);
 	}
 	
 	/**

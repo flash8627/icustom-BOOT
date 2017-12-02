@@ -59,8 +59,8 @@ public class IHtmlAreaServiceTests {
 		vo.setName("Test Html");
 		vo.setCategory("category");
 		vo.setDescription("Test Html");
-		vo.setCreateFromDate(new Date());
-		vo.setCreateToDate(new Date());
+		vo.setValidFromDate(new Date());
+		vo.setValidToDate(new Date());
 		list.add(vo);
 		
 		ResultWrapper result = htmlAreaService.batchSaveOrUpdate(list);
@@ -123,8 +123,8 @@ public class IHtmlAreaServiceTests {
 		vo.setName("Test javascript");
 		vo.setCategory("category");
 		vo.setDescription("Test javascript");
-		vo.setCreateFromDate(new Date());
-		vo.setCreateToDate(new Date());
+		vo.setValidFromDate(new Date());
+		vo.setValidToDate(new Date());
 		list.add(vo);
 		
 		ResultWrapper result = htmlAreaService.batchSaveOrUpdate(list);
@@ -225,8 +225,8 @@ public class IHtmlAreaServiceTests {
 		vo.setName("Test CSS");
 		vo.setCategory("category");
 		vo.setDescription("Test CSS");
-		vo.setCreateFromDate(new Date());
-		vo.setCreateToDate(new Date());
+		vo.setValidFromDate(new Date());
+		vo.setValidToDate(new Date());
 		list.add(vo);
 		
 		ResultWrapper result = htmlAreaService.batchSaveOrUpdate(list);
@@ -244,8 +244,8 @@ public class IHtmlAreaServiceTests {
 		vo.setName("我来测一下sql注入攻击");
 		vo.setCategory("category");
 		vo.setDescription("我来测一下sql注入攻击,如果content把sql脚本原样保存了，证明攻击无效。");
-		vo.setCreateFromDate(new Date());
-		vo.setCreateToDate(new Date());
+		vo.setValidFromDate(new Date());
+		vo.setValidToDate(new Date());
 		list.add(vo);
 		
 		ResultWrapper result = htmlAreaService.batchSaveOrUpdate(list);
@@ -263,8 +263,8 @@ public class IHtmlAreaServiceTests {
 		vo.setName(System.currentTimeMillis()+"");
 		vo.setCategory(System.currentTimeMillis()+"category");
 		vo.setDescription(System.currentTimeMillis()+"测试序列保存,疯狂的保存");
-		vo.setCreateFromDate(new Date());
-		vo.setCreateToDate(new Date());
+		vo.setValidFromDate(new Date());
+		vo.setValidToDate(new Date());
 		list.add(vo);
 		
 		ResultWrapper result = htmlAreaService.batchSaveOrUpdate(list);

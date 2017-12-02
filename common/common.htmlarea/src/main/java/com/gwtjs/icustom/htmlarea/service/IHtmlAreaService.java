@@ -3,7 +3,6 @@ package com.gwtjs.icustom.htmlarea.service;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -12,8 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
-import org.omg.CORBA.portable.ApplicationException;
 
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
@@ -58,6 +55,14 @@ public interface IHtmlAreaService {
 	public HtmlAreaVO findHtmlArea(@PathParam("htmlAreaId") Integer htmlAreaId);
 	
 	/**
+	 * 查询特定富文本  mappingUrl
+	 * @return
+	 */
+	@GET
+	@Path("/findHtmlAreaByMappingUrl/{mappingUrl}")
+	public HtmlAreaVO findHtmlAreaByMappingUrl(@PathParam("mappingUrl") String mappingUrl);
+	
+	/**
 	 * 查询名称,模糊查询
 	 * @return
 	 */
@@ -70,7 +75,7 @@ public interface IHtmlAreaService {
 	 * @param records
 	 * @return
 	 */
-	@DELETE @Path("/delete")
+	@PUT @Path("/batchRemovePks")
 	ResultWrapper batchRemovePks(List<HtmlAreaVO> records);
 
 }

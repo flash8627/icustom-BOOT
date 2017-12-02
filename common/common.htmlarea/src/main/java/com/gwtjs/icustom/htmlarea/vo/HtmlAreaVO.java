@@ -38,10 +38,10 @@ public class HtmlAreaVO extends BaseResource {
 	private String secondLevelType;
 	/** 二级类型 **/
 	private String thirdLevelType;
-	/** 修建日期-结束日期 */
-	private Date createToDate;
-	/** 创建日期-开始时间 */
-	private Date createFromDate;
+	/** 日期-结束日期 */
+	private Date validToDate;
+	/** 日期-开始时间 */
+	private Date validFromDate;
 	/**
 	 * 是否启用了富文本的program过滤
 	 * 
@@ -129,28 +129,28 @@ public class HtmlAreaVO extends BaseResource {
 		this.programFilterEnable = programFilterEnable;
 	}
 
-	public Date getCreateToDate() {
-		return createToDate;
+	public Date getValidToDate() {
+		return validToDate;
 	}
 
-	public void setCreateToDate(Date createToDate) {
-		this.createToDate = createToDate;
+	public void setValidToDate(Date validToDate) {
+		this.validToDate = validToDate;
 	}
 
-	public Date getCreateFromDate() {
-		return createFromDate;
+	public Date getValidFromDate() {
+		return validFromDate;
 	}
 
-	public void setCreateFromDate(Date createFromDate) {
-		this.createFromDate = createFromDate;
+	public void setValidFromDate(Date validFromDate) {
+		this.validFromDate = validFromDate;
 	}
 
 	@Override
 	public String toString() {
 		return "{'category':'" + category + "', 'name':'" + name + "', 'description':'" + description + "', 'content':'"
 				+ content + "', 'title':'" + title + "', 'mappingUrl':'" + mappingUrl + "', 'secondLevelType':'"
-				+ secondLevelType + "', 'thirdLevelType':'" + thirdLevelType + "', 'createToDate':'" + createToDate
-				+ "', 'createFromDate':'" + createFromDate + "', 'programFilterEnable':'" + programFilterEnable + "'}";
+				+ secondLevelType + "', 'thirdLevelType':'" + thirdLevelType + "', 'validToDate':'" + validToDate
+				+ "', 'validFromDate':'" + validFromDate + "', 'programFilterEnable':'" + programFilterEnable + "'}";
 	}
 
 }
