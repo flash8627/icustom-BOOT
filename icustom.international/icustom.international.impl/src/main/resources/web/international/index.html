@@ -132,7 +132,7 @@
 	
     <table class="table table-hover row-table" id="language_table">
     	<thead>
-        	<th>
+        	<tr>
     			<th>operate</th>
     			<th>Item Code <span class="required">*</span></th>
 				<th>Value <span class="required">*</span></th>
@@ -142,7 +142,8 @@
 				<th>Create Date</th>
 				<th>Update User</th>
 				<th>Update Date</th>
-			</th>
+				<th>Editor</th>
+			</tr>
 		</thead>
         <tbody>
 			{{#if data}}
@@ -182,9 +183,7 @@
         	<input type="checkbox" id="lanId" name="lanId" value="{{lanId}}" onclick="validateRemoveBtn()">
     	</label>
 		</td>
-		<td>
-			<button class="btn btn-xs btn-primary language_edit" title="Edit"><i class="fa fa-edit"></i></button>
-		</td>
+		
 		<td rowspan="1" class="rowspan" group="{{lanCode}}" id="rowspan_{{lanId}}">
 			{{lanCode}}
 		</td>
@@ -202,6 +201,9 @@
 		<td>{{createdDate}}</td>
 		<td>{{lastNameCn}}</td>
 		<td>{{updateLastDate}}</td>
+		<td>
+			<button class="btn btn-xs btn-primary language_edit" title="Edit"><i class="fa fa-edit"></i></button>
+		</td>
 	</tr>
 </script>
 

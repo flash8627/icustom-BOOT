@@ -2,7 +2,6 @@ package com.gwtjs.icustom.htmlarea.vo;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gwtjs.icustom.entity.BaseResource;
 
 /**

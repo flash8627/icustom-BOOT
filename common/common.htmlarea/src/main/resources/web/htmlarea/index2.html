@@ -1,0 +1,430 @@
+<link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="../kindeditor/plugins/code/prettify.css" />
+	<script charset="utf-8" src="../kindeditor/kindeditor-all.js"></script>
+	<script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+	<script charset="utf-8" src="../kindeditor/plugins/code/prettify.js"></script>
+
+	<script src="../resources/utils/formatDate.js"></script>
+	<script src="../resources/js/global.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/HtmlAreaView.js"></script>
+	<script src="js/HtmlAreaService.js"></script>
+	
+	<div class="container">
+		<div class="page-header">
+			<h1>富文本管理</h1>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form class="form-inline" method="post" id="language_search_form">
+					<div class="form-group my-form-row">
+						<div class="form-group my-form-group" style="width: 48%;">
+							<label for="formLanCode" style="">名称:</label> <input type="text"
+								class="form-control" style="width: 78%;"
+								placeholder="name" name="name">
+						</div>
+
+						<div class="form-group my-form-group" style="width: 48%;">
+							<label for="formLanValue" style="width: 18%; text-align: right;">内容:</label>
+							<input type="text" class="form-control" style="width: 78%;"
+								placeholder="Html Area Content" name="content">
+						</div>
+					</div>
+
+					<div class="form-group my-form-row">
+						<div class="form-group my-form-group" style="width: 48%;">
+							<label for="formRemarks" style="">映射路径:</label> <input type="text"
+								class="form-control" style="width: 78%;" placeholder="Mapper URL"
+								name="mappingUrl">
+						</div>
+
+						<div class="form-group my-form-group" style="width: 48%;">
+							<label for="formLanType" style="width: 18%; text-align: right;">状态:</label>
+							<select class="form-control" style="width: 78%;" name="programFilterEnable">
+								<option value="0">停用</option>
+								<option value="1">启用</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group my-form-row">
+						<div class="form-group my-form-group" style="width: 48%;">
+							<label for="formRemarks" style="">备注:</label> <input type="text"
+								class="form-control" style="width: 78%;" placeholder="Description"
+								name="description">
+						</div>
+
+						<div class="form-group my-form-group" style="width: 48%;">
+							<label for="formLanType" style="width: 18%; text-align: right;">语言:</label>
+							<select class="form-control" style="width: 78%;"
+								name="lanType">
+								<option value="1">中文</option>
+								<option value="2">英文</option>
+								<option value="3">韩语</option>
+								<option value="4">法语</option>
+								<option value="5">俄语</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group my-form-row" style="height: 38px;">
+						<label for="startdate" style="width: 108px; text-align: right;">创建时间:</label>
+						<input type="text" style="width: 38%;"
+							class="easyui-datebox form-control" id="startdate"
+							name="startdate"
+							data-options="prompt:'请选择开始日期',editable:false,required:'true',onSelect:onSelect">
+						<span style="width: 58px; text-align: center; margin: 0 28px;">&nbsp;
+							<i class="fa fa-chevron-right" aria-hidden="true"></i> <span
+							class="sr-only">TO</span>
+						</span> <input type="text" style="width: 38%; margin-left: 58px;"
+							class="easyui-datebox form-control" id="enddate" name="enddate"
+							data-options="prompt:'请选择结束日期',editable:false,required:'true',validType:'equaldDate[\'#startdate\']'">
+					</div>
+
+					<div
+						class="form-group my-form-group form-search-btn-group my-form-row"
+						style="text-align: center;">
+						<button type="submit" class="btn btn-success">
+							<i class="fa fa-undo"></i> Reset
+						</button>
+						<button type="submit" class="btn btn-success">
+							<i class="fa fa-search"></i> Search
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">富文本列表</div>
+			<div class="panel-body">
+				<div id="list_tools_bar">
+					<button type="button" class="btn btn-success" id="htmlarea_create">
+						<i class="fa fa-plus"></i> 新增
+					</button>
+					<a href="javascript:void(0)" id="language_remove"
+						class="btn btn-primary optionbtn l-btn-disabled"><i
+						class="fa fa-remove fa-trash-o fa-lg"></i> Remove</a>
+
+					<div class="btn-group formbtn">
+						<a href="javascript:;" class="btn btn-primary actionbtn"><i
+							class="fa fa-file-excel-o"></i> Export and Import</a> <a
+							href="javascript:;" data-toggle="dropdown"
+							class="btn btn-primary dropdown-toggle" aria-expanded="false">
+							<span class="fa fa-caret-down"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:;" onclick="exportExcel()"><i
+									class="i"></i> 导出Excel</a></li>
+							<li><a href="javascript:;" onclick="downloadTemplate()"><i
+									class="i"></i> 下载Excel模板</a></li>
+							<li class="divider"></li>
+							<li><a href="javascript:;" onclick="importExcel()"><i
+									class="i"></i> 导入Excel</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="htmlarea_list"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="htmlarea_modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						id="htmlarea_modal_submit">
+						<i class="fa fa-save"></i> Save 
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/x-handlebars-template" id="htmlarea_table_template">
+	
+    <table class="table table-hover row-table" id="htmlarea_table">
+    	<thead>
+        	<th>
+    			<th>ID</th>
+				<th>名称</th>
+				<th>映射地址</th>
+				<th>文本内容</th>
+				<th>TITLE</th>
+				<th>过滤开关</th>
+				<th>有效开始时间</th>
+				<th>有效结束时间</th>
+				<th>描述</th>
+				<th>扩展1</th>
+				<th>扩展2</th>
+				<th>扩展3</th>
+				<th>创建用户</th>
+				<th>创建时间</th>
+				<th>最后更新用户</th>
+				<th>最后更新时间</th>
+				<th>操作</th>
+			</th>
+		</thead>
+        <tbody>
+			{{#if data}}
+			{{#data}}
+            {{> tr}}
+            {{/data}}
+			{{else}}
+        		<div class="alert alert-warning">Can not find any data!</div>
+    		{{/if}}
+        </tbody>
+		<tfoot>
+			<th colspan="5">
+				<span>1</span>
+				<span>...</span>
+				<span>12</span>
+				<span>13</span>
+				<span>14</span>
+				<span>15</span>
+				<span>16</span>
+				<span>...</span>
+				<span>116</span>
+				<span>&nbsp;</span>
+				<span>{{totalRows}}</span>
+				<span>/</span>
+				<span>{{totalPage}}</span>
+			</th>
+			<th colspan="5">&nbsp;</th>
+		</tfoot>
+	</table>
+</script>
+
+	<script type="text/x-handlebars-template-partial"
+		id="htmlarea_table_tr_template">
+	{{#if data}}
+        <tr data-id="{{htmlAreaId}}" data-name="{{name}}">
+        <td>{{htmlAreaId}}</td>
+        <td>{{name}}</td>
+<td>{{mappingUrl}}</td>
+<td>{{content}}</td>
+<td>{{title}}</td>
+<td>{{programFilterEnable}}</td>
+<td>{{createFromDate}}</td>
+<td>{{createToDate}}</td>
+<td>{{description}}</td>
+<td>{{attribute1}}</td>
+<td>{{attribute2}}</td>
+<td>{{attribute3}}</td>
+        <td>{{createdUser}}</td>
+        <td>{{createdDate}}</td>
+        <td>{{updateLastUser}}</td>
+        <td>{{updateLastDate}}</td>
+        <td>
+            <button class="btn btn-xs btn-primary htmlarea_edit" title="Edit"><i class="fa fa-fw fa-edit"></i></button>
+            <button class="btn btn-xs btn-default htmlarea_delete" title="Delete"><i class="fa fa-fw fa-trash-o"></i></button>
+        </td>
+    	</tr>
+    {{else}}
+		<tr ><td colspan="17">
+        	<div class="alert alert-warning">Can not find any data!</div>
+		</td>
+    	</tr>
+    {{/if}}
+    
+</script>
+
+
+	<script type="text/x-handlebars-template"
+		id="htmlarea_modal_form_template">
+	<iframe id="form_iframe" style="display:none;"></iframe>
+	<form id="editor_html_area" method="post" target="form_iframe">
+        <input type="hidden" id="htmlAreaId" value="{{htmlAreaId}}">
+		<div class="form-group">        
+			<div class="form-group" style="width:46%;margin:3px;float:left;">
+            	<label for="name">名称:</label>
+            	<input type="text" value="{{name}}" class="form-control" id="name">
+        	</div>
+        	<div class="form-group" style="width:46%;margin:3px;float:left;">
+            	<label for="title">title:</label>
+            	<input type="text" value="{{title}}" class="form-control" id="title">
+        	</div>
+		</div>
+
+        <div class="form-group">
+            <label for="mappingUrl">映射地址:</label>
+            <input type="text" value="{{mappingUrl}}" class="form-control" id="mappingUrl">
+        </div>
+		<fieldset>
+		<legend>文本内容</legend>
+		<textarea name="htmlAreaContent" cols="100" rows="8" style="width:98%;height:200px;visibility:hidden;">
+		{{content}}
+		</textarea>
+	</fieldset>
+		
+	<fieldset>
+		<legend>补充说明</legend>
+		<textarea name="description" cols="100" rows="8" style="width:98%;height:100px;">
+		{{description}}
+		</textarea>
+	</fieldset>
+
+        <div class="form-group">
+            <div class="form-group" style="width:46%;margin:3px;float:left;">
+            	<label for="programFilterEnable">启用:</label>
+            	<input type="text" value="{{programFilterEnable}}" class="form-control" id="programFilterEnable">
+        	</div>
+            <div class="form-group" style="width:46%;margin:3px;float:left;">
+            	<label for="map_type">映射类型:</label>
+            	<input type="text" value="{{orderCode}}" class="form-control" id="map_type">
+        	</div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group" style="width:46%;margin:3px;float:left;">
+            	<label for="createFromDate">有效开始时间:</label>
+            	<input type="text" value="{{createFromDate}}" id="createFromDate" class="easyui-datebox form-control"
+						name="createFromDate"
+						data-options="prompt:'请选择开始日期',editable:false,onSelect:onSelect">
+        	</div>
+            <div class="form-group" style="width:46%;margin:3px;float:left;">
+            	<label for="createToDate">有效结束时间:</label>
+            	<input type="text" value="{{createToDate}}" class="easyui-datebox form-control"
+				 id="createToDate"  name="createToDate"
+					data-options="prompt:'请选择结束日期',editable:false,validType:'equaldDate[\'#createFromDate\']'">
+        	</div>
+        </div>
+    </form>
+</script>
+
+	<script>
+		function onSelect(date) { //开始日期选择时触发
+			$('#enddate').datebox('enable'); //启用结束日期控件
+			$('#enddate').datebox('reset') //重置结束日期的值
+		};
+		$.extend($.fn.validatebox.defaults.rules, {
+			equaldDate : {
+				validator : function(value, param) {
+					var d1 = $(param[0]).datetimebox('getValue'); //获取开始时间
+					return value >= d1; //有效范围为大于开始时间的日期
+				},
+				message : '结束日期不能早于开始日期!'
+			}
+		})
+
+		$(function() {
+
+			// 显示所有产品
+			// $('body').hide(); 隐藏界面
+			HtmlAreaService.findHtmlAreas(function() {
+				//$('body').show(); // 显示界面
+			});
+			//HtmlAreaView.renderHtmlAreaTable(null);
+
+			// 根据关键字查询产品
+			$('#htmlarea_search_form').on('submit', function() {
+				var keyword = $('#keyword').val();
+				HtmlAreaService.findHtmlAreasByName(keyword);
+				return false;
+			});
+
+			// 点击 Edit 按钮，弹出编辑产品对话框
+			$(document).on('click', '#htmlarea_table .htmlarea_edit',
+					function() {
+						var $tr = $(this).closest('tr');
+						var htmlAreaId = $tr.data('id');
+						HtmlAreaService.findHtmlAreaById(htmlAreaId);
+						$('#htmlarea_modal').modal('show');
+						return false;
+					});
+
+			// 点击 Delete 按钮，删除产品
+			$(document).on(
+					'click',
+					'#htmlarea_table .htmlarea_delete',
+					function() {
+						var $tr = $(this).closest('tr');
+						var htmlAreaId = $tr.data('id');
+						var name = $tr.data('name');
+						console.warn(htmlAreaId, name);
+						if (confirm('Do you want to delete this HtmlArea? ['
+								+ name + ']')) {
+							HtmlAreaService.deleteHtmlAreaById(htmlAreaId);
+						}
+						return false;
+					});
+
+			// 点击 Create 按钮，弹出创建产品对话框
+			$('#htmlarea_create').on('click', function() {
+				var form = $('#editor_html_area').clone();
+				var title = 'Create HtmlArea';
+				var HtmlArea = {
+					htmlAreaId : 0,
+					name : '',
+					title : '',
+					mappingUrl : '',
+					category : '',
+					description : '',
+					secondLevelType : '',
+					thirdLevelType : '',
+					createToDate : '',
+					createFromDate : '',
+					programFilterEnable : ''
+				};
+
+				HtmlAreaView.renderHtmlAreaModal(title, HtmlArea);
+				KindEditor.create('textarea[name="htmlAreaContent"]', {
+					resizeType : 1,
+					afterCreate : function() {
+						this.sync();
+					},
+					//下面这行代码就是关键的所在，当失去焦点时执行 this.sync();  
+					afterBlur : function() {
+						this.sync();
+					}
+				});
+				$('#htmlarea_modal').modal('show');
+
+			});
+
+			// 点击对话框中的 Save 按钮，创建或更新产品
+			$('#htmlarea_modal_submit').on(
+					'click',
+					function() {
+						var id = $('#htmlAreaId').val();
+						$('#editor_html_area').attr('action',
+								'../services/htmlAreaService/saveOrUpdate');
+						var form = $('#editor_html_area');
+						var htmlVal = $('textarea[name="htmlAreaContent"]')
+								.val();
+						$("#htmlContent").append(htmlVal);
+						console.warn(id, htmlVal);
+						console.warn(id, form);
+						return;
+
+						var HtmlArea = {
+							htmlAreaId : id,
+							parentId : $('#parentId').val(),
+							name : $('#name').val(),
+							orderCode : $('#orderCode').val(),
+							icon : $('#icon').val(),
+							url : $('#url').val()
+						};
+						console.warn(id, HtmlArea);
+						if (id == 0) {
+							HtmlAreaService.createHtmlArea(HtmlArea);
+						} else {
+							HtmlAreaService.updateHtmlArea(HtmlArea);
+						}
+						$('#htmlarea_modal').modal('hide');
+					});
+			//
+		});
+	</script>
+
+	<style type="text/css">
+.modal-content {
+	width: 738px;
+	margin: 0px auto;
+}
+</style>

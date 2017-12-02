@@ -35,13 +35,13 @@ var HtmlAreaService = function() {
             batchInsertHtmlArea(lans);
         },
         batchInsertHtmlArea: function(items,callback) {
-            AjaxUtil.sendPostData(BASE + '/saveOrUpdate', items, function(object) {
+            AjaxUtil.sendPostData(BASE + '/batchInsert', items, function(object) {
             	console.warn(object);
                 HtmlAreaView.insertHtmlAreaRows(object.data,callback);
             });
         },
         batchUpdateHtmlArea: function(items) {
-            AjaxUtil.sendPostData(BASE + '/saveOrUpdate', items, function(htmlArea) {
+            AjaxUtil.sendPutData(BASE + '/batchUpdate', items, function(htmlArea) {
                 HtmlAreaView.updateHtmlAreaRow(htmlArea);
             });
         },

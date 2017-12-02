@@ -10,7 +10,7 @@ var LanguageView = function() {
             TemplateUtil.registerPartical('tr', 'language_table_tr_template');
             var html = TemplateUtil.renderHtml('language_table_template', {
                 data: items
-            });console.warn('html?',html);
+            });
             $('#language_list').html(html);
         },
         renderLanguageModal: function(title, item) {

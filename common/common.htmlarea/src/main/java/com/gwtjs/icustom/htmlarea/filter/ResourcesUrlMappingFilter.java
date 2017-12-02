@@ -14,7 +14,10 @@ import javax.servlet.annotation.WebFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import com.gwtjs.icustom.htmlarea.HtmlAreaApplication;
 import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 
 /**
  * 拦截资源文件,将富文本的路径转换成管理平台编辑的内容
@@ -23,6 +26,9 @@ import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
  */
 @WebFilter(urlPatterns = "*",filterName="ResourcesUrlMappingFilter")
 public class ResourcesUrlMappingFilter implements Filter{
+	
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(HtmlAreaApplication.class);
 	
 	@Inject
 	private IHtmlAreaService htmlAreaService;
@@ -38,9 +44,8 @@ public class ResourcesUrlMappingFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		System.out.println("按路径取资源,如果有富文本则替换,没有则放行: "+htmlAreaService);
-		System.out.println("按路径取资源,如果有富文本则替换,没有则放行: "+applicationContext);
+		log.debug("按路径取资源,如果有富文本则替换,没有则放行: "+htmlAreaService);
+		log.debug("按路径取资源,如果有富文本则替换,没有则放行: "+applicationContext);
 		chain.doFilter(request, response);
 	}
 

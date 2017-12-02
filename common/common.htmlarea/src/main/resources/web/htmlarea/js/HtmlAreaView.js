@@ -1,38 +1,50 @@
 var HtmlAreaView = function() {
-    var generateHtmlAreaTableTrHtml = function(htmlarea) {
-        return TemplateUtil.renderHtml('htmlarea_table_tr_template', htmlarea);
+    var generateHtmlAreaTableTrHtml = function(item) {
+        return TemplateUtil.renderHtml('htmlArea_table_tr_template', item);
+    };
+    var insertHtmlAreaTableTrHtml = function(item) {
+        return TemplateUtil.renderHtml('htmlArea_modal_form_template', item);
     };
     return {
-        renderHtmlAreaTable: function(htmlareaList) {
-            TemplateUtil.registerPartical('tr', 'htmlarea_table_tr_template');
-            var html = TemplateUtil.renderHtml('htmlarea_table_template', {
-                data: htmlareaList
+        renderHtmlAreaTable: function(items) {
+            TemplateUtil.registerPartical('tr', 'htmlArea_table_tr_template');
+            var html = TemplateUtil.renderHtml('htmlArea_table_template', {
+                data: items
             });
-
-        	console.warn('html?',html);
-            $('#htmlarea_list').html(html);
+            $('#htmlArea_list').html(html);
         },
-        renderHtmlAreaModal: function(title, htmlarea) {
-            var $modal = $('#htmlarea_modal');
+        renderHtmlAreaModal: function(title, item) {
+            var $modal = $('#htmlArea_modal');
             $modal.find('.modal-title').text(title);
-            var html = TemplateUtil.renderHtml('htmlarea_modal_form_template', htmlarea);
+            var html = TemplateUtil.renderHtml('htmlArea_modal_form_template', item);
             $modal.find('.modal-body').html(html);
         },
-        insertHtmlAreaRow: function(htmlarea) {
-            var html = generateHtmlAreaTableTrHtml(htmlarea);
-            $('#htmlarea_table').find('tbody').prepend(html);
+        insertHtmlAreaRows: function(items,callback) {
+            for(var i=0;i<items.length;i++){
+            	var html = generateHtmlAreaTableTrHtml(items[i]);
+                $('#htmlArea_table').find('tbody').prepend(html);
+            }
+            //callback();//执行方法
         },
-        updateHtmlAreaRow: function(htmlarea) {
-        	console.warn(htmlarea);
-            var html = generateHtmlAreaTableTrHtml(htmlarea);
-            $('#htmlarea_table').find('tbody').find('tr[data-id="' + htmlarea.htmlAreaId + '"]').replaceWith(html);
+        insertHtmlAreaRow: function(item) {
+            var html = insertHtmlAreaTableTrHtml(item);
+            $('#htmlArea_table').find('tbody').prepend(html);
         },
-        deleteHtmlAreaRow: function(htmlAreaId) {
-            $('#htmlarea_table').find('tbody').find('tr[data-id="' + htmlAreaId + '"]').remove();
+        updateHtmlAreaRow: function(items) {
+        	console.warn(items);
+            for(var i=0;i<items.length;i++){
+            	var item = items[i];
+            	var html = generateHtmlAreaTableTrHtml(item);
+            	$('#htmlArea_table').find('tbody').prepend(html);//不再使用更新，因为页面　已经删除此行
+                //$('#htmlArea_table').find('tbody').find('tr[data-id="' + item.itemId + '"]').replaceWith(html);
+            }
+        },
+        deleteHtmlAreaRow: function(itemId) {
+            $('#htmlArea_table').find('tbody').find('tr[data-id="' + itemId + '"]').remove();
         },
         deleteHtmlAreaRows: function(items) {
             for(var nav in items){
-            	$('#htmlarea_table').find('tbody').find('tr[data-id="' + nav.htmlAreaId + '"]').remove();
+            	$('#htmlArea_table').find('tbody').find('tr[data-id="' + items[nav].lanId + '"]').remove();
             }
         }
     };

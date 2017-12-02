@@ -38,9 +38,9 @@ public class HtmlAreaService implements IHtmlAreaService {
 	@Override
 	public ResultWrapper saveOrUpdate(HtmlAreaVO vo) {
 		
-		String html = HtmlSpecialChars.inHtmlspecialchars(vo.getContent());
+		//String html = HtmlSpecialChars.inHtmlspecialchars(vo.getContent());
 
-		log.info("\n>>>>>>>>findHtmlAreaPage html-----",html);
+		//log.info("\n>>>>>>>>findHtmlAreaPage html-----",html);
 		//vo.setContent(html);
 		
 		List<HtmlAreaVO> list = new ArrayList<HtmlAreaVO>();
