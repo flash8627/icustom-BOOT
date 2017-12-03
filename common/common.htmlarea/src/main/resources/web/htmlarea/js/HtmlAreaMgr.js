@@ -78,27 +78,6 @@ setEditorFormValue=function(htmlObj){
 	console.warn("titletitle",htmlObj);
 }
 
-KindEditor.ready(function(K) {
-	var editor = K.create('textarea[name="content1"]', {
-		cssPath : 'kindeditor/plugins/code/prettify.css',
-		uploadJson : 'kindeditor/asp/upload_json.asp',
-		fileManagerJson : 'kindeditor/asp/file_manager_json.asp',
-		allowFileManager : true,
-		afterBlur : function() {
-			this.sync();
-		}
-	});
-	prettyPrint();
-	$("#content").change(function() {
-		$.post("as.asp", {
-			act : "getcontent",
-			id : $(this).val()
-		}, function(data) {
-			editor.html(data);
-		});
-	});
-});
-
 var editor = null;
 /**
  * 渲染编辑窗口和填充表单

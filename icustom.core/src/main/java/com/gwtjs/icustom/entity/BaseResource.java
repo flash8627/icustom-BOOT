@@ -23,10 +23,10 @@ public class BaseResource implements Serializable {
 	private Date updateLastDate;
 	private String lastNameCn;
 	private String language;
-	/*查询用-日期查询起*/
+	/* 查询用-日期查询起 */
 	private Date createFromDate;
-	/*查询用-日期止*/
-	private Date createdToDate;
+	/* 查询用-日期止 */
+	private Date createToDate;
 
 	private String attribute1;
 	private String attribute2;
@@ -40,15 +40,14 @@ public class BaseResource implements Serializable {
 	private String attribute10;
 
 	private Integer orderCode;
-	
+
 	private Integer validFlag;
 
 	public BaseResource() {
 		super();
 	}
 
-	public BaseResource(long createdUser, Date createdDate,
-			long updateLastUser, Date updateLastDate, String language,
+	public BaseResource(long createdUser, Date createdDate, long updateLastUser, Date updateLastDate, String language,
 			Integer orderCode) {
 		super();
 		this.createdUser = createdUser;
@@ -211,12 +210,12 @@ public class BaseResource implements Serializable {
 		this.createFromDate = createFromDate;
 	}
 
-	public Date getCreatedToDate() {
-		return createdToDate;
+	public Date getCreateToDate() {
+		return createToDate;
 	}
 
-	public void setCreatedToDate(Date createdToDate) {
-		this.createdToDate = createdToDate;
+	public void setCreateToDate(Date createToDate) {
+		this.createToDate = createToDate;
 	}
 
 	public Integer getValidFlag() {

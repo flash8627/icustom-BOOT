@@ -175,44 +175,43 @@
 	
 		<if
 			test='_parameter.get("vo").createFromDate!=null and _parameter.get("vo").createFromDate!=""'>
-			<![CDATA[and trunc(vo.CREATION_DATE) >=
-			trunc(to_date(#{poInfoVO.CREATION_DATE,jdbcType=VARCHAR},'yyyy-mm-dd'))]]>
+			<![CDATA[and date(VALID_FROM_DATE) >= date(#{vo.createFromDate,jdbcType=TIMESTAMP})]]>
 		</if>
 		<if
-			test='_parameter.get("vo").createdToDate!=null and _parameter.get("vo").createdToDate!=""'>
-			<![CDATA[	and trunc(vo.CREATION_DATE) <=
-			trunc(to_date(#{poInfoVO.createdToDate,jdbcType=VARCHAR},'yyyy-mm-dd')) ]]>
+			test='_parameter.get("vo").createToDate!=null and _parameter.get("vo").createToDate!=""'>
+			<![CDATA[and date(VALID_TO_DATE) <= date(#{vo.createToDate,jdbcType=TIMESTAMP}) ]]>
 		</if>
 		
 		<if
 			test='_parameter.get("vo").name != null and _parameter.get("vo").name != "" and _parameter.get("vo").name != "null"'>
-			AND sr.name LIKE '%#{vo.name,jdbcType=VARCHAR}%'
+			AND tha.name LIKE '%#{vo.name,jdbcType=VARCHAR}%'
 		</if>
 		
 		<if
 			test='_parameter.get("vo").title != null and _parameter.get("vo").title != "" and _parameter.get("vo").title != "null"'>
-			AND upper(sr.title) = upper(#{vo.title,jdbcType=VARCHAR})
+			AND upper(tha.title) = upper(#{vo.title,jdbcType=VARCHAR})
 		</if>
 		
 		<if
 			test='_parameter.get("vo").content != null and _parameter.get("vo").content != "" and _parameter.get("vo").content != "null"'>
-			AND sr.content LIKE '%#{vo.content,jdbcType=VARCHAR}%'
+			<!-- AND tha.content LIKE '%#{vo.content,jdbcType=CLOB,javaType=java.lang.String}%' -->
+			AND tha.content LIKE '%#{vo.content}%'
 		</if>
 		<if
 			test='_parameter.get("vo").mappingUrl != null and _parameter.get("vo").mappingUrl != "" and _parameter.get("vo").mappingUrl != "null"'>
-			AND sr.mapping_url LIKE '%#{vo.mapping_url,jdbcType=VARCHAR}%'
+			AND tha.mapping_url LIKE '%#{vo.mapping_url,jdbcType=VARCHAR}%'
 		</if>
 		<if
 			test='_parameter.get("vo").secondLevelType != null and _parameter.get("vo").secondLevelType != "" and _parameter.get("vo").secondLevelType != "null"'>
-			AND upper(sr.second_level_type) = upper(#{vo.secondLevelType,jdbcType=VARCHAR})
+			AND upper(tha.second_level_type) = upper(#{vo.secondLevelType,jdbcType=VARCHAR})
 		</if>
 		<if
 			test='_parameter.get("vo").thirdLevelType != null and _parameter.get("vo").thirdLevelType != "" and _parameter.get("vo").thirdLevelType != "null"'>
-			AND upper(sr.third_level_type) = upper(#{vo.thirdLevelType,jdbcType=VARCHAR})
+			AND upper(tha.third_level_type) = upper(#{vo.thirdLevelType,jdbcType=VARCHAR})
 		</if>
 		<if
 			test='_parameter.get("vo").description != null and _parameter.get("vo").description != "" and _parameter.get("vo").description != "null"'>
-			AND sr.description LIKE '%#{vo.description,jdbcType=VARCHAR}%'
+			AND tha.description LIKE '%#{vo.description,jdbcType=VARCHAR}%'
 		</if>
 	</sql>
 
