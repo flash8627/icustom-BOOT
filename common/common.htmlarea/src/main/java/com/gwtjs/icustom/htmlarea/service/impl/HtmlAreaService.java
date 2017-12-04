@@ -101,8 +101,8 @@ public class HtmlAreaService implements IHtmlAreaService {
 	@Override
 	public PagedResult<HtmlAreaVO> findHtmlAreaPage(HtmlAreaVO vo,PageVO page) {
 		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo);
-		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo.getCreateFromDate());
-		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo.getCreateToDate());
+		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo.getFromDate());
+		log.info("\n>>>>>>>>findHtmlAreaPage vo------",vo.getToDate());
 		log.info("\n>>>>>>>>findHtmlAreaPage po------",page);
 		log.info("\n>>>>>>>>findHtmlAreaPage dao-----",htmlAreaDao);
 		return htmlAreaDao.findHtmlAreaPage(vo, page);

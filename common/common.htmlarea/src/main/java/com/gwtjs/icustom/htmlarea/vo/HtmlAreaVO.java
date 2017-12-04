@@ -2,6 +2,7 @@ package com.gwtjs.icustom.htmlarea.vo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gwtjs.icustom.entity.BaseResource;
 
 /**
@@ -39,8 +40,10 @@ public class HtmlAreaVO extends BaseResource {
 	/** 二级类型 **/
 	private String thirdLevelType;
 	/** 日期-结束日期 */
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date validToDate;
 	/** 日期-开始时间 */
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date validFromDate;
 	/**
 	 * 是否启用了富文本的program过滤
@@ -148,7 +151,7 @@ public class HtmlAreaVO extends BaseResource {
 	@Override
 	public String toString() {
 		return "{'category':'" + category + "', 'name':'" + name + "', 'description':'" + description + "', 'content':'"
-				+ content + "', 'title':'" + title + "', 'mappingUrl':'" + mappingUrl + "', 'secondLevelType':'"
+				+ /*content + */"', 'title':'" + title + "', 'mappingUrl':'" + mappingUrl + "', 'secondLevelType':'"
 				+ secondLevelType + "', 'thirdLevelType':'" + thirdLevelType + "', 'validToDate':'" + validToDate
 				+ "', 'validFromDate':'" + validFromDate + "', 'programFilterEnable':'" + programFilterEnable + "'}";
 	}

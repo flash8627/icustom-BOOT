@@ -7,6 +7,12 @@ var HtmlAreaService = function() {
                 callback();
             });
         },
+    	formFindHtmlAreas: function(param,callback) {
+            AjaxUtil.sendGetRequest(BASE + '/findHtmlAreaPage/20/1?'+param, function(object) {
+                HtmlAreaView.renderHtmlAreaTable(object.result);
+                callback();
+            });
+        },
         
         findHtmlAreaByItem: function(itemId) {
         	var result = {};

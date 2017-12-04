@@ -8,12 +8,12 @@
 	      tha.name AS name,
 	      tha.description AS description,
 	      tha.content AS content,
-	      tha.VALID_TO_DATE AS validToDate,
-	      tha.VALID_FROM_DATE AS validFromDate,
-	      tha.created_by AS createdBy,
-	      tha.creation_date AS creationDate,
-	      tha.update_last_user AS lastUpdatedBy,
-	      tha.update_last_date AS lastUpdateDate,
+	      to_char(tha.VALID_TO_DATE,'yyyy-mm-dd HH24:MI:SS') AS validToDate,
+	      to_char(tha.VALID_FROM_DATE,'yyyy-mm-dd HH24:MI:SS') AS validFromDate,
+	      tha.CREATED_BY AS createdBy,
+	      to_char(tha.CREATION_DATE,'yyyy-mm-dd HH24:MI:SS') AS createdDate,
+	      tha.UPDATE_LAST_USER AS lastUpdatedBy,
+	      to_char(tha.UPDATE_LAST_DATE,'yyyy-mm-dd HH24:MI:SS') AS updateLastDate,
 	      u.user_name AS creationUserCN,
 	      tha.title AS title,
 	      tha.mapping_url AS mappingUrl,
@@ -174,12 +174,12 @@
 	<sql id="select_cond">
 	
 		<if
-			test='_parameter.get("vo").createFromDate!=null and _parameter.get("vo").createFromDate!=""'>
-			<![CDATA[and date(VALID_FROM_DATE) >= date(#{vo.createFromDate,jdbcType=TIMESTAMP})]]>
+			test='_parameter.get("vo").fromDate!=null and _parameter.get("vo").fromDate!=""'>
+			<![CDATA[and VALID_FROM_DATE >= to_date(#{vo.fromDate,jdbcType=TIMESTAMP},'yyyy-mm-dd')]]>
 		</if>
 		<if
-			test='_parameter.get("vo").createToDate!=null and _parameter.get("vo").createToDate!=""'>
-			<![CDATA[and date(VALID_TO_DATE) <= date(#{vo.createToDate,jdbcType=TIMESTAMP}) ]]>
+			test='_parameter.get("vo").toDate!=null and _parameter.get("vo").toDate!=""'>
+			<![CDATA[and VALID_TO_DATE <= to_date(#{vo.toDate,jdbcType=TIMESTAMP},'yyyy-mm-dd')]]>
 		</if>
 		
 		<if
@@ -195,7 +195,6 @@
 		<if
 			test='_parameter.get("vo").content != null and _parameter.get("vo").content != "" and _parameter.get("vo").content != "null"'>
 			<!-- AND tha.content LIKE '%#{vo.content,jdbcType=CLOB,javaType=java.lang.String}%' -->
-			AND tha.content LIKE '%#{vo.content}%'
 		</if>
 		<if
 			test='_parameter.get("vo").mappingUrl != null and _parameter.get("vo").mappingUrl != "" and _parameter.get("vo").mappingUrl != "null"'>

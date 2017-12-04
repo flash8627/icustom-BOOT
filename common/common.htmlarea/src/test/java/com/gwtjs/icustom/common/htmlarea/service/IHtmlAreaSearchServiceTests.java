@@ -2,8 +2,6 @@ package com.gwtjs.icustom.common.htmlarea.service;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Date;
-
 import javax.inject.Inject;
 
 import org.junit.Ignore;
@@ -19,7 +17,6 @@ import com.gwtjs.icustom.htmlarea.service.IHtmlAreaService;
 import com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO;
 import com.gwtjs.icustom.log.ICustomLogger;
 import com.gwtjs.icustom.log.ICustomLoggerFactory;
-import com.gwtjs.icustom.util.DateUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = HtmlAreaApplication.class)
@@ -60,7 +57,7 @@ public class IHtmlAreaSearchServiceTests {
 	 * 分页测试
 	 */
 	@Test @Ignore
-	public void testFindHtmlAreaPageLikeSearch() {
+	public void testFindHtmlAreaPageLikeMapUrl() {
 		HtmlAreaVO vo = new HtmlAreaVO();
 		vo.setName("Test");
 		vo.setTitle("主站");
@@ -76,8 +73,8 @@ public class IHtmlAreaSearchServiceTests {
 	/**
 	 * 分页测试
 	 */
-	@Test
-	public void testFindHtmlAreaPageLikeSearch2() {
+	@Test @Ignore
+	public void testFindHtmlAreaPageLikeContent() {
 		HtmlAreaVO vo = new HtmlAreaVO();
 		vo.setContent("adfasdfasdf");
 		PageVO page = new PageVO();
@@ -94,18 +91,18 @@ public class IHtmlAreaSearchServiceTests {
 	public void testFindHtmlAreaPageDateSearch() {
 		HtmlAreaVO vo = new HtmlAreaVO();
 		try {
-			Date createFromDate = DateUtil.stringToDate("2017-05-25");
-			Date createdToDate = DateUtil.stringToDate("2017-12-25");
-			vo.setCreateFromDate(createFromDate);
-			vo.setCreateToDate(createdToDate);
+			/*Date createFromDate = DateUtil.stringToDate("2017-05-25");
+			Date createdToDate = DateUtil.stringToDate("2017-12-25");*/
+			vo.setFromDate("2017-05-25");
+			vo.setToDate("2017-12-25");
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		PageVO page = new PageVO();
 		page.setCurPage(1);
 		page.setPageSize(20);
 		PagedResult<HtmlAreaVO> result = htmlAreaService.findHtmlAreaPage(vo, page);
-		log.info("testFindHtmlAreaPageDateSearch result," + result);
+		log.info("\ntestFindHtmlAreaPageDateSearch result," + result);
 	}
 
 }

@@ -6,6 +6,17 @@ import java.io.UnsupportedEncodingException;
  * 字符转义
  * @author aGuang
  * 
+ * <h2>字符型json数据转对象</h2>
+ * @author aGuang
+ *	<p>
+ *	TODO 说明
+ *</p>
+ *<p>
+ *	TODO 示例
+ *</p>
+ *<pre>
+ *	示例代码:
+ *</pre>
  */
 public class CharsTransferredMeaningUtil {
 	

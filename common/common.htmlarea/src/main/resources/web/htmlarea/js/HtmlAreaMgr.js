@@ -1,3 +1,18 @@
+
+//定义个helper，实现日期格式转换
+Handlebars.registerHelper("myFormatDate" , function(v){
+    var date = new Date(v);
+    var m = date.getMonth()+1 ;
+    if(m<10){
+        m = "0" + m ;
+    }
+    var d = date.getDay() ;
+    if(d<10){
+        d = "0" + d ;
+    }
+    return date.getFullYear() + "年" + m + "月" + d + "日" ;
+});
+                
 $.extend($.fn.validatebox.defaults.rules, {
 	equaldDate : {
 		validator : function(value, param) {
@@ -7,6 +22,10 @@ $.extend($.fn.validatebox.defaults.rules, {
 		message : '结束日期不能早于开始日期!'
 	}
 })
+
+/**
+ * 验证按钮并设置按钮样式
+ */
 var validateRemoveBtn = function(){
 	var checkNum = $('input:checkbox[name=htmlAreaId]:checked').length;
 	if(checkNum>0){
@@ -15,42 +34,6 @@ var validateRemoveBtn = function(){
 		$(".optionbtn").addClass("l-btn-disabled");
 	}
 }
-
-/**取编辑form表单的值*/
-/*getSearchFormValue=function(){
-	var htmlObj = {};
-	htmlObj.name = $('#search_html_area #name').val();
-	htmlObj.title = $('#search_html_area #title').val();
-	htmlObj.mappingUrl = $('#search_html_area #mappingUrl').val();
-	htmlObj.content = $('textarea[name="searchHtmlAreaContent"]').val();
-	htmlObj.description = $('#search_html_area textarea[name="description"]').val();
-	programFilterEnable = $('#search_html_area input[name="programFilterEnable"]').val();
-	htmlObj.programFilterEnable = programFilterEnable==1?true:false;
-	htmlObj.category = $('#search_html_area input[name="category"]').val();
-	var createdToDate = $('#search_html_area input[name="createdToDate"]').val();
-	//console.info('createToDate 1',createToDate);
-	htmlObj.createdToDate = createdToDate;
-	var createFromDate = $('#search_html_area input[name="createFromDate"]').val();
-	//console.info('createFromDate 2',createFromDate);
-	htmlObj.createFromDate = createFromDate;
-	htmlObj.htmlAreaId = $('#search_html_area #htmlAreaId').val();
-	return htmlObj;	
-}*/
-
-/**设置编辑form表单的值*/
-/*setSearchFormValue=function(htmlObj){
-
-	$('#htmlarea_modal #name').val(htmlObj.name);
-	$('textarea[name="searchHtmlAreaContent"]').val(htmlObj.content);
-	$('#htmlarea_modal #title').val(htmlObj.title);
-	$('#htmlarea_modal #mappingUrl').val(htmlObj.mappingUrl);
-	$('#htmlarea_modal textarea[name="description"]').val(htmlObj.description);
-	$('#htmlarea_modal input[name="programFilterEnable"]').val(htmlObj.programFilterEnable);
-	$('#htmlarea_modal input[name="category"]').val(htmlObj.category);
-	$('#htmlarea_modal #validToDate').val(htmlObj.validToDate);
-	$('#htmlarea_modal #validFromDate').val(htmlObj.validFromDate);
-	$('#htmlarea_modal #htmlAreaId').val(htmlObj.htmlAreaId);
-}*/
 
 /**取编辑form表单的值*/
 getEditorFormValue=function(){
@@ -92,7 +75,11 @@ renderHtmlAreaModal=function(title,htmlObj){
 	$('#htmlarea_modal #mappingUrl').val(htmlObj.mappingUrl);
 	$('#htmlarea_modal textarea[name="description"]').val(htmlObj.description);
 	$('#htmlarea_modal input[name="programFilterEnable"]').val(htmlObj.programFilterEnable);
+	var dd = htmlObj.programFilterEnable==true?1:0;
+	console.info(dd,$("#htmlarea_modal #programFilterEnable option[value='"+dd+"']"));
+	$("#htmlarea_modal #programFilterEnable option[value='"+dd+"']").attr("selected", true);
 	$('#htmlarea_modal input[name="category"]').val(htmlObj.category);
+	$("#htmlarea_modal #Category option[value='"+htmlObj.category+"']").attr("selected", true);
 	$('#htmlarea_modal #validToDate').val(htmlObj.validToDate);
 	$('#htmlarea_modal #validFromDate').val(htmlObj.validFromDate);
 	$('#htmlarea_modal #htmlAreaId').val(htmlObj.htmlAreaId);
@@ -151,7 +138,7 @@ $(function() {
 		
     });
 	
-	// 点击对话框中的 Save 按钮，创建或更新产品
+	//编辑窗口提交保存动作
 	$('#htmlarea_modal_submit').on('click', function() {
 		var idNode = $('#htmlAreaId');
 		var mappingUrlNode = $('#mappingUrl');
@@ -168,7 +155,7 @@ $(function() {
 
 	});
 	
-	// 点击 Delete 按钮，删除产品
+	// 点击 Delete 按钮，删除htmlarea
 	$(document).on('click','#htmlArea_remove',function() {
 		var chkValues =[];
 		$('input[name="htmlAreaId"]:checked').each(function(){
@@ -186,16 +173,32 @@ $(function() {
 		return false;
 	});
 	
-	/*// 根据关键字查询产品
-	$('#htmlarea_search_search').on('submit', function() {
-		var keyword = $('htmlArea_search_form #keyword').val().trim();
-		return false;
+	// 根据关键字查询产品
+	$('#htmlarea_search_search').on('click', function() {
+		var obj = {};var params = "";
+		
+		var values = $("#htmlArea_search_form").serializeArray();
+		for (index = 0; index < values.length; ++index) {
+			if(values[index].value!=null&&values[index].value!=''&&values[index].value!='null'){
+				params += '&'+values[index].name+"="+values[index].value; 
+			}
+		}
+		if(params.length>0){
+			params=params.substr(1,params.length);
+		}
+		
+		console.info(params);
+		HtmlAreaService.formFindHtmlAreas(params,function(){});
 	});
 	
 	// 根据关键字查询产品
-	$('#htmlarea_search_reset').on('submit', function() {
-		var keyword = $('htmlArea_search_form #keyword').val().trim();
-		return false;
-	});*/
+	$('#htmlarea_search_reset').on('click', function() {
+		var obj = '';
+		var values = $("#htmlArea_search_form").serializeArray();
+		for (index = 0; index < values.length; ++index) {
+			values[index].value = obj; 
+		}
+		$("#htmlArea_search_form input[type='hidden']").val(obj);
+	});
 
 });

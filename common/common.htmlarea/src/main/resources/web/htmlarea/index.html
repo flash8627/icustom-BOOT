@@ -30,45 +30,46 @@
 			<form class="form-inline" method="post" id="htmlArea_search_form">
 					<div class="form-group my-form-row">
 						<div class="form-group my-form-group" style="width: 48%;">
-							<label for="formLanCode" style="">名称:</label> <input type="text"
+							<label for="Name" style="">名称:</label> <input type="text"
 								class="form-control" style="width: 78%;"
-								placeholder="name" name="name">
+								placeholder="name" name="name" id="Name">
 						</div>
 
 						<div class="form-group my-form-group" style="width: 48%;">
-							<label for="searchHtmlAreaContent" style="width: 18%; text-align: right;">内容:</label>
+							<label for="Title" style="width: 18%; text-align: right;">标题:</label>
 							<input type="text" class="form-control" style="width: 78%;"
-								placeholder="Html Area Content" name="searchHtmlAreaContent">
+								placeholder="Title" name="title" id="Title">
 						</div>
 					</div>
 
 					<div class="form-group my-form-row">
 						<div class="form-group my-form-group" style="width: 48%;">
-							<label for="mappingUrl" style="">映射路径:</label> <input type="text"
+							<label for="MappingUrl" style="">映射路径:</label> 
+							<input type="text"
 								class="form-control" style="width: 78%;" placeholder="Mapper URL"
-								name="mappingUrl">
+								name="mappingUrl" id="MappingUrl">
 						</div>
 
 						<div class="form-group my-form-group" style="width: 48%;" >
-							<label for="programFilterEnable" style="width: 18%; text-align: right;">状态:</label>
-							<select class="form-control" style="width: 78%;" name="programFilterEnable">
+							<label for="ProgramFilterEnable" style="width: 18%; text-align: right;">状态:</label>
+							<select class="form-control" style="width: 78%;" id="ProgramFilterEnable" name="programFilterEnable">
 								<option value="0">停用</option>
-								<option value="1">启用</option>
+								<option value="1" selected="selected">启用</option>
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group my-form-row">
 						<div class="form-group my-form-group" style="width: 48%;">
-							<label for="formRemarks" style="">备注:</label> <input type="text"
-								class="form-control" style="width: 78%;" placeholder="Description"
-								name="description">
+							<label for="Description" style="">描述:</label> <input type="text"
+								class="form-control" style="width: 78%;" placeholder="描述"
+								name="Description">
 						</div>
 
 						<div class="form-group my-form-group" style="width: 48%;">
-							<label for="formLanType" style="width: 18%; text-align: right;">语言:</label>
+							<label for="Category" style="width: 18%; text-align: right;">语言:</label>
 							<select class="form-control" style="width:78%;height:32px;"
-								name="lanType">
+								name="category" id="Category">
 								<option value="1">中文</option>
 								<option value="2">英文</option>
 								<option value="3">韩语</option>
@@ -81,15 +82,15 @@
 					<div class="form-group my-form-row" style="height: 38px;">
 						<label for="startdate" style="width: 108px; text-align: right;">创建时间:</label>
 						<input type="text" style="width: 38%;"
-							class="easyui-datebox form-control" id="createFromDate"
-							name="createFromDate"
+							class="easyui-datebox form-control" id="fromDate"
+							name="fromDate"
 							data-options="formatter:myformatter2,parser:myparser,prompt:'请选择开始日期',editable:false,required:'true',onSelect:onSelect">
 						<span style="width: 58px; text-align: center; margin: 0 28px;">&nbsp;
 							<i class="fa fa-chevron-right" aria-hidden="true"></i> <span
 							class="sr-only">TO</span>
 						</span> <input type="text" style="width: 38%; margin-left: 58px;"
-							class="easyui-datebox form-control" id="createToDate" name="createToDate"
-							data-options="formatter:myformatter2,parser:myparser,prompt:'请选择结束日期',editable:false,required:'true',validType:'equaldDate[\'#createFromDate\']'">
+							class="easyui-datebox form-control" id="toDate" name="toDate"
+							data-options="formatter:myformatter2,parser:myparser,prompt:'请选择结束日期',editable:false,required:'true',validType:'equaldDate[\'#fromDate\']'">
 					</div>
 
 					<div
@@ -98,7 +99,7 @@
 						<button type="reset" class="btn btn-success" id="htmlarea_search_reset">
 							<i class="fa fa-undo"></i> Reset
 						</button>
-						<button type="submit" class="btn btn-success" id="htmlarea_search_search">
+						<button type="button" class="btn btn-success" id="htmlarea_search_search">
 							<i class="fa fa-search"></i> Search
 						</button>
 					</div>
@@ -201,12 +202,12 @@
 		</td>
 		<td>{{name}}</td>
 		<td ><div class="content_ov" alt="{{mappingUrl}}">{{mappingUrl}}</div></td>
-		<td ><div class="content_ov" alt="{{content}}">{{content}}</div></td>
+		<td ><div class="content_ov" alt="{{content}}" style="width:118px;line-height:16px;height:32px;overflow:hidden;">{{content}}</div></td>
 		<td>{{title}}</td>
 		<td>{{programFilterEnable}}</td>
 		<td>{{validFromDate}}</td>
 		<td>{{validToDate}}</td>
-		<td ><div class="content_ov" alt="{{description}}">{{description}}</div></td>
+		<td ><div class="content_ov" alt="{{description}}" style="width:118px;overflow:hidden;">{{description}}</div></td>
 		<td>{{createdUser}}</td>
 		<td>{{createdDate}}</td>
 		<td>{{updateLastUser}}</td>
@@ -226,7 +227,7 @@
 			</div>
 			<div class="modal-body">
 				<iframe id="form_iframe" style="display:none;"></iframe>
-			<form id="search_html_area" method="post" target="form_iframe">
+			<form id="editor_html_area" method="post" target="form_iframe">
 				<input type="hidden" id="htmlAreaId" value="{{htmlAreaId}}">
 				<div class="form-group">        
 					<div class="form-group" style="width:46%;margin:3px;float:left;">
@@ -256,16 +257,18 @@
 				<div class="form-group">
 					<div class="form-group" style="width:46%;margin:3px;float:left;">
 						<label for="programFilterEnable">启用:</label>
-						<input type="text" value="{{programFilterEnable}}" class="form-control" name="programFilterEnable">
+						<select class="form-control" id="programFilterEnable" name="programFilterEnable">
+							<option value="0">停用</option>
+							<option value="1">启用</option>
+						</select>
 					</div>
 					<div class="form-group" style="width:46%;margin:3px;float:left;">
 						<label for="map_type">映射类型:</label>
-						<select name="lanType" id="lanType" style="width:100%;height:32px;">
+						<select name="category" id="Category" style="width:100%;height:32px;">
 							<option value="1" code="CN">中文</option>
 							<option value="2" code="EN">英文</option>
 							<option value="3" code="FN">法文</option>
 						</select>
-						<input type="hidden" value="{{category}}" class="form-control" name="category">
 					</div>
 				</div>
 

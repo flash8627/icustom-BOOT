@@ -3,12 +3,15 @@ package com.gwtjs.icustom.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 系统基础属性
  * 
  * @author aGuang
  *
- */
+ */@JsonIgnoreProperties({"nameCn","lastNameCn","attribute1","attribute2","attribute3","attribute4",})
 public class BaseResource implements Serializable {
 
 	/**
@@ -16,17 +19,19 @@ public class BaseResource implements Serializable {
 	 */
 	private static final long serialVersionUID = -5402317918334633979L;
 	private long createdUser;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createdDate;
 	private String nameCn;
 
 	private long updateLastUser;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateLastDate;
 	private String lastNameCn;
 	private String language;
 	/* 查询用-日期查询起 */
-	private Date createFromDate;
+	private String fromDate;
 	/* 查询用-日期止 */
-	private Date createToDate;
+	private String toDate;
 
 	private String attribute1;
 	private String attribute2;
@@ -202,20 +207,20 @@ public class BaseResource implements Serializable {
 		this.attribute10 = attribute10;
 	}
 
-	public Date getCreateFromDate() {
-		return createFromDate;
+	public String getFromDate() {
+		return fromDate;
 	}
 
-	public void setCreateFromDate(Date createFromDate) {
-		this.createFromDate = createFromDate;
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
 	}
 
-	public Date getCreateToDate() {
-		return createToDate;
+	public String getToDate() {
+		return toDate;
 	}
 
-	public void setCreateToDate(Date createToDate) {
-		this.createToDate = createToDate;
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
 	}
 
 	public Integer getValidFlag() {
