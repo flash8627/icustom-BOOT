@@ -118,7 +118,7 @@ public class SysUserVO extends BaseResource {
 				+ password + "', 'remark':'" + remark
 				+ "', 'effectiveDateStart':'" + effectiveDateStart
 				+ "', 'effectiveDateEnd':'" + effectiveDateEnd
-				+ "', 'sysRoles':'" + sysRoles + "'}";
+				+ "', 'sysRoles':" + sysRoles + "}";
 	}
 
 }

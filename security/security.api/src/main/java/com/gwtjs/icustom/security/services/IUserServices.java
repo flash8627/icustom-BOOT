@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.entity.ResultWrapper;
@@ -26,6 +28,12 @@ import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface IUserServices {
+	
+	/**
+	 * 获取当前用户
+	 * @return
+	 */
+	SysUserVO getUserPrincipal();
 	
 	@GET @Path("findItem/{userId}")
 	ResultWrapper findItem(@PathParam("userId")long userId);

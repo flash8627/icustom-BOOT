@@ -7,21 +7,25 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.gwtjs.icustom.entity.ResultWrapper;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 import com.gwtjs.icustom.security.dao.ISysResourcesMgrDao;
 import com.gwtjs.icustom.security.services.IResourcesService;
 import com.gwtjs.icustom.springsecurity.entity.SysResourceVO;
+import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 @Named("resourcesService")
 public class ResourcesService implements IResourcesService {
 	
 	@Inject
 	private ISysResourcesMgrDao resourcesDAO;
-
-	private static final Logger log = LoggerFactory.getLogger(ResourcesService.class);
+	
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(ResourcesService.class);
 	
 	@Override
 	public Integer selectByItemId() {
@@ -34,6 +38,8 @@ public class ResourcesService implements IResourcesService {
 	 */
 	@Override
 	public List<SysResourceVO> findResourcesSiteMenu() {
+		SysUserVO user = (SysUserVO) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		log.info("current user:",user);
 		SysResourceVO nav = resourcesDAO.findResourcesGridTreeRoot();
 		List<SysResourceVO> menus = this.findMenus(nav.getResourceId());
 		for (SysResourceVO menu : menus) {
@@ -145,9 +151,12 @@ public class ResourcesService implements IResourcesService {
 
 	@Override
 	public ResultWrapper insert(SysResourceVO record) {
+		SysUserVO user = (SysUserVO) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		log.info("current user:",user);
 		//Integer resourceId = resourcesDAO.selectByItemId();
 		//record.setItemId(resourceId);
-		record.setCreatedUser(new Long("10001"));
+		record.setCreatedUser(user.getId());
+		record.setUpdateLastUser(user.getId());
 		record.setCreatedDate(new Date());
 		int msg = resourcesDAO.insert(record);
 		return ResultWrapper.successResult(msg, record);

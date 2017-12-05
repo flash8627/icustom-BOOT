@@ -15,7 +15,7 @@
         <div class="panel-body">
             <form class="form-inline" method="post" id="navigation_search_form">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="导航名称" id="keyword">
+                    <input type="text" style="width:380px;" class="form-control" placeholder="附件名称" id="keyword">
                 </div>
                 <button type="submit" class="btn btn-default">
                     <i class="fa fa-search"></i> Search
@@ -197,6 +197,7 @@
         		prettyPrint();
         	});
             $('#navigation_modal').modal('show');
+            window.open("attachments/upload");
         });
 
         // 点击对话框中的 Save 按钮，创建或更新产品

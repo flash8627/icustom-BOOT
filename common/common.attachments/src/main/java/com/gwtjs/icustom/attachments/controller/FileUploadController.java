@@ -26,62 +26,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class FileUploadController {
 
 	// 页面访问路径为
-	@RequestMapping(value = {"/attachments","/attachments/index","/upload/index","/attachments/upload/index"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/attachments","/attachments/index","/attachments/upload/index"}, method = RequestMethod.GET)
 	public String index() {
 		return "/index";
-	}
-
-	// 页面访问路径为
-	@RequestMapping(value = "/attachments/upload", method = RequestMethod.GET)
-	public String upload() {
-		return "/fileupload";
-	}
-
-	// 页面访问路径为：http://ip:port/upload/batch
-	@RequestMapping(value = "/attachments/uploadfiles", method = RequestMethod.GET)
-	public String batchUpload() {
-		return "/mutifileupload";
 	}
 
 	// 页面访问路径为：http://ip:port/upload/batch
 	@RequestMapping(value = "/attachments/uploads", method = RequestMethod.GET)
 	public String mutifileUpload() {
 		return "/mutifileupload2";
-	}
-
-	/**
-	 * 文件上传具体实现方法（单文件上传）
-	 *
-	 * @param file
-	 * @return
-	 * 
-	 * @author a g
-	 * @create 2017年1月11日
-	 */
-	@RequestMapping(value = "/attachments/upload/file", method = RequestMethod.POST)
-	@ResponseBody
-	public String upload(@RequestParam("file") MultipartFile file) {
-		if (!file.isEmpty()) {
-			try {
-				// 这里只是简单例子，文件直接输出到项目路径下。
-				// 实际项目中，文件需要输出到指定位置，需要在增加代码处理。
-				// 还有关于文件格式限制、文件大小限制，详见：中配置。
-				BufferedOutputStream out = new BufferedOutputStream(
-						new FileOutputStream(new File(file.getOriginalFilename())));
-				out.write(file.getBytes());
-				out.flush();
-				out.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				return "上传失败," + e.getMessage();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return "上传失败," + e.getMessage();
-			}
-			return "上传成功";
-		} else {
-			return "上传失败，因为文件是空的.";
-		}
 	}
 
 	/**
@@ -95,10 +48,11 @@ public class FileUploadController {
 	 */
 	@RequestMapping(value = "/attachments/upload/files", method = RequestMethod.POST)
 	public @ResponseBody String batchUpload(HttpServletRequest request) {
+		request.getUserPrincipal();
 		List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
 		MultipartFile file = null;
 		BufferedOutputStream stream = null;
-
+		System.out.println("files.size "+files.size());
 		for (int i = 0; i < files.size(); ++i) {
 			file = files.get(i);
 			if (!file.isEmpty()) {

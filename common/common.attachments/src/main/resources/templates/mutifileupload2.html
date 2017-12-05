@@ -8,7 +8,6 @@
 <script type="text/javascript"
 	src="../upload//bootstrap/js/bootstrap.min.js"></script>
 
-
 <link type="text/css" rel="stylesheet" href="../upload/css/app.css"></link>
 <link type="text/css" rel="stylesheet"
 	href="../upload/bootstrap/css/bootstrap.css"></link>
@@ -38,7 +37,7 @@
 		});
 
 		// 文件修改时
-		$("#batchFile").change(function() {
+		$("input[name='file']").change(function() {
 			$("#batchUploadBtn").val("上传");
 			$("#progressBar").width("0%");
 			var file = $(this).prop('files');
@@ -49,13 +48,16 @@
 		});
 
 		function UpladFile() {
-			var fileObj = $("#batchFile").get(0).files[0]; // js 获取文件对象
-			console.info("上传的文件：" + fileObj);
+			var fileObj = $("input[name='file']"); // js 获取文件对象
+			
 			var FileController = "upload/files"; // 接收上传文件的后台地址 
 			// FormData 对象
 			var form = new FormData();
-			// form.append("author", "hooyes"); // 可以增加表单数据
-			form.append("file", fileObj); // 文件对象
+			form.append("createDate", new Date()); // 可以增加表单数据
+			
+			$.each(fileObj,function(i,item){
+				form.append("file", fileObj.get(i).files[0]);
+			});
 			// XMLHttpRequest 对象
 			var xhr = new XMLHttpRequest();
 			xhr.open("post", FileController, true);
@@ -68,7 +70,7 @@
 				$("#progressBar").parent().hide();
 				//$('#myModal').modal('hide');
 			};
-			xhr.upload.addEventListener("progress", progressFunction, false);
+			xhr.upload.addEventListener("/attachments/upload/progress", progressFunction, false);
 			xhr.send(form);
 		}
 		function progressFunction(evt) {
@@ -97,17 +99,23 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">批量导入附件</h4>
 				</div>
-				<div class="modal-body">
-					<div class="form-group" id="passwordDiv">
-						<label>选择附件数据文件</label> <input class="form-control" type="file"
-							id="batchFile" />
+				<div class="modal-body" style="height:380px;">
+					<div class="form-group" id="passwordDiv" style="height:288px;clear: both;">
+						<div class="file_line" style="padding:6px;">
+							<label>选择附件数据文件</label> 
+							<input class="form-control" type="file" name="file" />
+						</div>
+						<div class="file_line" style="padding:6px;">
+							<label>选择附件数据文件</label> 
+							<input class="form-control" type="file" name="file" />
+						</div>
 					</div>
-					<div class="progress progress-striped active" style="display: none">
+					<div class="progress progress-striped active" style="display: none;clear: both;">
 						<div id="progressBar" class="progress-bar progress-bar-info"
 							role="progressbar" aria-valuemin="0" aria-valuenow="0"
 							aria-valuemax="100" style="width: 0%"></div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="clear: both;">
 						<input id="batchUploadBtn" type="submit" name="submit"
 							class="btn btn-success" value="上传" />
 					</div>

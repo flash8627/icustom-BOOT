@@ -184,12 +184,12 @@
 		
 		<if
 			test='_parameter.get("vo").name != null and _parameter.get("vo").name != "" and _parameter.get("vo").name != "null"'>
-			AND tha.name LIKE '%#{vo.name,jdbcType=VARCHAR}%'
+			AND tha.name LIKE concat(concat('%',#{vo.name,jdbcType=VARCHAR}),'%') 
 		</if>
 		
 		<if
 			test='_parameter.get("vo").title != null and _parameter.get("vo").title != "" and _parameter.get("vo").title != "null"'>
-			AND upper(tha.title) = upper(#{vo.title,jdbcType=VARCHAR})
+			AND tha.title LIKE concat(concat('%',#{vo.title,jdbcType=VARCHAR}),'%') 
 		</if>
 		
 		<if
@@ -198,7 +198,7 @@
 		</if>
 		<if
 			test='_parameter.get("vo").mappingUrl != null and _parameter.get("vo").mappingUrl != "" and _parameter.get("vo").mappingUrl != "null"'>
-			AND tha.mapping_url LIKE '%#{vo.mapping_url,jdbcType=VARCHAR}%'
+			AND tha.mapping_url LIKE concat(concat('%',#{vo.mappingUrl,jdbcType=VARCHAR}),'%')  
 		</if>
 		<if
 			test='_parameter.get("vo").secondLevelType != null and _parameter.get("vo").secondLevelType != "" and _parameter.get("vo").secondLevelType != "null"'>
@@ -210,7 +210,7 @@
 		</if>
 		<if
 			test='_parameter.get("vo").description != null and _parameter.get("vo").description != "" and _parameter.get("vo").description != "null"'>
-			AND tha.description LIKE '%#{vo.description,jdbcType=VARCHAR}%'
+			AND tha.description LIKE concat(concat('%',#{vo.description,jdbcType=VARCHAR}),'%') 
 		</if>
 	</sql>
 

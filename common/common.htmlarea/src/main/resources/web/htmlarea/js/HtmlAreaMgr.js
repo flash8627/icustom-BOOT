@@ -61,7 +61,17 @@ setEditorFormValue=function(htmlObj){
 	console.warn("titletitle",htmlObj);
 }
 
-var editor = null;
+var editor = KindEditor.create('textarea[name="textareaContent"]', {
+	resizeType : 1,
+	afterCreate : function() {
+		this.sync();
+	},
+	//下面这行代码就是关键的所在，当失去焦点时执行 this.sync();  
+	afterBlur : function() {
+		this.sync();
+	}
+});
+
 /**
  * 渲染编辑窗口和填充表单
  */
@@ -92,17 +102,6 @@ $(function() {
 	//$('body').hide(); // 隐藏界面
 	HtmlAreaService.findHtmlAreas(function() {
 		$('body').show(); // 显示界面
-	});
-	
-	editor = KindEditor.create('textarea[name="textareaContent"]', {
-		resizeType : 1,
-		afterCreate : function() {
-			this.sync();
-		},
-		//下面这行代码就是关键的所在，当失去焦点时执行 this.sync();  
-		afterBlur : function() {
-			this.sync();
-		}
 	});
 	
 	// 点击 Create 按钮，弹出创建产品对话框

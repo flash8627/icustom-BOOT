@@ -6,23 +6,38 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.gwtjs.icustom.entity.PageVO;
 import com.gwtjs.icustom.entity.PagedResult;
 import com.gwtjs.icustom.entity.ResultWrapper;
+import com.gwtjs.icustom.log.ICustomLogger;
+import com.gwtjs.icustom.log.ICustomLoggerFactory;
 import com.gwtjs.icustom.security.dao.ISysUserMgrDao;
 import com.gwtjs.icustom.security.services.IUserServices;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
 @Named("userServices")
 public class UserServices implements IUserServices {
-
+	
+	private static final ICustomLogger log = ICustomLoggerFactory
+			.getLogger(UserServices.class);
+	
 	@Inject
 	private ISysUserMgrDao userDao;
-
+	
 	/*@Override
 	public PagedResult<SysUserVO> findUserPage(SysUserVO record, PageVO page) {
 		return userDao.findUserPage(record, page);
 	}*/
+
+	@Override
+	public SysUserVO getUserPrincipal() {
+		SysUserVO user = (SysUserVO) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		log.info("current user:",user);
+		return user;
+	}
 
 	@Override
 	public List<String> loadUserAuthorities(SysUserVO record) {
@@ -120,6 +135,8 @@ public class UserServices implements IUserServices {
 	private List<SysUserVO> setRecordsUser(List<SysUserVO> records) {
 		List<SysUserVO> result = new ArrayList<SysUserVO>();
 		long createdUser = new Long(1);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+		log.info("current user:",userDetails);
 
 		for (SysUserVO vo : records) {
 			vo.setCreatedUser(createdUser);
