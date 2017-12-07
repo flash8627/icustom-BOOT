@@ -99,12 +99,6 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.28</version>
         </dependency>
-
-		<dependency>
-			<groupId>jxl</groupId>
-			<artifactId>jxl</artifactId>
-			<version>2.6</version>
-		</dependency>
 		
 	</dependencies>
 	

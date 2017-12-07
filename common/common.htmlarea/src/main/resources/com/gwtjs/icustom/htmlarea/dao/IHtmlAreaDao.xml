@@ -3,29 +3,29 @@
 <mapper namespace="com.gwtjs.icustom.htmlarea.dao.IHtmlAreaDao">
 
 	<sql id="queryBaseSql">
-		SELECT tha.html_area_id AS htmlAreaId,
-	      tha.category AS category,
-	      tha.name AS name,
-	      tha.description AS description,
-	      tha.content AS content,
-	      to_char(tha.VALID_TO_DATE,'yyyy-mm-dd HH24:MI:SS') AS validToDate,
-	      to_char(tha.VALID_FROM_DATE,'yyyy-mm-dd HH24:MI:SS') AS validFromDate,
-	      tha.CREATED_BY AS createdBy,
-	      to_char(tha.CREATION_DATE,'yyyy-mm-dd HH24:MI:SS') AS createdDate,
-	      tha.UPDATE_LAST_USER AS lastUpdatedBy,
-	      to_char(tha.UPDATE_LAST_DATE,'yyyy-mm-dd HH24:MI:SS') AS updateLastDate,
+		SELECT tt.html_area_id AS htmlAreaId,
+	      tt.category AS category,
+	      tt.name AS name,
+	      tt.description AS description,
+	      tt.content AS content,
+	      to_char(tt.VALID_TO_DATE,'yyyy-mm-dd HH24:MI:SS') AS validToDate,
+	      to_char(tt.VALID_FROM_DATE,'yyyy-mm-dd HH24:MI:SS') AS validFromDate,
+	      tt.CREATED_BY AS createdBy,
+	      to_char(tt.CREATION_DATE,'yyyy-mm-dd HH24:MI:SS') AS createdDate,
+	      tt.UPDATE_LAST_USER AS lastUpdatedBy,
+	      to_char(tt.UPDATE_LAST_DATE,'yyyy-mm-dd HH24:MI:SS') AS updateLastDate,
 	      u.user_name AS creationUserCN,
-	      tha.title AS title,
-	      tha.mapping_url AS mappingUrl,
-	      tha.PROGRAM_FILTER_ENABLE AS programFilterEnable,
-	      tha.attribute1 AS attribute1,
-	      tha.attribute2 AS attribute2,
-	      tha.attribute3 AS attribute3,
-	      tha.second_level_type AS secondLevelType,
-	      tha.third_level_type AS thirdLevelType
-	    FROM SYS_HTML_AREA_T tha
-	    LEFT JOIN sys_user_t u ON tha.created_by = u.user_id
-	    LEFT JOIN sys_user_t c ON tha.update_last_user = c.user_id 
+	      tt.title AS title,
+	      tt.mapping_url AS mappingUrl,
+	      tt.PROGRAM_FILTER_ENABLE AS programFilterEnable,
+	      tt.attribute1 AS attribute1,
+	      tt.attribute2 AS attribute2,
+	      tt.attribute3 AS attribute3,
+	      tt.second_level_type AS secondLevelType,
+	      tt.third_level_type AS thirdLevelType
+	    FROM SYS_HTML_AREA_T tt
+	    LEFT JOIN sys_user_t u ON tt.created_by = u.user_id
+	    LEFT JOIN sys_user_t c ON tt.update_last_user = c.user_id 
 	    WHERE 1=1 
 	</sql>
 
@@ -133,20 +133,20 @@
 
 	<select id="findHtmlArea" resultType="com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO">
 		<include refid="queryBaseSql" />
-		AND tha.html_area_id = #{htmlAreaId,jdbcType=INTEGER}
+		AND tt.html_area_id = #{htmlAreaId,jdbcType=INTEGER}
 	</select>
 	
 	<select id="findHtmlAreaByMappingUrl" resultType="com.gwtjs.icustom.htmlarea.vo.HtmlAreaVO">
 		<include refid="queryBaseSql" />
-		AND tha.mapping_url = #{mappingUrl,jdbcType=VARCHAR}
+		AND tt.mapping_url = #{mappingUrl,jdbcType=VARCHAR}
 	</select>
 
 	<select id="findHtmlAreaPageCount" resultType="int">
 		SELECT
 		COUNT(1)
-		FROM SYS_HTML_AREA_T tha 
-	    LEFT JOIN sys_user_t u ON tha.created_by = u.user_id 
-	    LEFT JOIN sys_user_t c ON tha.update_last_user = c.user_id 
+		FROM SYS_HTML_AREA_T tt 
+	    LEFT JOIN sys_user_t u ON tt.created_by = u.user_id 
+	    LEFT JOIN sys_user_t c ON tt.update_last_user = c.user_id 
 	    WHERE 1=1 
 		<include refid="select_cond" />
 	</select>
@@ -160,11 +160,11 @@
 	
 	<delete id="batchRemovePks" parameterType="java.util.List">
 		BEGIN
-		DELETE FROM SYS_HTML_AREA_T tha 
+		DELETE FROM SYS_HTML_AREA_T tt 
 		WHERE 1=1
 		AND ( 1=2
 		<foreach collection='list' item="item">
-			OR tha.HTML_AREA_ID=#{item.htmlAreaId,jdbcType=INTEGER}
+			OR tt.HTML_AREA_ID=#{item.htmlAreaId,jdbcType=INTEGER}
 		</foreach>
 		);
 		null;
@@ -184,33 +184,33 @@
 		
 		<if
 			test='_parameter.get("vo").name != null and _parameter.get("vo").name != "" and _parameter.get("vo").name != "null"'>
-			AND tha.name LIKE concat(concat('%',#{vo.name,jdbcType=VARCHAR}),'%') 
+			AND tt.name LIKE concat(concat('%',#{vo.name,jdbcType=VARCHAR}),'%') 
 		</if>
 		
 		<if
 			test='_parameter.get("vo").title != null and _parameter.get("vo").title != "" and _parameter.get("vo").title != "null"'>
-			AND tha.title LIKE concat(concat('%',#{vo.title,jdbcType=VARCHAR}),'%') 
+			AND tt.title LIKE concat(concat('%',#{vo.title,jdbcType=VARCHAR}),'%') 
 		</if>
 		
-		<if
+		<!-- <if
 			test='_parameter.get("vo").content != null and _parameter.get("vo").content != "" and _parameter.get("vo").content != "null"'>
-			<!-- AND tha.content LIKE '%#{vo.content,jdbcType=CLOB,javaType=java.lang.String}%' -->
-		</if>
+			AND tt.content LIKE '%#{vo.content,jdbcType=CLOB,javaType=java.lang.String}%'
+		</if> -->
 		<if
 			test='_parameter.get("vo").mappingUrl != null and _parameter.get("vo").mappingUrl != "" and _parameter.get("vo").mappingUrl != "null"'>
-			AND tha.mapping_url LIKE concat(concat('%',#{vo.mappingUrl,jdbcType=VARCHAR}),'%')  
+			AND tt.mapping_url LIKE concat(concat('%',#{vo.mappingUrl,jdbcType=VARCHAR}),'%')  
 		</if>
 		<if
 			test='_parameter.get("vo").secondLevelType != null and _parameter.get("vo").secondLevelType != "" and _parameter.get("vo").secondLevelType != "null"'>
-			AND upper(tha.second_level_type) = upper(#{vo.secondLevelType,jdbcType=VARCHAR})
+			AND upper(tt.second_level_type) = upper(#{vo.secondLevelType,jdbcType=VARCHAR})
 		</if>
 		<if
 			test='_parameter.get("vo").thirdLevelType != null and _parameter.get("vo").thirdLevelType != "" and _parameter.get("vo").thirdLevelType != "null"'>
-			AND upper(tha.third_level_type) = upper(#{vo.thirdLevelType,jdbcType=VARCHAR})
+			AND upper(tt.third_level_type) = upper(#{vo.thirdLevelType,jdbcType=VARCHAR})
 		</if>
 		<if
 			test='_parameter.get("vo").description != null and _parameter.get("vo").description != "" and _parameter.get("vo").description != "null"'>
-			AND tha.description LIKE concat(concat('%',#{vo.description,jdbcType=VARCHAR}),'%') 
+			AND tt.description LIKE concat(concat('%',#{vo.description,jdbcType=VARCHAR}),'%') 
 		</if>
 	</sql>
 
@@ -219,10 +219,7 @@
 		SELECT TT.* , ROWNUM RN FROM (
 	</sql>
 	<sql id="page_et">
-		) TT
-		<![CDATA[
-		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
-		]]>
+		<![CDATA[) TT WHERE rownum<=#{page.endIndex} ) WHERE rn>=#{page.startIndex} ]]>
 	</sql>
 
 </mapper>
