@@ -14,7 +14,7 @@ public class KindeditorApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(KindeditorApplication.class, args);
-		log.info("\nRunning with Kindeditor Application successfull------");
+		log.info("\nstartup successfull---");
 	}
 	
 }
