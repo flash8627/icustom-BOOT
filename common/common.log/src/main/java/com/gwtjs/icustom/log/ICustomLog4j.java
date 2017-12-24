@@ -124,7 +124,7 @@ public class ICustomLog4j implements ICustomLogger {
 	 * @see log.ILogger#info(java.lang.String)
 	 */
 	public void info(String message,Object obj) {
-		logger.log(FQCN, Level.INFO, message+obj, null);
+		logger.log(FQCN, Level.INFO, message+" "+obj, null);
 	}
 
 	/*

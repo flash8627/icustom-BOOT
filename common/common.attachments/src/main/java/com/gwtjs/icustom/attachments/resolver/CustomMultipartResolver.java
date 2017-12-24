@@ -14,31 +14,29 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.gwtjs.icustom.attachments.listener.FileUploadProgressListener;
+import com.gwtjs.icustom.attachments.listener.UploadProgressListener;
 
 public class CustomMultipartResolver extends CommonsMultipartResolver {
-	
-	@Autowired
-	private FileUploadProgressListener progressListener;
 
-	public void setFileUploadProgressListener(FileUploadProgressListener progressListener) {
-		this.progressListener = progressListener;
-	}
+	@Autowired
+	private UploadProgressListener uploadProgressListener;
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public MultipartParsingResult parseRequest(HttpServletRequest request) throws MultipartException {
+	protected MultipartParsingResult parseRequest(HttpServletRequest request) throws MultipartException {
 		String encoding = determineEncoding(request);
 		FileUpload fileUpload = prepareFileUpload(encoding);
-		progressListener.setSession(request.getSession());
-		fileUpload.setProgressListener(progressListener);
+		uploadProgressListener.setSession(request.getSession());// 问文件上传进度监听器设置session用于存储上传进度
+		fileUpload.setProgressListener(uploadProgressListener);// 将文件上传进度监听器加入到 fileUpload 中
 		try {
 			List<FileItem> fileItems = ((ServletFileUpload) fileUpload).parseRequest(request);
 			return parseFileItems(fileItems, encoding);
 		} catch (FileUploadBase.SizeLimitExceededException ex) {
 			throw new MaxUploadSizeExceededException(fileUpload.getSizeMax(), ex);
+		} catch (FileUploadBase.FileSizeLimitExceededException ex) {
+			throw new MaxUploadSizeExceededException(fileUpload.getFileSizeMax(), ex);
 		} catch (FileUploadException ex) {
-			throw new MultipartException("Could not parse multipart servlet request", ex);
+			throw new MultipartException("Failed to parse multipart servlet request", ex);
 		}
 	}
+
 }

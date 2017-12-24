@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.gwtjs.icustom.common.excel.Exception.ExcelException;
+import com.gwtjs.icustom.common.excel.exception.ExcelException;
 import com.gwtjs.icustom.common.excel.annotation.validate.Alias;
 import com.gwtjs.icustom.common.excel.annotation.validate.AliasItem;
 import com.gwtjs.icustom.common.excel.annotation.validate.CustomValidate;

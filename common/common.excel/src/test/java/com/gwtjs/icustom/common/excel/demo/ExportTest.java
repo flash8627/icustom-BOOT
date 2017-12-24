@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Test;
 
-import com.gwtjs.icustom.common.excel.Exception.ExcelException;
+import com.gwtjs.icustom.common.excel.exception.ExcelException;
 import com.gwtjs.icustom.common.excel.annotation.util.FlagInfoExcelUtils;
 
 /**
