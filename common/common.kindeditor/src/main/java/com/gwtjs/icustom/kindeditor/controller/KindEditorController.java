@@ -97,25 +97,25 @@ public class KindEditorController {
 		// 这里需要后台springmvc-servlet.xml配置multipartResolver
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		multipartRequest.setCharacterEncoding("UTF-8");
-		MultipartFile qqfile = multipartRequest.getFiles("imgFile").get(0);
-		String oldName = qqfile.getOriginalFilename();
-		String ext = qqfile.getOriginalFilename().substring(oldName.lastIndexOf(".") + 1);
+		MultipartFile mpFile = multipartRequest.getFiles("imgFile").get(0);
+		String oldName = mpFile.getOriginalFilename();
+		String ext = mpFile.getOriginalFilename().substring(oldName.lastIndexOf(".") + 1);
 		if (!Arrays.<String>asList(extMap.get(dirName).split(",")).contains(ext)) {
 
 			return getError("<font size='3'>非常抱歉，目前上传附件格式类型只允许为：<br/>" + extMap.get(dirName) + "，你选择的文件【" + oldName
 					+ "】不符合要求，无法上传！</font>");
 		}
 		String fileSizeNumber = fileMaxSize.substring(0, fileMaxSize.indexOf("M"));
-		if (qqfile.getSize() > Long.valueOf(fileSizeNumber) * 1000 * 1000) {
+		if (mpFile.getSize() > Long.valueOf(fileSizeNumber) * 1000 * 1000) {
 			return getError("<font size='3'>您选择的文件【" + oldName + "】大小超过" + fileMaxSize + "限制，无法上传！</font>");
 		}
 
 		String fileName = null;
 		UploadFile uploadFile = null;
-		String size = this.calculateFileSize(qqfile.getSize());
+		String size = this.calculateFileSize(mpFile.getSize());
 		try {
 			String createTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-			fileName = this.upload(qqfile, savePath);
+			fileName = this.upload(mpFile, savePath);
 			uploadFile = new UploadFile();
 			uploadFile.setName(oldName);
 			uploadFile.setPath(savePath + fileName);

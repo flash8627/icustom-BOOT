@@ -11,20 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/attachments")
 public class UploadController {
-
-	@RequestMapping(value = "/showUpload", method = RequestMethod.GET)
-	public ModelAndView showUpload() {
-		return new ModelAndView("/UploadProgressDemo");
-	}
 
 	@RequestMapping("/upload")
 	@ResponseBody
@@ -45,6 +38,7 @@ public class UploadController {
 			String originalFilename = file.getOriginalFilename();
 			i++;
 			validateType(uploadPath);
+			validatePath(uploadPath);
 			if (!file.isEmpty()) {
 				try {
 					byte[] bytes = file.getBytes();
