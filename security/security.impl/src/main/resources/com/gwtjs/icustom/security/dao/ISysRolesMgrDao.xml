@@ -132,10 +132,10 @@
 			) src
 			on (
 				tar.ROLE_ID=src.ROLE_ID
+				OR tar.ROLE_NAME = src.ROLE_NAME
 			)
 			WHEN MATCHED THEN
-			UPDATE SET
-				tar.ROLE_NAME = src.ROLE_NAME,
+			UPDATE SET 
 				tar.REMARK = src.REMARK,
 				tar.ROLE_CODE = src.ROLE_CODE,
 				tar.ORDER_CODE = src.ORDER_CODE,
