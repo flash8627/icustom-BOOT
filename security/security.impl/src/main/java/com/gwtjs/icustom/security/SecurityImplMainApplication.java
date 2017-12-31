@@ -17,7 +17,7 @@ public class SecurityImplMainApplication {
 		SpringApplication app = new SpringApplication(SecurityImplMainApplication.class);
 		Appctx.ctx = app.run(args);
 
-		log.info("Running with Spring successfull------");
+		log.info("Running with Security api successfull------");
 
 	}
 	

@@ -141,10 +141,7 @@
 	</sql>
 	
 	<sql id="page_et">
-		) TT
-		<![CDATA[
-		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
-		]]>
+		) TT WHERE<![CDATA[ rownum<=#{page.endIndex} ) WHERE rn>=#{page.startIndex} ]]>
 	</sql>
 	
 </mapper>

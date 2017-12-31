@@ -23,7 +23,7 @@ public class SecurityMainApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(SecurityMainApplication.class, args);
+		SpringApplication app = new SpringApplication(SecurityMainApplication.class);
 		Appctx.ctx = app.run(args);
 		/*
 		System.out.println(Appctx.getObject("customInvocationSecurityMetadataSourceService"));
@@ -40,7 +40,7 @@ public class SecurityMainApplication {
 		 * System.out.println("密码"+su.getPassword()); suserService.update(su);
 		 */// 运行一次后记得注释这段重复加密会无法匹配
 
-		log.info("Running with Spring successfull------");
+		log.info("Running with Security core successfull------");
 
 	}
 	
