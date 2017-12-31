@@ -44,6 +44,16 @@ create table SYS_USER_T
   effective_date_end   DATE,
   effective_date_start DATE default SYSDATE,
   valid_flag       INTEGER default 1,
+  ATTRIBUTE1        VARCHAR2(200),
+  ATTRIBUTE2        VARCHAR2(200),
+  ATTRIBUTE3        VARCHAR2(200),
+  ATTRIBUTE4        VARCHAR2(200),
+  ATTRIBUTE5        VARCHAR2(200),
+  ATTRIBUTE6        VARCHAR2(200),
+  ATTRIBUTE7        VARCHAR2(200),
+  ATTRIBUTE8        VARCHAR2(200),
+  ATTRIBUTE9        VARCHAR2(200),
+  ATTRIBUTE10        VARCHAR2(200),
   remark               VARCHAR2(1200)
 )
 tablespace USERS;

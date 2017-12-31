@@ -87,14 +87,14 @@ public class UserServices implements IUserServices {
 	@Override
 	public ResultWrapper batchUpdate(List<SysUserVO> records) {
 		records = setRecordsUser(records);
-		userDao.batchUpdate(records);
+		userDao.saveOrUpdate(records);
 		return ResultWrapper.successResult(records);
 	}
 
 	@Override
 	public ResultWrapper batchInsert(List<SysUserVO> records) {
 		records = setRecordsUser(records);
-		userDao.batchInsert(records);
+		userDao.saveOrUpdate(records);
 		return genericResult(records);
 	}
 

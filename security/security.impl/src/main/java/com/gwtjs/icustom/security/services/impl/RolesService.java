@@ -40,14 +40,14 @@ public class RolesService implements IRolesService {
 	@Override
 	public ResultWrapper batchUpdate(List<SysRoleVO> records) {
 		records = setRecordsRoles(records);
-		rolesDao.batchUpdate(records);
+		rolesDao.saveOrUpdate(records);
 		return ResultWrapper.successResult(records);
 	}
 
 	@Override
 	public ResultWrapper batchInsert(List<SysRoleVO> records) {
 		records = setRecordsRoles(records);
-		rolesDao.batchInsert(records);
+		rolesDao.saveOrUpdate(records);
 		return genericResult(records);
 	}
 

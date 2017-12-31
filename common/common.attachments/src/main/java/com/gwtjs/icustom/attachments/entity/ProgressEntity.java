@@ -1,9 +1,17 @@
 package com.gwtjs.icustom.attachments.entity;
 
+import java.io.Serializable;
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProgressEntity {
+public class ProgressEntity implements Serializable {
+	
+	/**
+	 * 上传进度实体
+	 */
+	private static final long serialVersionUID = -2091315524152155041L;
+	
 	private long pBytesRead = 0L; // 到目前为止读取文件的比特数
 	private long pContentLength = 0L; // 文件总大小
 	private int pItems; // 目前正在读取第几个文件

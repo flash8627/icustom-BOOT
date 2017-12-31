@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.gwtjs.icustom.entity.ResultWrapper;
 import com.gwtjs.icustom.log.ICustomLogger;

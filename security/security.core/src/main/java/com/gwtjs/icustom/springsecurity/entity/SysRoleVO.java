@@ -2,7 +2,11 @@ package com.gwtjs.icustom.springsecurity.entity;
 
 import com.gwtjs.icustom.entity.BaseResource;
 
-//系统角色表
+/**
+ * 系统角色表
+ * @author aGuang
+ *
+ */
 public class SysRoleVO extends BaseResource {
 
 	/**
@@ -13,6 +17,8 @@ public class SysRoleVO extends BaseResource {
 	private long id;
 
 	private String rolename;// 角色名称
+
+	private String roleCode;// 角色名称
 
 	private String remark;// 角色描述
 
@@ -37,8 +43,7 @@ public class SysRoleVO extends BaseResource {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result
-				+ ((rolename == null) ? 0 : rolename.hashCode());
+		result = prime * result + ((rolename == null) ? 0 : rolename.hashCode());
 		return result;
 	}
 
@@ -69,10 +74,17 @@ public class SysRoleVO extends BaseResource {
 		this.remark = remark;
 	}
 
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
 	@Override
 	public String toString() {
-		return "{'id':'" + id + "', 'rolename':'" + rolename + "', 'remark':'"
-				+ remark + "'}";
+		return "{'id':'" + id + "', 'rolename':'" + rolename+ "', 'roleCode':'" + roleCode + "', 'remark':'" + remark + "'}";
 	}
 
 }

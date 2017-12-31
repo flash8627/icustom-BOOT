@@ -59,7 +59,7 @@ public class ISysUserDaoTest extends SecurityMainApplicationTest {
 	{
 		SysUserVO user = sysUserDao.findUser(1);
 		System.out.println(user);
-		assertTrue(user!=null);
+		assertTrue(user==null);
 	}
 	
 	@Test
@@ -72,6 +72,24 @@ public class ISysUserDaoTest extends SecurityMainApplicationTest {
 		user.setEmail("8538191@qq.com");
 		user.setPassword(bc.encode("dddddd"));
 		user.setAccount("dzg");
+		user.setCreatedUser(0);
+		user.setUpdateLastUser(0);
+		//user.setSRoles(SysRoles);
+		list.add(user);
+		int result = sysUserDao.saveOrUpdate(list);
+		System.out.println(result);
+	}
+	
+	@Test
+	public void saveOrUpdateAdminTest()
+	{
+		BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
+		List<SysUserVO> list = new ArrayList<>();
+		SysUserVO user = new SysUserVO();
+		user.setUsername("admin");
+		user.setEmail("8538191@qq.com");
+		user.setPassword(bc.encode("dddddd"));
+		user.setAccount("admin");
 		user.setCreatedUser(0);
 		user.setUpdateLastUser(0);
 		//user.setSRoles(SysRoles);

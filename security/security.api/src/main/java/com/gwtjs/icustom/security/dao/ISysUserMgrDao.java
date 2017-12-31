@@ -43,12 +43,10 @@ public interface ISysUserMgrDao{
 	//
 	int batchRemovePks(List<SysUserVO> records);
 
-	//
-	int batchUpdate(List<SysUserVO> records);
-
-	//
-	int batchInsert(List<SysUserVO> records);
+	//新增或修改，新增时有密码，保存时无密码修改
+	int saveOrUpdate(List<SysUserVO> records);
 	
+	//更新密码
 	int updateUserPwd(SysUserVO record);
 	
 }

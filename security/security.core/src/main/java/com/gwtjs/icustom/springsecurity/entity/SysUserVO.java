@@ -23,8 +23,8 @@ public class SysUserVO extends BaseResource {
 
 	private String remark; // 用户描述
 
-	private Date effectiveDateStart;// 有效期开始
-	private Date effectiveDateEnd;// 有效期结束
+	private Date validStart;// 有效期开始
+	private Date validEnd;// 有效期结束
 
 	private Set<SysRoleVO> sysRoles = new HashSet<SysRoleVO>(0);// 用户的角色
 
@@ -87,20 +87,20 @@ public class SysUserVO extends BaseResource {
 		this.remark = remark;
 	}
 
-	public Date getEffectiveDateStart() {
-		return effectiveDateStart;
+	public Date getValidStart() {
+		return validStart;
 	}
 
-	public void setEffectiveDateStart(Date effectiveDateStart) {
-		this.effectiveDateStart = effectiveDateStart;
+	public void setValidStart(Date validStart) {
+		this.validStart = validStart;
 	}
 
-	public Date getEffectiveDateEnd() {
-		return effectiveDateEnd;
+	public Date getValidEnd() {
+		return validEnd;
 	}
 
-	public void setEffectiveDateEnd(Date effectiveDateEnd) {
-		this.effectiveDateEnd = effectiveDateEnd;
+	public void setValidEnd(Date validEnd) {
+		this.validEnd = validEnd;
 	}
 
 	public Integer getUserEnabled() {
@@ -113,12 +113,9 @@ public class SysUserVO extends BaseResource {
 
 	@Override
 	public String toString() {
-		return "{'id':'" + id + "', 'account':'" + account + "', 'username':'"
-				+ username + "', 'email':'" + email + "', 'password':'"
-				+ password + "', 'remark':'" + remark
-				+ "', 'effectiveDateStart':'" + effectiveDateStart
-				+ "', 'effectiveDateEnd':'" + effectiveDateEnd
-				+ "', 'sysRoles':" + sysRoles + "}";
+		return "{'id':'" + id + "', 'account':'" + account + "', 'username':'" + username + "', 'email':'" + email
+				+ "', 'password':'" + password + "', 'remark':'" + remark + "', 'validStart':'" + validStart
+				+ "', 'validEnd':'" + validEnd + "', 'sysRoles':" + sysRoles + "}";
 	}
 
 }

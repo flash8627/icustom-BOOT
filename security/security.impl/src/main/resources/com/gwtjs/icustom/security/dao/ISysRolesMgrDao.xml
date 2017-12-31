@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gwtjs.icustom.security.dao.ISysRolesMgrDao">
 	
-	
 	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false" />
 	<!-- eviction是缓存的淘汰算法，可选值有"LRU"、"FIFO"、"SOFT"、"WEAK"，缺省值是LRU flashInterval指缓存过期时间，单位为毫秒，60000即为60秒，缺省值为空，即只要容量足够，永不过期 
 		size指缓存多少个对象，默认值为1024 readOnly是否只读，如果为true，则所有相同的sql语句返回的是同一个对象（有助于提高性能，但并发操作同一条数据时，可能不安全），如果设置为false，则相同的sql，后面访问的是cache的clone副本。 -->
@@ -11,7 +10,7 @@
 	<select id="findByItem" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		SELECT
 		<include refid="Base_Column_List" />
-		FROM SYS_ROLES_T T1 
+		FROM SYS_ROLE_T T1 
 		where T1.VALID_FLAG=1 
 			AND T1.ROLE_NAME = #{roleName,jdbcType=VARCHAR}
 	</select>
@@ -19,17 +18,15 @@
 	<select id="findItem" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		SELECT
 		<include refid="Base_Column_List" />
-		FROM SYS_ROLES_T T1 
-		where T1.VALID_FLAG=1 AND T1.ROLE_ID = #{roleId,jdbcType=NUMERIC}
+		FROM SYS_ROLE_T T1 
+		where T1.VALID_FLAG=1 AND T1.ROLE_ID = #{id,jdbcType=NUMERIC}
 	</select>
 	
 	<sql id="Base_Column_List">
-		ROLE_ID 		 roleId,
+		ROLE_ID 		 id,
 		ROLE_NAME        roleName, 
 		ROLE_CODE        roleCode,    
-		ROLE_DESC        roleDesc,
-		ENABLED          enabled, 
-		ISSYS            issys,
+		REMARK        	remark,
 		ATTRIBUTE1       attribute1,                                
 		ATTRIBUTE2       attribute2,                                
 		ATTRIBUTE3       attribute3,                                
@@ -53,10 +50,7 @@
 		SELECT TT.* , ROWNUM RN FROM (
 	</sql>
 	<sql id="page_et">
-		) TT
-		<![CDATA[
-		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
-		]]>
+		) TT WHERE<![CDATA[ rownum<=#{page.endIndex} ) WHERE rn>=#{page.startIndex} ]]>
 	</sql>
 	
 	<select id="findSysRoles" parameterType="hashmap"
@@ -64,7 +58,7 @@
 		<include refid="page_st" />
 		SELECT
 		<include refid="Base_Column_List" />
-		FROM SYS_ROLES_T T1
+		FROM SYS_ROLE_T T1
 		where T1.VALID_FLAG=1
 		<include refid="select_cond" />
 		ORDER BY ROLE_ID DESC 
@@ -75,26 +69,26 @@
 	<select id="findSysRolesCount" resultType="INTEGER">
 		SELECT
 		COUNT(1)
-		FROM SYS_ROLES_T T1
+		FROM SYS_ROLE_T T1
 		where T1.VALID_FLAG=1
 		<include refid="select_cond" />
 	</select>
 
 	<sql id="select_cond">
-		<if test='_parameter.get("0").roleName != null'>
+		<if test='_parameter.get("vo").roleName != null'>
 			AND T1.ROLE_NAME LIKE ('%'||#{vo.roleName,jdbcType=VARCHAR}||'%')
 		</if>
-		<if test='_parameter.get("0").roleCode != null'>
+		<if test='_parameter.get("vo").roleCode != null'>
 			AND upper(T1.ROLE_CODE) LIKE ('%'||upper(#{vo.roleCode,jdbcType=VARCHAR})||'%')
 		</if>
-		<if test='_parameter.get("0").roleDesc != null'>
-			AND T1.ROLE_DESC LIKE ('%'||#{vo.roleDesc,jdbcType=VARCHAR}||'%')
+		<if test='_parameter.get("vo").remark != null'>
+			AND T1.remark LIKE ('%'||#{vo.remark,jdbcType=VARCHAR}||'%')
 		</if>
-		<if test='_parameter.get("0").createdDate != null'>
-			AND T1.CREATED_DATE <![CDATA[>=]]> TO_CHAR(#{vo.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
+		<if test='_parameter.get("vo").createdDate != null'>
+			AND T1.CREATED_DATE <![CDATA[>=]]> TO_DATE(#{vo.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
 		</if>
-		<if test='_parameter.get("0").createdDate != null'>
-			AND T1.CREATED_DATE <![CDATA[<=]]> TO_CHAR(#{vo.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
+		<if test='_parameter.get("vo").createdDate != null'>
+			AND T1.CREATED_DATE <![CDATA[<=]]> TO_DATE(#{vo.createdDate,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
 		</if>
 
 	</sql>
@@ -102,105 +96,107 @@
 	<!-- batch action -->
 
 	<delete id="batchRemovePks" parameterType="java.util.List">
-		DELETE FROM SYS_ROLES_T WHERE ROLE_ID in 
+		DELETE FROM SYS_ROLE_T WHERE ROLE_ID in 
 		<foreach item="item" index="index" collection="list" open="("
 			separator="," close=")">
-			#{item.roleId}
+			#{item.id}
 		</foreach>
 	</delete>
 	
 	<!-- batchUpdate -->
-	<update id="batchUpdate">
-		declare
-		<if test="list!=null and !list.isEmpty()">
-			begin
-			<foreach collection="list" item="item">
-				UPDATE
-				SYS_ROLES_T
-				SET
-					ROLE_NAME  =  #{item.roleName,jdbcType=VARCHAR},
-					ROLE_CODE  =  #{item.roleCode,jdbcType=VARCHAR},
-					ROLE_DESC =   #{item.roleDesc,jdbcType=VARCHAR},
-					ENABLED   =   #{item.enabled,jdbcType=INTEGER},
-					ISSYS    =   #{item.issys,jdbcType=INTEGER},
-					ATTRIBUTE1 = #{item.attribute1,jdbcType=VARCHAR},
-					ATTRIBUTE2 = #{item.attribute2,jdbcType=VARCHAR},
-					ATTRIBUTE3 = #{item.attribute3,jdbcType=VARCHAR},
-					ATTRIBUTE4 = #{item.attribute4,jdbcType=VARCHAR},
-					ATTRIBUTE5 = #{item.attribute5,jdbcType=VARCHAR},
-					ATTRIBUTE6 = #{item.attribute6,jdbcType=VARCHAR},
-					ATTRIBUTE7 = #{item.attribute7,jdbcType=VARCHAR},
-					ATTRIBUTE8 = #{item.attribute8,jdbcType=VARCHAR},
-					ATTRIBUTE9 = #{item.attribute9,jdbcType=VARCHAR},
-					ATTRIBUTE10 = #{item.attribute10,jdbcType=VARCHAR},
-					ORDER_CODE = #{item.orderCode,jdbcType=INTEGER},
-					UPDATE_LAST_USER = #{item.updateLastUser,jdbcType=NUMERIC},
-					UPDATE_LAST_DATE = SYSDATE 
-				where ROLE_ID = #{item.roleId,jdbcType=NUMERIC};
-			</foreach>
-			end;
-		</if>
-	</update>
-
-	<insert id="batchInsert">
-		declare
-		<if test="list!=null and !list.isEmpty()">
-			begin
-			<foreach collection="list" item="item">
-				INSERT into
-				SYS_ROLES_T
-				(
-					ROLE_ID,                          
-					ROLE_NAME,
-					ROLE_CODE, 
-					ROLE_DESC,                         
-					ENABLED,                         
-					ISSYS,                           
-					ATTRIBUTE1,                         
-					ATTRIBUTE2,                         
-					ATTRIBUTE3,                         
-					ATTRIBUTE4,                         
-					ATTRIBUTE5,                         
-					ATTRIBUTE6,                         
-					ATTRIBUTE7,                         
-					ATTRIBUTE8,                         
-					ATTRIBUTE9,                         
-					ATTRIBUTE10,                         
-					ORDER_CODE,
-					CREATED_USER,                         
-					CREATED_DATE,
-					UPDATE_LAST_USER,                         
-					UPDATE_LAST_DATE,
-					VALID_FLAG
+	<update id="saveOrUpdate">
+		begin
+		<foreach collection='list' item="item" index="index">
+			MERGE INTO SYS_ROLE_T tar 
+			USING (
+				SELECT
+					#{item.id,jdbcType=NUMERIC} ROLE_ID,
+					#{item.rolename,jdbcType=VARCHAR} ROLE_NAME,
+					#{item.orderCode,jdbcType=INTEGER} ORDER_CODE,
+					#{item.remark,jdbcType=VARCHAR} REMARK,
+					#{item.roleCode,jdbcType=VARCHAR} ROLE_CODE,
+					#{item.validFlag,jdbcType=INTEGER} VALID_FLAG,
+					#{item.attribute1,jdbcType=VARCHAR} attribute1,
+					#{item.attribute2,jdbcType=VARCHAR} attribute2,
+					#{item.attribute3,jdbcType=VARCHAR} attribute3,
+					#{item.attribute4,jdbcType=VARCHAR} attribute4,
+					#{item.attribute5,jdbcType=VARCHAR} attribute5,
+					#{item.attribute6,jdbcType=VARCHAR} attribute6,
+					#{item.attribute7,jdbcType=VARCHAR} attribute7,
+					#{item.attribute8,jdbcType=VARCHAR} attribute8,
+					#{item.attribute9,jdbcType=VARCHAR} attribute9,
+					#{item.attribute10,jdbcType=VARCHAR} attribute10,
+					#{item.createdUser,jdbcType=NUMERIC} CREATED_USER,
+					#{item.updateLastUser,jdbcType=NUMERIC} UPDATE_LAST_USER
+				FROM dual
+			) src
+			on (
+				tar.ROLE_ID=src.ROLE_ID
+			)
+			WHEN MATCHED THEN
+			UPDATE SET
+				tar.ROLE_NAME = src.ROLE_NAME,
+				tar.REMARK = src.REMARK,
+				tar.ROLE_CODE = src.ROLE_CODE,
+				tar.ORDER_CODE = src.ORDER_CODE,
+				tar.attribute1 = src.attribute1,
+				tar.attribute2 = src.attribute2,
+				tar.attribute3 = src.attribute3,
+				tar.attribute4 = src.attribute4,
+				tar.attribute5 = src.attribute5,
+				tar.attribute6 = src.attribute6,
+				tar.attribute7 = src.attribute7,
+				tar.attribute8 = src.attribute8,
+				tar.attribute9 = src.attribute9,
+				tar.attribute10 = src.attribute10
+			WHEN NOT MATCHED THEN
+			INSERT
+			(
+				ROLE_ID ,
+				ROLE_NAME ,
+				ORDER_CODE ,
+				CREATED_USER ,
+				CREATED_DATE,
+				UPDATE_LAST_USER ,
+				UPDATE_LAST_DATE ,
+				VALID_FLAG ,
+				ATTRIBUTE1 ,
+				ATTRIBUTE2 ,
+				ATTRIBUTE3 ,
+				ATTRIBUTE4 ,
+				ATTRIBUTE5 ,
+				ATTRIBUTE6 ,
+				ATTRIBUTE7 ,
+				ATTRIBUTE8 ,
+				ATTRIBUTE9 ,
+				ATTRIBUTE10 ,
+				REMARK
 				)
 				values
 				(
-					SYS_ROLES_S.NEXTVAL,
-					#{item.roleName,jdbcType=VARCHAR},
-					#{item.roleCode,jdbcType=VARCHAR},
-					#{item.roleDesc,jdbcType=VARCHAR},
-					#{item.enabled,jdbcType=INTEGER},
-					#{item.issys,jdbcType=INTEGER},
-					#{item.attribute1,jdbcType=VARCHAR},
-					#{item.attribute2,jdbcType=VARCHAR},
-					#{item.attribute3,jdbcType=VARCHAR},
-					#{item.attribute4,jdbcType=VARCHAR},
-					#{item.attribute5,jdbcType=VARCHAR},
-					#{item.attribute6,jdbcType=VARCHAR},
-					#{item.attribute7,jdbcType=VARCHAR},
-					#{item.attribute8,jdbcType=VARCHAR},
-					#{item.attribute9,jdbcType=VARCHAR},
-					#{item.attribute10,jdbcType=VARCHAR},
-					#{item.orderCode,jdbcType=INTEGER},
-					#{item.createdUser,jdbcType=NUMERIC},
-					SYSDATE,
-					#{item.updateLastUser,jdbcType=NUMERIC},
-					SYSDATE,
-					1
+				SYS_ROLE_S.NEXTVAL ,
+				src.ROLE_NAME ,
+				src.ORDER_CODE ,
+				src.CREATED_USER ,
+				SYSDATE,
+				src.UPDATE_LAST_USER ,
+				SYSDATE ,
+				src.VALID_FLAG ,
+				src.ATTRIBUTE1 ,
+				src.ATTRIBUTE2 ,
+				src.ATTRIBUTE3 ,
+				src.ATTRIBUTE4 ,
+				src.ATTRIBUTE5 ,
+				src.ATTRIBUTE6 ,
+				src.ATTRIBUTE7 ,
+				src.ATTRIBUTE8 ,
+				src.ATTRIBUTE9 ,
+				src.ATTRIBUTE10 ,
+				src.REMARK
 				);
-			</foreach>
-			end;
-		</if>
-	</insert>
+		</foreach>
+		null;
+		END;
+	</update>
 	
 </mapper>

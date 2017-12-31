@@ -23,9 +23,6 @@ public interface ISysRolesMgrDao {
 	int batchRemovePks(List<SysRoleVO> records);
 
 	//
-	int batchUpdate(List<SysRoleVO> records);
+	int saveOrUpdate(List<SysRoleVO> records);
 
-	//
-	int batchInsert(List<SysRoleVO> records);
-	
 }

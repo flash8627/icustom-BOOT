@@ -14,7 +14,7 @@
 
 	<select id="findByUserAccount" resultType="com.gwtjs.icustom.springsecurity.entity.SysUserVO">
 		<include refid="Base_Column_List" />
-		AND upper(T1.USER_ACCOUNT) = upper(#{userAccount,jdbcType=VARCHAR})
+		AND upper(T1.USER_ACCOUNT) = upper(#{account,jdbcType=VARCHAR})
 	</select>
 
 	<select id="loadUserAuthorities" resultType="string">
@@ -24,38 +24,33 @@
 			SYS_AUTHORITIES_T A, 
 			SYS_ROLES_AUTHORITIES_T B, 
 			SYS_USERS_ROLES_T C, 
-			SYS_USERS_T D 
+			SYS_USER_T D 
 		WHERE 
 		A.AUTH_ID = B.AUTH_ID 
 		AND B.ROLE_ID = C.ROLE_ID 
 		AND C.USER_ID = D.USER_ID 
 		AND D.VALID_FLAG = 1 
-		AND upper(D.USER_ACCOUNT = upper(#{userAccount,jdbcType=VARCHAR})
+		AND upper(D.USER_ACCOUNT = upper(#{account,jdbcType=VARCHAR})
 	</select>
 
 	<!-- 按登陆帐号和姓名查找用户　 -->
 	<select id="findByItem" resultType="com.gwtjs.icustom.springsecurity.entity.SysUserVO">
 		<include refid="Base_Column_List" />
-		AND upper(T1.USER_ACCOUNT) = upper(#{userAccount,jdbcType=VARCHAR})
+		AND upper(T1.USER_ACCOUNT) = upper(#{account,jdbcType=VARCHAR})
 		AND T1.USER_NAME = #{username,jdbcType=NUMERIC}
 	</select>
 	
 	<!-- 按用户主键查找用户 -->
 	<select id="findItem" resultType="com.gwtjs.icustom.springsecurity.entity.SysUserVO">
-		<include refid="Base_Column_List" /> AND T1.USER_ID = #{userId,jdbcType=NUMERIC}
+		<include refid="Base_Column_List" /> AND T1.USER_ID = #{id,jdbcType=NUMERIC}
 	</select>
 
 	<sql id="Base_Column_List">
-		SELECT USER_ID          userId,
-		       USER_ACCOUNT     userAccount,
+		SELECT USER_ID          id,
+		       USER_ACCOUNT     account,
 		       USER_NAME        username,
-		       USER_PASSWORD    password,
-		       USER_DESC        userDesc,
-		       ENABLED          userEnabled,
-		       ISSYS            issys,
-		       USER_DEPT        userDept,
-		       USER_DUTY        userDuty,
-		       SUB_SYSTEM       subSystem,
+		       PASSWORD    password,
+		       remark        remark,
 		       ATTRIBUTE1       attribute1,
 		       ATTRIBUTE2       attribute2,
 		       ATTRIBUTE3       attribute3,
@@ -67,14 +62,14 @@
 		       ATTRIBUTE9       attribute9,
 		       ATTRIBUTE10      attribute10,
 		       VALID_FLAG       validFlag,
-		       VALID_START      validStart,
-		       VALID_END        validEnd,
+		       EFFECTIVE_DATE_START      validStart,
+		       EFFECTIVE_DATE_END        validEnd,
 		       ORDER_CODE       orderCode,
 		       CREATED_USER     createdUser,
 		       CREATED_DATE     createdDate,
 		       UPDATE_LAST_USER updateLastUser,
 		       UPDATE_LAST_DATE updateLastDate
-		  FROM SYS_USERS_T T1
+		  FROM SYS_USER_T T1
 		 where T1.VALID_FLAG = 1
 	</sql>
 
@@ -83,10 +78,7 @@
 		SELECT TT.* , ROWNUM RN FROM (
 	</sql>
 	<sql id="page_et">
-		) TT
-		<![CDATA[
-		) WHERE RN<=#{page.endIndex} AND RN>=#{page.startIndex}
-		]]>
+		) TT WHERE<![CDATA[ rownum<=#{page.endIndex} ) WHERE rn>=#{page.startIndex} ]]>
 	</sql>
 	
 	<select id="findUserByPage" resultType="com.gwtjs.icustom.springsecurity.entity.SysUserVO">
@@ -101,29 +93,29 @@
 	<select id="findUserByPageCount" resultType="INTEGER">
 		SELECT
 		COUNT(1)
-		FROM SYS_USERS_T T1
+		FROM SYS_USER_T T1
 		where T1.VALID_FLAG=1
 		<include refid="select_cond" />
 	</select>
 
 	<sql id="select_cond">
-		<if test='_parameter.get("0").userAccount != null'>
-			AND upper(T1.USER_ACCOUNT) = upper(#{vo.userAccount,jdbcType=VARCHAR})
+		<if test='_parameter.get("vo").account != null'>
+			AND upper(T1.USER_ACCOUNT) = upper(#{vo.account,jdbcType=VARCHAR})
 		</if>
-		<if test='_parameter.get("0").username != null'>
+		<if test='_parameter.get("vo").username != null'>
 			AND T1.USER_NAME LIKE
 			('%'||#{vo.username,jdbcType=VARCHAR}||'%')
 		</if>
-		<if test='_parameter.get("0").userDesc != null'>
-			AND T1.USER_DESC LIKE
-			('%'||#{vo.userDesc,jdbcType=VARCHAR}||'%')
+		<if test='_parameter.get("vo").remark != null'>
+			AND T1.remark LIKE
+			('%'||#{vo.remark,jdbcType=VARCHAR}||'%')
 		</if>
-		<if test='_parameter.get("0").validStart != null'>
-			AND T1.VALID_START <![CDATA[>=]]>
+		<if test='_parameter.get("vo").validStart != null'>
+			AND T1.EFFECTIVE_DATE_START <![CDATA[>=]]>
 			TO_CHAR(#{vo.validStart,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
 		</if>
-		<if test='_parameter.get("0").validEnd != null'>
-			AND T1.VALID_END <![CDATA[<=]]>
+		<if test='_parameter.get("vo").validEnd != null'>
+			AND T1.EFFECTIVE_DATE_END <![CDATA[<=]]>
 			TO_CHAR(#{vo.validEnd,jdbcType=DATE},'YYYY-MM-DD HH24:MI:SS')
 		</if>
 
@@ -132,99 +124,83 @@
 	<!-- batch action -->
 
 	<delete id="batchRemovePks" parameterType="java.util.List">
-		DELETE FROM SYS_USERS_T WHERE USER_ID in
+		DELETE FROM SYS_USER_T WHERE USER_ID in
 		<foreach item="item" index="index" collection="list" open="("
 			separator="," close=")">
-			#{item.userId}
+			#{item.id}
 		</foreach>
 	</delete>
 
 	<update id="updateUserPwd">
-		UPDATE SYS_USERS_T
+		UPDATE SYS_USER_T
 		SET
-		USER_PASSWORD=#{item.password,jdbcType=VARCHAR}
+		PASSWORD=#{item.password,jdbcType=VARCHAR}
 		where USER_ID =
-		#{item.userId,jdbcType=NUMERIC}
+		#{item.id,jdbcType=NUMERIC}
 		AND upper(T1.USER_ACCOUNT) =
-		upper(#{userAccount,jdbcType=VARCHAR})
+		upper(#{account,jdbcType=VARCHAR})
 	</update>
 
 	<!-- batchUpdate -->
-	<update id="batchUpdate">
-		declare
-		<if test="list!=null and !list.isEmpty()">
-			begin
-			<foreach collection="list" item="item">
-				UPDATE
-				SYS_USERS_T
-				SET
-				USER_ACCOUNT = #{item.userAccount,jdbcType=VARCHAR},
-				USER_NAME =
-				#{item.username,jdbcType=VARCHAR},
-				USER_PASSWORD=#{item.password,jdbcType=VARCHAR},
-				USER_DESC =
-				#{item.userDesc,jdbcType=VARCHAR},
-				ENABLED =
-				#{item.userEnabled,jdbcType=INTEGER},
-				ISSYS =
-				#{item.issys,jdbcType=INTEGER},
-				USER_DEPT =
-				#{item.userDept,jdbcType=VARCHAR},
-				USER_DUTY =
-				#{item.userDuty,jdbcType=VARCHAR},
-				SUB_SYSTEM =
-				#{item.subSystem,jdbcType=VARCHAR},
-				ATTRIBUTE1 =
-				#{item.attribute1,jdbcType=VARCHAR},
-				ATTRIBUTE2 =
-				#{item.attribute2,jdbcType=VARCHAR},
-				ATTRIBUTE3 =
-				#{item.attribute3,jdbcType=VARCHAR},
-				ATTRIBUTE4 =
-				#{item.attribute4,jdbcType=VARCHAR},
-				ATTRIBUTE5 =
-				#{item.attribute5,jdbcType=VARCHAR},
-				ATTRIBUTE6 =
-				#{item.attribute6,jdbcType=VARCHAR},
-				ATTRIBUTE7 =
-				#{item.attribute7,jdbcType=VARCHAR},
-				ATTRIBUTE8 =
-				#{item.attribute8,jdbcType=VARCHAR},
-				ATTRIBUTE9 =
-				#{item.attribute9,jdbcType=VARCHAR},
-				ATTRIBUTE10 =
-				#{item.attribute10,jdbcType=VARCHAR},
-				VALID_START = SYSDATE,
-				VALID_END = #{item.validEnd,jdbcType=DATE},
-				ORDER_CODE =
-				#{item.orderCode,jdbcType=INTEGER},
-				UPDATE_LAST_USER =
-				#{item.updateLastUser,jdbcType=NUMERIC},
-				UPDATE_LAST_DATE = SYSDATE
-				where USER_ID = #{item.userId,jdbcType=NUMERIC};
-			</foreach>
-			end;
-		</if>
-	</update>
-
-	<insert id="batchInsert">
-		declare
-		<if test="list!=null and !list.isEmpty()">
-			begin
-			<foreach collection="list" item="item">
-				INSERT into
-				SYS_USERS_T
-				(
+	<update id="saveOrUpdate">
+		begin
+		<foreach collection='list' item="item" index="index">
+			MERGE INTO SYS_USER_T tar 
+			USING (
+				SELECT
+					#{item.id,jdbcType=NUMERIC} USER_ID,
+					#{item.account,jdbcType=VARCHAR} USER_ACCOUNT,
+					#{item.username,jdbcType=VARCHAR} USER_NAME,
+					#{item.password,jdbcType=VARCHAR} PASSWORD,
+					#{item.remark,jdbcType=VARCHAR} remark,
+					#{item.email,jdbcType=VARCHAR} EMAIL,
+					#{item.validStart,jdbcType=DATE} EFFECTIVE_DATE_START,
+					#{item.validEnd,jdbcType=DATE} EFFECTIVE_DATE_END,
+					#{item.orderCode,jdbcType=INTEGER} ORDER_CODE,
+					#{item.validFlag,jdbcType=INTEGER} VALID_FLAG,
+					#{item.attribute1,jdbcType=VARCHAR} attribute1,
+					#{item.attribute2,jdbcType=VARCHAR} attribute2,
+					#{item.attribute3,jdbcType=VARCHAR} attribute3,
+					#{item.attribute4,jdbcType=VARCHAR} attribute4,
+					#{item.attribute5,jdbcType=VARCHAR} attribute5,
+					#{item.attribute6,jdbcType=VARCHAR} attribute6,
+					#{item.attribute7,jdbcType=VARCHAR} attribute7,
+					#{item.attribute8,jdbcType=VARCHAR} attribute8,
+					#{item.attribute9,jdbcType=VARCHAR} attribute9,
+					#{item.attribute10,jdbcType=VARCHAR} attribute10,
+					#{item.createdUser,jdbcType=NUMERIC} CREATED_USER,
+					#{item.updateLastUser,jdbcType=NUMERIC} UPDATE_LAST_USER
+				FROM dual
+			) src
+			on (
+				tar.USER_ID=src.USER_ID
+			)
+			WHEN MATCHED THEN
+			UPDATE SET
+				tar.USER_NAME = src.USER_NAME,
+				tar.EFFECTIVE_DATE_START = src.EFFECTIVE_DATE_START,
+				tar.EFFECTIVE_DATE_END = src.EFFECTIVE_DATE_END,
+				tar.EMAIL = src.EMAIL,
+				tar.REMARK = src.REMARK,
+				tar.attribute1 = src.attribute1,
+				tar.attribute2 = src.attribute2,
+				tar.attribute3 = src.attribute3,
+				tar.attribute4 = src.attribute4,
+				tar.attribute5 = src.attribute5,
+				tar.attribute6 = src.attribute6,
+				tar.attribute7 = src.attribute7,
+				tar.attribute8 = src.attribute8,
+				tar.attribute9 = src.attribute9,
+				tar.attribute10 = src.attribute10
+			WHEN NOT MATCHED THEN
+			INSERT
+			(
 				USER_ID ,
 				USER_ACCOUNT ,
 				USER_NAME ,
-				USER_PASSWORD ,
-				USER_DESC ,
-				ENABLED,
-				ISSYS ,
-				USER_DEPT ,
-				USER_DUTY ,
-				SUB_SYSTEM ,
+				PASSWORD ,
+				EMAIL,
+				remark ,
 				ATTRIBUTE1 ,
 				ATTRIBUTE2 ,
 				ATTRIBUTE3 ,
@@ -236,8 +212,8 @@
 				ATTRIBUTE9 ,
 				ATTRIBUTE10 ,
 				VALID_FLAG ,
-				VALID_START ,
-				VALID_END ,
+				EFFECTIVE_DATE_START ,
+				EFFECTIVE_DATE_END ,
 				ORDER_CODE ,
 				CREATED_USER ,
 				CREATED_DATE ,
@@ -246,38 +222,34 @@
 				)
 				values
 				(
-				SYS_USERS_S.NEXTVAL,
-				#{item.userAccount,jdbcType=VARCHAR},
-				#{item.username,jdbcType=VARCHAR},
-				#{item.password,jdbcType=VARCHAR},
-				#{item.userDesc,jdbcType=VARCHAR},
-				#{item.userEnabled,jdbcType=INTEGER},
-				#{item.issys,jdbcType=INTEGER},
-				#{item.userDept,jdbcType=VARCHAR},
-				#{item.userDuty,jdbcType=VARCHAR},
-				#{item.subSystem,jdbcType=VARCHAR},
-				#{item.attribute1,jdbcType=VARCHAR},
-				#{item.attribute2,jdbcType=VARCHAR},
-				#{item.attribute3,jdbcType=VARCHAR},
-				#{item.attribute4,jdbcType=VARCHAR},
-				#{item.attribute5,jdbcType=VARCHAR},
-				#{item.attribute6,jdbcType=VARCHAR},
-				#{item.attribute7,jdbcType=VARCHAR},
-				#{item.attribute8,jdbcType=VARCHAR},
-				#{item.attribute9,jdbcType=VARCHAR},
-				#{item.attribute10,jdbcType=VARCHAR},
-				1,
+				SYS_USER_S.NEXTVAL,
+				src.USER_ACCOUNT ,
+				src.USER_NAME ,
+				src.PASSWORD ,
+				src.EMAIL ,
+				src.REMARK ,
+				src.ATTRIBUTE1 ,
+				src.ATTRIBUTE2 ,
+				src.ATTRIBUTE3 ,
+				src.ATTRIBUTE4 ,
+				src.ATTRIBUTE5 ,
+				src.ATTRIBUTE6 ,
+				src.ATTRIBUTE7 ,
+				src.ATTRIBUTE8 ,
+				src.ATTRIBUTE9 ,
+				src.ATTRIBUTE10 ,
+				src.VALID_FLAG ,
+				src.EFFECTIVE_DATE_START ,
+				src.EFFECTIVE_DATE_END ,
+				src.ORDER_CODE ,
+				src.CREATED_USER ,
 				SYSDATE,
-				#{item.validEnd,jdbcType=DATE},
-				#{item.orderCode,jdbcType=INTEGER},
-				#{item.createdUser,jdbcType=NUMERIC},
-				SYSDATE,
-				#{item.updateLastUser,jdbcType=NUMERIC},
+				src.UPDATE_LAST_USER,
 				SYSDATE
 				);
-			</foreach>
-			end;
-		</if>
-	</insert>
+		</foreach>
+		null;
+		END;
+	</update>
 
 </mapper>
