@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.gwtjs.icustom.security.SecurityImplMainApplication;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
+import com.gwtjs.icustom.springsecurity.entity.SysUserRoleVO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=SecurityImplMainApplication.class)
@@ -51,8 +52,8 @@ public class ISysUserRolesDAOTest {
 	 */
 	@Test
 	public void saveOrUpdateTest() {
-		SysRoleVO record = new SysRoleVO();
-		List<SysRoleVO> records=new ArrayList<SysRoleVO>();
+		SysUserRoleVO record = new SysUserRoleVO();
+		List<SysUserRoleVO> records=new ArrayList<SysUserRoleVO>();
 		records.add(record);
 		int result = sysUserRolesMgrDao.saveOrUpdate(records);
 		System.out.println("findAuthResourcesTreeRoot result:" + result);
@@ -73,8 +74,8 @@ public class ISysUserRolesDAOTest {
 	 */
 	@Test
 	public void batchRemovePksTest() {
-		SysRoleVO record = new SysRoleVO();
-		List<SysRoleVO> records=new ArrayList<SysRoleVO>();
+		SysUserRoleVO record = new SysUserRoleVO();
+		List<SysUserRoleVO> records=new ArrayList<SysUserRoleVO>();
 		records.add(record);
 		int result = sysUserRolesMgrDao.batchRemovePks(records);
 		System.out.println("findAuthResourcesTreeRoot result:" + result);

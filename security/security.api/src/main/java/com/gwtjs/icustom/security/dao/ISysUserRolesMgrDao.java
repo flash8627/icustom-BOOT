@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gwtjs.icustom.springsecurity.entity.SysRoleResourceVO;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
+import com.gwtjs.icustom.springsecurity.entity.SysUserRoleVO;
 
 public interface ISysUserRolesMgrDao{
 	
@@ -17,14 +17,14 @@ public interface ISysUserRolesMgrDao{
 	List<SysRoleVO> findByUserRoles(@Param("userId") long userId);
 	
 	/**批量新增用户的角色*/
-	int saveOrUpdate(List<SysRoleVO> records);
+	int saveOrUpdate(List<SysUserRoleVO> records);
 	
 	/**
 	 * 删除数据,批量
 	 * @param records
 	 * @return
 	 */
-	int batchRemovePks(List<SysRoleVO> records);
+	int batchRemovePks(List<SysUserRoleVO> records);
 	/**
 	 * 删除数据,批量
 	 * @param records

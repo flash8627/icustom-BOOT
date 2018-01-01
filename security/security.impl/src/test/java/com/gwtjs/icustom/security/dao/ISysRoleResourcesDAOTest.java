@@ -63,7 +63,7 @@ public class ISysRoleResourcesDAOTest {
 	 * 删除角色的资源
 	 */
 	@Test
-	public void deleteRoleResourcesTest() {
+	public void removeRoleResourcesTest() {
 		long roleId = 4l;
 		sysRoleResourcesMgrDao.removeRoleResources(roleId);
 	}

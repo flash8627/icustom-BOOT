@@ -82,7 +82,7 @@
 	<delete id="removeUserRoles" parameterType="java.util.List">
 		BEGIN
 			DELETE FROM SYS_USER_ROLES_T tt 
-				WHERE tt.USER_ID=#{userId,jdbcType=NUMERIC}
+				WHERE tt.USER_ID=#{userId,jdbcType=NUMERIC};
 			null;
 		end;
 	</delete>

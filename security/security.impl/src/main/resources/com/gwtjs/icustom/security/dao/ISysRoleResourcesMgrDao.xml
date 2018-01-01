@@ -27,7 +27,7 @@
 			MERGE INTO SYS_ROLE_RESOURCE_T tar 
 			USING (
 				SELECT
-					#{item.id,jdbcType=NUMERIC} UR_ID,
+					#{item.id,jdbcType=NUMERIC} ID,
 					#{item.roleId,jdbcType=NUMERIC} ROLE_ID,
 					#{item.resourceId,jdbcType=NUMERIC} RESOURCE_ID,
 					#{item.validFlag,jdbcType=INTEGER} VALID_FLAG,
@@ -85,7 +85,7 @@
 	<delete id="removeRoleResources" parameterType="java.util.List">
 		BEGIN
 			DELETE FROM SYS_ROLE_RESOURCE_T tt 
-				WHERE tt.ROLE_ID=#{roleId,jdbcType=NUMERIC}
+				WHERE tt.ROLE_ID=#{roleId,jdbcType=NUMERIC};
 			null;
 		end;
 	</delete>
