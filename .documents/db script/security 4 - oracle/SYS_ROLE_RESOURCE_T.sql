@@ -32,9 +32,8 @@ end;
 create table SYS_ROLE_RESOURCE_RESOURCE_T
 (
   id               NUMBER(20) not null,
-  resource_id      VARCHAR2(20),
-  role_id          VARCHAR2(20),
-  update_time      DATE default SYSDATE,
+  resource_id      NUMBER(20),
+  role_id          NUMBER(20),
   order_code       INTEGER default 1,
   created_user     NUMBER(20),
   created_date     DATE default SYSDATE,

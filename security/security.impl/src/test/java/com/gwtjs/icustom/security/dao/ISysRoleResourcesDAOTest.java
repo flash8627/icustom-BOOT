@@ -2,6 +2,7 @@ package com.gwtjs.icustom.security.dao;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,18 +51,12 @@ public class ISysRoleResourcesDAOTest {
 	 */
 	@Test
 	public void saveOrUpdateTest() {
-		/*SysRoleVO record = new SysRoleVO();
-		record.setRemark("JUnit Test Case ");
-		record.setRolename("test1");
-		record.setRoleCode("test1");
-		record.setValidFlag(1);
-		record.setId(1L);
-		
-		System.out.println(record);
-		List<SysRoleVO> records=new ArrayList<SysRoleVO>();
+		SysRoleResourceVO record = new SysRoleResourceVO();
+		List<SysRoleResourceVO> records=new ArrayList<SysRoleResourceVO>();
 		records.add(record);
-		int result = sysRolesMgrDao.saveOrUpdate(records);
-		System.out.println("findAuthResourcesTreeRoot result:" + result);*/
+		
+		int result = sysRoleResourcesMgrDao.saveOrUpdate(records);
+		System.out.println("findAuthResourcesTreeRoot result:" + result);
 	}
 	
 	/**
@@ -69,7 +64,20 @@ public class ISysRoleResourcesDAOTest {
 	 */
 	@Test
 	public void deleteRoleResourcesTest() {
-		
+		long roleId = 4l;
+		sysRoleResourcesMgrDao.removeRoleResources(roleId);
+	}
+	
+	/**
+	 * 删除用户的角色
+	 */
+	@Test
+	public void batchRemovePksTest() {
+		SysRoleResourceVO record = new SysRoleResourceVO();
+		List<SysRoleResourceVO> records=new ArrayList<SysRoleResourceVO>();
+		records.add(record);
+		int result = sysRoleResourcesMgrDao.batchRemovePks(records);
+		System.out.println("findAuthResourcesTreeRoot result:" + result);
 	}
 
 }

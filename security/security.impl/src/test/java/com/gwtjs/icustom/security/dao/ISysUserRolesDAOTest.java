@@ -2,6 +2,7 @@ package com.gwtjs.icustom.security.dao;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,6 +51,11 @@ public class ISysUserRolesDAOTest {
 	 */
 	@Test
 	public void saveOrUpdateTest() {
+		SysRoleVO record = new SysRoleVO();
+		List<SysRoleVO> records=new ArrayList<SysRoleVO>();
+		records.add(record);
+		int result = sysUserRolesMgrDao.saveOrUpdate(records);
+		System.out.println("findAuthResourcesTreeRoot result:" + result);
 	}
 	
 	/**
@@ -57,6 +63,21 @@ public class ISysUserRolesDAOTest {
 	 */
 	@Test
 	public void deleteUserRolesTest() {
+		long userId = 4;
+		int result = sysUserRolesMgrDao.removeRoleResources(userId);
+		System.out.println("findAuthResourcesTreeRoot result:" + result);
+	}
+	
+	/**
+	 * 删除用户的角色
+	 */
+	@Test
+	public void batchRemovePksTest() {
+		SysRoleVO record = new SysRoleVO();
+		List<SysRoleVO> records=new ArrayList<SysRoleVO>();
+		records.add(record);
+		int result = sysUserRolesMgrDao.batchRemovePks(records);
+		System.out.println("findAuthResourcesTreeRoot result:" + result);
 	}
 	
 }

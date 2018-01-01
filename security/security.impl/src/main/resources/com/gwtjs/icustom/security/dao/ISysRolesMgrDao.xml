@@ -148,7 +148,9 @@
 				tar.attribute7 = src.attribute7,
 				tar.attribute8 = src.attribute8,
 				tar.attribute9 = src.attribute9,
-				tar.attribute10 = src.attribute10
+				tar.attribute10 = src.attribute10,
+				tar.UPDATE_LAST_DATE = SYSDATE,
+				tar.UPDATE_LAST_USER = src.UPDATE_LAST_USER
 			WHEN NOT MATCHED THEN
 			INSERT
 			(

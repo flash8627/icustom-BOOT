@@ -16,5 +16,20 @@ public interface ISysRoleResourcesMgrDao {
 	//角色的资源
 	List<SysRoleResourceVO> findByRoleResource(@Param("roleId")long roleId);
 	
+	/**批量新增用户的角色*/
+	int saveOrUpdate(List<SysRoleResourceVO> records);
+	
+	/**
+	 * 删除数据,批量
+	 * @param records
+	 * @return
+	 */
+	int batchRemovePks(List<SysRoleResourceVO> records);
+	/**
+	 * 删除数据,批量
+	 * @param records
+	 * @return
+	 */
+	int removeRoleResources(@Param("roleId")long roleId);
 }
 

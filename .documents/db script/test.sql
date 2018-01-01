@@ -1,7 +1,7 @@
 
 SELECT * FROM sys_user_t;
 
--- user
+-- step 1 -> user
 INSERT INTO sys_user_t ( id ,account ,email ,PASSWORD ,username ) VALUES ('4', 'test', 'email', 'password', 'test');
  
  COMMIT;
@@ -20,7 +20,7 @@ INSERT INTO sys_role_t (rolename ,uid ) VALUES ('super', '1');
 INSERT INTO sys_role_t (rolename ,uid ) VALUES ('user', '1');
 
 
--- resource 
+-- -- step 2 -> resource 
 INSERT INTO sys_resource_t 
 ( id ,
   method_name ,
@@ -52,27 +52,25 @@ INSERT INTO sys_resource_t
   resource_string )
 VALUES ('3','','method_path','remark','3','resource_name','/admin'); 
  
---  sys_resource_role_t
+-- -- step 3 ->  sys_role_resource_t
 
-INSERT INTO `bootsample`.`sys_resource_role_t`
+INSERT INTO `bootsample`.`sys_role_resource_t`
 (`id`, `resource_id`, `role_id`) VALUES ( '1','1','3'); 
- 
- 
- 
-INSERT INTO `bootsample`.`sys_resource_role_t`
+  
+INSERT INTO `bootsample`.`sys_role_resource_t`
 (`id`, `resource_id`, `role_id`)
 VALUES ('2','2','2'); 
 
 -- 资源(3)被管理拥有(1)
-INSERT INTO `bootsample`.`sys_resource_role_t`
+INSERT INTO `bootsample`.`sys_role_resource_t`
 (`id`, `resource_id`, `role_id`)
 VALUES ('3', '3','1'); 
 
 -- 资源(3)被管理拥有(1)
-INSERT INTO `bootsample`.`sys_resource_role_t`
+INSERT INTO `bootsample`.`sys_role_resource_t`
 (`resource_id`, `role_id`)
 VALUES ('2','1'); 
-INSERT INTO `bootsample`.`sys_resource_role_t`
+INSERT INTO `bootsample`.`sys_role_resource_t`
 (`resource_id`, `role_id`)
 VALUES ('1','1'); 
    
@@ -81,7 +79,7 @@ VALUES ('1','1');
  
  SELECT * FROM  sys_resource_t;
 
- SELECT * FROM sys_resource_role_t;
+ SELECT * FROM sys_role_resource_t;
  
  -- 
  
@@ -98,7 +96,7 @@ FROM
   sys_user_t u 
 LEFT JOIN sys_role_t r 
 	ON (u.id = r.uid) 
-LEFT JOIN sys_resource_role_t rr
+LEFT JOIN sys_role_resource_t rr
 	ON (r.id = rr.role_id)
 LEFT JOIN sys_resource_t sr
 	ON (rr.resource_id=sr.resource_id);
