@@ -55,42 +55,11 @@
 	</update>
 	
 	<select id="findAll" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
-		SELECT
-				ROLE_ID 			id,
-			  	ROLE_NAME 			rolename,
-			  	ORDER_CODE			orderCode,
-			  	CREATED_USER		createdUser,
-			  	CREATED_DATE		createdDate,
-			  	UPDATE_LAST_USER	updateLastUser,
-			  	UPDATE_LAST_DATE	updateLastDate
-			FROM sys_role_t sr WHERE sr.valid_flag = 1 
-	</select>
-	
-	<select id="findByUserRoles" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
-		SELECT sr.ROLE_ID          id,
-	        sr.ROLE_NAME        rolename,
-	        sr.ORDER_CODE       orderCode,
-	        sr.CREATED_USER     createdUser,
-	        sr.CREATED_DATE     createdDate,
-	        sr.UPDATE_LAST_USER updateLastUser,
-	        sr.UPDATE_LAST_DATE updateLastDate
-	   FROM sys_role_t sr
-	  join sys_user_roles_t rt
-	    on (sr.role_id = rt.role_id)
-	  WHERE sr.valid_flag = 1 and rt.user_id = #{userId,jdbcType=NUMERIC} 
+		<include refid="select_base" />
 	</select>
 	
 	<select id="findByRoleName" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
-		SELECT
-			  sr.ROLE_ID          id,
-	        sr.ROLE_NAME        rolename,
-	        sr.ORDER_CODE       orderCode,
-	        sr.CREATED_USER     createdUser,
-	        sr.CREATED_DATE     createdDate,
-	        sr.UPDATE_LAST_USER updateLastUser,
-	        sr.UPDATE_LAST_DATE updateLastDate
-			FROM sys_role_t sr 
-			WHERE sr.valid_flag = 1 
+		<include refid="select_base" />
 			AND sr.ROLE_NAME = #{rolename,jdbcType=VARCHAR}
 	</select>
 	
@@ -109,7 +78,7 @@
 	
 	<sql id="select_base">
 		SELECT
-			  ROLE_ID id,
+			ROLE_ID id,
 		  	ROLE_NAME 			rolename,
 		  	ORDER_CODE			orderCode,
 		  	CREATED_USER		createdUser,

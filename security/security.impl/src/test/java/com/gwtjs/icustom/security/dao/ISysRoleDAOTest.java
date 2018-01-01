@@ -42,7 +42,7 @@ public class ISysRoleDAOTest {
 	}
 
 	@Test
-	public void saveOrUPdateTest() {
+	public void saveOrUpdateTest() {
 		SysRoleVO record = new SysRoleVO();
 		record.setRemark("JUnit Test Case ");
 		record.setRolename("test1");

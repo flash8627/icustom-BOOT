@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.gwtjs.icustom.springsecurity.dao.ISysRoleDao;
 import com.gwtjs.icustom.springsecurity.dao.ISysUserDao;
+import com.gwtjs.icustom.springsecurity.dao.ISysUserRolesDao;
 import com.gwtjs.icustom.springsecurity.entity.SysRoleVO;
 import com.gwtjs.icustom.springsecurity.entity.SysUserVO;
 
@@ -29,8 +30,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private ISysUserDao userDao;
 	
+	/*@Inject
+	private ISysRoleDao	isysRoleDao;*/
+	
 	@Inject
-	private ISysRoleDao	isysRoleDao;
+	private ISysUserRolesDao isysUserRolesDao;
 	
 	/**
 	 * 用户登陆在这里
@@ -43,7 +47,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("account " + account + " not found");
 		}else{
-			Set<SysRoleVO> sysRoles = this.getUserRoles(isysRoleDao.findByUserRoles(user.getId()));
+			Set<SysRoleVO> sysRoles = this.getUserRoles(isysUserRolesDao.findByUserRoles(user.getId()));
 			user.setSysRoles(sysRoles);
 		}
 		// SecurityUser实现UserDetails并将SysUser的name映射为username

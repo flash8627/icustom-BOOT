@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gwtjs.icustom.security.dao.ISysUserRolesMgrDao">
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwtjs.icustom.springsecurity.dao.ISysUserRolesDao">
+	
 	<select id="findByUserRoles" resultType="com.gwtjs.icustom.springsecurity.entity.SysRoleVO">
 		SELECT sr.ROLE_ID          id,
 		       sr.ROLE_NAME        rolename,
@@ -16,5 +16,5 @@
 		 WHERE sr.valid_flag = 1 
 		 		and rt.user_id = #{userId,jdbcType=NUMERIC} 
 	</select>
-
+	
 </mapper>

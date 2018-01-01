@@ -2,6 +2,11 @@ package com.gwtjs.icustom.springsecurity.entity;
 
 import com.gwtjs.icustom.entity.TreeModel;
 
+/**
+ * 系统资源-主要是系统菜单路径
+ * @author aGuang
+ *
+ */
 public class SysResourceVO extends TreeModel<SysResourceVO> {
 
 	/***/
