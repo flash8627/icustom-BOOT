@@ -63,9 +63,9 @@ public class ISysUserRolesDAOTest {
 	 * 删除用户的角色
 	 */
 	@Test
-	public void deleteUserRolesTest() {
+	public void removeUserRolesTest() {
 		long userId = 4;
-		int result = sysUserRolesMgrDao.removeRoleResources(userId);
+		int result = sysUserRolesMgrDao.removeUserRoles(userId);
 		System.out.println("findAuthResourcesTreeRoot result:" + result);
 	}
 	

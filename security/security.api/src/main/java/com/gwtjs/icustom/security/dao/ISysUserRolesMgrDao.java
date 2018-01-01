@@ -30,5 +30,5 @@ public interface ISysUserRolesMgrDao{
 	 * @param records
 	 * @return
 	 */
-	int removeRoleResources(@Param("userId")long userId);
+	int removeUserRoles(@Param("userId")long userId);
 }
