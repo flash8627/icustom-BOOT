@@ -4,16 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * ClassName: IndexController
- * Description:
+ * ClassName: IndexController Description:
  *
- * @author aGuang
- *         Date 2016/11/24
+ * @author aGuang Date 2016/11/24
  */
 @Controller
 public class IndexController {
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
 }
