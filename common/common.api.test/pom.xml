@@ -13,21 +13,21 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
-		
+	
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>icustom.core</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>common.resources</artifactId>
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>common.log</artifactId>

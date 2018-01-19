@@ -21,6 +21,7 @@
 		<module>boot.starter.cxf</module>
 		<module>boot.starter.mybatis</module>
 		<module>boot.starter.jedis</module>
+		<module>boot.starter.test</module>
 	</modules>
 
 
