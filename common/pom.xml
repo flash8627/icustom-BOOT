@@ -24,7 +24,7 @@
 		<module>common.htmlarea</module>
 		<module>common.kindeditor</module>
 		<module>common.json</module>
-		<module>common.api.test</module>
+		<module>common.api.test.ui</module>
 	</modules>
 	
 </project>
