@@ -31,7 +31,7 @@ end;
 -- Create table
 create table SYS_ROLE_RESOURCE_RESOURCE_T
 (
-  id               NUMBER(20) not null,
+  id               NUMBER(20) primary key not null,
   resource_id      NUMBER(20),
   role_id          NUMBER(20),
   order_code       INTEGER default 1,
@@ -42,11 +42,7 @@ create table SYS_ROLE_RESOURCE_RESOURCE_T
   valid_flag       INTEGER default 1
 )
 tablespace USERS;
--- Create/Recreate primary, unique and foreign key constraints 
-alter table SYS_ROLE_RESOURCE_RESOURCE_T
-  add constraint SYS_ROLE_RESOURCE_RESOURCE_T_PK primary key (ID)
-  using index 
-  tablespace USERS;
+
 alter table SYS_ROLE_RESOURCE_RESOURCE_T
   add constraint SYS_ROLE_RESOURCE_RESOURCE_T_UNQ unique (RESOURCE_ID, ROLE_ID)
   using index 

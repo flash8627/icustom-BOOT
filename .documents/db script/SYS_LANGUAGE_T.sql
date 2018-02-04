@@ -1,4 +1,6 @@
 
+
+
 -- Drop SEQUENCE
 declare
   v_num number;
@@ -23,15 +25,20 @@ increment by 1
 cache 20;
 
 
+
 declare
-v_num number;
+  v_num number;
 begin
-select count(*) into v_num from user_tables where table_name='SYS_LANGUAGE_T';
-if v_num > 0 then
-execute immediate 'drop table SYS_LANGUAGE_T';
-end if;
+  select count(*)
+    into v_num
+    from user_tables
+   where table_name = 'SYS_LANGUAGE_T';
+  if v_num > 0 then
+    execute immediate 'drop table SYS_LANGUAGE_T';
+  end if;
 end;
 /
+
 
 -- Create table
 create table SYS_LANGUAGE_T
@@ -88,6 +95,7 @@ alter table SYS_LANGUAGE_T
   using index 
   tablespace USERS;
 alter table SYS_LANGUAGE_T
-  add constraint SYS_LANGUAGE_UNIQUE unique (LAN_VALUE, LAN_TYPE)
+  add constraint SYS_LANGUAGE_UNIQUE unique (LAN_CODE,LAN_VALUE, LAN_TYPE)
   using index 
   tablespace USERS;
+
