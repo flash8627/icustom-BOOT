@@ -21,15 +21,15 @@ begin
   select count(*)
     into v_num
     from user_tables
-   where table_name = 'SYS_ROLE_RESOURCE_RESOURCE_T';
+   where table_name = 'SYS_ROLE_RESOURCE_T';
   if v_num > 0 then
-    execute immediate 'drop table SYS_ROLE_RESOURCE_RESOURCE_T';
+    execute immediate 'drop table SYS_ROLE_RESOURCE_T';
   end if;
 end;
 /
 
 -- Create table
-create table SYS_ROLE_RESOURCE_RESOURCE_T
+create table SYS_ROLE_RESOURCE_T
 (
   id               NUMBER(20) primary key not null,
   resource_id      NUMBER(20),
@@ -43,8 +43,8 @@ create table SYS_ROLE_RESOURCE_RESOURCE_T
 )
 tablespace USERS;
 
-alter table SYS_ROLE_RESOURCE_RESOURCE_T
-  add constraint SYS_ROLE_RESOURCE_RESOURCE_T_UNQ unique (RESOURCE_ID, ROLE_ID)
+alter table SYS_ROLE_RESOURCE_T
+  add constraint SYS_ROLE_RESOURCE_T_UNQ unique (RESOURCE_ID, ROLE_ID)
   using index 
   tablespace USERS;
   
