@@ -8,7 +8,6 @@
 		<version>0.7.11.8</version>
 		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
-
   
   <artifactId>icustom.international.api</artifactId>
   <packaging>jar</packaging>

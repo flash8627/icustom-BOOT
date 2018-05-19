@@ -16,9 +16,9 @@ public class ICustomWebApplication {
 			.getLogger(ICustomWebApplication.class);
 	
 	public static void main(String[] args) {
-		/*Properties props = new Properties();
-		props.setProperty("appName", "icustom-web");
-		System.setProperties(props);*/
+		Properties props = new Properties();
+		props.setProperty("spring.application.name", "icustom-web");
+		//System.setProperties(props);
 		SpringApplication.run(ICustomWebApplication.class, args);
 		log.info("\nRunning with icustom web successfull------");
 	}
