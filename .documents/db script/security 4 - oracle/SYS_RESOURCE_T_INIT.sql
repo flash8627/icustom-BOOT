@@ -88,4 +88,6 @@ values (13, null, null, null, 8, 'zh_cn=国际化,zh_en=international', 'internatio
 insert into SYS_RESOURCE_T (RESOURCE_ID, METHOD_NAME, METHOD_PATH, REMARK, PARENT_ID, RESOURCE_NAME, RESOURCE_URL, ORDER_CODE, CREATED_USER, CREATED_DATE, UPDATE_LAST_USER, UPDATE_LAST_DATE, VALID_FLAG, MAIN_VIEW_FLAG, ICON, USE_STATUS,  RESOURCE_TYPE)
 values (14, null, null, 'demo页面,可以把地址复制过去查看', 8, 'zh_cn=System Menu,zh_en=System Menu', null, 1, null, to_date('03-09-2017 15:58:43', 'dd-mm-yyyy hh24:mi:ss'), 0, to_date('05-11-2017 13:10:59', 'dd-mm-yyyy hh24:mi:ss'), 1, 1, null, 0, 0);
 
+commit;
+
 prompt Done.
