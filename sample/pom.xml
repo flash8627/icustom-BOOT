@@ -22,6 +22,7 @@
 		<module>sample.product</module>
 		<module>sample.parstore</module>
 		<module>sample.lottery</module>
+		<module>sample.demo</module>
 	</modules>
 
 
